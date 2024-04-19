@@ -3,10 +3,10 @@
 #define MAX_INSTR_SZ 15
 #define MAX_PREFIX 2
 
-#define IMM_BYTE 1       // OPERAND TYPE b (Byte, regardless of operand-size attribute)
-#define IMM_WORD 2       // OPERAND TYPE w (Word, regardless of operand-size attribute)
-#define IMM_DOUBLEWORD 4 // OPERAND TYPE v (Word or doubleword, depending on operand-size attribute)
-#define ADDR_48  6       // OPERAND TYPE p (32-bit or 48-bit pointer, depending on operand-size attribute)
+#define BYTE_SZ 1       // OPERAND TYPE b (Byte, regardless of operand-size attribute)
+#define WORD_SZ 2       // OPERAND TYPE w (Word, regardless of operand-size attribute)
+#define DOUBLEWORD_SZ 4 // OPERAND TYPE v (Word or doubleword, depending on operand-size attribute)
+#define ADDR_48_SZ  6   // OPERAND TYPE p (32-bit or 48-bit pointer, depending on operand-size attribute)
 
 enum Prefixes{
     LOCK            = 0xF0,     //LOCK prefix 
@@ -66,6 +66,7 @@ bool instr_has_extended_opcode(unsigned char instruction);  // checks if the ins
 bool instr_has_zero_operands(unsigned char opcode); // if instruction has no operands
 bool instr_has_immediate_operand(unsigned char opcode);
 bool instr_has_rel_offset_operand(unsigned char opcode);
+bool instr_has_direct_addr_operand(unsigned char opcode);
 bool instr_has_modrm(unsigned char opcode);
 unsigned int get_immediate_operand_size(unsigned char opcode);
 unsigned int get_rel_offset_operand_size(unsigned char opcode);

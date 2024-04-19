@@ -6,7 +6,13 @@ void dump(Dinstruction* decoded){
     printf("instruction size: %llu\n", decoded->size);
     printf("has_prefix: %d\n", decoded->has_prefix);
     printf("extended: %d\n", decoded->extended);
-    printf("instruction prefix: 0x%02X\n", decoded->prefix);
+
+    if(decoded->has_prefix)
+        printf("instruction prefix 1: 0x%02X\n", decoded->prefixes[0]);
+
+    if(decoded->extended)
+        printf("instruction prefix 2: 0x%02X\n", decoded->prefixes[1]);
+
     printf("instruction opcode 1: 0x%02X\n", decoded->op1);
     printf("instruction opcode 2: 0x%02X\n", decoded->op2);
 }
@@ -88,6 +94,24 @@ bool instr_has_immediate_operand(unsigned char opcode){
 }
 
 bool instr_has_rel_offset_operand(unsigned char opcode){
+    // relative address jumps
+    switch (opcode) {
+        case 0x70: case 0x71: case 0x72: case 0x73: case 0x74: 
+        case 0x75: case 0x76: case 0x77: case 0x78: case 0x79: 
+        case 0x7A: case 0x7B: case 0x7C: case 0x7D: case 0x7E: 
+        case 0x7F: case 0xE0: case 0xE1: case 0xE2: case 0xE3: 
+        case 0xE8: case 0xE9: case 0xEB:
+            return true;
+    }
+    return false;
+}
+
+bool instr_has_direct_addr_operand(unsigned char opcode){
+    // absolute address jump/call
+    switch (opcode) {
+        case 0x9A: case 0xEA:
+            return true;
+    }
     return false;
 }
 
@@ -98,21 +122,47 @@ bool instr_has_modrm(unsigned char opcode){
 unsigned int get_immediate_operand_size(unsigned char opcode){
     switch(opcode){
         case 0x04: case 0x0C: case 0x14: case 0x1C: case 0x24:
-        case 0x2C: case 0x34: case 0x3C: case 0x6A: case 0x70: 
-        case 0x71: case 0x72: case 0x73: case 0x74: case 0x75: 
-        case 0x76: case 0x77: case 0x78: case 0x79: case 0x7A:
-        case 0x7B: case 0x7C: case 0x7D: case 0x7E: case 0x7F: 
-        case 0xA8: case 0xB0: case 0xB1: case 0xB2: case 0xB3: 
-        case 0xB4: case 0xB5: case 0xB6: case 0xB7: case 0xCD: 
-        case 0xD4: case 0xD5: case 0xE0: case 0xE1: case 0xE2: 
-        case 0xE3: case 0xE4: case 0xE5: case 0xE6: case 0xE7:
-        case 0xEB:
-            return IMM_BYTE; 
+        case 0x2C: case 0x34: case 0x3C: case 0x6A: case 0xA8: 
+        case 0xB0: case 0xB1: case 0xB2: case 0xB3: case 0xB4: 
+        case 0xB5: case 0xB6: case 0xB7: case 0xCD: case 0xD4: 
+        case 0xD5: case 0xE4: case 0xE5: case 0xE6: case 0xE7:
+            return BYTE_SZ; 
+
+        case 0xC2: case 0xCA:
+            return WORD_SZ;
+
+        case 0x05: case 0x0D: case 0x15: case 0x1D: case 0x25:
+        case 0x2D: case 0x35: case 0x3D: case 0x68: case 0xA1:
+        case 0xA3: case 0xA9: case 0xB8: case 0xB9: case 0xBA:
+        case 0xBB: case 0xBC: case 0xBD: case 0xBE: case 0xBF:
+            return DOUBLEWORD_SZ;
+
     }
+    return 0;
 }
 
 unsigned int get_rel_offset_operand_size(unsigned char opcode){
+    switch (opcode) {
+        case 0x70: case 0x71: case 0x72: case 0x73: case 0x74: 
+        case 0x75: case 0x76: case 0x77: case 0x78: case 0x79: 
+        case 0x7A: case 0x7B: case 0x7C: case 0x7D: case 0x7E: 
+        case 0x7F: case 0xE0: case 0xE1: case 0xE2: case 0xE3:
+        case 0xEB:
+            return BYTE_SZ;
 
+        case 0xE8: case 0xE9:
+            return DOUBLEWORD_SZ;
+
+    }
+    return 0;
+}
+
+unsigned int get_direct_addr_operand_size(unsigned char opcode){
+    switch (opcode) {
+        case 0x9A: case 0xEA:
+        return ADDR_48_SZ;
+    }
+    return 0;
 }
 
 
@@ -173,19 +223,28 @@ bool decode32(unsigned char* insruction, Dinstruction* decoded, unsigned int mod
         }
 
         if(instr_has_immediate_operand(decoded->op1)){
-            i_ptr++;
             decoded->size+=get_immediate_operand_size(decoded->op1);
-
             return true;
         }
 
         if(instr_has_rel_offset_operand(decoded->op1)){
-            i_ptr++;
-            decoded->size+=get_rel_offset_operand_size(decoded->op1); // probably not just one :)
+            decoded->size+=get_rel_offset_operand_size(decoded->op1);
             return true;
         }
 
-        i_ptr++;
+        if(instr_has_direct_addr_operand(decoded->op1)){
+            decoded->size+=get_direct_addr_operand_size(decoded->op1);
+            return true;
+        }
+
+        if(instr_has_modrm(decoded->op1)){         
+            i_ptr++;
+            // mod/rm part is gonna be here
+            unsigned int mod = (*i_ptr & 0xC0) >> 6;
+            unsigned int reg = (*i_ptr & 0x38) >> 3;
+            unsigned int rm  = (*i_ptr & 0x07);
+            return true;
+        }
 
         /*
             Example:
@@ -218,12 +277,12 @@ bool decode32(unsigned char* insruction, Dinstruction* decoded, unsigned int mod
 
 
     //printf("%x\n", *i_ptr);
-    return true;
+    return false;
 }
 
 bool decode64(unsigned char* insruction, Dinstruction* decoded, unsigned int mode){
     // todo
-    return true;
+    return false;
 }
 
 bool decode(unsigned char* insruction, Dinstruction* decoded, unsigned int mode){
