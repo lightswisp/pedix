@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "decoder.h"
+#include "defines.h"
 
 void dump(Dinstruction* decoded){
     printf("instruction size: %llu\n", decoded->size);
@@ -28,17 +29,17 @@ void free_instrucion(Dinstruction* decoded){
 
 bool instr_has_prefix(unsigned char instruction){
     switch(instruction){
-        case LOCK: 
-        case REPNE_Z:
-        case REP_E_Z: 
-        case CS:
-        case DS: 
-        case SS:
-        case ES: 
-        case FS:
-        case GS: 
-        case OPSZ_OVERRIDE:
-        case ASZ_OVERRIDE:
+        case PREFIX_LOCK: 
+        case PREFIX_REPNE_Z:
+        case PREFIX_REP_E_Z: 
+        case PREFIX_CS:
+        case PREFIX_DS: 
+        case PREFIX_SS:
+        case PREFIX_ES: 
+        case PREFIX_FS:
+        case PREFIX_GS: 
+        case PREFIX_OPSZ_OVERRIDE:
+        case PREFIX_ASZ_OVERRIDE:
             return true;
     }
     return false;
