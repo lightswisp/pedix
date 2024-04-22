@@ -11,7 +11,7 @@ int main(void){
     Dinstruction* decoded = init_instruction();
     unsigned int mode = 32;
     
-
+    puts("1");
     printf("result: %d\n", decode(instruction, decoded, mode));
 
     dump(decoded);

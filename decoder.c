@@ -73,7 +73,7 @@ bool instr_has_zero_operands(unsigned char opcode){
         case 0xD7: case 0xEC: case 0xED: case 0xEE: case 0xEF:
         case 0xF4: case 0xF5: case 0xF8: case 0xF9: case 0xFA: 
         case 0xFB: case 0xFC: case 0xFD:   
-        return true;
+            return true;
     }
     return false;
 }
@@ -89,7 +89,7 @@ bool instr_has_immediate_operand(unsigned char opcode){
         case 0xBA: case 0xBB: case 0xBC: case 0xBD: case 0xBE:
         case 0xBF: case 0xC2: case 0xCA: case 0xCD: case 0xD4:
         case 0xD5: case 0xE4: case 0xE5: case 0xE6: case 0xE7: 
-        return true;
+            return true;
     }
     return false;
 }
@@ -117,6 +117,20 @@ bool instr_has_direct_addr_operand(unsigned char opcode){
 }
 
 bool instr_has_modrm(unsigned char opcode){
+    switch(opcode){
+        case 0x00: case 0x01: case 0x02: case 0x03: case 0x08: 
+        case 0x09: case 0x0A: case 0x0B: case 0x10: case 0x11:
+        case 0x12: case 0x13: case 0x18: case 0x19: case 0x1A:
+        case 0x1B: case 0x20: case 0x21: case 0x22: case 0x23:
+        case 0x28: case 0x29: case 0x2A: case 0x2B: case 0x30:
+        case 0x31: case 0x32: case 0x33: case 0x38: case 0x39:
+        case 0x3A: case 0x3B: case 0x63: case 0x69: case 0x6B:
+        case 0x80: case 0x81: case 0x82: case 0x83: case 0x84:
+        case 0x85: case 0x86: case 0x87: case 0x88: case 0x89:
+        case 0x8A: case 0x8B: case 0x8C: case 0x8E: case 0x8F:
+        case 0xC6: case 0xC7: 
+            return true;
+    }
     return false;
 }
 
@@ -238,8 +252,7 @@ bool decode32(unsigned char* insruction, Dinstruction* decoded, unsigned int mod
             return true;
         }
 
-        if(instr_has_modrm(decoded->op1)){   
-            printf("MODRM\n");      
+        if(instr_has_modrm(decoded->op1)){        
             i_ptr++;
             // mod/rm part is gonna be here
             unsigned int mod = (*i_ptr & 0xC0) >> 6;
