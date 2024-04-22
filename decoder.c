@@ -238,7 +238,8 @@ bool decode32(unsigned char* insruction, Dinstruction* decoded, unsigned int mod
             return true;
         }
 
-        if(instr_has_modrm(decoded->op1)){         
+        if(instr_has_modrm(decoded->op1)){   
+            printf("MODRM\n");      
             i_ptr++;
             // mod/rm part is gonna be here
             unsigned int mod = (*i_ptr & 0xC0) >> 6;
