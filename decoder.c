@@ -281,6 +281,7 @@ bool decode32(unsigned char* insruction, Dinstruction* decoded, unsigned int mod
         }
         // else if -> maybe i should also add VMCALL, VMLAUNCH, VMRESUME, VMXOFF, MONITOR, MWAIT, XGETBV, XSETBV and RDTSCP support as well?
         else{
+            // todo: implement extended opcodes
             decoded->op1 = *i_ptr;
             i_ptr++;
             decoded->size+=1;
@@ -375,9 +376,15 @@ bool decode32(unsigned char* insruction, Dinstruction* decoded, unsigned int mod
                     }
                     break;
                 case 1:
+                    if(rm == 4) // SIB MODE
+                        decoded->size+=1;
+
                     decoded->size+=1; // one byte signed displacement (disp8)
                     break;
                 case 2:
+                    if(rm == 4) // SIB MODE
+                        decoded->size+=1;
+                        
                     decoded->size+=4; // four byte signed displacement (disp32)
                     break;
                 case 3:
