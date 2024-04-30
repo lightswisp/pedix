@@ -5,6 +5,7 @@
 #include "defines.h"
 
 void dump(Dinstruction* decoded){
+    printf("========================================\n");
     printf("instruction size: %llu\n", decoded->size);
     printf("has_prefix: %d\n", decoded->has_prefix);
     printf("extended: %d\n", decoded->extended);
@@ -20,9 +21,6 @@ void dump(Dinstruction* decoded){
             case INSTR_OTHER:
                 printf("type: OTHER\n");
                 break;
-            case INSTR_UNDEC:
-                printf("type: UNDEC\n");
-                break;
         }
     }
 
@@ -34,6 +32,7 @@ void dump(Dinstruction* decoded){
 
     printf("instruction opcode 1: 0x%02X\n", decoded->op1);
     printf("instruction opcode 2: 0x%02X\n", decoded->op2);
+    printf("========================================\n\n");
 }
 
 Dinstruction* init_instruction(){
@@ -88,6 +87,9 @@ bool instr_modrm(unsigned char opcode){
         case 0x8A: case 0x8B: case 0x8C: case 0x8E: case 0x8F:
         case 0xC6: case 0xC7: case 0xC0: case 0xC1: case 0xD0:
         case 0xD1: case 0xD2: case 0xD3: case 0xF6: case 0xF7:
+        case 0x62: case 0x8D: case 0xC4: case 0xC5: case 0xD8:
+        case 0xD9: case 0xDA: case 0xDB: case 0xDC: case 0xDD:
+        case 0xDE: case 0xDF: case 0xFE: case 0xFF:
             return true;
     }
     return false;
@@ -109,7 +111,7 @@ bool instr_other(unsigned char opcode){
         case 0xBE: case 0xBF: case 0xC2: case 0xCA: case 0xCD:
         case 0xD4: case 0xD5: case 0xE0: case 0xE1: case 0xE2:
         case 0xE3: case 0xE4: case 0xE5: case 0xE6: case 0xE7: 
-        case 0xE8: case 0xE9: case 0xEA: case 0xEB:
+        case 0xE8: case 0xE9: case 0xEA: case 0xEB: case 0xC8:
             return true;
     }
     return false;
@@ -141,13 +143,6 @@ bool instr_zero(unsigned char opcode){
     return false;
 }
 
-bool instr_undec(unsigned char opcode){
-    switch(opcode){
-
-    }
-    return false;
-}
-
 bool instr_has_immediate_operand(unsigned char opcode){
     switch(opcode){
         case 0x04: case 0x05: case 0x0C: case 0x0D: case 0x14:
@@ -160,7 +155,8 @@ bool instr_has_immediate_operand(unsigned char opcode){
         case 0xBF: case 0xC2: case 0xCA: case 0xCD: case 0xD4:
         case 0xD5: case 0xE4: case 0xE5: case 0xE6: case 0xE7:
         case 0x69: case 0x6B: case 0x80: case 0x81: case 0x82:
-        case 0x83: case 0xC0: case 0xC1: case 0xC6: case 0xC7: 
+        case 0x83: case 0xC0: case 0xC1: case 0xC6: case 0xC7:
+        case 0xC8: 
             return true;
     }
     return false;
@@ -209,6 +205,9 @@ unsigned int get_immediate_operand_size(unsigned char opcode){
         case 0xBB: case 0xBC: case 0xBD: case 0xBE: case 0xBF:
         case 0x69: case 0x81: case 0xC7:
             return DOUBLEWORD_SZ;
+        
+        case 0xC8:
+            return (WORD_SZ + BYTE_SZ); // ENTER Iw Ib => Word + Byte = 3 
 
     }
     return 0;
@@ -299,14 +298,20 @@ bool decode32(unsigned char* insruction, Dinstruction* decoded, unsigned int mod
 
         if(instr_other(decoded->op1)){
             decoded->instr_type = INSTR_OTHER;
-            if(instr_has_immediate_operand(decoded->op1))
+            if(instr_has_immediate_operand(decoded->op1)){
                 decoded->size+=get_immediate_operand_size(decoded->op1);
+                return true;
+            }
 
-            if(instr_has_rel_offset_operand(decoded->op1))
+            else if(instr_has_rel_offset_operand(decoded->op1)){
                 decoded->size+=get_rel_offset_operand_size(decoded->op1);
+                return true;
+            }
 
-            if(instr_has_direct_addr_operand(decoded->op1))
+            else if(instr_has_direct_addr_operand(decoded->op1)){
                 decoded->size+=get_direct_addr_operand_size(decoded->op1);
+                return true;
+            }
 
             return true;
         }
@@ -384,7 +389,7 @@ bool decode32(unsigned char* insruction, Dinstruction* decoded, unsigned int mod
                 case 2:
                     if(rm == 4) // SIB MODE
                         decoded->size+=1;
-                        
+
                     decoded->size+=4; // four byte signed displacement (disp32)
                     break;
                 case 3:
@@ -397,11 +402,6 @@ bool decode32(unsigned char* insruction, Dinstruction* decoded, unsigned int mod
                 decoded->size+=get_immediate_operand_size(decoded->op1);
 
             return true;
-        }
-
-        if(instr_undec(decoded->op1)){
-            decoded->instr_type = INSTR_UNDEC;
-            return false;
         }
 
 

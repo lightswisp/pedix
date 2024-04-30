@@ -4,7 +4,6 @@ enum Types{
     INSTR_ZERO  = 1,
     INSTR_MODRM = 2,
     INSTR_OTHER = 3,
-    INSTR_UNDEC = 4 
 };
 
 typedef struct {
@@ -33,7 +32,6 @@ bool instr_has_extended_opcode(unsigned char instruction);  // checks if the ins
 bool instr_zero(unsigned char opcode); // if instruction has no operands
 bool instr_modrm(unsigned char opcode);
 bool instr_other(unsigned char opcode);
-bool instr_undec(unsigned char opcode);
 bool instr_has_rel_offset_operand(unsigned char opcode);
 bool instr_has_direct_addr_operand(unsigned char opcode);
 bool instr_has_modrm(unsigned char opcode);
