@@ -6,6 +6,7 @@ OUTFILE="main"
 
 main:
 	$(CC) $(SRC)/*.c -o $(OUTFILE).exe
+	./$(OUTFILE).exe
 
 clean:
 	rm *.exe

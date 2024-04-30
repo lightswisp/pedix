@@ -2,13 +2,13 @@
 #include <stdlib.h>
 #include <string.h>
 #include "decoder.h"
-#include "utils.h"
+#include "iutils.h"
 
 void dump(Dinstruction* decoded){
     printf("========================================\n");
     printf("instruction size: %llu\n", decoded->size);
     printf("has_prefix: %d\n", decoded->has_prefix);
-    printf("extended: %d\n", decoded->extended);
+    printf("0x0f extended: %d\n", decoded->extended);
 
     if(decoded->instr_type){
         switch(decoded->instr_type){
@@ -28,7 +28,7 @@ void dump(Dinstruction* decoded){
         printf("instruction prefix 1: 0x%02X\n", decoded->prefixes[0]);
 
     if(decoded->extended)
-        printf("instruction prefix 2: 0x%02X\n", decoded->prefixes[1]);
+        printf("instruction extended opcode: 0x%02X\n", decoded->prefixes[1]);
 
     printf("instruction opcode 1: 0x%02X\n", decoded->op1);
     printf("instruction opcode 2: 0x%02X\n", decoded->op2);
@@ -75,6 +75,7 @@ bool decode32(unsigned char* insruction, Dinstruction* decoded, unsigned int mod
         else{
             decoded->prefixes[0] = *i_ptr;
         }
+
         decoded->size+=1;
         i_ptr++;
 
@@ -88,12 +89,85 @@ bool decode32(unsigned char* insruction, Dinstruction* decoded, unsigned int mod
             i_ptr++;
             decoded->size+=1;
         }
-        // else if -> maybe i should also add VMCALL, VMLAUNCH, VMRESUME, VMXOFF, MONITOR, MWAIT, XGETBV, XSETBV and RDTSCP support as well?
+        else if(*i_ptr == 0x01){
+            //maybe i should also add VMCALL, VMLAUNCH, VMRESUME, VMXOFF, MONITOR, MWAIT, XGETBV, XSETBV and RDTSCP support as well?
+            switch(*i_ptr+1){
+                case 0xC1: case 0xC2: case 0xC3: case 0xC4:
+                case 0xC8: case 0xC9: case 0xD0: case 0xD1:
+                case 0xF9:
+                    decoded->size+=2;
+                    return true;
+            }
+        }  
         else{
             // todo: implement extended opcodes
             decoded->op1 = *i_ptr;
-            i_ptr++;
             decoded->size+=1;
+
+            if(extended_instr_zero(decoded->op1)){
+                decoded->instr_type = INSTR_ZERO;
+                return true;  // if no (mod/rm, imm or rel jmp offset) byte is coming after
+            }
+
+            if(extended_instr_other(decoded->op1)){
+                decoded->instr_type = INSTR_OTHER;
+                size_t op_size = get_extended_operand_size(decoded->op1);
+                if(op_size == 0)
+                    return false;
+
+                decoded->size+=op_size;
+                return true;
+            }
+
+            if(extended_instr_modrm(decoded->op1)){
+                decoded->instr_type = INSTR_MODRM;
+                i_ptr++;
+                // mod/rm part is gonna be here
+                unsigned int mod = (*i_ptr & 0xC0) >> 6;
+                unsigned int reg = (*i_ptr & 0x38) >> 3;
+                unsigned int rm  = (*i_ptr & 0x07);
+
+                printf("%02x: %d, %d, %d\n",*i_ptr, mod, reg, rm);
+
+                decoded->mod = mod;
+
+                decoded->size+=1; //mod/rm byte
+
+                switch(mod){
+                    case 0:
+                        switch(rm){
+                            case 4:
+                                // SIB MODE
+                                decoded->size+=1; //1 sib byte follows mod/rm field
+                                break;
+                            case 5:
+                                decoded->size+=4; //4 byte displacement field follows mod/rm field
+                                // 32-bit Displacement-Only Mode
+                                break;
+                        }
+                        break;
+                    case 1:
+                        if(rm == 4) // SIB MODE
+                            decoded->size+=1;
+
+                        decoded->size+=1; // one byte signed displacement (disp8)
+                        break;
+                    case 2:
+                        if(rm == 4) // SIB MODE
+                            decoded->size+=1;
+
+                        decoded->size+=4; // four byte signed displacement (disp32)
+                        break;
+                    case 3:
+                        // register addressing mode
+                        break;
+                }
+
+                // if(extended_instr_has_immediate_operand(decoded->op1))
+                //     decoded->size+=get_extended_immediate_operand_size(decoded->op1);
+
+                return true;
+            }
         }
     }
     else{  // one byte opcode is gonna be here
@@ -108,21 +182,11 @@ bool decode32(unsigned char* insruction, Dinstruction* decoded, unsigned int mod
 
         if(instr_other(decoded->op1)){
             decoded->instr_type = INSTR_OTHER;
-            if(instr_has_immediate_operand(decoded->op1)){
-                decoded->size+=get_immediate_operand_size(decoded->op1);
-                return true;
-            }
+            size_t op_size = get_operand_size(decoded->op1);
+            if(op_size == 0)
+                return false;
 
-            else if(instr_has_rel_offset_operand(decoded->op1)){
-                decoded->size+=get_rel_offset_operand_size(decoded->op1);
-                return true;
-            }
-
-            else if(instr_has_direct_addr_operand(decoded->op1)){
-                decoded->size+=get_direct_addr_operand_size(decoded->op1);
-                return true;
-            }
-
+            decoded->size+=op_size;
             return true;
         }
 
@@ -209,7 +273,7 @@ bool decode32(unsigned char* insruction, Dinstruction* decoded, unsigned int mod
             }
 
             if(instr_has_immediate_operand(decoded->op1))
-                decoded->size+=get_immediate_operand_size(decoded->op1);
+                decoded->size+=get_operand_size(decoded->op1);
 
             return true;
         }
