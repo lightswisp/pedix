@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "decoder.h"
+#include "defines.h"
 #include "iutils.h"
 
 void dump(Dinstruction* decoded){
@@ -87,7 +88,9 @@ bool decode32(unsigned char* insruction, Dinstruction* decoded, unsigned int mod
 
             decoded->op2 = *i_ptr;
             i_ptr++;
-            decoded->size+=1;
+            decoded->size+=WORD_SZ;
+
+            return true;
         }
         else if(*i_ptr == 0x01){
             //maybe i should also add VMCALL, VMLAUNCH, VMRESUME, VMXOFF, MONITOR, MWAIT, XGETBV, XSETBV and RDTSCP support as well?
