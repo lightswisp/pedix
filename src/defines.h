@@ -1,3 +1,5 @@
+#pragma once
+
 #define MAX_INSTR_SZ 15
 #define MAX_PREFIX 2
 

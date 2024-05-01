@@ -1,4 +1,7 @@
+#pragma once
+
 #include <stdbool.h>
+#include "decoder.h"
 
 enum Types{
     INSTR_ZERO  = 1,
@@ -18,9 +21,9 @@ bool extended_instr_modrm(unsigned char opcode);
 bool extended_instr_other(unsigned char opcode);
 
 bool instr_has_rel_offset_operand(unsigned char opcode);
-bool instr_has_immediate_operand(unsigned char opcode);
+bool instr_has_immediate_operand(Dinstruction* decoded, unsigned char opcode);
 bool instr_has_direct_addr_operand(unsigned char opcode);
 bool instr_has_modrm(unsigned char opcode);
 
-size_t get_operand_size(unsigned char opcode);
-size_t get_extended_operand_size(unsigned char opcode);
+size_t get_operand_size(Dinstruction* decoded, unsigned char opcode);
+size_t get_modrm_size(Dinstruction* decoded, unsigned char* i_ptr);

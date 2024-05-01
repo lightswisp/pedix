@@ -44,7 +44,7 @@ bool instr_modrm(unsigned char opcode){
         case 0xD1: case 0xD2: case 0xD3: case 0xF6: case 0xF7:
         case 0x62: case 0x8D: case 0xC4: case 0xC5: case 0xD8:
         case 0xD9: case 0xDA: case 0xDB: case 0xDC: case 0xDD:
-        case 0xDE: case 0xDF: case 0xFE: case 0xFF:
+        case 0xDE: case 0xDF: case 0xFE: case 0xFF: 
             return true;
         default:
             return false;
@@ -67,7 +67,9 @@ bool extended_instr_modrm(unsigned char opcode){
         case 0x5C: case 0x5D: case 0x5E: case 0x5F: case 0x60:
         case 0x61: case 0x62: case 0x63: case 0x64: case 0x65:
         case 0x66: case 0x67: case 0x68: case 0x69: case 0x6A:
-        case 0x6B:  
+        case 0x6B: case 0x6C: case 0x6D: case 0x6E: case 0x6F:
+        case 0x70:
+
             return true;
         default:
             return false;
@@ -96,14 +98,56 @@ bool extended_instr_other(unsigned char opcode){
     }
 }
 
-size_t get_extended_operand_size(unsigned char opcode){
-      switch(opcode){
-        case 0x20: case 0x21: case 0x22: case 0x23: case 0x24:
-        case 0x26: case 0x50: 
-            return BYTE_SZ;
-        default:
-            return 0;
+size_t get_modrm_size(Dinstruction* decoded, unsigned char* i_ptr){
+    size_t modrm_size = 0;
+    decoded->instr_type = INSTR_MODRM;
+    i_ptr++;
+    // mod/rm part is gonna be here
+    unsigned int mod = (*i_ptr & 0xC0) >> 6;
+    unsigned int reg = (*i_ptr & 0x38) >> 3;
+    unsigned int rm  = (*i_ptr & 0x07);
+
+    decoded->mod = mod;
+
+    modrm_size+=1; //mod/rm byte
+
+    switch(mod){
+        case 0:
+            switch(rm){
+                case 4:
+                    // SIB MODE
+                    modrm_size+=(BYTE_SZ + DOUBLEWORD_SZ); //1 sib byte follows mod/rm field + 32bit displacement
+                    break;
+                case 5:
+                    modrm_size+=DOUBLEWORD_SZ; //4 byte displacement field follows mod/rm field
+                    // 32-bit Displacement-Only Mode
+                    break;
+            }
+            break;
+        case 1:
+            if(rm == 4) // SIB MODE
+                modrm_size+=BYTE_SZ;
+
+            modrm_size+=BYTE_SZ; // one byte signed displacement (disp8)
+            break;
+        case 2:
+            if(rm == 4) // SIB MODE
+                modrm_size+=BYTE_SZ;
+
+            modrm_size+=DOUBLEWORD_SZ; // four byte signed displacement (disp32)
+            break;
+        case 3:
+            // register addressing mode
+            break;
+
     }
+
+    if(instr_has_immediate_operand(decoded, decoded->op1)){
+        modrm_size+=get_operand_size(decoded, decoded->op1);
+    }
+            
+
+    return modrm_size;
 }
 
 bool instr_other(unsigned char opcode){
@@ -158,7 +202,26 @@ bool instr_zero(unsigned char opcode){
     }
 }
 
-bool instr_has_immediate_operand(unsigned char opcode){
+bool instr_has_immediate_operand(Dinstruction* decoded, unsigned char opcode){
+    if(decoded->extended){
+        switch(opcode){
+            case 0x3A: case 0x38:
+                switch(decoded->op2){
+                    case 0x08: case 0x09: case 0x0A: case 0x0B: case 0x0C:
+                    case 0x0D: case 0x0E: case 0x14: case 0x15: case 0x16:
+                    case 0x17: case 0x20: case 0x21: case 0x22: case 0x42:
+                    case 0x60: case 0x61: case 0x62: case 0x63:
+                        return true;
+                    default:
+                        return false;
+                }
+            case 0x70:
+                return true;
+            default:
+                return false;
+        }            
+        
+    }
     switch(opcode){
         case 0x04: case 0x05: case 0x0C: case 0x0D: case 0x14:
         case 0x15: case 0x1C: case 0x1D: case 0x24: case 0x25:
@@ -205,7 +268,24 @@ bool instr_has_direct_addr_operand(unsigned char opcode){
 }
 
 
-size_t get_operand_size(unsigned char opcode){
+size_t get_operand_size(Dinstruction* decoded, unsigned char opcode){
+    if(decoded->extended){
+        switch(opcode){
+            case 0x38: case 0x3A:
+                switch(opcode){
+                    case 0x08: case 0x09: case 0x0A: case 0x0B: case 0x0C:
+                    case 0x0D: case 0x0E: case 0x14: case 0x15: case 0x16:
+                    case 0x17: case 0x20: case 0x21: case 0x22: case 0x42:
+                    case 0x60: case 0x61: case 0x62: case 0x63:
+                        return BYTE_SZ;
+                }
+            case 0x20: case 0x21: case 0x22: case 0x23: case 0x24:
+            case 0x26: case 0x50: case 0x70:
+                return BYTE_SZ;
+            default:
+                return 0;
+        }
+    }
     switch(opcode){
         case 0x04: case 0x0C: case 0x14: case 0x1C: case 0x24:
         case 0x2C: case 0x34: case 0x3C: case 0x6A: case 0xA8: 

@@ -25,11 +25,14 @@ void dump(Dinstruction* decoded){
         }
     }
 
-    if(decoded->has_prefix)
+    if(decoded->has_prefix){
         printf("instruction prefix 1: 0x%02X\n", decoded->prefixes[0]);
-
-    if(decoded->extended)
         printf("instruction extended opcode: 0x%02X\n", decoded->prefixes[1]);
+    }
+    else{
+        if(decoded->extended)
+            printf("instruction extended opcode: 0x%02X\n", decoded->prefixes[0]);
+    }
 
     printf("instruction opcode 1: 0x%02X\n", decoded->op1);
     printf("instruction opcode 2: 0x%02X\n", decoded->op2);
@@ -58,7 +61,7 @@ bool decode32(unsigned char* insruction, Dinstruction* decoded, unsigned int mod
     if(instr_has_prefix(*i_ptr)){
         decoded->has_prefix = true;
         decoded->prefixes[0] = *i_ptr;
-        decoded->size+=1;
+        decoded->size+=BYTE_SZ;
         i_ptr++;
     }
     
@@ -77,29 +80,42 @@ bool decode32(unsigned char* insruction, Dinstruction* decoded, unsigned int mod
             decoded->prefixes[0] = *i_ptr;
         }
 
-        decoded->size+=1;
+        decoded->size+=BYTE_SZ;
         i_ptr++;
 
         if(*i_ptr == 0x38 || *i_ptr == 0x3A){
             // if it has secondary opcode
             decoded->op1 = *i_ptr;
+            decoded->size+=BYTE_SZ;
+            printf("I_PTR: 0x%02x\n", *i_ptr);
             i_ptr++;
-            decoded->size+=1;
-
             decoded->op2 = *i_ptr;
-            i_ptr++;
-            decoded->size+=WORD_SZ;
+            decoded->size+=BYTE_SZ;
+            printf("I_PTR: 0x%02x\n", *i_ptr);
+            size_t modrm_size = get_modrm_size(decoded, i_ptr);
+            printf("MODRM_SZ: %d\n", modrm_size);
+            printf("SIZE BEFORE: %d\n", decoded->size);
+            if(modrm_size == 0)
+                return false;
+            
+            printf("SIZE: %d\n", modrm_size);
+            decoded->size += modrm_size;
 
             return true;
         }
         else if(*i_ptr == 0x01){
+            decoded->op1 = *i_ptr;
+            i_ptr++;
             //maybe i should also add VMCALL, VMLAUNCH, VMRESUME, VMXOFF, MONITOR, MWAIT, XGETBV, XSETBV and RDTSCP support as well?
-            switch(*i_ptr+1){
+            switch(*i_ptr){
                 case 0xC1: case 0xC2: case 0xC3: case 0xC4:
                 case 0xC8: case 0xC9: case 0xD0: case 0xD1:
                 case 0xF9:
-                    decoded->size+=2;
+                    decoded->op2 = *i_ptr;
+                    decoded->size+=WORD_SZ;
                     return true;
+                default:
+                    return false;
             }
         }  
         else{
@@ -114,7 +130,7 @@ bool decode32(unsigned char* insruction, Dinstruction* decoded, unsigned int mod
 
             if(extended_instr_other(decoded->op1)){
                 decoded->instr_type = INSTR_OTHER;
-                size_t op_size = get_extended_operand_size(decoded->op1);
+                size_t op_size = get_operand_size(decoded, decoded->op1);
                 if(op_size == 0)
                     return false;
 
@@ -123,52 +139,11 @@ bool decode32(unsigned char* insruction, Dinstruction* decoded, unsigned int mod
             }
 
             if(extended_instr_modrm(decoded->op1)){
-                decoded->instr_type = INSTR_MODRM;
-                i_ptr++;
-                // mod/rm part is gonna be here
-                unsigned int mod = (*i_ptr & 0xC0) >> 6;
-                unsigned int reg = (*i_ptr & 0x38) >> 3;
-                unsigned int rm  = (*i_ptr & 0x07);
+                size_t modrm_size = get_modrm_size(decoded, i_ptr);
+                if(modrm_size == 0)
+                    return false;            
 
-                printf("%02x: %d, %d, %d\n",*i_ptr, mod, reg, rm);
-
-                decoded->mod = mod;
-
-                decoded->size+=1; //mod/rm byte
-
-                switch(mod){
-                    case 0:
-                        switch(rm){
-                            case 4:
-                                // SIB MODE
-                                decoded->size+=1; //1 sib byte follows mod/rm field
-                                break;
-                            case 5:
-                                decoded->size+=4; //4 byte displacement field follows mod/rm field
-                                // 32-bit Displacement-Only Mode
-                                break;
-                        }
-                        break;
-                    case 1:
-                        if(rm == 4) // SIB MODE
-                            decoded->size+=1;
-
-                        decoded->size+=1; // one byte signed displacement (disp8)
-                        break;
-                    case 2:
-                        if(rm == 4) // SIB MODE
-                            decoded->size+=1;
-
-                        decoded->size+=4; // four byte signed displacement (disp32)
-                        break;
-                    case 3:
-                        // register addressing mode
-                        break;
-                }
-
-                // if(extended_instr_has_immediate_operand(decoded->op1))
-                //     decoded->size+=get_extended_immediate_operand_size(decoded->op1);
-
+                decoded->size += modrm_size;
                 return true;
             }
         }
@@ -185,7 +160,7 @@ bool decode32(unsigned char* insruction, Dinstruction* decoded, unsigned int mod
 
         if(instr_other(decoded->op1)){
             decoded->instr_type = INSTR_OTHER;
-            size_t op_size = get_operand_size(decoded->op1);
+            size_t op_size = get_operand_size(decoded, decoded->op1);
             if(op_size == 0)
                 return false;
 
@@ -194,90 +169,11 @@ bool decode32(unsigned char* insruction, Dinstruction* decoded, unsigned int mod
         }
 
         if(instr_modrm(decoded->op1)){
-            decoded->instr_type = INSTR_MODRM;
-            i_ptr++;
-            // mod/rm part is gonna be here
-            unsigned int mod = (*i_ptr & 0xC0) >> 6;
-            unsigned int reg = (*i_ptr & 0x38) >> 3;
-            unsigned int rm  = (*i_ptr & 0x07);
+            size_t modrm_size = get_modrm_size(decoded, i_ptr);
+            if(modrm_size == 0)
+                return false;
 
-            decoded->mod = mod;
-
-            decoded->size+=1; //mod/rm byte
-            // Some instructions cannot make use of the REG portion of the ModR/M byte. 
-            // Many of these instructions are "multiplexed" using this field, where a single opcode can refer to multiple instructions, and the REG field determines the instruction. 
-            // In opcode listings, these are specified by following the opcode with a slash (/) and a digit 0-7
-            
-
-            // MOD R/M Addressing Mode
-            // === === ================================
-            // 00  000 [ eax ]
-            // 01  000 [ eax + disp8 ]              
-            // 10  000 [ eax + disp32 ]
-            // 11  000 register  ( al / ax / eax )   
-            // 00  001 [ ecx ]
-            // 01  001 [ ecx + disp8 ]
-            // 10  001 [ ecx + disp32 ]
-            // 11  001 register  ( cl / cx / ecx )
-            // 00  010 [ edx ]
-            // 01  010 [ edx + disp8 ]
-            // 10  010 [ edx + disp32 ]
-            // 11  010 register  ( dl / dx / edx )
-            // 00  011 [ ebx ]
-            // 01  011 [ ebx + disp8 ]
-            // 10  011 [ ebx + disp32 ]
-            // 11  011 register  ( bl / bx / ebx )
-            // 00  100 SIB  Mode                     
-            // 01  100 SIB  +  disp8  Mode
-            // 10  100 SIB  +  disp32  Mode
-            // 11  100 register  ( ah / sp / esp )
-            // 00  101 32-bit Displacement-Only Mode 
-            // 01  101 [ ebp + disp8 ]
-            // 10  101 [ ebp + disp32 ]
-            // 11  101 register  ( ch / bp / ebp )
-            // 00  110 [ esi ]
-            // 01  110 [ esi + disp8 ]
-            // 10  110 [ esi + disp32 ]
-            // 11  110 register  ( dh / si / esi )
-            // 00  111 [ edi ]
-            // 01  111 [ edi + disp8 ]
-            // 10  111 [ edi + disp32 ]
-            // 11  111 register  ( bh / di / edi )
-
-            switch(mod){
-                case 0:
-                    switch(rm){
-                        case 4:
-                            // SIB MODE
-                            decoded->size+=1; //1 sib byte follows mod/rm field
-                            break;
-                        case 5:
-                            decoded->size+=4; //4 byte displacement field follows mod/rm field
-                            // 32-bit Displacement-Only Mode
-                            break;
-                    }
-                    break;
-                case 1:
-                    if(rm == 4) // SIB MODE
-                        decoded->size+=1;
-
-                    decoded->size+=1; // one byte signed displacement (disp8)
-                    break;
-                case 2:
-                    if(rm == 4) // SIB MODE
-                        decoded->size+=1;
-
-                    decoded->size+=4; // four byte signed displacement (disp32)
-                    break;
-                case 3:
-                    // register addressing mode
-                    break;
-
-            }
-
-            if(instr_has_immediate_operand(decoded->op1))
-                decoded->size+=get_operand_size(decoded->op1);
-
+            decoded->size += modrm_size;
             return true;
         }
 
