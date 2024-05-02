@@ -12,13 +12,9 @@ enum Types{
 bool instr_has_prefix(unsigned char instruction);           // checks if the instruction has prefixes (4 bytes max)
 bool instr_has_extended_opcode(unsigned char instruction);  // checks if the instruction has 2-byte opcode
 
-bool instr_zero(unsigned char opcode); // if instruction has no operands
-bool instr_modrm(unsigned char opcode);
-bool instr_other(unsigned char opcode);
-
-bool extended_instr_zero(unsigned char opcode); // if instruction has no operands
-bool extended_instr_modrm(unsigned char opcode);
-bool extended_instr_other(unsigned char opcode);
+bool instr_zero(Dinstruction* decoded,  unsigned char opcode); // if instruction has no operands
+bool instr_modrm(Dinstruction* decoded, unsigned char opcode);
+bool instr_other(Dinstruction* decoded, unsigned char opcode);
 
 bool instr_has_rel_offset_operand(unsigned char opcode);
 bool instr_has_immediate_operand(Dinstruction* decoded, unsigned char opcode);

@@ -21,5 +21,5 @@ void dump(Dinstruction* decoded);               // dumps struct fields to stdout
 void free_instrucion(Dinstruction* decoded);    // frees the memory
 void zero_instruction(Dinstruction* decoded);   // zeroes the struct
 bool decode(unsigned char* insruction, Dinstruction* decoded, unsigned int mode);   //general decode func
-bool decode32(unsigned char* insruction, Dinstruction* decoded, unsigned int mode); // 32bit specific 
-bool decode64(unsigned char* insruction, Dinstruction* decoded, unsigned int mode); // 64bit specific
+bool decode32(unsigned char* insruction, Dinstruction* decoded); // 32bit specific 
+bool decode64(unsigned char* insruction, Dinstruction* decoded); // 64bit specific

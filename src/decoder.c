@@ -52,7 +52,7 @@ void free_instrucion(Dinstruction* decoded){
     free(decoded);
 }
 
-bool decode32(unsigned char* insruction, Dinstruction* decoded, unsigned int mode){
+bool decode32(unsigned char* insruction, Dinstruction* decoded){
 
     // https://sparksandflames.com/files/x86InstructionChart.html
 
@@ -123,12 +123,12 @@ bool decode32(unsigned char* insruction, Dinstruction* decoded, unsigned int mod
             decoded->op1 = *i_ptr;
             decoded->size+=1;
 
-            if(extended_instr_zero(decoded->op1)){
+            if(instr_zero(decoded, decoded->op1)){
                 decoded->instr_type = INSTR_ZERO;
                 return true;  // if no (mod/rm, imm or rel jmp offset) byte is coming after
             }
 
-            if(extended_instr_other(decoded->op1)){
+            if(instr_other(decoded, decoded->op1)){
                 decoded->instr_type = INSTR_OTHER;
                 size_t op_size = get_operand_size(decoded, decoded->op1);
                 if(op_size == 0)
@@ -138,7 +138,7 @@ bool decode32(unsigned char* insruction, Dinstruction* decoded, unsigned int mod
                 return true;
             }
 
-            if(extended_instr_modrm(decoded->op1)){
+            if(instr_modrm(decoded, decoded->op1)){
                 size_t modrm_size = get_modrm_size(decoded, i_ptr);
                 if(modrm_size == 0)
                     return false;            
@@ -153,12 +153,12 @@ bool decode32(unsigned char* insruction, Dinstruction* decoded, unsigned int mod
         decoded->op1 = *i_ptr;
         decoded->size+=1;   
 
-        if(instr_zero(decoded->op1)){
+        if(instr_zero(decoded, decoded->op1)){
             decoded->instr_type = INSTR_ZERO;
             return true;  // if no (mod/rm, imm or rel jmp offset) byte is coming after
         }
 
-        if(instr_other(decoded->op1)){
+        if(instr_other(decoded, decoded->op1)){
             decoded->instr_type = INSTR_OTHER;
             size_t op_size = get_operand_size(decoded, decoded->op1);
             if(op_size == 0)
@@ -168,7 +168,7 @@ bool decode32(unsigned char* insruction, Dinstruction* decoded, unsigned int mod
             return true;
         }
 
-        if(instr_modrm(decoded->op1)){
+        if(instr_modrm(decoded, decoded->op1)){
             size_t modrm_size = get_modrm_size(decoded, i_ptr);
             if(modrm_size == 0)
                 return false;
@@ -212,7 +212,7 @@ bool decode32(unsigned char* insruction, Dinstruction* decoded, unsigned int mod
     return false;
 }
 
-bool decode64(unsigned char* insruction, Dinstruction* decoded, unsigned int mode){
+bool decode64(unsigned char* insruction, Dinstruction* decoded){
     // todo
     return false;
 }
@@ -220,9 +220,9 @@ bool decode64(unsigned char* insruction, Dinstruction* decoded, unsigned int mod
 bool decode(unsigned char* insruction, Dinstruction* decoded, unsigned int mode){
     switch(mode){
         case 32:
-            return decode32(insruction, decoded, mode);
+            return decode32(insruction, decoded);
         case 64:
-            return decode64(insruction, decoded, mode);
+            return decode64(insruction, decoded);
         default: 
             return false;
     }
