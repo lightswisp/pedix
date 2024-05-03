@@ -24,6 +24,8 @@ bool instr_has_prefix(unsigned char instruction){
 bool instr_modrm(Dinstruction* decoded, unsigned char opcode){
     if(decoded->extended){
         switch(opcode){
+            case 0x71:
+
             case 0x00: case 0x01: case 0x02: case 0x03: case 0x0D:
             case 0x10: case 0x11: case 0x12: case 0x13: case 0x14:
             case 0x15: case 0x16: case 0x17: case 0x18: case 0x19:
@@ -142,6 +144,95 @@ bool instr_zero(Dinstruction* decoded, unsigned char opcode){
     }
 }
 
+bool instr_has_opcode_extension(Dinstruction* decoded, unsigned char opcode){
+    //Table A-6. Opcode Extensions for One- and Two-byte Opcodes by Group Number
+    // VEX.0F38 F3 todo
+    if(decoded->extended){
+        switch(opcode){
+            case 0x00: case 0x01: case 0xBA: case 0xC7: case 0xB9:
+            case 0x71: case 0x72: case 0x73: case 0xAE: case 0x18:
+                return true;
+            default: 
+                return false;
+        }
+    }
+    switch(opcode){
+        case 0x80: case 0x81: case 0x82: case 0x83: case 0x8F:
+        case 0xC0: case 0xC1: case 0xD0: case 0xD1: case 0xD2:
+        case 0xD3: case 0xF6: case 0xF7: case 0xFE: case 0xFF:
+        case 0xC6: case 0xC7: 
+            return true;
+        default:
+            return false;
+    }
+}
+
+bool instr_has_valid_extension(Dinstruction* decoded, unsigned char opcode){
+    // Table A-6. Opcode Extensions for One- and Two-byte Opcodes by Group Number
+    unsigned int reg = (decoded->mod & 0x38) >> 3;
+    if(decoded->extended){
+        switch(opcode){
+            case 0x00:
+                switch(reg){
+                    case 0x06: case 0x07:
+                        return false;
+                    default:
+                        return true;
+                }
+            case 0x01:
+                switch(reg){
+                    case 0x05:
+                        return false;
+                    default:
+                        return true;
+                }
+
+        }
+    }
+    switch(opcode){
+        case 0x80: case 0x81: case 0x82: case 0x83: 
+            return true;
+        case 0x8F:
+            switch(reg){
+                case 0x00:
+                    return true;
+                default: 
+                    return false;
+            }
+        case 0xC0: case 0xC1: case 0xD0: 
+        case 0xD1: case 0xD2: case 0xD3:
+            switch(reg){
+                case 0x06:
+                    return false;
+                default:
+                    return true;
+            }
+        case 0xF6: case 0xF7:
+            switch(reg){
+                case 0x01:
+                    return false;
+                default:
+                    return true;
+            }
+        case 0xFE:
+            switch(reg){
+                case 0x01: case 0x02:
+                    return true;
+                default:
+                    return false;
+            }
+        case 0xFF:
+            switch(reg){
+                case 0x07:
+                    return false;
+                default:
+                    return true;
+            }
+        
+        
+    }
+}
+
 bool instr_has_extended_opcode(unsigned char instruction){
     // it means that the opcode size is 2bytes long
     if(instruction == 0x0F)
@@ -214,14 +305,12 @@ bool instr_has_direct_addr_operand(unsigned char opcode){
     }
 }
 
-size_t get_modrm_size(Dinstruction* decoded, unsigned char* i_ptr){
+size_t get_modrm_size(Dinstruction* decoded){
     size_t modrm_size = 0;
-    decoded->instr_type = INSTR_MODRM;
-    i_ptr++;
     // mod/rm part is gonna be here
-    unsigned int mod = (*i_ptr & 0xC0) >> 6;
-    unsigned int reg = (*i_ptr & 0x38) >> 3;
-    unsigned int rm  = (*i_ptr & 0x07);
+    unsigned int mod = (decoded->mod & 0xC0) >> 6;
+    unsigned int reg = (decoded->mod & 0x38) >> 3;
+    unsigned int rm  = (decoded->mod & 0x07);
 
     decoded->mod = mod;
 

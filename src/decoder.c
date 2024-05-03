@@ -87,18 +87,18 @@ bool decode32(unsigned char* insruction, Dinstruction* decoded){
             // if it has secondary opcode
             decoded->op1 = *i_ptr;
             decoded->size+=BYTE_SZ;
-            printf("I_PTR: 0x%02x\n", *i_ptr);
+
             i_ptr++;
             decoded->op2 = *i_ptr;
             decoded->size+=BYTE_SZ;
-            printf("I_PTR: 0x%02x\n", *i_ptr);
-            size_t modrm_size = get_modrm_size(decoded, i_ptr);
-            printf("MODRM_SZ: %d\n", modrm_size);
-            printf("SIZE BEFORE: %d\n", decoded->size);
-            if(modrm_size == 0)
-                return false;
-            
-            printf("SIZE: %d\n", modrm_size);
+
+            // if(instr_has_opcode_extension(decoded, i_ptr)){
+
+            // }
+            i_ptr++;
+            decoded->instr_type = INSTR_MODRM;      
+            decoded->mod = *i_ptr;
+            size_t modrm_size = get_modrm_size(decoded);          
             decoded->size += modrm_size;
 
             return true;
@@ -106,7 +106,7 @@ bool decode32(unsigned char* insruction, Dinstruction* decoded){
         else if(*i_ptr == 0x01){
             decoded->op1 = *i_ptr;
             i_ptr++;
-            //maybe i should also add VMCALL, VMLAUNCH, VMRESUME, VMXOFF, MONITOR, MWAIT, XGETBV, XSETBV and RDTSCP support as well?
+            //VMCALL, VMLAUNCH, VMRESUME, VMXOFF, MONITOR, MWAIT, XGETBV, XSETBV and RDTSCP
             switch(*i_ptr){
                 case 0xC1: case 0xC2: case 0xC3: case 0xC4:
                 case 0xC8: case 0xC9: case 0xD0: case 0xD1:
@@ -139,10 +139,18 @@ bool decode32(unsigned char* insruction, Dinstruction* decoded){
             }
 
             if(instr_modrm(decoded, decoded->op1)){
-                size_t modrm_size = get_modrm_size(decoded, i_ptr);
-                if(modrm_size == 0)
-                    return false;            
+                i_ptr++;
+                decoded->instr_type = INSTR_MODRM;      
+                decoded->mod = *i_ptr;
 
+                if(instr_has_opcode_extension(decoded, decoded->op1)){
+                    if(!instr_has_valid_extension(decoded, decoded->op1)){
+                        
+                        return false;
+                    }
+                }
+
+                size_t modrm_size = get_modrm_size(decoded);
                 decoded->size += modrm_size;
                 return true;
             }
@@ -169,10 +177,18 @@ bool decode32(unsigned char* insruction, Dinstruction* decoded){
         }
 
         if(instr_modrm(decoded, decoded->op1)){
-            size_t modrm_size = get_modrm_size(decoded, i_ptr);
-            if(modrm_size == 0)
-                return false;
+            i_ptr++;
+            decoded->instr_type = INSTR_MODRM;
+            decoded->mod = *i_ptr;
 
+            if(instr_has_opcode_extension(decoded, decoded->op1)){
+                if(!instr_has_valid_extension(decoded, decoded->op1)){
+                    
+                    return false;
+                }
+            }
+
+            size_t modrm_size = get_modrm_size(decoded);
             decoded->size += modrm_size;
             return true;
         }

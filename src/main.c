@@ -1,6 +1,4 @@
-#include <stdio.h>
-#include "decoder.h"    
-
+#include "decoder.h"
 
 int main(void){
     //unsigned char instruction[] = { 0xB8, 0x00, 0xF9, 0x5F, 0x1F, 0xBA, 0x00, 0x00, 0x00, 0x00, 0xB9, 0x1B, 0x00, 0x00, 0x00, 0x0F, 0x30 } ;
@@ -23,7 +21,8 @@ int main(void){
                                     0x0F, 0x42, 0x00,
                                     0x0F, 0x01, 0xC1,                                  
                                     0x0F, 0x70, 0x44, 0x43, 0x10, 0x10, 
-                                    0x00, 0x84, 0x4F, 0x40, 0x30, 0x20, 0x10
+                                    0x00, 0x84, 0x4F, 0x40, 0x30, 0x20, 0x10,
+                                    0xD0, 0x44, 0xC1, 0x10
     };
     
     
@@ -33,7 +32,7 @@ int main(void){
     
     int offset = 0;
     int instructions = 0;
-    while(instructions < 18){
+    while(instructions < 19){
         int r = decode(instruction + offset, decoded, mode);
         if(r == 0){
             break;
