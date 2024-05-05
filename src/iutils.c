@@ -40,7 +40,7 @@ bool instr_modrm(Dinstruction* decoded, unsigned char opcode){
             case 0x61: case 0x62: case 0x63: case 0x64: case 0x65:
             case 0x66: case 0x67: case 0x68: case 0x69: case 0x6A:
             case 0x6B: case 0x6C: case 0x6D: case 0x6E: case 0x6F:
-            case 0x70: case 0x71: case 0x72: case 0x73:
+            case 0x70: case 0x71: case 0x72: case 0x73: case 0x74:
 
                 return true;
             default:
@@ -367,7 +367,7 @@ size_t get_modrm_size(Dinstruction* decoded){
             switch(rm){
                 case 4:
                     // SIB MODE
-                    modrm_size+=(BYTE_SZ + DOUBLEWORD_SZ); //1 sib byte follows mod/rm field + 32bit displacement
+                    modrm_size+=BYTE_SZ; //1 sib byte follows mod/rm field  (SIB with no displacement)
                     break;
                 case 5:
                     modrm_size+=DOUBLEWORD_SZ; //4 byte displacement field follows mod/rm field
