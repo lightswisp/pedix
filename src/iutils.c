@@ -24,7 +24,6 @@ bool instr_has_prefix(unsigned char instruction){
 bool instr_modrm(Dinstruction* decoded, unsigned char opcode){
     if(decoded->extended){
         switch(opcode){
-            case 0x71:
 
             case 0x00: case 0x01: case 0x02: case 0x03: case 0x0D:
             case 0x10: case 0x11: case 0x12: case 0x13: case 0x14:
@@ -41,7 +40,7 @@ bool instr_modrm(Dinstruction* decoded, unsigned char opcode){
             case 0x61: case 0x62: case 0x63: case 0x64: case 0x65:
             case 0x66: case 0x67: case 0x68: case 0x69: case 0x6A:
             case 0x6B: case 0x6C: case 0x6D: case 0x6E: case 0x6F:
-            case 0x70:
+            case 0x70: case 0x71: case 0x72: case 0x73:
 
                 return true;
             default:
@@ -186,7 +185,48 @@ bool instr_has_valid_extension(Dinstruction* decoded, unsigned char opcode){
                     default:
                         return true;
                 }
-
+            case 0xBA:
+                switch(reg){
+                    case 0x04: case 0x05: case 0x06: case 0x07:
+                        return true;
+                    default:
+                        return false;
+                }
+            case 0xC7:
+                switch(reg){
+                    case 0x01: case 0x06: case 0x07:
+                        return true;
+                    default:
+                        return false;
+                }
+            case 0xB9:
+                return true;
+            case 0x71:
+                switch(reg){
+                    case 0x02: case 0x04: case 0x06:
+                        return true;
+                    default:
+                        return false;
+                }
+            case 0x72:
+                switch(reg){
+                    case 0x02: case 0x04: case 0x06:
+                        return true;
+                    default:
+                        return false;
+                }
+            case 0x73:
+                switch(reg){
+                    case 0x02: case 0x03: case 0x06: case 0x07:
+                        return true;
+                    default:
+                        return false;
+                }
+            case 0xAE:
+                return true;
+            case 0x18:
+                return true;
+            
         }
     }
     switch(opcode){
@@ -228,7 +268,13 @@ bool instr_has_valid_extension(Dinstruction* decoded, unsigned char opcode){
                 default:
                     return true;
             }
-        
+        case 0xC6: case 0xC7:
+            switch(reg){
+                case 0x00: case 0x07:
+                    return true;
+                default:
+                    return false;
+            }
         
     }
 }
@@ -253,7 +299,7 @@ bool instr_has_immediate_operand(Dinstruction* decoded, unsigned char opcode){
                     default:
                         return false;
                 }
-            case 0x70:
+            case 0x70: case 0x71: case 0x72: case 0x73:
                 return true;
             default:
                 return false;
@@ -367,7 +413,8 @@ size_t get_operand_size(Dinstruction* decoded, unsigned char opcode){
                         return BYTE_SZ;
                 }
             case 0x20: case 0x21: case 0x22: case 0x23: case 0x24:
-            case 0x26: case 0x50: case 0x70:
+            case 0x26: case 0x50: case 0x70: case 0x71: case 0x72: 
+            case 0x73:
                 return BYTE_SZ;
             default:
                 return 0;

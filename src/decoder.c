@@ -92,9 +92,6 @@ bool decode32(unsigned char* insruction, Dinstruction* decoded){
             decoded->op2 = *i_ptr;
             decoded->size+=BYTE_SZ;
 
-            // if(instr_has_opcode_extension(decoded, i_ptr)){
-
-            // }
             i_ptr++;
             decoded->instr_type = INSTR_MODRM;      
             decoded->mod = *i_ptr;
@@ -106,8 +103,10 @@ bool decode32(unsigned char* insruction, Dinstruction* decoded){
         else if(*i_ptr == 0x01){
             decoded->op1 = *i_ptr;
             i_ptr++;
-            //VMCALL, VMLAUNCH, VMRESUME, VMXOFF, MONITOR, MWAIT, XGETBV, XSETBV and RDTSCP
+            // actually this block of code is a whole mess, because it is not aware of sgdt, sidt, lgdt, lidt, smsw, lmsw and invlpg instructions.
+            // да похуй уже?
             switch(*i_ptr){
+                // VMCALL, VMLAUNCH, VMRESUME, VMXOFF, MONITOR, MWAIT, XGETBV, XSETBV and RDTSCP
                 case 0xC1: case 0xC2: case 0xC3: case 0xC4:
                 case 0xC8: case 0xC9: case 0xD0: case 0xD1:
                 case 0xF9:
@@ -145,7 +144,6 @@ bool decode32(unsigned char* insruction, Dinstruction* decoded){
 
                 if(instr_has_opcode_extension(decoded, decoded->op1)){
                     if(!instr_has_valid_extension(decoded, decoded->op1)){
-                        
                         return false;
                     }
                 }
@@ -154,6 +152,8 @@ bool decode32(unsigned char* insruction, Dinstruction* decoded){
                 decoded->size += modrm_size;
                 return true;
             }
+
+            return false;
         }
     }
     else{  // one byte opcode is gonna be here
@@ -193,38 +193,9 @@ bool decode32(unsigned char* insruction, Dinstruction* decoded){
             return true;
         }
 
-
-        /*
-            Example:
-            ADD opcode => [0 0 0 0 0 0 d s]
-            d = 0 if adding from register to memory
-            d = 1 if adding from memory to register
-            s = 0 if adding 8bit operands
-            s = 1 if adding 16bit or 32bit operands
-
-            REMARK: 
-            d = 1 => instruction source is in reg field
-            d = 0 => instruction destination is in reg field
-            
-            bit marked "d" specifies the direction of data transfer:
-            if d = 0 then we add from register to memory
-                add [ebx], al
-            
-            [0 0 0 0 0 0 0 0] [0 0 0 0 0 0 1 1]
-            reg1 = instruction & 
-
-            if d = 1 then we add from memory to register
-                add al, [ebx]
-
-            [0 0 0 0 0 0 1 0] [0 0 0 0 0 0 1 1]
-        */
-
-
     }
 
 
-
-    //printf("%x\n", *i_ptr);
     return false;
 }
 
