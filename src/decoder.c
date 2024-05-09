@@ -53,6 +53,8 @@ void free_instrucion(Dinstruction* decoded){
 }
 
 bool decode32(unsigned char* insruction, Dinstruction* decoded){
+    // TODO: ADD VALID PREFIX CHECK
+    // EX: 66 0f 74 04 00 -> IS A VALID INSTRUCTION, WHILE f3 0f 74 04 00 IS NOT
 
     // https://sparksandflames.com/files/x86InstructionChart.html
 
@@ -95,7 +97,7 @@ bool decode32(unsigned char* insruction, Dinstruction* decoded){
             i_ptr++;
             decoded->instr_type = INSTR_MODRM;      
             decoded->mod = *i_ptr;
-            size_t modrm_size = get_modrm_size(decoded);          
+            size_t modrm_size = get_modrm_size(decoded, i_ptr);          
             decoded->size += modrm_size;
 
             return true;
@@ -148,7 +150,7 @@ bool decode32(unsigned char* insruction, Dinstruction* decoded){
                     }
                 }
 
-                size_t modrm_size = get_modrm_size(decoded);
+                size_t modrm_size = get_modrm_size(decoded, i_ptr);
                 decoded->size += modrm_size;
                 return true;
             }
@@ -188,7 +190,7 @@ bool decode32(unsigned char* insruction, Dinstruction* decoded){
                 }
             }
 
-            size_t modrm_size = get_modrm_size(decoded);
+            size_t modrm_size = get_modrm_size(decoded, i_ptr);
             decoded->size += modrm_size;
             return true;
         }

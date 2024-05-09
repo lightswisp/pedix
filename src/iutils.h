@@ -24,4 +24,4 @@ bool instr_has_direct_addr_operand(unsigned char opcode);
 bool instr_has_modrm(unsigned char opcode);
 
 size_t get_operand_size(Dinstruction* decoded, unsigned char opcode);
-size_t get_modrm_size(Dinstruction* decoded);
+size_t get_modrm_size(Dinstruction* decoded, unsigned char* i_ptr);

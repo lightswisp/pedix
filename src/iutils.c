@@ -41,6 +41,8 @@ bool instr_modrm(Dinstruction* decoded, unsigned char opcode){
             case 0x66: case 0x67: case 0x68: case 0x69: case 0x6A:
             case 0x6B: case 0x6C: case 0x6D: case 0x6E: case 0x6F:
             case 0x70: case 0x71: case 0x72: case 0x73: case 0x74:
+            case 0x75: case 0x76: case 0x78: case 0x79: case 0x7C:
+            case 0x7D: case 0x7E: case 0x7F:
 
                 return true;
             default:
@@ -74,7 +76,7 @@ bool instr_other(Dinstruction* decoded, unsigned char opcode){
     if(decoded->extended){
         switch(opcode){
             case 0x20: case 0x21: case 0x22: case 0x23: case 0x24:
-            case 0x26: case 0x50:
+            case 0x26: case 0x50: case 0x80: 
                 return true;
             default:
                 return false;
@@ -108,7 +110,7 @@ bool instr_zero(Dinstruction* decoded, unsigned char opcode){
         switch(opcode){
             case 0x05: case 0x06: case 0x07: case 0x08: case 0x09:
             case 0x0B: case 0x30: case 0x31: case 0x32: case 0x33:
-            case 0x34: case 0x35: case 0x37:
+            case 0x34: case 0x35: case 0x37: case 0x77:
 
                 return true;
             default:
@@ -351,7 +353,7 @@ bool instr_has_direct_addr_operand(unsigned char opcode){
     }
 }
 
-size_t get_modrm_size(Dinstruction* decoded){
+size_t get_modrm_size(Dinstruction* decoded, unsigned char* i_ptr){
     size_t modrm_size = 0;
     // mod/rm part is gonna be here
     unsigned int mod = (decoded->mod & 0xC0) >> 6;
@@ -368,6 +370,10 @@ size_t get_modrm_size(Dinstruction* decoded){
                 case 4:
                     // SIB MODE
                     modrm_size+=BYTE_SZ; //1 sib byte follows mod/rm field  (SIB with no displacement)
+                    unsigned int base = *(i_ptr+1) & 7;
+                    if(base == 5){
+                        modrm_size+=DOUBLEWORD_SZ;  // displacement follows SIB byte if base field is 5
+                    }
                     break;
                 case 5:
                     modrm_size+=DOUBLEWORD_SZ; //4 byte displacement field follows mod/rm field
@@ -416,6 +422,11 @@ size_t get_operand_size(Dinstruction* decoded, unsigned char opcode){
             case 0x26: case 0x50: case 0x70: case 0x71: case 0x72: 
             case 0x73:
                 return BYTE_SZ;
+            case 0x80: case 0x81: case 0x82: case 0x83: case 0x84:
+            case 0x85: case 0x86: case 0x87: case 0x88: case 0x89:
+            case 0x8A: case 0x8B: case 0x8C: case 0x8D: case 0x8E:
+            case 0x8F:
+                return DOUBLEWORD_SZ;
             default:
                 return 0;
         }
