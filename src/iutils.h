@@ -18,7 +18,7 @@ bool instr_zero(Dinstruction* decoded,  unsigned char opcode); // if instruction
 bool instr_modrm(Dinstruction* decoded, unsigned char opcode);
 bool instr_other(Dinstruction* decoded, unsigned char opcode);
 
-bool instr_has_rel_offset_operand(unsigned char opcode);
+bool instr_has_rel_offset_operand(Dinstruction* decoded, unsigned char opcode);
 bool instr_has_immediate_operand(Dinstruction* decoded, unsigned char opcode);
 bool instr_has_direct_addr_operand(unsigned char opcode);
 bool instr_has_modrm(unsigned char opcode);
