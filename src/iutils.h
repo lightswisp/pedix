@@ -9,6 +9,7 @@ enum Types{
     INSTR_OTHER = 3,
 };
 
+bool instr_has_rex(unsigned char insruction);
 bool instr_has_prefix(unsigned char instruction);           // checks if the instruction has prefixes (4 bytes max)
 bool instr_has_extended_opcode(unsigned char instruction);  // checks if the instruction has 2-byte opcode
 bool instr_has_opcode_extension(Dinstruction* decoded, unsigned char opcode);

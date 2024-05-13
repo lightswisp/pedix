@@ -52,7 +52,7 @@ void free_instrucion(Dinstruction* decoded){
     free(decoded);
 }
 
-bool decode32(unsigned char* insruction, Dinstruction* decoded){
+bool decode32(Dinstruction* decoded, unsigned char* insruction){
     // TODO: ADD VALID PREFIX CHECK
     // EX: 66 0f 74 04 00 -> IS A VALID INSTRUCTION, WHILE f3 0f 74 04 00 IS NOT
 
@@ -201,17 +201,31 @@ bool decode32(unsigned char* insruction, Dinstruction* decoded){
     return false;
 }
 
-bool decode64(unsigned char* insruction, Dinstruction* decoded){
-    // todo
+bool decode64(Dinstruction* decoded, unsigned char* insruction){
+    unsigned char* i_ptr = insruction;
+
+    if(instr_has_rex(*i_ptr)){
+        decoded->has_rex = true;
+        decoded->size+=BYTE_SZ;
+        i_ptr++;
+    }
+
+    if(instr_has_prefix(*i_ptr)){
+        decoded->has_prefix = true;
+        decoded->prefixes[0] = *i_ptr;
+        decoded->size+=BYTE_SZ;
+        i_ptr++;
+    }
+
     return false;
 }
 
-bool decode(unsigned char* insruction, Dinstruction* decoded, unsigned int mode){
+bool decode(Dinstruction* decoded, unsigned char* insruction, unsigned int mode){
     switch(mode){
         case 32:
-            return decode32(insruction, decoded);
+            return decode32(decoded, insruction);
         case 64:
-            return decode64(insruction, decoded);
+            return decode64(decoded, insruction);
         default: 
             return false;
     }

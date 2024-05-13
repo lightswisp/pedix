@@ -21,6 +21,23 @@ bool instr_has_prefix(unsigned char instruction){
     }
 }
 
+bool instr_has_rex(unsigned char insruction){
+    // REX prefixes are a set of 16 opcodes that span one row of the opcode map and occupy entries 40H to 4FH. These
+    // opcodes represent valid instructions (INC or DEC) in IA-32 operating modes and in compatibility mode. In 64-bit
+    // mode, the same opcodes represent the instruction prefix REX and are not treated as individual instructions.
+    // The single-byte-opcode forms of the INC/DEC instructions are not available in 64-bit mode. INC/DEC functionality
+    // is still available using ModR/M forms of the same instructions (opcodes FF/0 and FF/1).
+    switch(insruction){
+        case 0x40: case 0x41: case 0x42: case 0x43: case 0x44:
+        case 0x45: case 0x46: case 0x47: case 0x48: case 0x49:
+        case 0x4A: case 0x4B: case 0x4C: case 0x4D: case 0x4E:
+        case 0x4F:
+            return true;
+        default:
+            return false;
+    }
+}
+
 bool instr_modrm(Dinstruction* decoded, unsigned char opcode){
     if(decoded->extended){
         switch(opcode){
@@ -60,8 +77,7 @@ bool instr_modrm(Dinstruction* decoded, unsigned char opcode){
             case 0xED: case 0xEE: case 0xEF: case 0xF0: case 0xF1:
             case 0xF2: case 0xF3: case 0xF4: case 0xF5: case 0xF6:
             case 0xF7: case 0xF8: case 0xF9: case 0xFA: case 0xFB:
-            case 0xFC: case 0xFD: case 0xFE: case 0xFF: 
-            
+            case 0xFC: case 0xFD: case 0xFE: case 0xFF:        
                 return true;
             default:
                 return false;

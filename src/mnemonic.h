@@ -1,4 +1,4 @@
-const char** m_table = {
+const char* m_table[] = {
     "add",  "add",  "add",  "add",
     "add",  "add",  "push", "pop",
     "or",   "or",   "or",   "or",
@@ -9,6 +9,6 @@ const char** m_table = {
     "sbb",  "sbb"
 };
 
-const char** ex_m_table = {
+const char* ex_m_table[] = {
 
 };

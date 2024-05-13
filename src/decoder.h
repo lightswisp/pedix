@@ -2,8 +2,14 @@
 
 #include <stdbool.h>
 
+typedef struct{
+    char str[100];
+    size_t cur_size;
+} Mnemonic;
+
 typedef struct {
     size_t size;
+    bool has_rex;
     bool has_prefix;
     bool extended;
     unsigned int prefixes[2];
@@ -13,13 +19,13 @@ typedef struct {
     unsigned int reg_src;
     unsigned int reg_dst;
     unsigned int instr_type;
-    char mnemonic[100]; // this one is not implemented yet!
+    Mnemonic* mnemonic; // this one is not implemented yet!
 } Dinstruction;
 
 Dinstruction* init_instruction();               // allocates memory for the struct
 void dump(Dinstruction* decoded);               // dumps struct fields to stdout
 void free_instrucion(Dinstruction* decoded);    // frees the memory
 void zero_instruction(Dinstruction* decoded);   // zeroes the struct
-bool decode(unsigned char* insruction, Dinstruction* decoded, unsigned int mode);   //general decode func
-bool decode32(unsigned char* insruction, Dinstruction* decoded); // 32bit specific 
-bool decode64(unsigned char* insruction, Dinstruction* decoded); // 64bit specific
+bool decode(Dinstruction* decoded, unsigned char* insruction, unsigned int mode);   //general decode func
+bool decode32(Dinstruction* decoded, unsigned char* insruction); // 32bit specific 
+bool decode64(Dinstruction* decoded, unsigned char* insruction); // 64bit specific
