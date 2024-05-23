@@ -21,13 +21,22 @@ bool instr_has_prefix(unsigned char instruction){
     }
 }
 
-bool instr_has_rex(unsigned char insruction){
+bool instr_has_vex(unsigned char instruction){
+    switch(instruction){
+        case 0xC5: case 0xC4:
+            return true;
+        default:
+            return false;
+    }
+}
+
+bool instr_has_rex(unsigned char instruction){
     // REX prefixes are a set of 16 opcodes that span one row of the opcode map and occupy entries 40H to 4FH. These
     // opcodes represent valid instructions (INC or DEC) in IA-32 operating modes and in compatibility mode. In 64-bit
     // mode, the same opcodes represent the instruction prefix REX and are not treated as individual instructions.
     // The single-byte-opcode forms of the INC/DEC instructions are not available in 64-bit mode. INC/DEC functionality
     // is still available using ModR/M forms of the same instructions (opcodes FF/0 and FF/1).
-    switch(insruction){
+    switch(instruction){
         case 0x40: case 0x41: case 0x42: case 0x43: case 0x44:
         case 0x45: case 0x46: case 0x47: case 0x48: case 0x49:
         case 0x4A: case 0x4B: case 0x4C: case 0x4D: case 0x4E:
@@ -405,6 +414,15 @@ bool instr_has_direct_addr_operand(unsigned char opcode){
             return true;
         default:
             return false;
+    }
+}
+
+size_t get_vex_size(unsigned char vex_byte){
+    switch(vex_byte){
+        case 0xC5:
+            return WORD_SZ;
+        case 0xC4:
+            return THREE_BYTE_SZ;
     }
 }
 

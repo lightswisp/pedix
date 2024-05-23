@@ -4,6 +4,7 @@
 #include "decoder.h"
 #include "defines.h"
 #include "iutils.h"
+#include "mnemonic.h"
 
 void dump(Dinstruction* decoded){
     printf("========================================\n");
@@ -52,13 +53,13 @@ void free_instrucion(Dinstruction* decoded){
     free(decoded);
 }
 
-bool decode32(Dinstruction* decoded, unsigned char* insruction){
+bool decode32(Dinstruction* decoded, unsigned char* instruction){
     // TODO: ADD VALID PREFIX CHECK
     // EX: 66 0f 74 04 00 -> IS A VALID INSTRUCTION, WHILE f3 0f 74 04 00 IS NOT
 
     // https://sparksandflames.com/files/x86InstructionChart.html
 
-    unsigned char* i_ptr = insruction;
+    unsigned char* i_ptr = instruction;
 
     if(instr_has_prefix(*i_ptr)){
         decoded->has_prefix = true;
@@ -126,7 +127,7 @@ bool decode32(Dinstruction* decoded, unsigned char* insruction){
 
             if(instr_zero(decoded, decoded->op1)){
                 decoded->instr_type = INSTR_ZERO;
-                return true;  // if no (mod/rm, imm or rel jmp offset) byte is coming after
+                return true;  // if no other bytes are coming after
             }
 
             if(instr_other(decoded, decoded->op1)){
@@ -165,7 +166,8 @@ bool decode32(Dinstruction* decoded, unsigned char* insruction){
 
         if(instr_zero(decoded, decoded->op1)){
             decoded->instr_type = INSTR_ZERO;
-            return true;  // if no (mod/rm, imm or rel jmp offset) byte is coming after
+            set_mnemonic(decoded, decoded->op1);
+            return true;  // if no other bytes are coming after
         }
 
         if(instr_other(decoded, decoded->op1)){
@@ -175,6 +177,7 @@ bool decode32(Dinstruction* decoded, unsigned char* insruction){
                 return false;
 
             decoded->size+=op_size;
+            set_mnemonic(decoded, decoded->op1);
             return true;
         }
 
@@ -192,6 +195,7 @@ bool decode32(Dinstruction* decoded, unsigned char* insruction){
 
             size_t modrm_size = get_modrm_size(decoded, i_ptr);
             decoded->size += modrm_size;
+            set_mnemonic(decoded, decoded->op1);
             return true;
         }
 
@@ -201,14 +205,10 @@ bool decode32(Dinstruction* decoded, unsigned char* insruction){
     return false;
 }
 
-bool decode64(Dinstruction* decoded, unsigned char* insruction){
-    unsigned char* i_ptr = insruction;
-
-    if(instr_has_rex(*i_ptr)){
-        decoded->has_rex = true;
-        decoded->size+=BYTE_SZ;
-        i_ptr++;
-    }
+bool decode64(Dinstruction* decoded, unsigned char* instruction){
+//     In 64-bit mode, instruction formats do not change. Bits needed to define fields in the 64-bit context are provided by the
+// addition of REX prefixes.
+    unsigned char* i_ptr = instruction;
 
     if(instr_has_prefix(*i_ptr)){
         decoded->has_prefix = true;
@@ -217,15 +217,41 @@ bool decode64(Dinstruction* decoded, unsigned char* insruction){
         i_ptr++;
     }
 
+    if(instr_has_rex(*i_ptr)){
+        decoded->has_rex = true;
+        decoded->size+=BYTE_SZ;
+        i_ptr++;
+    }
+
+    if(instr_has_extended_opcode(*i_ptr)){
+        // 0x0f (two byte opcode is gonna be decoded here)
+        decoded->extended = true;
+        if(decoded->has_prefix){
+            decoded->prefixes[1] = *i_ptr;
+        }
+        else{
+            decoded->prefixes[0] = *i_ptr;
+        }
+
+        decoded->size+=BYTE_SZ;
+        i_ptr++;
+    }
+
+    if(instr_has_vex(*i_ptr)){
+        decoded->has_vex = true;
+        decoded->size+=get_vex_size(*i_ptr);
+        i_ptr++;
+    }
+
     return false;
 }
 
-bool decode(Dinstruction* decoded, unsigned char* insruction, unsigned int mode){
+bool decode(Dinstruction* decoded, unsigned char* instruction, unsigned int mode){
     switch(mode){
         case 32:
-            return decode32(decoded, insruction);
+            return decode32(decoded, instruction);
         case 64:
-            return decode64(decoded, insruction);
+            return decode64(decoded, instruction);
         default: 
             return false;
     }
