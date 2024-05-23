@@ -220,6 +220,11 @@ bool decode64(Dinstruction* decoded, unsigned char* instruction){
     if(instr_has_rex(*i_ptr)){
         decoded->status.has_rex = true;
         decoded->buffer.size += BYTE_SZ;
+        decoded->rex.field = *i_ptr;
+        decoded->rex.w = (decoded->rex.field & 0x08) >> 3;
+        decoded->rex.r = (decoded->rex.field & 0x04) >> 2;
+        decoded->rex.x = (decoded->rex.field & 0x02) >> 1;
+        decoded->rex.b = (decoded->rex.field & 0x01);
         i_ptr++;
     }
 

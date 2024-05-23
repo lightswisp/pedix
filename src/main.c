@@ -53,13 +53,13 @@ int main(void){
     // };
 
     
-    unsigned char instruction[] = { 0x00, 0x00, 0x06, 0xfa } ;
+    unsigned char instruction[] = { 0x4b, 0xC7, 0xC0, 0x40, 0x30, 0x20, 0x10 } ;
     Dinstruction* decoded = init_instruction();
-    unsigned int mode = 32;
+    unsigned int mode = 64;
     
     int offset = 0;
     int instructions = 0;
-    while(instructions < 3){
+    while(instructions < 1){
         int r = decode(decoded, instruction + offset, mode);
         if(r == 0){
             printf("Error has occured while decoding!\n");
