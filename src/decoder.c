@@ -8,9 +8,9 @@
 
 void dump(Dinstruction* decoded){
     printf("========================================\n");
-    printf("instruction size: %llu\n", decoded->size);
-    printf("has_prefix: %d\n", decoded->has_prefix);
-    printf("0x0f extended: %d\n", decoded->extended);
+    printf("instruction size: %llu\n", decoded->buffer.size);
+    printf("has_prefix: %d\n", decoded->status.has_prefix);
+    printf("0x0f extended: %d\n", decoded->status.extended);
 
     if(decoded->instr_type){
         switch(decoded->instr_type){
@@ -26,12 +26,12 @@ void dump(Dinstruction* decoded){
         }
     }
 
-    if(decoded->has_prefix){
+    if(decoded->status.has_prefix){
         printf("instruction prefix 1: 0x%02X\n", decoded->prefixes[0]);
         printf("instruction extended opcode: 0x%02X\n", decoded->prefixes[1]);
     }
     else{
-        if(decoded->extended)
+        if(decoded->status.extended)
             printf("instruction extended opcode: 0x%02X\n", decoded->prefixes[0]);
     }
 
@@ -62,9 +62,9 @@ bool decode32(Dinstruction* decoded, unsigned char* instruction){
     unsigned char* i_ptr = instruction;
 
     if(instr_has_prefix(*i_ptr)){
-        decoded->has_prefix = true;
+        decoded->status.has_prefix = true;
         decoded->prefixes[0] = *i_ptr;
-        decoded->size+=BYTE_SZ;
+        decoded->buffer.size += BYTE_SZ;
         i_ptr++;
     }
     
@@ -75,31 +75,31 @@ bool decode32(Dinstruction* decoded, unsigned char* instruction){
 
     if(instr_has_extended_opcode(*i_ptr)){
         // 0x0f (two byte opcode is gonna be decoded here)
-        decoded->extended = true;
-        if(decoded->has_prefix){
+        decoded->status.extended = true;
+        if(decoded->status.has_prefix){
             decoded->prefixes[1] = *i_ptr;
         }
         else{
             decoded->prefixes[0] = *i_ptr;
         }
 
-        decoded->size+=BYTE_SZ;
+        decoded->buffer.size += BYTE_SZ;
         i_ptr++;
 
         if(*i_ptr == 0x38 || *i_ptr == 0x3A){
             // if it has secondary opcode
             decoded->op1 = *i_ptr;
-            decoded->size+=BYTE_SZ;
+            decoded->buffer.size += BYTE_SZ;
 
             i_ptr++;
             decoded->op2 = *i_ptr;
-            decoded->size+=BYTE_SZ;
+            decoded->buffer.size += BYTE_SZ;
 
             i_ptr++;
             decoded->instr_type = INSTR_MODRM;      
             decoded->mod = *i_ptr;
             size_t modrm_size = get_modrm_size(decoded, i_ptr);          
-            decoded->size += modrm_size;
+            decoded->buffer.size += modrm_size;
 
             return true;
         }
@@ -114,7 +114,7 @@ bool decode32(Dinstruction* decoded, unsigned char* instruction){
                 case 0xC8: case 0xC9: case 0xD0: case 0xD1:
                 case 0xF9:
                     decoded->op2 = *i_ptr;
-                    decoded->size+=WORD_SZ;
+                    decoded->buffer.size += WORD_SZ;
                     return true;
                 default:
                     return false;
@@ -123,7 +123,7 @@ bool decode32(Dinstruction* decoded, unsigned char* instruction){
         else{
             // todo: implement extended opcodes
             decoded->op1 = *i_ptr;
-            decoded->size+=1;
+            decoded->buffer.size += BYTE_SZ;
 
             if(instr_zero(decoded, decoded->op1)){
                 decoded->instr_type = INSTR_ZERO;
@@ -136,7 +136,7 @@ bool decode32(Dinstruction* decoded, unsigned char* instruction){
                 if(op_size == 0)
                     return false;
 
-                decoded->size+=op_size;
+                decoded->buffer.size += op_size;
                 return true;
             }
 
@@ -152,7 +152,7 @@ bool decode32(Dinstruction* decoded, unsigned char* instruction){
                 }
 
                 size_t modrm_size = get_modrm_size(decoded, i_ptr);
-                decoded->size += modrm_size;
+                decoded->buffer.size += modrm_size;
                 return true;
             }
 
@@ -162,7 +162,7 @@ bool decode32(Dinstruction* decoded, unsigned char* instruction){
     else{  // one byte opcode is gonna be here
 
         decoded->op1 = *i_ptr;
-        decoded->size+=1;   
+        decoded->buffer.size += BYTE_SZ;   
 
         if(instr_zero(decoded, decoded->op1)){
             decoded->instr_type = INSTR_ZERO;
@@ -176,7 +176,7 @@ bool decode32(Dinstruction* decoded, unsigned char* instruction){
             if(op_size == 0)
                 return false;
 
-            decoded->size+=op_size;
+            decoded->buffer.size += op_size;
             set_mnemonic(decoded, decoded->op1);
             return true;
         }
@@ -194,7 +194,7 @@ bool decode32(Dinstruction* decoded, unsigned char* instruction){
             }
 
             size_t modrm_size = get_modrm_size(decoded, i_ptr);
-            decoded->size += modrm_size;
+            decoded->buffer.size += modrm_size;
             set_mnemonic(decoded, decoded->op1);
             return true;
         }
@@ -211,35 +211,35 @@ bool decode64(Dinstruction* decoded, unsigned char* instruction){
     unsigned char* i_ptr = instruction;
 
     if(instr_has_prefix(*i_ptr)){
-        decoded->has_prefix = true;
+        decoded->status.has_prefix = true;
         decoded->prefixes[0] = *i_ptr;
-        decoded->size+=BYTE_SZ;
+        decoded->buffer.size += BYTE_SZ;
         i_ptr++;
     }
 
     if(instr_has_rex(*i_ptr)){
-        decoded->has_rex = true;
-        decoded->size+=BYTE_SZ;
+        decoded->status.has_rex = true;
+        decoded->buffer.size += BYTE_SZ;
         i_ptr++;
     }
 
     if(instr_has_extended_opcode(*i_ptr)){
         // 0x0f (two byte opcode is gonna be decoded here)
-        decoded->extended = true;
-        if(decoded->has_prefix){
+        decoded->status.extended = true;
+        if(decoded->status.has_prefix){
             decoded->prefixes[1] = *i_ptr;
         }
         else{
             decoded->prefixes[0] = *i_ptr;
         }
 
-        decoded->size+=BYTE_SZ;
+        decoded->buffer.size += BYTE_SZ;
         i_ptr++;
     }
 
     if(instr_has_vex(*i_ptr)){
-        decoded->has_vex = true;
-        decoded->size+=get_vex_size(*i_ptr);
+        decoded->status.has_vex = true;
+        decoded->buffer.size += get_vex_size(*i_ptr);
         i_ptr++;
     }
 

@@ -1,5 +1,6 @@
 #pragma once
 
+#define MAX_INSTR_SIZE        0x0F
 #define BYTE_SZ               0x01        // OPERAND TYPE b (Byte, regardless of operand-size attribute)
 #define THREE_BYTE_SZ         0x03        // 24 bit
 #define WORD_SZ               0x02        // OPERAND TYPE w (Word, regardless of operand-size attribute)

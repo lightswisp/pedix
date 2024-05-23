@@ -68,7 +68,7 @@ int main(void){
         }
         dump(decoded);
         printf("%s\n\n", decoded->mnemonic.str);
-        offset+=decoded->size;
+        offset += decoded->buffer.size;
         instructions++;
         zero_instruction(decoded);
     }

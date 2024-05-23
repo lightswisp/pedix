@@ -2,7 +2,7 @@
 #include "mnemonic.h"
 
 void set_mnemonic(Dinstruction* decoded, unsigned char instruction){
-    if(decoded->extended){
+    if(decoded->status.extended){
         char* ex_m = ex_m_table[instruction];
         memcpy(decoded->mnemonic.str, ex_m, strlen(ex_m));
     }

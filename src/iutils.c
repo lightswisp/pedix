@@ -48,7 +48,7 @@ bool instr_has_rex(unsigned char instruction){
 }
 
 bool instr_modrm(Dinstruction* decoded, unsigned char opcode){
-    if(decoded->extended){
+    if(decoded->status.extended){
         switch(opcode){
             case 0x00: case 0x01: case 0x02: case 0x03: case 0x0D:
             case 0x10: case 0x11: case 0x12: case 0x13: case 0x14:
@@ -116,7 +116,7 @@ bool instr_modrm(Dinstruction* decoded, unsigned char opcode){
 
 
 bool instr_other(Dinstruction* decoded, unsigned char opcode){
-    if(decoded->extended){
+    if(decoded->status.extended){
         switch(opcode){
             case 0x20: case 0x21: case 0x22: case 0x23: case 0x24:
             case 0x26: case 0x50: case 0x80: case 0x81: case 0x82: 
@@ -152,7 +152,7 @@ bool instr_other(Dinstruction* decoded, unsigned char opcode){
 }
 
 bool instr_zero(Dinstruction* decoded, unsigned char opcode){
-    if(decoded->extended){
+    if(decoded->status.extended){
         switch(opcode){
             case 0x05: case 0x06: case 0x07: case 0x08: case 0x09:
             case 0x0B: case 0x30: case 0x31: case 0x32: case 0x33:
@@ -197,7 +197,7 @@ bool instr_zero(Dinstruction* decoded, unsigned char opcode){
 bool instr_has_opcode_extension(Dinstruction* decoded, unsigned char opcode){
     //Table A-6. Opcode Extensions for One- and Two-byte Opcodes by Group Number
     // VEX.0F38 F3 todo
-    if(decoded->extended){
+    if(decoded->status.extended){
         switch(opcode){
             case 0x00: case 0x01: case 0xBA: case 0xC7: case 0xB9:
             case 0x71: case 0x72: case 0x73: case 0xAE: case 0x18:
@@ -222,7 +222,7 @@ bool instr_has_valid_extension(Dinstruction* decoded, unsigned char opcode){
     // TODO: add validation by  prefix
     // check for  decoded->prefixes[0] in both  cases (extended and not)
     unsigned int reg = (decoded->mod & 0x38) >> 3;
-    if(decoded->extended){
+    if(decoded->status.extended){
         switch(opcode){
             case 0x00:
                 switch(reg){
@@ -333,14 +333,14 @@ bool instr_has_valid_extension(Dinstruction* decoded, unsigned char opcode){
 }
 
 bool instr_has_extended_opcode(unsigned char instruction){
-    // it means that the opcode size is 2bytes long
+    // it means that the instruction size is at least 2 bytes long
     if(instruction == 0x0F)
         return true;
     return false;
 }
 
 bool instr_has_immediate_operand(Dinstruction* decoded, unsigned char opcode){
-    if(decoded->extended){
+    if(decoded->status.extended){
         switch(opcode){
             case 0x3A: case 0x38:
                 switch(decoded->op2){
@@ -383,7 +383,7 @@ bool instr_has_immediate_operand(Dinstruction* decoded, unsigned char opcode){
 
 bool instr_has_rel_offset_operand(Dinstruction* decoded, unsigned char opcode){
     // relative address jumps
-    if(decoded->extended){
+    if(decoded->status.extended){
         switch(opcode){
             case 0x80: case 0x81: case 0x82: case 0x83: case 0x84:
             case 0x85: case 0x86: case 0x87: case 0x88: case 0x89:
@@ -435,36 +435,36 @@ size_t get_modrm_size(Dinstruction* decoded, unsigned char* i_ptr){
 
     decoded->mod = mod;
 
-    modrm_size+=1; //mod/rm byte
+    modrm_size += BYTE_SZ; //mod/rm byte
 
     switch(mod){
         case 0:
             switch(rm){
                 case 4:
                     // SIB MODE
-                    modrm_size+=BYTE_SZ; //1 sib byte follows mod/rm field  (SIB with no displacement)
+                    modrm_size += BYTE_SZ; //1 sib byte follows mod/rm field  (SIB with no displacement)
                     unsigned int base = *(i_ptr+1) & 7;
                     if(base == 5){
-                        modrm_size+=DOUBLEWORD_SZ;  // displacement follows SIB byte if base field is 5
+                        modrm_size += DOUBLEWORD_SZ;  // displacement follows SIB byte if base field is 5
                     }
                     break;
                 case 5:
-                    modrm_size+=DOUBLEWORD_SZ; //4 byte displacement field follows mod/rm field
+                    modrm_size += DOUBLEWORD_SZ; //4 byte displacement field follows mod/rm field
                     // 32-bit Displacement-Only Mode
                     break;
             }
             break;
         case 1:
             if(rm == 4) // SIB MODE
-                modrm_size+=BYTE_SZ;
+                modrm_size += BYTE_SZ;
 
-            modrm_size+=BYTE_SZ; // one byte signed displacement (disp8)
+            modrm_size += BYTE_SZ; // one byte signed displacement (disp8)
             break;
         case 2:
             if(rm == 4) // SIB MODE
-                modrm_size+=BYTE_SZ;
+                modrm_size += BYTE_SZ;
 
-            modrm_size+=DOUBLEWORD_SZ; // four byte signed displacement (disp32)
+            modrm_size += DOUBLEWORD_SZ; // four byte signed displacement (disp32)
             break;
         case 3:
             // register addressing mode
@@ -473,7 +473,7 @@ size_t get_modrm_size(Dinstruction* decoded, unsigned char* i_ptr){
     }
 
     if(instr_has_immediate_operand(decoded, decoded->op1)){
-        modrm_size+=get_operand_size(decoded, decoded->op1);
+        modrm_size += get_operand_size(decoded, decoded->op1);
     }
             
 
@@ -481,7 +481,7 @@ size_t get_modrm_size(Dinstruction* decoded, unsigned char* i_ptr){
 }
 
 size_t get_operand_size(Dinstruction* decoded, unsigned char opcode){
-    if(decoded->extended){
+    if(decoded->status.extended){
         switch(opcode){
             case 0x38: case 0x3A:
                 switch(opcode){
