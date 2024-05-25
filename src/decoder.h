@@ -16,6 +16,13 @@ typedef struct{
 
 typedef struct{
     unsigned int field;
+    unsigned int mod : 2;
+    unsigned int reg : 3;
+    unsigned int rm : 3;
+} Modrm;
+
+typedef struct{
+    unsigned int field;
     unsigned int w : 1;
     unsigned int r : 1;
     unsigned int x : 1;
@@ -46,7 +53,7 @@ typedef struct {
     Rex rex;           // rex field
     unsigned char op1; // op1 is the primary opcode 
     unsigned char op2; // op2 is the secondary opcode
-    unsigned int mod;  // modrm field
+    Modrm modrm;  // modrm field
     Sib sib;           // sib field
     unsigned int displacement; // disp field
     unsigned int immediate;    // imm field

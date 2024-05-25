@@ -221,32 +221,31 @@ bool instr_has_valid_extension(Dinstruction* decoded, unsigned char opcode){
     // Table A-6. Opcode Extensions for One- and Two-byte Opcodes by Group Number
     // TODO: add validation by  prefix
     // check for  decoded->prefixes[0] in both  cases (extended and not)
-    unsigned int reg = (decoded->mod & 0x38) >> 3;
     if(decoded->status.extended){
         switch(opcode){
             case 0x00:
-                switch(reg){
+                switch(decoded->modrm.reg){
                     case 0x06: case 0x07:
                         return false;
                     default:
                         return true;
                 }
             case 0x01:
-                switch(reg){
+                switch(decoded->modrm.reg){
                     case 0x05:
                         return false;
                     default:
                         return true;
                 }
             case 0xBA:
-                switch(reg){
+                switch(decoded->modrm.reg){
                     case 0x04: case 0x05: case 0x06: case 0x07:
                         return true;
                     default:
                         return false;
                 }
             case 0xC7:
-                switch(reg){
+                switch(decoded->modrm.reg){
                     case 0x01: case 0x06: case 0x07:
                         return true;
                     default:
@@ -255,21 +254,21 @@ bool instr_has_valid_extension(Dinstruction* decoded, unsigned char opcode){
             case 0xB9:
                 return true;
             case 0x71:
-                switch(reg){
+                switch(decoded->modrm.reg){
                     case 0x02: case 0x04: case 0x06:
                         return true;
                     default:
                         return false;
                 }
             case 0x72:
-                switch(reg){
+                switch(decoded->modrm.reg){
                     case 0x02: case 0x04: case 0x06:
                         return true;
                     default:
                         return false;
                 }
             case 0x73:
-                switch(reg){
+                switch(decoded->modrm.reg){
                     case 0x02: case 0x03: case 0x06: case 0x07:
                         return true;
                     default:
@@ -286,7 +285,7 @@ bool instr_has_valid_extension(Dinstruction* decoded, unsigned char opcode){
         case 0x80: case 0x81: case 0x82: case 0x83: 
             return true;
         case 0x8F:
-            switch(reg){
+            switch(decoded->modrm.reg){
                 case 0x00:
                     return true;
                 default: 
@@ -294,35 +293,35 @@ bool instr_has_valid_extension(Dinstruction* decoded, unsigned char opcode){
             }
         case 0xC0: case 0xC1: case 0xD0: 
         case 0xD1: case 0xD2: case 0xD3:
-            switch(reg){
+            switch(decoded->modrm.reg){
                 case 0x06:
                     return false;
                 default:
                     return true;
             }
         case 0xF6: case 0xF7:
-            switch(reg){
+            switch(decoded->modrm.reg){
                 case 0x01:
                     return false;
                 default:
                     return true;
             }
         case 0xFE:
-            switch(reg){
+            switch(decoded->modrm.reg){
                 case 0x01: case 0x02:
                     return true;
                 default:
                     return false;
             }
         case 0xFF:
-            switch(reg){
+            switch(decoded->modrm.reg){
                 case 0x07:
                     return false;
                 default:
                     return true;
             }
         case 0xC6: case 0xC7:
-            switch(reg){
+            switch(decoded->modrm.reg){
                 case 0x00: case 0x07:
                     return true;
                 default:
@@ -428,18 +427,11 @@ size_t get_vex_size(unsigned char vex_byte){
 
 size_t get_modrm_size(Dinstruction* decoded, unsigned char* i_ptr){
     size_t modrm_size = 0;
-    // mod/rm part is gonna be here
-    unsigned int mod = (decoded->mod & 0xC0) >> 6;
-    //unsigned int reg = (decoded->mod & 0x38) >> 3;
-    unsigned int rm  = (decoded->mod & 0x07);
-
-    decoded->mod = mod;
-
     modrm_size += BYTE_SZ; //mod/rm byte
 
-    switch(mod){
+    switch(decoded->modrm.mod){
         case 0:
-            switch(rm){
+            switch(decoded->modrm.rm){
                 case 4:
                     // SIB MODE
                     modrm_size += BYTE_SZ; //1 sib byte follows mod/rm field  (SIB with no displacement)
@@ -455,13 +447,13 @@ size_t get_modrm_size(Dinstruction* decoded, unsigned char* i_ptr){
             }
             break;
         case 1:
-            if(rm == 4) // SIB MODE
+            if(decoded->modrm.rm == 4) // SIB MODE
                 modrm_size += BYTE_SZ;
 
             modrm_size += BYTE_SZ; // one byte signed displacement (disp8)
             break;
         case 2:
-            if(rm == 4) // SIB MODE
+            if(decoded->modrm.rm == 4) // SIB MODE
                 modrm_size += BYTE_SZ;
 
             modrm_size += DOUBLEWORD_SZ; // four byte signed displacement (disp32)

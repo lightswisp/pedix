@@ -97,7 +97,10 @@ bool decode32(Dinstruction* decoded, unsigned char* instruction){
 
             i_ptr++;
             decoded->instr_type = INSTR_MODRM;      
-            decoded->mod = *i_ptr;
+            decoded->modrm.field = *i_ptr;
+            decoded->modrm.mod = (decoded->modrm.field & 0xC0) >> 6;
+            decoded->modrm.reg = (decoded->modrm.field & 0x38) >> 3;
+            decoded->modrm.rm  = (decoded->modrm.field & 0x07);
             size_t modrm_size = get_modrm_size(decoded, i_ptr);          
             decoded->buffer.size += modrm_size;
 
@@ -143,7 +146,10 @@ bool decode32(Dinstruction* decoded, unsigned char* instruction){
             if(instr_modrm(decoded, decoded->op1)){
                 i_ptr++;
                 decoded->instr_type = INSTR_MODRM;      
-                decoded->mod = *i_ptr;
+                decoded->modrm.field = *i_ptr;
+                decoded->modrm.mod = (decoded->modrm.field & 0xC0) >> 6;
+                decoded->modrm.reg = (decoded->modrm.field & 0x38) >> 3;
+                decoded->modrm.rm  = (decoded->modrm.field & 0x07);
 
                 if(instr_has_opcode_extension(decoded, decoded->op1)){
                     if(!instr_has_valid_extension(decoded, decoded->op1)){
@@ -184,7 +190,10 @@ bool decode32(Dinstruction* decoded, unsigned char* instruction){
         if(instr_modrm(decoded, decoded->op1)){
             i_ptr++;
             decoded->instr_type = INSTR_MODRM;
-            decoded->mod = *i_ptr;
+            decoded->modrm.field = *i_ptr;
+            decoded->modrm.mod = (decoded->modrm.field & 0xC0) >> 6;
+            decoded->modrm.reg = (decoded->modrm.field & 0x38) >> 3;
+            decoded->modrm.rm  = (decoded->modrm.field & 0x07);
 
             if(instr_has_opcode_extension(decoded, decoded->op1)){
                 if(!instr_has_valid_extension(decoded, decoded->op1)){
