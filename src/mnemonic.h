@@ -4,7 +4,13 @@ void set_mnemonic(Dinstruction* decoded, unsigned char instruction);
 void set_operands(Dinstruction* decoded);
 void set_immediate(Dinstruction* decoded);
 
-static char* m_table[] = {
+static char* m_ex_table[0xff][0x08] = { [0x80]={"add", "or", "adc", "sbb", "and", "sub", "xor", "cmp"}, 
+																				[0x81]={"add", "or", "adc", "sbb", "and", "sub", "xor", "cmp"}, 
+																				[0x82]={"add", "or", "adc", "sbb", "and", "sub", "xor", "cmp"}, 
+																				[0x83]={"add", "or", "adc", "sbb", "and", "sub", "xor", "cmp"}
+}; //mod/rm extension via reg (Table A-6. Opcode Extensions for One- and Two-byte Opcodes by Group Number)
+
+static char* m_table[] = { // regular
     "add",    "add",    "add",    "add", 
     "add",    "add",    "push",   "pop", 
     "or",     "or",     "or",     "or",  
@@ -71,6 +77,6 @@ static char* m_table[] = {
     "cld",    "std",    "inc/dec","inc/dec"
 };
 
-static char* ex_m_table[] = {
+static char* ex_m_table[] = { // 0x0f 
 
 };
