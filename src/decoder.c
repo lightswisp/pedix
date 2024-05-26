@@ -257,6 +257,48 @@ bool decode64(Dinstruction* decoded, unsigned char* instruction){
         i_ptr++;
     }
 
+		
+    decoded->op1 = *i_ptr;
+    decoded->buffer.size += BYTE_SZ;  
+
+		if(instr_zero(decoded, decoded->op1)){
+			decoded->instr_type = INSTR_ZERO;
+			set_mnemonic(decoded, decoded->op1);
+			return true;  // if no other bytes are coming after
+		}
+
+		if(instr_other(decoded, decoded->op1)){
+			decoded->instr_type = INSTR_OTHER;
+			size_t op_size = get_operand_size(decoded, decoded->op1);
+			if(op_size == 0)
+				return false;
+
+			decoded->buffer.size += op_size;
+			set_mnemonic(decoded, decoded->op1);
+			return true;
+		}
+
+		if(instr_modrm(decoded, decoded->op1)){
+			i_ptr++;
+			decoded->instr_type = INSTR_MODRM;
+			decoded->modrm.field = *i_ptr;
+			decoded->modrm.mod = (decoded->modrm.field & 0xC0) >> 6;
+			decoded->modrm.reg = (decoded->modrm.field & 0x38) >> 3;
+			decoded->modrm.rm  = (decoded->modrm.field & 0x07);
+
+			if(instr_has_opcode_extension(decoded, decoded->op1)){
+				if(!instr_has_valid_extension(decoded, decoded->op1)){
+
+					return false;
+				}
+		}
+
+			size_t modrm_size = get_modrm_size(decoded, i_ptr);
+			decoded->buffer.size += modrm_size;
+			set_mnemonic(decoded, decoded->op1);
+			return true;
+		}
+ 
     return false;
 }
 

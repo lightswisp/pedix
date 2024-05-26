@@ -519,6 +519,9 @@ size_t get_operand_size(Dinstruction* decoded, unsigned char opcode){
         case 0xA3: case 0xA9: case 0xB8: case 0xB9: case 0xBA:
         case 0xBB: case 0xBC: case 0xBD: case 0xBE: case 0xBF:
         case 0x69: case 0x81: case 0xC7: case 0xE8: case 0xE9:
+        		if(decoded->rex.w)
+        			return QUADWORD_SZ;
+        			
             return DOUBLEWORD_SZ;
         
         case 0xC8:

@@ -6,6 +6,7 @@
 #define WORD_SZ               0x02        // OPERAND TYPE w (Word, regardless of operand-size attribute)
 #define DOUBLEWORD_SZ         0x04        // OPERAND TYPE v (Word or doubleword, depending on operand-size attribute)
 #define ADDR_48_SZ            0x06        // OPERAND TYPE p (32-bit or 48-bit pointer, depending on operand-size attribute)
+#define QUADWORD_SZ						0x08				// 64bit
 
 #define PREFIX_LOCK           0xF0     //LOCK prefix 
 #define PREFIX_REPNE_Z        0xF2     //REPNE/REPNZ prefix 

@@ -1,4 +1,5 @@
 #pragma once
+#include <stdlib.h>
 #include "defines.h"
 #include <stdbool.h>
 
