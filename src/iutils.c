@@ -553,14 +553,14 @@ size_t get_operand_size32(Dinstruction* decoded, unsigned char opcode){
 }
 
 size_t get_operand_size64(Dinstruction* decoded, unsigned char opcode){
-		if(decoded->status.has_rex){
-			switch(opcode){
-				case 0xB8: case 0xB9: case 0xBA: case 0xBB: case 0xBC: case 0xBD: 
-				case 0xBE: case 0xBF:
-					return QUADWORD_SZ;
-			}
-		}
-		if(decoded->status.extended){
+    if(decoded->status.has_rex){
+        switch(opcode){
+            case 0xB8: case 0xB9: case 0xBA: case 0xBB: case 0xBC: case 0xBD: 
+            case 0xBE: case 0xBF:
+                return QUADWORD_SZ;
+        }
+    }
+    if(decoded->status.extended){
         switch(opcode){
             case 0x38: case 0x3A:
                 switch(opcode){
@@ -608,7 +608,7 @@ size_t get_operand_size64(Dinstruction* decoded, unsigned char opcode){
         case 0xB8: case 0xB9: case 0xBA: case 0xBB: case 0xBC: 
         case 0xBD: case 0xBE: case 0xBF:
             return DOUBLEWORD_SZ;
-        
+
         case 0xC8:
             return (WORD_SZ + BYTE_SZ); // ENTER Iw Ib => Word + Byte = 3 
 
@@ -616,7 +616,7 @@ size_t get_operand_size64(Dinstruction* decoded, unsigned char opcode){
             return ADDR_48_SZ;
 
         case 0xA0: case 0xA1: case 0xA2: case 0xA3:
-        	return QUADWORD_SZ;
+            return QUADWORD_SZ;
 
         default:
             return 0;

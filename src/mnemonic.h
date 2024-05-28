@@ -6,29 +6,29 @@ void set_immediate(Dinstruction* decoded);
 
 //mod/rm extension via reg (Table A-6. Opcode Extensions for One- and Two-byte Opcodes by Group Number)
 static char* m_ex_table[0x100][0x08] = { 
-		[0x80] = {"add", "or", "adc", "sbb", "and", "sub", "xor", "cmp"}, 
-		[0x81] = {"add", "or", "adc", "sbb", "and", "sub", "xor", "cmp"}, 
-		[0x82] = {"add", "or", "adc", "sbb", "and", "sub", "xor", "cmp"}, 
-		[0x83] = {"add", "or", "adc", "sbb", "and", "sub", "xor", "cmp"},
-		[0x8F] = {"pop"},
-		[0xC0] = {"rol", "ror", "rcl", "rcr", "shl", "shr", "shl", "sar"},
-		[0xC1] = {"rol", "ror", "rcl", "rcr", "shl", "shr", "shl", "sar"},
-		[0xC6] = {"mov", "", "", "", "", "", "xabort"},
-		[0xC7] = {"mov", "", "", "", "", "", "xbegin"},
-		[0xD0] = {"rol", "ror", "rcl", "rcr", "shl", "shr", "shl", "sar"},
-		[0xD1] = {"rol", "ror", "rcl", "rcr", "shl", "shr", "shl", "sar"},
-		[0xD2] = {"rol", "ror", "rcl", "rcr", "shl", "shr", "shl", "sar"},
-		[0xD3] = {"rol", "ror", "rcl", "rcr", "shl", "shr", "shl", "sar"},
-		[0xF6] = {"test", "", "not", "neg", "mul", "imul", "div", "idiv"},
-		[0xF7] = {"test", "", "not", "neg", "mul", "imul", "div", "idiv"},
-		[0xFE] = {"inc", "dec"},
-		[0xFF] = {"inc", "dec", "call", "call", "jmp", "jmp", "push"}	
+    [0x80] = {"add", "or", "adc", "sbb", "and", "sub", "xor", "cmp"}, 
+    [0x81] = {"add", "or", "adc", "sbb", "and", "sub", "xor", "cmp"}, 
+    [0x82] = {"add", "or", "adc", "sbb", "and", "sub", "xor", "cmp"}, 
+    [0x83] = {"add", "or", "adc", "sbb", "and", "sub", "xor", "cmp"},
+    [0x8F] = {"pop"},
+    [0xC0] = {"rol", "ror", "rcl", "rcr", "shl", "shr", "shl", "sar"},
+    [0xC1] = {"rol", "ror", "rcl", "rcr", "shl", "shr", "shl", "sar"},
+    [0xC6] = {"mov", "", "", "", "", "", "xabort"},
+    [0xC7] = {"mov", "", "", "", "", "", "xbegin"},
+    [0xD0] = {"rol", "ror", "rcl", "rcr", "shl", "shr", "shl", "sar"},
+    [0xD1] = {"rol", "ror", "rcl", "rcr", "shl", "shr", "shl", "sar"},
+    [0xD2] = {"rol", "ror", "rcl", "rcr", "shl", "shr", "shl", "sar"},
+    [0xD3] = {"rol", "ror", "rcl", "rcr", "shl", "shr", "shl", "sar"},
+    [0xF6] = {"test", "", "not", "neg", "mul", "imul", "div", "idiv"},
+    [0xF7] = {"test", "", "not", "neg", "mul", "imul", "div", "idiv"},
+    [0xFE] = {"inc", "dec"},
+    [0xFF] = {"inc", "dec", "call", "call", "jmp", "jmp", "push"}	
 }; 
 
 // extended (0x0f) extension table
 static char* m_extd_ex_table[0x100][0x08] = {
-		[0x00] = {"sldt", "str", "lldt", "ltr", "verr", "verw", "", ""},
-		[0x01] = {"sgdt", "sidt", "lgdt", "lidt", "smsw", "", "lmsw", "invlpg"}, // -_- sorry
+    [0x00] = {"sldt", "str", "lldt", "ltr", "verr", "verw", "", ""},
+    [0x01] = {"sgdt", "sidt", "lgdt", "lidt", "smsw", "", "lmsw", "invlpg"}, // -_- sorry
 };
 
 static char* m_table[] = { // regular
@@ -99,5 +99,5 @@ static char* m_table[] = { // regular
 };
 
 static char* ex_m_table[] = { // 0x0f 
-	[0x8e] = "jle"
+    [0x8e] = "jle"
 };
