@@ -7,6 +7,7 @@ typedef struct{
     bool has_vex;
     bool has_rex;
     bool has_prefix;
+    bool has_opcode_extension;
     bool extended;
 } Status;
 
@@ -46,6 +47,7 @@ typedef struct {
     Status status;
     Buffer buffer;
     Mnemonic mnemonic; // this one is not implemented yet!
+    unsigned int mode;
     unsigned int instr_type;
     unsigned int reg_src;
     unsigned int reg_dst;

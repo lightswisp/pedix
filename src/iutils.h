@@ -25,6 +25,8 @@ bool instr_has_immediate_operand(Dinstruction* decoded, unsigned char opcode);
 bool instr_has_direct_addr_operand(unsigned char opcode);
 bool instr_has_modrm(unsigned char opcode);
 
-size_t get_operand_size(Dinstruction* decoded, unsigned char opcode);
+size_t get_operand_size32(Dinstruction* decoded, unsigned char opcode);
+size_t get_operand_size64(Dinstruction* decoded, unsigned char opcode);
+size_t get_opcode_extension_operand_size(Dinstruction* decoded, unsigned char opcode);
 size_t get_modrm_size(Dinstruction* decoded, unsigned char* i_ptr);
 size_t get_vex_size(unsigned char vex_byte);

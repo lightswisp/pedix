@@ -58,6 +58,7 @@ bool decode32(Dinstruction* decoded, unsigned char* instruction){
     // EX: 66 0f 74 04 00 -> IS A VALID INSTRUCTION, WHILE f3 0f 74 04 00 IS NOT
 
     // https://sparksandflames.com/files/x86InstructionChart.html
+		decoded->mode = 32;
 
     unsigned char* i_ptr = instruction;
 
@@ -135,7 +136,7 @@ bool decode32(Dinstruction* decoded, unsigned char* instruction){
 
             if(instr_other(decoded, decoded->op1)){
                 decoded->instr_type = INSTR_OTHER;
-                size_t op_size = get_operand_size(decoded, decoded->op1);
+                size_t op_size = get_operand_size32(decoded, decoded->op1);
                 if(op_size == 0)
                     return false;
 
@@ -155,6 +156,8 @@ bool decode32(Dinstruction* decoded, unsigned char* instruction){
                     if(!instr_has_valid_extension(decoded, decoded->op1)){
                         return false;
                     }
+                    decoded->status.has_opcode_extension = true;
+                    decoded->buffer.size+=get_opcode_extension_operand_size(decoded, decoded->op1);
                 }
 
                 size_t modrm_size = get_modrm_size(decoded, i_ptr);
@@ -178,7 +181,7 @@ bool decode32(Dinstruction* decoded, unsigned char* instruction){
 
         if(instr_other(decoded, decoded->op1)){
             decoded->instr_type = INSTR_OTHER;
-            size_t op_size = get_operand_size(decoded, decoded->op1);
+            size_t op_size = get_operand_size32(decoded, decoded->op1);
             if(op_size == 0)
                 return false;
 
@@ -200,6 +203,8 @@ bool decode32(Dinstruction* decoded, unsigned char* instruction){
                     
                     return false;
                 }
+                decoded->status.has_opcode_extension = true;
+                decoded->buffer.size+=get_opcode_extension_operand_size(decoded, decoded->op1);
             }
 
             size_t modrm_size = get_modrm_size(decoded, i_ptr);
@@ -217,6 +222,7 @@ bool decode32(Dinstruction* decoded, unsigned char* instruction){
 bool decode64(Dinstruction* decoded, unsigned char* instruction){
 //     In 64-bit mode, instruction formats do not change. Bits needed to define fields in the 64-bit context are provided by the
 // addition of REX prefixes.
+		decoded->mode = 64;
     unsigned char* i_ptr = instruction;
 
     if(instr_has_prefix(*i_ptr)){
@@ -269,7 +275,7 @@ bool decode64(Dinstruction* decoded, unsigned char* instruction){
 
 		if(instr_other(decoded, decoded->op1)){
 			decoded->instr_type = INSTR_OTHER;
-			size_t op_size = get_operand_size(decoded, decoded->op1);
+			size_t op_size = get_operand_size64(decoded, decoded->op1);
 			if(op_size == 0)
 				return false;
 
@@ -288,10 +294,11 @@ bool decode64(Dinstruction* decoded, unsigned char* instruction){
 
 			if(instr_has_opcode_extension(decoded, decoded->op1)){
 				if(!instr_has_valid_extension(decoded, decoded->op1)){
-
 					return false;
 				}
-		}
+				decoded->status.has_opcode_extension = true;
+				decoded->buffer.size+=get_opcode_extension_operand_size(decoded, decoded->op1);
+			}
 
 			size_t modrm_size = get_modrm_size(decoded, i_ptr);
 			decoded->buffer.size += modrm_size;
