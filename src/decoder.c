@@ -28,7 +28,7 @@ void dump(Dinstruction* decoded){
 
     if(decoded->status.has_prefix){
     		for(size_t i = 0; i < decoded->prefixes.size; i++){
-    				printf("instruction prefix %lu: 0x%02X\n", i, decoded->prefixes.prefix[i]);
+    				printf("instruction prefix %zu: 0x%02X\n", i, decoded->prefixes.prefix[i]);
     		}
     }
 
