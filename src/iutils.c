@@ -86,7 +86,7 @@ bool instr_modrm(Dinstruction* decoded, unsigned char opcode){
             case 0xED: case 0xEE: case 0xEF: case 0xF0: case 0xF1:
             case 0xF2: case 0xF3: case 0xF4: case 0xF5: case 0xF6:
             case 0xF7: case 0xF8: case 0xF9: case 0xFA: case 0xFB:
-            case 0xFC: case 0xFD: case 0xFE: case 0xFF:        
+            case 0xFC: case 0xFD: case 0xFE: case 0xFF: case 0x1F:   
                 return true;
             default:
                 return false;
@@ -422,6 +422,8 @@ size_t get_vex_size(unsigned char vex_byte){
             return WORD_SZ;
         case 0xC4:
             return THREE_BYTE_SZ;
+        case 0x8F:
+        		return THREE_BYTE_SZ;
     }
     return 0;
 }

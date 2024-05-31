@@ -12,6 +12,11 @@ typedef struct{
 } Status;
 
 typedef struct{
+	unsigned int prefix[4];
+	size_t size;
+} Prefix;
+
+typedef struct{
     char str[100];
     size_t cur_size;
 } Mnemonic;
@@ -52,7 +57,7 @@ typedef struct {
     unsigned int reg_src;
     unsigned int reg_dst;
 
-    unsigned int prefixes[2]; // prefixes 
+    Prefix prefixes; // prefixes 
     Rex rex;           // rex field
     unsigned char op1; // op1 is the primary opcode 
     unsigned char op2; // op2 is the secondary opcode

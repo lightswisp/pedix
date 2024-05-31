@@ -29,6 +29,7 @@ static char* m_ex_table[0x100][0x08] = {
 static char* m_extd_ex_table[0x100][0x08] = {
     [0x00] = {"sldt", "str", "lldt", "ltr", "verr", "verw", "", ""},
     [0x01] = {"sgdt", "sidt", "lgdt", "lidt", "smsw", "", "lmsw", "invlpg"}, // -_- sorry
+    [0xBA] = {"", "", "", "", "bt", "bts", "btr", "btc"},
 };
 
 static char* m_table[] = { // regular
