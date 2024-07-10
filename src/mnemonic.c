@@ -1,7 +1,8 @@
-#include "mnemonic.h"
+#include <stdio.h>
 #include <string.h>
+#include "headers/mnemonic.h"
 
-bool set_mnemonic(Dinstruction *decoded, unsigned char instruction) {
+bool set_mnemonic32(Dinstruction *decoded, unsigned char instruction) {
   if (decoded->status.extended) {
     if (decoded->status.has_opcode_extension) {
       // extended and has extension
@@ -68,6 +69,7 @@ bool set_mnemonic(Dinstruction *decoded, unsigned char instruction) {
     }
   } else {
     if (decoded->status.has_opcode_extension) {
+      printf("regular! but with extension\n");
       // has extension (regular_opcode_with_extensions_table)
       if (decoded->modrm.mod == 0x03) { // register addressing
         char *m = reg_ext_11b[instruction][decoded->modrm.reg];
@@ -81,6 +83,7 @@ bool set_mnemonic(Dinstruction *decoded, unsigned char instruction) {
 
     } else {
       // regular opcode (regular_opcode_table)
+      printf("regular!\n");
       char *m = reg[instruction];
       memcpy(decoded->mnemonic.str, m, strlen(m));
       return true;
@@ -89,10 +92,15 @@ bool set_mnemonic(Dinstruction *decoded, unsigned char instruction) {
   return false;
 }
 
-void set_operands(Dinstruction *decoded) {
-  // todo
+bool set_mnemonic64(Dinstruction *decoded, unsigned char instruction) {
+  return false;
+}
+bool set_mnemonic(Dinstruction *decoded, unsigned char instruction) {
+  switch (decoded->mode) {
+  case 32:
+    return set_mnemonic32(decoded, instruction);
+  case 64:
+    return set_mnemonic64(decoded, instruction);
+  }
 }
 
-void set_immediate(Dinstruction *decoded) {
-  // todo
-}

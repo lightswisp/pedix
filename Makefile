@@ -1,11 +1,11 @@
 default:main
 
-CC=clang
+CC=gcc
 SRC="src"
 OUTFILE="main"
 
 main:
-	$(CC) $(SRC)/*.c -Wall -Wextra -o $(OUTFILE).exe
+	$(CC) $(SRC)/*.c -std=c99 -o $(OUTFILE).exe
 	./$(OUTFILE).exe
 
 clean:

@@ -1,14 +1,14 @@
-#include "decoder.h"
-#include "defines.h"
-#include "iutils.h"
-#include "mnemonic.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "headers/decoder.h"
+#include "headers/defines.h"
+#include "headers/iutils.h"
+#include "headers/mnemonic.h"
 
 void dump(Dinstruction *decoded) {
   printf("========================================\n");
-  printf("instruction size: %llu\n", decoded->buffer.size);
+  printf("instruction size: %lu\n", decoded->buffer.size);
   printf("has_prefix: %d\n", decoded->status.has_prefix);
   printf("0x0f extended: %d\n", decoded->status.extended);
 

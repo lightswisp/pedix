@@ -1,10 +1,9 @@
 #include <stdbool.h>
-
 #include "decoder.h"
 
 bool set_mnemonic(Dinstruction *decoded, unsigned char instruction);
-void set_operands(Dinstruction *decoded);
-void set_immediate(Dinstruction *decoded);
+bool set_mnemonic32(Dinstruction *decoded, unsigned char instruction);
+bool set_mnemonic64(Dinstruction *decoded, unsigned char instruction);
 
 static char *extd_ext_11b_66[0x100][0x08] = {
     [0x71] = {"", "", "vpsrlw", "", "vpsraw", "", "vpsllw", ""},

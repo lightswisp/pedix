@@ -1,5 +1,5 @@
-#include "iutils.h"
-#include "defines.h"
+#include "headers/iutils.h"
+#include "headers/defines.h"
 
 bool instr_has_prefix(unsigned char instruction) {
   switch (instruction) {
