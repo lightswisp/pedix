@@ -3,11 +3,6 @@
 #include "decoder.h"
 #include <stdbool.h>
 
-enum Types {
-  INSTR_ZERO = 1,
-  INSTR_MODRM = 2,
-  INSTR_OTHER = 3,
-};
 
 bool instr_has_vex(unsigned char instruction);
 bool instr_has_rex(unsigned char instruction);

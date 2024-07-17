@@ -9,6 +9,7 @@ typedef struct {
   bool has_prefix;
   bool has_opcode_extension;
   bool extended;
+  bool opsize_override;
 } Status;
 
 typedef struct {

@@ -14,7 +14,10 @@ bool set_mnemonic32(Dinstruction *decoded, unsigned char instruction) {
           // extension + mod 11B and 0x66
           // prefix
           char *m_66 = extd_ext_11b_66[instruction][decoded->modrm.reg];
-          memcpy(decoded->mnemonic.str, m_66, strlen(m_66));
+          size_t m_len = strlen(m_66);
+          memcpy(decoded->mnemonic.str, m_66, m_len);
+          decoded->mnemonic.str[m_len] = 0x20;
+          decoded->mnemonic.cur_size = m_len + 1;
           return true;
         case 0xF3:
           // handle extended with
@@ -85,7 +88,10 @@ bool set_mnemonic32(Dinstruction *decoded, unsigned char instruction) {
       // regular opcode (regular_opcode_table)
       printf("regular!\n");
       char *m = reg[instruction];
-      memcpy(decoded->mnemonic.str, m, strlen(m));
+      size_t m_len = strlen(m);
+      memcpy(decoded->mnemonic.str, m, m_len);
+      decoded->mnemonic.str[m_len] = 0x20;
+      decoded->mnemonic.cur_size = m_len + 1;
       return true;
     }
   }

@@ -1,5 +1,11 @@
 #pragma once
 
+enum Types {
+  INSTR_ZERO = 1,
+  INSTR_MODRM = 2,
+  INSTR_OTHER = 3,
+};
+
 #define MAX_INSTR_SIZE 0x0F
 #define BYTE_SZ                                                                \
   0x01 // OPERAND TYPE b (Byte, regardless of operand-size attribute)

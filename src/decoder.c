@@ -60,6 +60,9 @@ bool decode32(Dinstruction *decoded, unsigned char *instruction) {
 
   while (instr_has_prefix(*i_ptr)) {
     decoded->status.has_prefix = true;
+    if(*i_ptr == 0x66)
+      decoded->status.opsize_override = true;
+    
     decoded->prefixes.prefix[decoded->prefixes.size] = *i_ptr;
     decoded->buffer.size += BYTE_SZ;
     decoded->prefixes.size = decoded->buffer.size;
@@ -219,6 +222,9 @@ bool decode64(Dinstruction *decoded, unsigned char *instruction) {
 
   while (instr_has_prefix(*i_ptr)) {
     decoded->status.has_prefix = true;
+    if(*i_ptr == 0x66)
+      decoded->status.opsize_override = true;
+
     decoded->prefixes.prefix[decoded->prefixes.size] = *i_ptr;
     decoded->buffer.size += BYTE_SZ;
     decoded->prefixes.size = decoded->buffer.size;
