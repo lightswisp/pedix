@@ -1,5 +1,5 @@
-#include <stdbool.h>
 #include "decoder.h"
+#include <stdbool.h>
 
 bool set_mnemonic(Dinstruction *decoded, unsigned char instruction);
 bool set_mnemonic32(Dinstruction *decoded, unsigned char instruction);

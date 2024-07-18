@@ -62,7 +62,6 @@ bool set_operands32(Dinstruction *decoded, unsigned char instruction) {
     }
     break;
   case INSTR_ZERO:
-    // todo
     char *op;
     if (decoded->status.opsize_override) {
       // 16-bit
@@ -76,7 +75,129 @@ bool set_operands32(Dinstruction *decoded, unsigned char instruction) {
     decoded->mnemonic.cur_size += op_len;
     break;
   case INSTR_OTHER:
-    // todo
+    char *op1; // first operand
+    if (decoded->status.opsize_override) {
+      // 16-bit
+      op1 = o_instr_op16[instruction];
+    } else {
+      // 32-bit
+      op1 = o_instr_op32[instruction];
+    }
+
+    if (d == 0) {
+      // d = 0
+      unsigned int op1_len = strlen(op1);
+      memcpy(decoded->mnemonic.str + decoded->mnemonic.cur_size, op1, op1_len);
+      decoded->mnemonic.cur_size += op1_len;
+      decoded->mnemonic.str[decoded->mnemonic.cur_size] = ',';
+      decoded->mnemonic.cur_size += 1;
+
+      if (decoded->status.has_immediate_operand) {
+        // immediate operand
+        switch (decoded->operand2.size) {
+        case BYTE_SZ:
+          sprintf(decoded->mnemonic.str + decoded->mnemonic.cur_size, "0x%02x",
+                  decoded->operand2);
+          break;
+        case WORD_SZ:
+          sprintf(decoded->mnemonic.str + decoded->mnemonic.cur_size, "0x%04x",
+                  decoded->operand2);
+          break;
+        case DOUBLEWORD_SZ:
+          sprintf(decoded->mnemonic.str + decoded->mnemonic.cur_size, "0x%08x",
+                  decoded->operand2);
+          break;
+        }
+      } else if (decoded->status.has_rel_offset_operand) {
+        // relative offset jump/call
+        switch (decoded->operand2.size) {
+        case BYTE_SZ:
+          sprintf(decoded->mnemonic.str + decoded->mnemonic.cur_size, "0x%02x",
+                  decoded->operand2);
+          break;
+        case WORD_SZ:
+          sprintf(decoded->mnemonic.str + decoded->mnemonic.cur_size, "0x%04x",
+                  decoded->operand2);
+          break;
+        case DOUBLEWORD_SZ:
+          sprintf(decoded->mnemonic.str + decoded->mnemonic.cur_size, "0x%08x",
+                  decoded->operand2);
+          break;
+        }
+      } else if (decoded->status.has_direct_addr_operand) {
+        // direct address
+        switch (decoded->operand2.size) {
+        case BYTE_SZ:
+          sprintf(decoded->mnemonic.str + decoded->mnemonic.cur_size, "0x%02x",
+                  decoded->operand2);
+          break;
+        case WORD_SZ:
+          sprintf(decoded->mnemonic.str + decoded->mnemonic.cur_size, "0x%04x",
+                  decoded->operand2);
+          break;
+        case DOUBLEWORD_SZ:
+          sprintf(decoded->mnemonic.str + decoded->mnemonic.cur_size, "0x%08x",
+                  decoded->operand2);
+          break;
+        }
+      } // end
+
+    } else {
+      // d = 1
+      if (decoded->status.has_immediate_operand) {
+        // immediate operand
+        switch (decoded->operand2.size) {
+        case BYTE_SZ:
+          sprintf(decoded->mnemonic.str + decoded->mnemonic.cur_size, "0x%02x,",
+                  decoded->operand2);
+          break;
+        case WORD_SZ:
+          sprintf(decoded->mnemonic.str + decoded->mnemonic.cur_size, "0x%04x,",
+                  decoded->operand2);
+          break;
+        case DOUBLEWORD_SZ:
+          sprintf(decoded->mnemonic.str + decoded->mnemonic.cur_size, "0x%08x,",
+                  decoded->operand2);
+          break;
+        }
+      } else if (decoded->status.has_rel_offset_operand) {
+        // relative offset jump/call
+        switch (decoded->operand2.size) {
+        case BYTE_SZ:
+          sprintf(decoded->mnemonic.str + decoded->mnemonic.cur_size, "0x%02x,",
+                  decoded->operand2);
+          break;
+        case WORD_SZ:
+          sprintf(decoded->mnemonic.str + decoded->mnemonic.cur_size, "0x%04x,",
+                  decoded->operand2);
+          break;
+        case DOUBLEWORD_SZ:
+          sprintf(decoded->mnemonic.str + decoded->mnemonic.cur_size, "0x%08x,",
+                  decoded->operand2);
+          break;
+        }
+      } else if (decoded->status.has_direct_addr_operand) {
+        // direct address
+        switch (decoded->operand2.size) {
+        case BYTE_SZ:
+          sprintf(decoded->mnemonic.str + decoded->mnemonic.cur_size, "0x%02x,",
+                  decoded->operand2);
+          break;
+        case WORD_SZ:
+          sprintf(decoded->mnemonic.str + decoded->mnemonic.cur_size, "0x%04x,",
+                  decoded->operand2);
+          break;
+        case DOUBLEWORD_SZ:
+          sprintf(decoded->mnemonic.str + decoded->mnemonic.cur_size, "0x%08x,",
+                  decoded->operand2);
+          break;
+        }
+      }
+      decoded->mnemonic.cur_size +=
+          decoded->operand2.size * WORD_SZ + 3; // 3 -> 0x and , = 3
+      unsigned int op1_len = strlen(op1);
+      memcpy(decoded->mnemonic.str + decoded->mnemonic.cur_size, op1, op1_len);
+    }
     break;
   }
   return false;

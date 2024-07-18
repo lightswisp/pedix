@@ -35,6 +35,9 @@ void dump(Dinstruction *decoded) {
 
   printf("instruction opcode 1: 0x%02X\n", decoded->op1);
   printf("instruction opcode 2: 0x%02X\n", decoded->op2);
+  printf("instruction operand 2: %d\n", decoded->operand2);
+  printf("instruction operand 3: %d\n", decoded->operand3);
+  printf("instruction operand 4: %d\n", decoded->operand4);
   printf("raw bytes: ");
   for (size_t i = 0; i < decoded->buffer.size; i++) {
     printf("%02x ", decoded->buffer.bytes[i]);
@@ -150,11 +153,14 @@ bool decode32(Dinstruction *decoded, unsigned char *instruction) {
         if (op_size == 0)
           return false;
 
+        i_ptr++;
         memcpy(decoded->buffer.bytes + decoded->buffer.size, i_ptr, op_size);
         decoded->buffer.size += op_size;
 
         if (instr_has_immediate_operand(decoded, decoded->op1)) {
           decoded->status.has_immediate_operand = true;
+          for (size_t i = 0; i < op_size; i++) {
+          }
         }
         if (instr_has_rel_offset_operand(decoded, decoded->op1)) {
           decoded->status.has_rel_offset_operand = true;
@@ -209,8 +215,30 @@ bool decode32(Dinstruction *decoded, unsigned char *instruction) {
       if (op_size == 0)
         return false;
 
+      i_ptr++;
       memcpy(decoded->buffer.bytes + decoded->buffer.size, i_ptr, op_size);
       decoded->buffer.size += op_size;
+      if (instr_has_immediate_operand(decoded, decoded->op1)) {
+        decoded->status.has_immediate_operand = true;
+        decoded->operand2.size = op_size;
+        for (size_t i = 0; i < op_size; i++) {
+          decoded->operand2.operand += decoded->buffer.bytes[decoded->buffer.size - op_size + i] << 0x08*i;          
+        }
+      }
+      if (instr_has_rel_offset_operand(decoded, decoded->op1)) {
+        decoded->status.has_rel_offset_operand = true;
+        decoded->operand2.size = op_size;
+        for (size_t i = 0; i < op_size; i++) {
+          decoded->operand2.operand += decoded->buffer.bytes[decoded->buffer.size - op_size + i] << 0x08*i;          
+        }
+      }
+      if (instr_has_direct_addr_operand(decoded->op1)) {
+        decoded->status.has_direct_addr_operand = true;
+        decoded->operand2.size = op_size;
+        for (size_t i = 0; i < op_size; i++) {
+          decoded->operand2.operand += decoded->buffer.bytes[decoded->buffer.size - op_size + i] << 0x08*i;          
+        }
+      }
       return true;
     }
 

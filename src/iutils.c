@@ -936,6 +936,10 @@ bool instr_has_rel_offset_operand(Dinstruction *decoded, unsigned char opcode) {
   case 0xE8:
   case 0xE9:
   case 0xEB:
+  case 0xA0:
+  case 0xA1:
+  case 0xA2:
+  case 0xA3:
     return true;
 
   default:

@@ -53,27 +53,36 @@ typedef struct {
 } Buffer;
 
 typedef struct {
-  Status status;
-  Buffer buffer;
-  Mnemonic mnemonic; // this one is not implemented yet!
-  unsigned int mode;
-  unsigned int instr_type;
+  size_t operand;
+  unsigned int size;
+} Operand;
 
-  Prefix prefixes;           // prefixes
-  Rex rex;                   // rex field
-  unsigned char op1;         // op1 is the primary opcode
-  unsigned char op2;         // op2 is the secondary opcode
-  Modrm modrm;               // modrm field
-  Sib sib;                   // sib field
+typedef struct {
+  Status status;           // instruction status
+  Buffer buffer;           // instruction raw bytes
+  Mnemonic mnemonic;       // this one is not implemented yet!
+  unsigned int mode;       // 32-bit or 64-bit
+  unsigned int instr_type; // zero/other/modrm
+
+  Prefix prefixes;            // prefixes
+  Rex rex;                    // rex field
+  unsigned char op1;          // op1 is the primary opcode
+  unsigned char op2;          // op2 is the secondary opcode
+  Modrm modrm;                // modrm field
+  Sib sib;                    // sib field
   unsigned long displacement; // disp field
-  unsigned long immediate;    // imm field
+  Operand operand1;           // first operand
+  Operand operand2;           // second operand
+  Operand operand3;           // third operand
+  Operand operand4;           // fourth operand
 } Dinstruction;
 
 Dinstruction *init_instruction();             // allocates memory for the struct
 void dump(Dinstruction *decoded);             // dumps struct fields to stdout
 void free_instrucion(Dinstruction *decoded);  // frees the memory
 void zero_instruction(Dinstruction *decoded); // zeroes the struct
-bool decode(Dinstruction *decoded, unsigned char *instruction); // general decode func
+bool decode(Dinstruction *decoded,
+            unsigned char *instruction); // general decode func
 bool decode32(Dinstruction *decoded,
               unsigned char *instruction); // 32bit specific
 bool decode64(Dinstruction *decoded,
