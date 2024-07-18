@@ -27,19 +27,19 @@ bool set_operands32(Dinstruction *decoded, unsigned char instruction) {
       char *reg1, *reg2;
       if (s == 0) {
         // 8-bit operands
-        reg1 = b8_reg[decoded->modrm.reg];
-        reg2 = b8_reg[decoded->modrm.rm];
+        reg1 = modrm_reg8[decoded->modrm.reg];
+        reg2 = modrm_reg8[decoded->modrm.rm];
       } else if (decoded->status.opsize_override) {
         // 16-bit operands
-        reg1 = b16_reg[decoded->modrm.reg];
-        reg2 = b16_reg[decoded->modrm.rm];
+        reg1 = modrm_reg16[decoded->modrm.reg];
+        reg2 = modrm_reg16[decoded->modrm.rm];
       } else {
         // 32-bit operands
-        reg1 = b32_reg[decoded->modrm.reg];
-        reg2 = b32_reg[decoded->modrm.rm];
+        reg1 = modrm_reg32[decoded->modrm.reg];
+        reg2 = modrm_reg32[decoded->modrm.rm];
       }
-      size_t reg1_len = strlen(reg1);
-      size_t reg2_len = strlen(reg2);
+      unsigned int reg1_len = strlen(reg1);
+      unsigned int reg2_len = strlen(reg2);
       if (d == 0) {
         memcpy(decoded->mnemonic.str + decoded->mnemonic.cur_size, reg2,
                reg2_len);
@@ -63,6 +63,17 @@ bool set_operands32(Dinstruction *decoded, unsigned char instruction) {
     break;
   case INSTR_ZERO:
     // todo
+    char *op;
+    if (decoded->status.opsize_override) {
+      // 16-bit
+      op = z_instr_op16[instruction];
+    } else {
+      // 32-bit
+      op = z_instr_op32[instruction];
+    }
+    unsigned int op_len = strlen(op);
+    memcpy(decoded->mnemonic.str + decoded->mnemonic.cur_size, op, op_len);
+    decoded->mnemonic.cur_size += op_len;
     break;
   case INSTR_OTHER:
     // todo

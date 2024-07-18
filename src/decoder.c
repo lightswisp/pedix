@@ -1,10 +1,10 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include "headers/decoder.h"
 #include "headers/defines.h"
 #include "headers/iutils.h"
 #include "headers/mnemonic.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 void dump(Dinstruction *decoded) {
   printf("========================================\n");
@@ -15,13 +15,13 @@ void dump(Dinstruction *decoded) {
   if (decoded->instr_type) {
     switch (decoded->instr_type) {
     case INSTR_ZERO:
-      printf("type: ZERO\n");
+      printf("type: zero\n");
       break;
     case INSTR_MODRM:
-      printf("type: HAS MOD R/M\n");
+      printf("type: mod/rm\n");
       break;
     case INSTR_OTHER:
-      printf("type: OTHER\n");
+      printf("type: other\n");
       break;
     }
   }
@@ -44,7 +44,10 @@ Dinstruction *init_instruction() {
 }
 
 void zero_instruction(Dinstruction *decoded) {
+  // save the mode in order to restore it after zeroing the struct
+  unsigned int mode = decoded->mode;
   memset(decoded, 0, sizeof(Dinstruction));
+  decoded->mode = mode;
 }
 
 void free_instrucion(Dinstruction *decoded) { free(decoded); }
@@ -54,15 +57,12 @@ bool decode32(Dinstruction *decoded, unsigned char *instruction) {
   // EX: 66 0f 74 04 00 -> IS A VALID INSTRUCTION, WHILE f3 0f 74 04 00 IS NOT
 
   // https://sparksandflames.com/files/x86InstructionChart.html
-  decoded->mode = 32;
-
   unsigned char *i_ptr = instruction;
-
   while (instr_has_prefix(*i_ptr)) {
     decoded->status.has_prefix = true;
-    if(*i_ptr == 0x66)
+    if (*i_ptr == 0x66)
       decoded->status.opsize_override = true;
-    
+
     decoded->prefixes.prefix[decoded->prefixes.size] = *i_ptr;
     decoded->buffer.size += BYTE_SZ;
     decoded->prefixes.size = decoded->buffer.size;
@@ -217,12 +217,11 @@ bool decode64(Dinstruction *decoded, unsigned char *instruction) {
   //     In 64-bit mode, instruction formats do not change. Bits needed to
   //     define fields in the 64-bit context are provided by the
   // addition of REX prefixes.
-  decoded->mode = 64;
   unsigned char *i_ptr = instruction;
 
   while (instr_has_prefix(*i_ptr)) {
     decoded->status.has_prefix = true;
-    if(*i_ptr == 0x66)
+    if (*i_ptr == 0x66)
       decoded->status.opsize_override = true;
 
     decoded->prefixes.prefix[decoded->prefixes.size] = *i_ptr;
@@ -378,9 +377,9 @@ bool decode64(Dinstruction *decoded, unsigned char *instruction) {
   return false;
 }
 
-bool decode(Dinstruction *decoded, unsigned char *instruction,
-            unsigned int mode) {
-  switch (mode) {
+bool decode(Dinstruction *decoded, unsigned char *instruction) {
+  printf("mode: %d\n", decoded->mode);
+  switch (decoded->mode) {
   case 32:
     return decode32(decoded, instruction);
   case 64:

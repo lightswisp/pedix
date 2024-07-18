@@ -72,8 +72,7 @@ Dinstruction *init_instruction();             // allocates memory for the struct
 void dump(Dinstruction *decoded);             // dumps struct fields to stdout
 void free_instrucion(Dinstruction *decoded);  // frees the memory
 void zero_instruction(Dinstruction *decoded); // zeroes the struct
-bool decode(Dinstruction *decoded, unsigned char *instruction,
-            unsigned int mode); // general decode func
+bool decode(Dinstruction *decoded, unsigned char *instruction); // general decode func
 bool decode32(Dinstruction *decoded,
               unsigned char *instruction); // 32bit specific
 bool decode64(Dinstruction *decoded,
