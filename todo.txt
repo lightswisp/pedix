@@ -1,3 +1,0 @@
-[x] instuction buffer filling
-[] set instuction immediate/relative/direct addr inside structure's appropriate fields. We need to check decoded->status.has_imm/relative/direct before that.
-[] add other instruction operand to text convertion
