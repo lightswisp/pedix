@@ -2,3 +2,4 @@ test.c
 *.exe
 .vscode
 .swp
+.txt

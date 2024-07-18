@@ -8,6 +8,9 @@ typedef struct {
   bool has_rex;
   bool has_prefix;
   bool has_opcode_extension;
+  bool has_immediate_operand;
+  bool has_rel_offset_operand;
+  bool has_direct_addr_operand;
   bool extended;
   bool opsize_override;
 } Status;
@@ -46,7 +49,7 @@ typedef struct {
 
 typedef struct {
   size_t size;
-  unsigned int bytes[MAX_INSTR_SIZE];
+  unsigned char bytes[MAX_INSTR_SIZE];
 } Buffer;
 
 typedef struct {
@@ -55,8 +58,6 @@ typedef struct {
   Mnemonic mnemonic; // this one is not implemented yet!
   unsigned int mode;
   unsigned int instr_type;
-  unsigned int reg_src;
-  unsigned int reg_dst;
 
   Prefix prefixes;           // prefixes
   Rex rex;                   // rex field
@@ -64,8 +65,8 @@ typedef struct {
   unsigned char op2;         // op2 is the secondary opcode
   Modrm modrm;               // modrm field
   Sib sib;                   // sib field
-  unsigned int displacement; // disp field
-  unsigned int immediate;    // imm field
+  unsigned long displacement; // disp field
+  unsigned long immediate;    // imm field
 } Dinstruction;
 
 Dinstruction *init_instruction();             // allocates memory for the struct
