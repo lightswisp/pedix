@@ -71,6 +71,7 @@ typedef struct {
   Modrm modrm;                // modrm field
   Sib sib;                    // sib field
   unsigned long displacement; // disp field
+  size_t operand_capacity;    // amount of operands per instruction
   Operand operand1;           // first operand
   Operand operand2;           // second operand
   Operand operand3;           // third operand

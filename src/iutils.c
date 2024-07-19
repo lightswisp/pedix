@@ -1,8 +1,7 @@
 #include "headers/iutils.h"
-#include "headers/defines.h"
 
-bool instr_has_prefix(unsigned char instruction) {
-  switch (instruction) {
+bool instr_has_prefix(unsigned char opcode) {
+  switch (opcode) {
   case PREFIX_LOCK:
   case PREFIX_REPNE_Z:
   case PREFIX_REP_E_Z:
@@ -21,8 +20,8 @@ bool instr_has_prefix(unsigned char instruction) {
   }
 }
 
-bool instr_has_vex(unsigned char instruction) {
-  switch (instruction) {
+bool instr_has_vex(unsigned char opcode) {
+  switch (opcode) {
   case 0xC5:
   case 0xC4:
     return true;
@@ -31,7 +30,7 @@ bool instr_has_vex(unsigned char instruction) {
   }
 }
 
-bool instr_has_rex(unsigned char instruction) {
+bool instr_has_rex(unsigned char opcode) {
   // REX prefixes are a set of 16 opcodes that span one row of the opcode map
   // and occupy entries 40H to 4FH. These opcodes represent valid instructions
   // (INC or DEC) in IA-32 operating modes and in compatibility mode. In 64-bit
@@ -40,7 +39,7 @@ bool instr_has_rex(unsigned char instruction) {
   // INC/DEC instructions are not available in 64-bit mode. INC/DEC
   // functionality is still available using ModR/M forms of the same
   // instructions (opcodes FF/0 and FF/1).
-  switch (instruction) {
+  switch (opcode) {
   case 0x40:
   case 0x41:
   case 0x42:
@@ -771,9 +770,9 @@ bool instr_has_valid_extension(Dinstruction *decoded, unsigned char opcode) {
   return false;
 }
 
-bool instr_has_extended_opcode(unsigned char instruction) {
+bool instr_has_extended_opcode(unsigned char opcode) {
   // it means that the instruction size is at least 2 bytes long
-  if (instruction == 0x0F)
+  if (opcode == 0x0F)
     return true;
   return false;
 }
@@ -908,43 +907,40 @@ bool instr_has_rel_offset_operand(Dinstruction *decoded, unsigned char opcode) {
     case 0x8E:
     case 0x8F:
       return true;
-    default:
-      return false;
+    }
+  } else {
+    switch (opcode) {
+    case 0x70:
+    case 0x71:
+    case 0x72:
+    case 0x73:
+    case 0x74:
+    case 0x75:
+    case 0x76:
+    case 0x77:
+    case 0x78:
+    case 0x79:
+    case 0x7A:
+    case 0x7B:
+    case 0x7C:
+    case 0x7D:
+    case 0x7E:
+    case 0x7F:
+    case 0xE0:
+    case 0xE1:
+    case 0xE2:
+    case 0xE3:
+    case 0xE8:
+    case 0xE9:
+    case 0xEB:
+    case 0xA0:
+    case 0xA1:
+    case 0xA2:
+    case 0xA3:
+      return true;
     }
   }
-  switch (opcode) {
-  case 0x70:
-  case 0x71:
-  case 0x72:
-  case 0x73:
-  case 0x74:
-  case 0x75:
-  case 0x76:
-  case 0x77:
-  case 0x78:
-  case 0x79:
-  case 0x7A:
-  case 0x7B:
-  case 0x7C:
-  case 0x7D:
-  case 0x7E:
-  case 0x7F:
-  case 0xE0:
-  case 0xE1:
-  case 0xE2:
-  case 0xE3:
-  case 0xE8:
-  case 0xE9:
-  case 0xEB:
-  case 0xA0:
-  case 0xA1:
-  case 0xA2:
-  case 0xA3:
-    return true;
-
-  default:
-    return false;
-  }
+  return false;
 }
 
 bool instr_has_direct_addr_operand(unsigned char opcode) {
@@ -1037,6 +1033,43 @@ size_t get_modrm_size(Dinstruction *decoded, unsigned char *i_ptr) {
   return modrm_size;
 }
 
+size_t get_operand_capacity32(Dinstruction *decoded, unsigned char opcode) {
+  if (decoded->status.extended) {
+    // todo
+    switch (decoded->instr_type) {}
+  } else {
+    switch (decoded->instr_type) {
+    case INSTR_OTHER:
+      if (decoded->status.has_rel_offset_operand ||
+          decoded->status.has_direct_addr_operand) {
+        // jump/call instructions
+        return 1;
+      }
+      // all other
+      return 2;
+    case INSTR_MODRM:
+      switch (opcode) {
+      case 0x69:
+      case 0x6B:
+        // imul
+        return 3;
+
+      case 0x8F:
+        // pop
+        return 1;
+      default:
+        return 2;
+      }
+    }
+  }
+  return 0;
+}
+
+size_t get_operand_capacity64(Dinstruction *decoded, unsigned char opcode) {
+  // todo
+  return 0;
+}
+
 size_t get_operand_size32(Dinstruction *decoded, unsigned char opcode) {
   if (decoded->status.extended) {
     switch (opcode) {
@@ -1100,114 +1133,111 @@ size_t get_operand_size32(Dinstruction *decoded, unsigned char opcode) {
     case 0x8E:
     case 0x8F:
       return DOUBLEWORD_SZ;
-    default:
-      return 0;
+    }
+  } else {
+    switch (opcode) {
+    case 0x04:
+    case 0x0C:
+    case 0x14:
+    case 0x1C:
+    case 0x24:
+    case 0x2C:
+    case 0x34:
+    case 0x3C:
+    case 0x6A:
+    case 0xA8:
+    case 0xB0:
+    case 0xB1:
+    case 0xB2:
+    case 0xB3:
+    case 0xB4:
+    case 0xB5:
+    case 0xB6:
+    case 0xB7:
+    case 0xCD:
+    case 0xD4:
+    case 0xD5:
+    case 0xE4:
+    case 0xE5:
+    case 0xE6:
+    case 0xE7:
+    case 0x6B:
+    case 0x80:
+    case 0x82:
+    case 0x83:
+    case 0xC0:
+    case 0xC1:
+    case 0xC6:
+    case 0xD0:
+    case 0xD1:
+    case 0xD2:
+    case 0xD3:
+    case 0x70:
+    case 0x71:
+    case 0x72:
+    case 0xEB:
+    case 0x73:
+    case 0x74:
+    case 0x75:
+    case 0x76:
+    case 0x77:
+    case 0x78:
+    case 0x79:
+    case 0x7A:
+    case 0x7B:
+    case 0x7C:
+    case 0x7D:
+    case 0x7E:
+    case 0x7F:
+    case 0xE0:
+    case 0xE1:
+    case 0xE2:
+    case 0xE3:
+      return BYTE_SZ;
+
+    case 0xC2:
+    case 0xCA:
+      return WORD_SZ;
+
+    case 0x05:
+    case 0x0D:
+    case 0x15:
+    case 0x1D:
+    case 0x25:
+    case 0x2D:
+    case 0x35:
+    case 0x3D:
+    case 0x68:
+    case 0xA0:
+    case 0xA1:
+    case 0xA2:
+    case 0xA3:
+    case 0xA9:
+    case 0xB8:
+    case 0xB9:
+    case 0xBA:
+    case 0xBB:
+    case 0xBC:
+    case 0xBD:
+    case 0xBE:
+    case 0xBF:
+    case 0x69:
+    case 0x81:
+    case 0xC7:
+    case 0xE8:
+    case 0xE9:
+
+      return DOUBLEWORD_SZ;
+
+    case 0xC8:
+      return (WORD_SZ + BYTE_SZ); // ENTER Iw Ib => Word + Byte = 3
+
+    case 0x9A:
+    case 0xEA:
+      return ADDR_48_SZ;
     }
   }
-  switch (opcode) {
-  case 0x04:
-  case 0x0C:
-  case 0x14:
-  case 0x1C:
-  case 0x24:
-  case 0x2C:
-  case 0x34:
-  case 0x3C:
-  case 0x6A:
-  case 0xA8:
-  case 0xB0:
-  case 0xB1:
-  case 0xB2:
-  case 0xB3:
-  case 0xB4:
-  case 0xB5:
-  case 0xB6:
-  case 0xB7:
-  case 0xCD:
-  case 0xD4:
-  case 0xD5:
-  case 0xE4:
-  case 0xE5:
-  case 0xE6:
-  case 0xE7:
-  case 0x6B:
-  case 0x80:
-  case 0x82:
-  case 0x83:
-  case 0xC0:
-  case 0xC1:
-  case 0xC6:
-  case 0xD0:
-  case 0xD1:
-  case 0xD2:
-  case 0xD3:
-  case 0x70:
-  case 0x71:
-  case 0x72:
-  case 0xEB:
-  case 0x73:
-  case 0x74:
-  case 0x75:
-  case 0x76:
-  case 0x77:
-  case 0x78:
-  case 0x79:
-  case 0x7A:
-  case 0x7B:
-  case 0x7C:
-  case 0x7D:
-  case 0x7E:
-  case 0x7F:
-  case 0xE0:
-  case 0xE1:
-  case 0xE2:
-  case 0xE3:
-    return BYTE_SZ;
-
-  case 0xC2:
-  case 0xCA:
-    return WORD_SZ;
-
-  case 0x05:
-  case 0x0D:
-  case 0x15:
-  case 0x1D:
-  case 0x25:
-  case 0x2D:
-  case 0x35:
-  case 0x3D:
-  case 0x68:
-  case 0xA0:
-  case 0xA1:
-  case 0xA2:
-  case 0xA3:
-  case 0xA9:
-  case 0xB8:
-  case 0xB9:
-  case 0xBA:
-  case 0xBB:
-  case 0xBC:
-  case 0xBD:
-  case 0xBE:
-  case 0xBF:
-  case 0x69:
-  case 0x81:
-  case 0xC7:
-  case 0xE8:
-  case 0xE9:
-
-    return DOUBLEWORD_SZ;
-
-  case 0xC8:
-    return (WORD_SZ + BYTE_SZ); // ENTER Iw Ib => Word + Byte = 3
-
-  case 0x9A:
-  case 0xEA:
-    return ADDR_48_SZ;
-
-  default:
-    return 0;
-  }
+  return 0;
 }
 
 size_t get_operand_size64(Dinstruction *decoded, unsigned char opcode) {

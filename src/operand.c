@@ -3,6 +3,23 @@
 #include <stdio.h>
 #include <string.h>
 
+void set_operand_by_size(Dinstruction *decoded) {
+  switch (decoded->operand2.size) {
+  case BYTE_SZ:
+    sprintf(decoded->mnemonic.str + decoded->mnemonic.cur_size, "0x%02x",
+            decoded->operand2);
+    break;
+  case WORD_SZ:
+    sprintf(decoded->mnemonic.str + decoded->mnemonic.cur_size, "0x%04x",
+            decoded->operand2);
+    break;
+  case DOUBLEWORD_SZ:
+    sprintf(decoded->mnemonic.str + decoded->mnemonic.cur_size, "0x%08x",
+            decoded->operand2);
+    break;
+  }
+}
+
 bool set_operands32(Dinstruction *decoded, unsigned char instruction) {
   // d = 0 (adding from register to memory)
   // d = 1 (adding from memory to register)
@@ -86,117 +103,48 @@ bool set_operands32(Dinstruction *decoded, unsigned char instruction) {
 
     if (d == 0) {
       // d = 0
-      unsigned int op1_len = strlen(op1);
-      memcpy(decoded->mnemonic.str + decoded->mnemonic.cur_size, op1, op1_len);
-      decoded->mnemonic.cur_size += op1_len;
-      decoded->mnemonic.str[decoded->mnemonic.cur_size] = ',';
-      decoded->mnemonic.cur_size += 1;
+      if (decoded->operand_capacity != 1) {
+        unsigned int op1_len = strlen(op1);
+        memcpy(decoded->mnemonic.str + decoded->mnemonic.cur_size, op1,
+               op1_len);
+        decoded->mnemonic.cur_size += op1_len;
+
+        decoded->mnemonic.str[decoded->mnemonic.cur_size] = ',';
+        decoded->mnemonic.cur_size += 1;
+      }
 
       if (decoded->status.has_immediate_operand) {
         // immediate operand
-        switch (decoded->operand2.size) {
-        case BYTE_SZ:
-          sprintf(decoded->mnemonic.str + decoded->mnemonic.cur_size, "0x%02x",
-                  decoded->operand2);
-          break;
-        case WORD_SZ:
-          sprintf(decoded->mnemonic.str + decoded->mnemonic.cur_size, "0x%04x",
-                  decoded->operand2);
-          break;
-        case DOUBLEWORD_SZ:
-          sprintf(decoded->mnemonic.str + decoded->mnemonic.cur_size, "0x%08x",
-                  decoded->operand2);
-          break;
-        }
+        set_operand_by_size(decoded);
       } else if (decoded->status.has_rel_offset_operand) {
         // relative offset jump/call
-        switch (decoded->operand2.size) {
-        case BYTE_SZ:
-          sprintf(decoded->mnemonic.str + decoded->mnemonic.cur_size, "0x%02x",
-                  decoded->operand2);
-          break;
-        case WORD_SZ:
-          sprintf(decoded->mnemonic.str + decoded->mnemonic.cur_size, "0x%04x",
-                  decoded->operand2);
-          break;
-        case DOUBLEWORD_SZ:
-          sprintf(decoded->mnemonic.str + decoded->mnemonic.cur_size, "0x%08x",
-                  decoded->operand2);
-          break;
-        }
+        set_operand_by_size(decoded);
       } else if (decoded->status.has_direct_addr_operand) {
         // direct address
-        switch (decoded->operand2.size) {
-        case BYTE_SZ:
-          sprintf(decoded->mnemonic.str + decoded->mnemonic.cur_size, "0x%02x",
-                  decoded->operand2);
-          break;
-        case WORD_SZ:
-          sprintf(decoded->mnemonic.str + decoded->mnemonic.cur_size, "0x%04x",
-                  decoded->operand2);
-          break;
-        case DOUBLEWORD_SZ:
-          sprintf(decoded->mnemonic.str + decoded->mnemonic.cur_size, "0x%08x",
-                  decoded->operand2);
-          break;
-        }
-      } // end
+        set_operand_by_size(decoded);
+      }
 
     } else {
       // d = 1
       if (decoded->status.has_immediate_operand) {
         // immediate operand
-        switch (decoded->operand2.size) {
-        case BYTE_SZ:
-          sprintf(decoded->mnemonic.str + decoded->mnemonic.cur_size, "0x%02x,",
-                  decoded->operand2);
-          break;
-        case WORD_SZ:
-          sprintf(decoded->mnemonic.str + decoded->mnemonic.cur_size, "0x%04x,",
-                  decoded->operand2);
-          break;
-        case DOUBLEWORD_SZ:
-          sprintf(decoded->mnemonic.str + decoded->mnemonic.cur_size, "0x%08x,",
-                  decoded->operand2);
-          break;
-        }
+        set_operand_by_size(decoded);
       } else if (decoded->status.has_rel_offset_operand) {
         // relative offset jump/call
-        switch (decoded->operand2.size) {
-        case BYTE_SZ:
-          sprintf(decoded->mnemonic.str + decoded->mnemonic.cur_size, "0x%02x,",
-                  decoded->operand2);
-          break;
-        case WORD_SZ:
-          sprintf(decoded->mnemonic.str + decoded->mnemonic.cur_size, "0x%04x,",
-                  decoded->operand2);
-          break;
-        case DOUBLEWORD_SZ:
-          sprintf(decoded->mnemonic.str + decoded->mnemonic.cur_size, "0x%08x,",
-                  decoded->operand2);
-          break;
-        }
+        set_operand_by_size(decoded);
       } else if (decoded->status.has_direct_addr_operand) {
         // direct address
-        switch (decoded->operand2.size) {
-        case BYTE_SZ:
-          sprintf(decoded->mnemonic.str + decoded->mnemonic.cur_size, "0x%02x,",
-                  decoded->operand2);
-          break;
-        case WORD_SZ:
-          sprintf(decoded->mnemonic.str + decoded->mnemonic.cur_size, "0x%04x,",
-                  decoded->operand2);
-          break;
-        case DOUBLEWORD_SZ:
-          sprintf(decoded->mnemonic.str + decoded->mnemonic.cur_size, "0x%08x,",
-                  decoded->operand2);
-          break;
-        }
+        set_operand_by_size(decoded);
       }
-      decoded->mnemonic.cur_size +=
-          decoded->operand2.size * WORD_SZ + 3; // 3 -> 0x and , = 3
-      unsigned int op1_len = strlen(op1);
-      memcpy(decoded->mnemonic.str + decoded->mnemonic.cur_size, op1, op1_len);
+
+      if (decoded->operand_capacity != 1) {
+        decoded->mnemonic.cur_size +=
+            decoded->operand2.size * WORD_SZ + 3; // 3 -> 0x and , = 3
+        unsigned int op1_len = strlen(op1);
+        memcpy(decoded->mnemonic.str + decoded->mnemonic.cur_size, op1,
+               op1_len);
+      }
+
     }
     break;
   }

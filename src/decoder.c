@@ -1,13 +1,15 @@
-#include "headers/decoder.h"
-#include "headers/defines.h"
 #include "headers/iutils.h"
 #include "headers/mnemonic.h"
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 
+/*
+ * Dumps all needed information about instruction
+ */
 void dump(Dinstruction *decoded) {
   printf("========================================\n");
+
+  printf("instruction mode: %d\n", decoded->mode);
   printf("instruction size: %lu\n", decoded->buffer.size);
   printf("has_prefix: %d\n", decoded->status.has_prefix);
   printf("0x0f extended: %d\n", decoded->status.extended);
@@ -35,6 +37,7 @@ void dump(Dinstruction *decoded) {
 
   printf("instruction opcode 1: 0x%02X\n", decoded->op1);
   printf("instruction opcode 2: 0x%02X\n", decoded->op2);
+  printf("instruction operand capacity: %zu\n", decoded->operand_capacity);
   printf("instruction operand 2: %d\n", decoded->operand2);
   printf("instruction operand 3: %d\n", decoded->operand3);
   printf("instruction operand 4: %d\n", decoded->operand4);
@@ -42,15 +45,21 @@ void dump(Dinstruction *decoded) {
   for (size_t i = 0; i < decoded->buffer.size; i++) {
     printf("%02x ", decoded->buffer.bytes[i]);
   }
-  printf("\n");
+  putchar('\n');
   printf("========================================\n\n");
 }
 
+/*
+ * Initializes the struct
+ */
 Dinstruction *init_instruction() {
   Dinstruction *decoded = (Dinstruction *)calloc(1, sizeof(Dinstruction));
   return decoded;
 }
 
+/*
+ * Zeroes the struct, but preserves the mode
+ */
 void zero_instruction(Dinstruction *decoded) {
   // save the mode in order to restore it after zeroing the struct
   unsigned int mode = decoded->mode;
@@ -58,8 +67,14 @@ void zero_instruction(Dinstruction *decoded) {
   decoded->mode = mode;
 }
 
+/*
+ * Frees the struct
+ */
 void free_instrucion(Dinstruction *decoded) { free(decoded); }
 
+/*
+ * Decodes 32-bit instruction
+ */
 bool decode32(Dinstruction *decoded, unsigned char *instruction) {
   // TODO: ADD VALID PREFIX CHECK
   // EX: 66 0f 74 04 00 -> IS A VALID INSTRUCTION, WHILE f3 0f 74 04 00 IS NOT
@@ -107,9 +122,11 @@ bool decode32(Dinstruction *decoded, unsigned char *instruction) {
       decoded->modrm.mod = (decoded->modrm.field & 0xC0) >> 6;
       decoded->modrm.reg = (decoded->modrm.field & 0x38) >> 3;
       decoded->modrm.rm = (decoded->modrm.field & 0x07);
+
       size_t modrm_size = get_modrm_size(decoded, i_ptr);
       memcpy(decoded->buffer.bytes + decoded->buffer.size, i_ptr, modrm_size);
       decoded->buffer.size += modrm_size;
+      decoded->operand_capacity = get_operand_capacity32(decoded, decoded->op1);
 
       return true;
     } else if (*i_ptr == 0x01) {
@@ -133,6 +150,8 @@ bool decode32(Dinstruction *decoded, unsigned char *instruction) {
         decoded->op2 = *i_ptr;
         memcpy(decoded->buffer.bytes + decoded->buffer.size, i_ptr, WORD_SZ);
         decoded->buffer.size += WORD_SZ;
+        decoded->operand_capacity =
+            get_operand_capacity32(decoded, decoded->op1);
         return true;
       default:
         return false;
@@ -144,6 +163,7 @@ bool decode32(Dinstruction *decoded, unsigned char *instruction) {
 
       if (instr_zero(decoded, decoded->op1)) {
         decoded->instr_type = INSTR_ZERO;
+        // no need to set operand capacity, because it's already zero by default
         return true; // if no other bytes are coming after
       }
 
@@ -159,15 +179,34 @@ bool decode32(Dinstruction *decoded, unsigned char *instruction) {
 
         if (instr_has_immediate_operand(decoded, decoded->op1)) {
           decoded->status.has_immediate_operand = true;
+          decoded->operand2.size = op_size;
           for (size_t i = 0; i < op_size; i++) {
+            decoded->operand2.operand +=
+                decoded->buffer.bytes[decoded->buffer.size - op_size + i]
+                << 0x08 * i;
           }
         }
         if (instr_has_rel_offset_operand(decoded, decoded->op1)) {
           decoded->status.has_rel_offset_operand = true;
+          decoded->operand2.size = op_size;
+          for (size_t i = 0; i < op_size; i++) {
+            decoded->operand2.operand +=
+                decoded->buffer.bytes[decoded->buffer.size - op_size + i]
+                << 0x08 * i;
+          }
         }
         if (instr_has_direct_addr_operand(decoded->op1)) {
           decoded->status.has_direct_addr_operand = true;
+          decoded->operand2.size = op_size;
+          for (size_t i = 0; i < op_size; i++) {
+            decoded->operand2.operand +=
+                decoded->buffer.bytes[decoded->buffer.size - op_size + i]
+                << 0x08 * i;
+          }
         }
+
+        decoded->operand_capacity =
+            get_operand_capacity32(decoded, decoded->op1);
         return true;
       }
 
@@ -193,6 +232,8 @@ bool decode32(Dinstruction *decoded, unsigned char *instruction) {
         size_t modrm_size = get_modrm_size(decoded, i_ptr);
         memcpy(decoded->buffer.bytes + decoded->buffer.size, i_ptr, modrm_size);
         decoded->buffer.size += modrm_size;
+        decoded->operand_capacity =
+            get_operand_capacity32(decoded, decoded->op1);
         return true;
       }
 
@@ -222,23 +263,30 @@ bool decode32(Dinstruction *decoded, unsigned char *instruction) {
         decoded->status.has_immediate_operand = true;
         decoded->operand2.size = op_size;
         for (size_t i = 0; i < op_size; i++) {
-          decoded->operand2.operand += decoded->buffer.bytes[decoded->buffer.size - op_size + i] << 0x08*i;          
+          decoded->operand2.operand +=
+              decoded->buffer.bytes[decoded->buffer.size - op_size + i]
+              << 0x08 * i;
         }
       }
       if (instr_has_rel_offset_operand(decoded, decoded->op1)) {
         decoded->status.has_rel_offset_operand = true;
         decoded->operand2.size = op_size;
         for (size_t i = 0; i < op_size; i++) {
-          decoded->operand2.operand += decoded->buffer.bytes[decoded->buffer.size - op_size + i] << 0x08*i;          
+          decoded->operand2.operand +=
+              decoded->buffer.bytes[decoded->buffer.size - op_size + i]
+              << 0x08 * i;
         }
       }
       if (instr_has_direct_addr_operand(decoded->op1)) {
         decoded->status.has_direct_addr_operand = true;
         decoded->operand2.size = op_size;
         for (size_t i = 0; i < op_size; i++) {
-          decoded->operand2.operand += decoded->buffer.bytes[decoded->buffer.size - op_size + i] << 0x08*i;          
+          decoded->operand2.operand +=
+              decoded->buffer.bytes[decoded->buffer.size - op_size + i]
+              << 0x08 * i;
         }
       }
+      decoded->operand_capacity = get_operand_capacity32(decoded, decoded->op1);
       return true;
     }
 
@@ -265,6 +313,7 @@ bool decode32(Dinstruction *decoded, unsigned char *instruction) {
       size_t modrm_size = get_modrm_size(decoded, i_ptr);
       memcpy(decoded->buffer.bytes + decoded->buffer.size, i_ptr, modrm_size);
       decoded->buffer.size += modrm_size;
+      decoded->operand_capacity = get_operand_capacity32(decoded, decoded->op1);
       return true;
     }
   }
@@ -272,6 +321,9 @@ bool decode32(Dinstruction *decoded, unsigned char *instruction) {
   return false;
 }
 
+/*
+ * Decodes 64-bit instruction
+ */
 bool decode64(Dinstruction *decoded, unsigned char *instruction) {
   //     In 64-bit mode, instruction formats do not change. Bits needed to
   //     define fields in the 64-bit context are provided by the
@@ -325,9 +377,11 @@ bool decode64(Dinstruction *decoded, unsigned char *instruction) {
       decoded->modrm.mod = (decoded->modrm.field & 0xC0) >> 6;
       decoded->modrm.reg = (decoded->modrm.field & 0x38) >> 3;
       decoded->modrm.rm = (decoded->modrm.field & 0x07);
+
       size_t modrm_size = get_modrm_size(decoded, i_ptr);
       memcpy(decoded->buffer.bytes + decoded->buffer.size, i_ptr, modrm_size);
       decoded->buffer.size += modrm_size;
+      decoded->operand_capacity = get_operand_capacity64(decoded, decoded->op1);
 
       return true;
     } else if (*i_ptr == 0x01) {
@@ -346,6 +400,8 @@ bool decode64(Dinstruction *decoded, unsigned char *instruction) {
         decoded->op2 = *i_ptr;
         memcpy(decoded->buffer.bytes + decoded->buffer.size, i_ptr, WORD_SZ);
         decoded->buffer.size += WORD_SZ;
+        decoded->operand_capacity =
+            get_operand_capacity64(decoded, decoded->op1);
         return true;
       default:
         return false;
@@ -368,6 +424,8 @@ bool decode64(Dinstruction *decoded, unsigned char *instruction) {
 
         memcpy(decoded->buffer.bytes + decoded->buffer.size, i_ptr, op_size);
         decoded->buffer.size += op_size;
+        decoded->operand_capacity =
+            get_operand_capacity64(decoded, decoded->op1);
         return true;
       }
 
@@ -393,6 +451,8 @@ bool decode64(Dinstruction *decoded, unsigned char *instruction) {
         size_t modrm_size = get_modrm_size(decoded, i_ptr);
         memcpy(decoded->buffer.bytes + decoded->buffer.size, i_ptr, modrm_size);
         decoded->buffer.size += modrm_size;
+        decoded->operand_capacity =
+            get_operand_capacity64(decoded, decoded->op1);
         return true;
       }
     }
@@ -424,6 +484,7 @@ bool decode64(Dinstruction *decoded, unsigned char *instruction) {
 
     memcpy(decoded->buffer.bytes + decoded->buffer.size, i_ptr, op_size);
     decoded->buffer.size += op_size;
+    decoded->operand_capacity = get_operand_capacity64(decoded, decoded->op1);
     return true;
   }
 
@@ -448,6 +509,7 @@ bool decode64(Dinstruction *decoded, unsigned char *instruction) {
     size_t modrm_size = get_modrm_size(decoded, i_ptr);
     memcpy(decoded->buffer.bytes + decoded->buffer.size, i_ptr, modrm_size);
     decoded->buffer.size += modrm_size;
+    decoded->operand_capacity = get_operand_capacity64(decoded, decoded->op1);
     return true;
   }
 
@@ -455,7 +517,6 @@ bool decode64(Dinstruction *decoded, unsigned char *instruction) {
 }
 
 bool decode(Dinstruction *decoded, unsigned char *instruction) {
-  printf("mode: %d\n", decoded->mode);
   switch (decoded->mode) {
   case 32:
     return decode32(decoded, instruction);

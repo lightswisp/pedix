@@ -1,7 +1,10 @@
+#include "headers/mnemonic.h"
 #include <stdio.h>
 #include <string.h>
-#include "headers/mnemonic.h"
 
+/*
+ * Sets decoded->mnemonic.str field
+ */
 bool set_mnemonic32(Dinstruction *decoded, unsigned char instruction) {
   if (decoded->status.extended) {
     if (decoded->status.has_opcode_extension) {
