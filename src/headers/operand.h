@@ -1,5 +1,6 @@
 #include "decoder.h"
 
+void set_operand_by_size(Dinstruction *decoded); 
 bool set_operands(Dinstruction *decoded, unsigned char instruction);
 bool set_operands32(Dinstruction *decoded, unsigned char instruction);
 bool set_operands64(Dinstruction *decoded, unsigned char instruction);
