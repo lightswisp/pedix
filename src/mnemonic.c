@@ -6,8 +6,8 @@
  * Sets decoded->mnemonic.str field
  */
 bool set_mnemonic32(Dinstruction *decoded, unsigned char instruction) {
-  if (decoded->status.extended) {
-    if (decoded->status.has_opcode_extension) {
+  if (HAS_STATUS(decoded->status, STATUS_EXTENDED)) {
+    if (HAS_STATUS(decoded->status, STATUS_OPCODE_EXTENSION)) {
       // extended and has extension
       // (extended_opcode_with_extensions_table)
       if (decoded->modrm.mod == 0x03) { // register addressing
@@ -19,8 +19,6 @@ bool set_mnemonic32(Dinstruction *decoded, unsigned char instruction) {
           char *m_66 = extd_ext_11b_66[instruction][decoded->modrm.reg];
           size_t m_len = strlen(m_66);
           memcpy(decoded->mnemonic.str, m_66, m_len);
-          decoded->mnemonic.str[m_len] = 0x20;
-          decoded->mnemonic.cur_size = m_len + 1;
           return true;
         case 0xF3:
           // handle extended with
@@ -74,7 +72,7 @@ bool set_mnemonic32(Dinstruction *decoded, unsigned char instruction) {
       return true;
     }
   } else {
-    if (decoded->status.has_opcode_extension) {
+    if (HAS_STATUS(decoded->status, STATUS_OPCODE_EXTENSION)) {
       printf("regular! but with extension\n");
       // has extension (regular_opcode_with_extensions_table)
       if (decoded->modrm.mod == 0x03) { // register addressing
@@ -93,8 +91,6 @@ bool set_mnemonic32(Dinstruction *decoded, unsigned char instruction) {
       char *m = reg[instruction];
       size_t m_len = strlen(m);
       memcpy(decoded->mnemonic.str, m, m_len);
-      decoded->mnemonic.str[m_len] = 0x20;
-      decoded->mnemonic.cur_size = m_len + 1;
       return true;
     }
   }

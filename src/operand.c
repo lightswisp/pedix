@@ -3,11 +3,14 @@
 #include <stdio.h>
 #include <string.h>
 
-void set_operand_by_size(Dinstruction *decoded) {
-  switch (decoded->operand2.size) {
+void set_operand_by_size(Dinstruction *decoded, unsigned int operand) {
+//  if (operand > MAX_OPERANDS - 1)
+//    return;
+
+  /*
+  switch (decoded->operands[operand].size) {
   case BYTE_SZ:
-    sprintf(decoded->mnemonic.str + decoded->mnemonic.cur_size, "0x%02x",
-            decoded->operand2);
+    sprintf(decoded->operands[operand].str, "0x%02x", decoded->operand2);
     break;
   case WORD_SZ:
     sprintf(decoded->mnemonic.str + decoded->mnemonic.cur_size, "0x%04x",
@@ -18,9 +21,12 @@ void set_operand_by_size(Dinstruction *decoded) {
             decoded->operand2);
     break;
   }
+  */
 }
 
 bool set_operands32(Dinstruction *decoded, unsigned char instruction) {
+  char *op;
+  size_t op_len;
   // d = 0 (adding from register to memory)
   // d = 1 (adding from memory to register)
   unsigned char d = (instruction & 2) >> 1;
@@ -46,7 +52,7 @@ bool set_operands32(Dinstruction *decoded, unsigned char instruction) {
         // 8-bit operands
         reg1 = modrm_reg8[decoded->modrm.reg];
         reg2 = modrm_reg8[decoded->modrm.rm];
-      } else if (decoded->status.opsize_override) {
+      } else if (HAS_STATUS(decoded->status, STATUS_OPSIZE_OVERRIDE)) {
         // 16-bit operands
         reg1 = modrm_reg16[decoded->modrm.reg];
         reg2 = modrm_reg16[decoded->modrm.rm];
@@ -58,94 +64,44 @@ bool set_operands32(Dinstruction *decoded, unsigned char instruction) {
       unsigned int reg1_len = strlen(reg1);
       unsigned int reg2_len = strlen(reg2);
       if (d == 0) {
-        memcpy(decoded->mnemonic.str + decoded->mnemonic.cur_size, reg2,
-               reg2_len);
-        decoded->mnemonic.cur_size += reg2_len;
-        decoded->mnemonic.str[decoded->mnemonic.cur_size] = ',';
-        decoded->mnemonic.cur_size += 1;
-        memcpy(decoded->mnemonic.str + decoded->mnemonic.cur_size, reg1,
-               reg1_len);
+        //        memcpy(decoded->operands[0].str, reg2, reg2_len);
+        //        memcpy(decoded->operands[1].str, reg1, reg1_len);
       } else {
-        memcpy(decoded->mnemonic.str + decoded->mnemonic.cur_size, reg1,
-               reg1_len);
-        decoded->mnemonic.cur_size += reg1_len;
-        decoded->mnemonic.str[decoded->mnemonic.cur_size] = ',';
-        decoded->mnemonic.cur_size += 1;
-        memcpy(decoded->mnemonic.str + decoded->mnemonic.cur_size, reg2,
-               reg2_len);
+        //       memcpy(decoded->operands[1].str, reg2, reg2_len);
+        //       memcpy(decoded->operands[0].str, reg1, reg1_len);
       }
 
       break;
     }
     break;
   case INSTR_ZERO:
-    char *op;
-    if (decoded->status.opsize_override) {
+    if (HAS_STATUS(decoded->status, STATUS_OPSIZE_OVERRIDE)) {
       // 16-bit
       op = z_instr_op16[instruction];
     } else {
       // 32-bit
       op = z_instr_op32[instruction];
     }
-    unsigned int op_len = strlen(op);
-    memcpy(decoded->mnemonic.str + decoded->mnemonic.cur_size, op, op_len);
-    decoded->mnemonic.cur_size += op_len;
+    op_len = strlen(op);
+    memcpy(decoded->operands.str, op, op_len);
     break;
   case INSTR_OTHER:
-    char *op1; // first operand
-    if (decoded->status.opsize_override) {
+    if (HAS_STATUS(decoded->status, STATUS_OPSIZE_OVERRIDE)) {
       // 16-bit
-      op1 = o_instr_op16[instruction];
+      op = o_instr_op16[instruction];
     } else {
       // 32-bit
-      op1 = o_instr_op32[instruction];
+      op = o_instr_op32[instruction];
     }
-
-    if (d == 0) {
-      // d = 0
-      if (decoded->operand_capacity != 1) {
-        unsigned int op1_len = strlen(op1);
-        memcpy(decoded->mnemonic.str + decoded->mnemonic.cur_size, op1,
-               op1_len);
-        decoded->mnemonic.cur_size += op1_len;
-
-        decoded->mnemonic.str[decoded->mnemonic.cur_size] = ',';
-        decoded->mnemonic.cur_size += 1;
-      }
-
-      if (decoded->status.has_immediate_operand) {
-        // immediate operand
-        set_operand_by_size(decoded);
-      } else if (decoded->status.has_rel_offset_operand) {
-        // relative offset jump/call
-        set_operand_by_size(decoded);
-      } else if (decoded->status.has_direct_addr_operand) {
-        // direct address
-        set_operand_by_size(decoded);
-      }
-
-    } else {
-      // d = 1
-      if (decoded->status.has_immediate_operand) {
-        // immediate operand
-        set_operand_by_size(decoded);
-      } else if (decoded->status.has_rel_offset_operand) {
-        // relative offset jump/call
-        set_operand_by_size(decoded);
-      } else if (decoded->status.has_direct_addr_operand) {
-        // direct address
-        set_operand_by_size(decoded);
-      }
-
-      if (decoded->operand_capacity != 1) {
-        decoded->mnemonic.cur_size +=
-            decoded->operand2.size * WORD_SZ + 3; // 3 -> 0x and , = 3
-        unsigned int op1_len = strlen(op1);
-        memcpy(decoded->mnemonic.str + decoded->mnemonic.cur_size, op1,
-               op1_len);
-      }
-
-    }
+    op_len = strlen(op);
+    
+    if(HAS_STATUS(decoded->status, STATUS_IMMEDIATE_OPERAND))
+      sprintf(decoded->operands.str, op, decoded->imm);
+    else if(HAS_STATUS(decoded->status, STATUS_REL_OFFSET_OPERAND))
+      sprintf(decoded->operands.str, op, decoded->rel);
+    else if(HAS_STATUS(decoded->status, STATUS_DIRECT_ADDR_OPERAND))
+      sprintf(decoded->operands.str, op, decoded->dir);
+//    memcpy(decoded->operands.str, op1, op1_len);
     break;
   }
   return false;

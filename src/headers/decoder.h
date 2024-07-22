@@ -3,26 +3,26 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
-typedef struct {
-  bool has_vex;
-  bool has_rex;
-  bool has_prefix;
-  bool has_opcode_extension;
-  bool has_immediate_operand;
-  bool has_rel_offset_operand;
-  bool has_direct_addr_operand;
-  bool extended;
-  bool opsize_override;
+#define HAS_STATUS(s, x) ((s & x) > 0)
+typedef enum {
+  STATUS_VEX = 1 << 0,
+  STATUS_REX = 1 << 1,
+  STATUS_PREFIX = 1 << 2,
+  STATUS_OPCODE_EXTENSION = 1 << 3,
+  STATUS_IMMEDIATE_OPERAND = 1 << 4,
+  STATUS_REL_OFFSET_OPERAND = 1 << 5,
+  STATUS_DIRECT_ADDR_OPERAND = 1 << 6,
+  STATUS_EXTENDED = 1 << 7,
+  STATUS_OPSIZE_OVERRIDE = 1 << 8,
 } Status;
 
 typedef struct {
-  unsigned int prefix[4];
+  unsigned int prefix[MAX_PREFIXES];
   size_t size;
 } Prefix;
 
 typedef struct {
-  char str[100];
-  size_t cur_size;
+  char str[MAX_MNEMONIC_STR_LEN];
 } Mnemonic;
 
 typedef struct {
@@ -53,14 +53,14 @@ typedef struct {
 } Buffer;
 
 typedef struct {
-  size_t operand;
-  unsigned int size;
+  char str[MAX_OPERAND_STR_LEN];
 } Operand;
 
 typedef struct {
   Status status;           // instruction status
   Buffer buffer;           // instruction raw bytes
-  Mnemonic mnemonic;       // this one is not implemented yet!
+  Mnemonic mnemonic;       // mnemonic
+  Operand operands;        // operands
   unsigned int mode;       // 32-bit or 64-bit
   unsigned int instr_type; // zero/other/modrm
 
@@ -71,17 +71,16 @@ typedef struct {
   Modrm modrm;                // modrm field
   Sib sib;                    // sib field
   unsigned long displacement; // disp field
+  unsigned long imm;          // immediate operand
+  unsigned long rel;          // relative addr operand
+  unsigned long dir;          // direct addr operand
   size_t operand_capacity;    // amount of operands per instruction
-  Operand operand1;           // first operand
-  Operand operand2;           // second operand
-  Operand operand3;           // third operand
-  Operand operand4;           // fourth operand
 } Dinstruction;
 
 Dinstruction *init_instruction();             // allocates memory for the struct
-void dump(Dinstruction *decoded);             // dumps struct fields to stdout
 void free_instrucion(Dinstruction *decoded);  // frees the memory
 void zero_instruction(Dinstruction *decoded); // zeroes the struct
+void set_instruction_operand(Dinstruction *decoded, size_t op_size);
 bool decode(Dinstruction *decoded,
             unsigned char *instruction); // general decode func
 bool decode32(Dinstruction *decoded,

@@ -62,9 +62,9 @@ bool instr_has_rex(unsigned char opcode) {
   }
 }
 
-bool instr_modrm(Dinstruction *decoded, unsigned char opcode) {
-  if (decoded->status.extended) {
-    switch (opcode) {
+bool instr_modrm(Dinstruction *decoded) {
+  if (HAS_STATUS(decoded->status, STATUS_EXTENDED)) {
+    switch (decoded->op1) {
     case 0x00:
     case 0x01:
     case 0x02:
@@ -255,7 +255,7 @@ bool instr_modrm(Dinstruction *decoded, unsigned char opcode) {
       return false;
     }
   }
-  switch (opcode) {
+  switch (decoded->op1) {
   case 0x00:
   case 0x01:
   case 0x02:
@@ -336,9 +336,9 @@ bool instr_modrm(Dinstruction *decoded, unsigned char opcode) {
   }
 }
 
-bool instr_other(Dinstruction *decoded, unsigned char opcode) {
-  if (decoded->status.extended) {
-    switch (opcode) {
+bool instr_other(Dinstruction *decoded) {
+  if (HAS_STATUS(decoded->status, STATUS_EXTENDED)) {
+    switch (decoded->op1) {
     case 0x20:
     case 0x21:
     case 0x22:
@@ -367,7 +367,7 @@ bool instr_other(Dinstruction *decoded, unsigned char opcode) {
       return false;
     }
   }
-  switch (opcode) {
+  switch (decoded->op1) {
   case 0x04:
   case 0x05:
   case 0x0C:
@@ -450,9 +450,9 @@ bool instr_other(Dinstruction *decoded, unsigned char opcode) {
   }
 }
 
-bool instr_zero(Dinstruction *decoded, unsigned char opcode) {
-  if (decoded->status.extended) {
-    switch (opcode) {
+bool instr_zero(Dinstruction *decoded) {
+  if (HAS_STATUS(decoded->status, STATUS_EXTENDED)) {
+    switch (decoded->op1) {
     case 0x05:
     case 0x06:
     case 0x07:
@@ -488,7 +488,7 @@ bool instr_zero(Dinstruction *decoded, unsigned char opcode) {
     }
   }
 
-  switch (opcode) {
+  switch (decoded->op1) {
   case 0x06:
   case 0x07:
   case 0x0E:
@@ -589,11 +589,11 @@ bool instr_zero(Dinstruction *decoded, unsigned char opcode) {
   }
 }
 
-bool instr_has_opcode_extension(Dinstruction *decoded, unsigned char opcode) {
+bool instr_has_opcode_extension(Dinstruction *decoded) {
   // Table A-6. Opcode Extensions for One- and Two-byte Opcodes by Group Number
   //  VEX.0F38 F3 todo
-  if (decoded->status.extended) {
-    switch (opcode) {
+  if (HAS_STATUS(decoded->status, STATUS_EXTENDED)) {
+    switch (decoded->op1) {
     case 0x00:
     case 0x01:
     case 0xBA:
@@ -609,7 +609,7 @@ bool instr_has_opcode_extension(Dinstruction *decoded, unsigned char opcode) {
       return false;
     }
   }
-  switch (opcode) {
+  switch (decoded->op1) {
   case 0x80:
   case 0x81:
   case 0x82:
@@ -633,12 +633,12 @@ bool instr_has_opcode_extension(Dinstruction *decoded, unsigned char opcode) {
   }
 }
 
-bool instr_has_valid_extension(Dinstruction *decoded, unsigned char opcode) {
+bool instr_has_valid_extension(Dinstruction *decoded) {
   // Table A-6. Opcode Extensions for One- and Two-byte Opcodes by Group Number
   // TODO: add validation by  prefix
   // check for  decoded->prefixes[0] in both  cases (extended and not)
-  if (decoded->status.extended) {
-    switch (opcode) {
+  if (HAS_STATUS(decoded->status, STATUS_EXTENDED)) {
+    switch (decoded->op1) {
     case 0x00:
       switch (decoded->modrm.reg) {
       case 0x06:
@@ -709,7 +709,7 @@ bool instr_has_valid_extension(Dinstruction *decoded, unsigned char opcode) {
       return true;
     }
   }
-  switch (opcode) {
+  switch (decoded->op1) {
   case 0x80:
   case 0x81:
   case 0x82:
@@ -777,9 +777,9 @@ bool instr_has_extended_opcode(unsigned char opcode) {
   return false;
 }
 
-bool instr_has_immediate_operand(Dinstruction *decoded, unsigned char opcode) {
-  if (decoded->status.extended) {
-    switch (opcode) {
+bool instr_has_immediate_operand(Dinstruction *decoded) {
+  if (HAS_STATUS(decoded->status, STATUS_EXTENDED)) {
+    switch (decoded->op1) {
     case 0x3A:
     case 0x38:
       switch (decoded->op2) {
@@ -822,7 +822,7 @@ bool instr_has_immediate_operand(Dinstruction *decoded, unsigned char opcode) {
       return false;
     }
   }
-  switch (opcode) {
+  switch (decoded->op1) {
   case 0x04:
   case 0x05:
   case 0x0C:
@@ -886,10 +886,10 @@ bool instr_has_immediate_operand(Dinstruction *decoded, unsigned char opcode) {
   }
 }
 
-bool instr_has_rel_offset_operand(Dinstruction *decoded, unsigned char opcode) {
+bool instr_has_rel_offset_operand(Dinstruction *decoded) {
   // relative address jumps
-  if (decoded->status.extended) {
-    switch (opcode) {
+  if (HAS_STATUS(decoded->status, STATUS_EXTENDED)) {
+    switch (decoded->op1) {
     case 0x80:
     case 0x81:
     case 0x82:
@@ -909,7 +909,7 @@ bool instr_has_rel_offset_operand(Dinstruction *decoded, unsigned char opcode) {
       return true;
     }
   } else {
-    switch (opcode) {
+    switch (decoded->op1) {
     case 0x70:
     case 0x71:
     case 0x72:
@@ -943,9 +943,9 @@ bool instr_has_rel_offset_operand(Dinstruction *decoded, unsigned char opcode) {
   return false;
 }
 
-bool instr_has_direct_addr_operand(unsigned char opcode) {
+bool instr_has_direct_addr_operand(Dinstruction *decoded) {
   // absolute address jump/call
-  switch (opcode) {
+  switch (decoded->op1) {
   case 0x9A:
   case 0xEA:
     return true;
@@ -966,9 +966,8 @@ size_t get_vex_size(unsigned char vex_byte) {
   return 0;
 }
 
-size_t get_opcode_extension_operand_size(Dinstruction *decoded,
-                                         unsigned char opcode) {
-  switch (opcode) {
+size_t get_opcode_extension_operand_size(Dinstruction *decoded) {
+  switch (decoded->op1) {
   case 0xF6:
     if (decoded->modrm.reg == 0x00) {
       return BYTE_SZ;
@@ -1022,33 +1021,99 @@ size_t get_modrm_size(Dinstruction *decoded, unsigned char *i_ptr) {
     break;
   }
 
-  if (instr_has_immediate_operand(decoded, decoded->op1)) {
+  if (instr_has_immediate_operand(decoded)) {
     if (decoded->mode == 32) {
-      modrm_size += get_operand_size32(decoded, decoded->op1);
+      modrm_size += get_operand_size32(decoded);
     } else {
-      modrm_size += get_operand_size64(decoded, decoded->op1);
+      modrm_size += get_operand_size64(decoded);
     }
   }
 
   return modrm_size;
 }
 
-size_t get_operand_capacity32(Dinstruction *decoded, unsigned char opcode) {
-  if (decoded->status.extended) {
+size_t get_operand_capacity32(Dinstruction *decoded) {
+  if (HAS_STATUS(decoded->status, STATUS_EXTENDED)) {
     // todo
     switch (decoded->instr_type) {}
   } else {
     switch (decoded->instr_type) {
-    case INSTR_OTHER:
-      if (decoded->status.has_rel_offset_operand ||
-          decoded->status.has_direct_addr_operand) {
-        // jump/call instructions
+    case INSTR_ZERO:
+      switch (decoded->op1) {
+      case 0x27:
+      case 0x2F:
+      case 0x37:
+      case 0x3F:
+      case 0x60:
+      case 0x61:
+      case 0x90:
+      case 0x98:
+      case 0x99:
+      case 0x9B:
+      case 0x9E:
+      case 0x9F:
+      case 0xC3:
+      case 0xC9:
+      case 0xCB:
+      case 0xCC:
+      case 0xCE:
+      case 0xCF:
+      case 0xD7:
+      case 0xF4:
+      case 0xF5:
+      case 0xF8:
+      case 0xF9:
+      case 0xFA:
+      case 0xFB:
+      case 0xFC:
+      case 0xFD:
+        return 0;
+      default:
         return 1;
       }
-      // all other
-      return 2;
+    case INSTR_OTHER:
+      switch (decoded->op1) {
+      case 0x68:
+      case 0x6A:
+      case 0x70:
+      case 0x71:
+      case 0x72:
+      case 0x73:
+      case 0x74:
+      case 0x75:
+      case 0x76:
+      case 0x77:
+      case 0x78:
+      case 0x79:
+      case 0x7A:
+      case 0x7B:
+      case 0x7C:
+      case 0x7D:
+      case 0x7E:
+      case 0x7F:
+      case 0x9A:
+      case 0xC2:
+      case 0xCA:
+      case 0xCD:
+      case 0xD4:
+      case 0xD5:
+      case 0xE0:
+      case 0xE1:
+      case 0xE2:
+      case 0xE3:
+      case 0xE8:
+      case 0xE9:
+      case 0xEA:
+      case 0xEB:
+        // jump/call/push
+        return 1;
+      default:
+        // all other
+        return 2;
+      }
+
     case INSTR_MODRM:
-      switch (opcode) {
+      switch (decoded->op1) {
       case 0x69:
       case 0x6B:
         // imul
@@ -1065,17 +1130,17 @@ size_t get_operand_capacity32(Dinstruction *decoded, unsigned char opcode) {
   return 0;
 }
 
-size_t get_operand_capacity64(Dinstruction *decoded, unsigned char opcode) {
+size_t get_operand_capacity64(Dinstruction *decoded) {
   // todo
   return 0;
 }
 
-size_t get_operand_size32(Dinstruction *decoded, unsigned char opcode) {
-  if (decoded->status.extended) {
-    switch (opcode) {
+size_t get_operand_size32(Dinstruction *decoded) {
+  if (HAS_STATUS(decoded->status, STATUS_EXTENDED)) {
+    switch (decoded->op1) {
     case 0x38:
     case 0x3A:
-      switch (opcode) {
+      switch (decoded->op1) {
       case 0x08:
       case 0x09:
       case 0x0A:
@@ -1135,7 +1200,7 @@ size_t get_operand_size32(Dinstruction *decoded, unsigned char opcode) {
       return DOUBLEWORD_SZ;
     }
   } else {
-    switch (opcode) {
+    switch (decoded->op1) {
     case 0x04:
     case 0x0C:
     case 0x14:
@@ -1240,9 +1305,9 @@ size_t get_operand_size32(Dinstruction *decoded, unsigned char opcode) {
   return 0;
 }
 
-size_t get_operand_size64(Dinstruction *decoded, unsigned char opcode) {
-  if (decoded->status.has_rex) {
-    switch (opcode) {
+size_t get_operand_size64(Dinstruction *decoded) {
+  if (HAS_STATUS(decoded->status, STATUS_REX)) {
+    switch (decoded->op1) {
     case 0xB8:
     case 0xB9:
     case 0xBA:
@@ -1254,11 +1319,11 @@ size_t get_operand_size64(Dinstruction *decoded, unsigned char opcode) {
       return QUADWORD_SZ;
     }
   }
-  if (decoded->status.extended) {
-    switch (opcode) {
+  if (HAS_STATUS(decoded->status, STATUS_EXTENDED)) {
+    switch (decoded->op1) {
     case 0x38:
     case 0x3A:
-      switch (opcode) {
+      switch (decoded->op1) {
       case 0x08:
       case 0x09:
       case 0x0A:
@@ -1320,7 +1385,7 @@ size_t get_operand_size64(Dinstruction *decoded, unsigned char opcode) {
       return 0;
     }
   }
-  switch (opcode) {
+  switch (decoded->op1) {
   case 0x04:
   case 0x0C:
   case 0x14:

@@ -6,6 +6,9 @@ enum Types {
   INSTR_OTHER = 3,
 };
 
+#define MAX_OPERAND_STR_LEN 100 
+#define MAX_MNEMONIC_STR_LEN 17
+#define MAX_PREFIXES 4
 #define MAX_INSTR_SIZE 0x0F
 #define BYTE_SZ                                                                \
   0x01 // OPERAND TYPE b (Byte, regardless of operand-size attribute)
