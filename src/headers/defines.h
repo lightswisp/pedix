@@ -34,5 +34,5 @@ enum Types {
 #define PREFIX_GS 0x65            // GS segment override
 #define PREFIX_BNT 0x2E           // Branch not taken
 #define PREFIX_BT 0x3E            // Branch taken
-#define PREFIX_OPSZ_OVERRIDE 0x66 // Operand-size override prefix
+#define PREFIX_OPSIZE_OVERRIDE 0x66 // Operand-size override prefix
 #define PREFIX_ASZ_OVERRIDE 0x67  // Address-size override prefix

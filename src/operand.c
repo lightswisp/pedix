@@ -98,10 +98,9 @@ bool set_operands32(Dinstruction *decoded, unsigned char instruction) {
     if(HAS_STATUS(decoded->status, STATUS_IMMEDIATE_OPERAND))
       sprintf(decoded->operands.str, op, decoded->imm);
     else if(HAS_STATUS(decoded->status, STATUS_REL_OFFSET_OPERAND))
-      sprintf(decoded->operands.str, op, decoded->rel);
+      sprintf(decoded->operands.str, op, decoded->rel + decoded->operands.size + BYTE_SZ);
     else if(HAS_STATUS(decoded->status, STATUS_DIRECT_ADDR_OPERAND))
-      sprintf(decoded->operands.str, op, decoded->dir);
-//    memcpy(decoded->operands.str, op1, op1_len);
+      sprintf(decoded->operands.str, op, decoded->dir >> (HAS_STATUS(decoded->status, STATUS_OPSIZE_OVERRIDE) ? 0x10 : 0x20), decoded->dir);
     break;
   }
   return false;

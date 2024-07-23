@@ -53,6 +53,7 @@ typedef struct {
 } Buffer;
 
 typedef struct {
+  size_t size;
   char str[MAX_OPERAND_STR_LEN];
 } Operand;
 

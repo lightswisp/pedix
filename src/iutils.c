@@ -11,7 +11,7 @@ bool instr_has_prefix(unsigned char opcode) {
   case PREFIX_ES:
   case PREFIX_FS:
   case PREFIX_GS:
-  case PREFIX_OPSZ_OVERRIDE:
+  case PREFIX_OPSIZE_OVERRIDE:
   case PREFIX_ASZ_OVERRIDE:
     return true;
 
@@ -1299,7 +1299,7 @@ size_t get_operand_size32(Dinstruction *decoded) {
 
     case 0x9A:
     case 0xEA:
-      return ADDR_48_SZ;
+      return (HAS_STATUS(decoded->status, STATUS_OPSIZE_OVERRIDE) ? DOUBLEWORD_SZ : ADDR_48_SZ);
     }
   }
   return 0;

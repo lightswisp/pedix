@@ -56,7 +56,7 @@ bool decode32(Dinstruction *decoded, unsigned char *instruction) {
   unsigned char *i_ptr = instruction;
   while (instr_has_prefix(*i_ptr)) {
     decoded->status |= STATUS_PREFIX;
-    if (*i_ptr == PREFIX_OPSZ_OVERRIDE)
+    if (*i_ptr == PREFIX_OPSIZE_OVERRIDE)
       decoded->status |= STATUS_OPSIZE_OVERRIDE;
 
     decoded->prefixes.prefix[decoded->prefixes.size] = *i_ptr;
@@ -213,6 +213,7 @@ bool decode32(Dinstruction *decoded, unsigned char *instruction) {
 
       i_ptr++;
       memcpy(decoded->buffer.bytes + decoded->buffer.size, i_ptr, op_size);
+      decoded->operands.size = op_size;
       decoded->buffer.size += op_size;
       decoded->operand_capacity = get_operand_capacity32(decoded);
 
@@ -268,7 +269,7 @@ bool decode64(Dinstruction *decoded, unsigned char *instruction) {
 
   while (instr_has_prefix(*i_ptr)) {
     decoded->status |= STATUS_PREFIX;
-    if (*i_ptr == PREFIX_OPSZ_OVERRIDE)
+    if (*i_ptr == PREFIX_OPSIZE_OVERRIDE)
       decoded->status |= STATUS_OPSIZE_OVERRIDE;
 
     decoded->prefixes.prefix[decoded->prefixes.size] = *i_ptr;
@@ -356,11 +357,12 @@ bool decode64(Dinstruction *decoded, unsigned char *instruction) {
 
       if (instr_other(decoded)) {
         decoded->instr_type = INSTR_OTHER;
-        size_t op_size = get_operand_size32(decoded);
+        size_t op_size = get_operand_size64(decoded);
         if (op_size == 0)
           return false;
 
         memcpy(decoded->buffer.bytes + decoded->buffer.size, i_ptr, op_size);
+        decoded->operands.size = op_size;
         decoded->buffer.size += op_size;
         decoded->operand_capacity =
             get_operand_capacity64(decoded);
@@ -420,6 +422,7 @@ bool decode64(Dinstruction *decoded, unsigned char *instruction) {
       return false;
 
     memcpy(decoded->buffer.bytes + decoded->buffer.size, i_ptr, op_size);
+    decoded->operands.size = op_size;
     decoded->buffer.size += op_size;
     decoded->operand_capacity = get_operand_capacity64(decoded);
     return true;
