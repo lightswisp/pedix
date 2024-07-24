@@ -589,6 +589,15 @@ bool instr_zero(Dinstruction *decoded) {
   }
 }
 
+bool instr_has_secondary_opcode(unsigned char opcode) {
+  switch (opcode) {
+  case 0x38:
+  case 0x3A:
+    return true;
+  }
+  return false;
+}
+
 bool instr_has_opcode_extension(Dinstruction *decoded) {
   // Table A-6. Opcode Extensions for One- and Two-byte Opcodes by Group Number
   //  VEX.0F38 F3 todo

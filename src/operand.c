@@ -3,27 +3,6 @@
 #include <stdio.h>
 #include <string.h>
 
-void set_operand_by_size(Dinstruction *decoded, unsigned int operand) {
-//  if (operand > MAX_OPERANDS - 1)
-//    return;
-
-  /*
-  switch (decoded->operands[operand].size) {
-  case BYTE_SZ:
-    sprintf(decoded->operands[operand].str, "0x%02x", decoded->operand2);
-    break;
-  case WORD_SZ:
-    sprintf(decoded->mnemonic.str + decoded->mnemonic.cur_size, "0x%04x",
-            decoded->operand2);
-    break;
-  case DOUBLEWORD_SZ:
-    sprintf(decoded->mnemonic.str + decoded->mnemonic.cur_size, "0x%08x",
-            decoded->operand2);
-    break;
-  }
-  */
-}
-
 bool set_operands32(Dinstruction *decoded, unsigned char instruction) {
   char *op;
   size_t op_len;
@@ -64,11 +43,9 @@ bool set_operands32(Dinstruction *decoded, unsigned char instruction) {
       unsigned int reg1_len = strlen(reg1);
       unsigned int reg2_len = strlen(reg2);
       if (d == 0) {
-        //        memcpy(decoded->operands[0].str, reg2, reg2_len);
-        //        memcpy(decoded->operands[1].str, reg1, reg1_len);
+        sprintf(decoded->operands.str, REG_TO_REG, reg2, reg1);
       } else {
-        //       memcpy(decoded->operands[1].str, reg2, reg2_len);
-        //       memcpy(decoded->operands[0].str, reg1, reg1_len);
+        sprintf(decoded->operands.str, REG_TO_REG, reg1, reg2);
       }
 
       break;

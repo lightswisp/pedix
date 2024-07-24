@@ -1,11 +1,16 @@
 #include "decoder.h"
 
+/* Ib or imm8 */
 #define OPERAND_BYTE "0x%02x"
+/* Iw Ic Iv or imm16 */
 #define OPERAND_WORD "0x%04x"
+/* Iv Id or imm32 */
 #define OPERAND_DWORD "0x%08x"
+/* Ap 32/48 bit pointer */
 #define OPERAND_48 "0x%lx"
+/* When register addressing (mod field = 3) */
+#define REG_TO_REG "%s,%s"
 
-void set_operand_by_size(Dinstruction *decoded, unsigned int operand);
 bool set_operands(Dinstruction *decoded, unsigned char instruction);
 bool set_operands32(Dinstruction *decoded, unsigned char instruction);
 bool set_operands64(Dinstruction *decoded, unsigned char instruction);

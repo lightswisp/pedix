@@ -3,6 +3,7 @@
 #include "decoder.h"
 #include <stdbool.h>
 
+bool instr_has_secondary_opcode(unsigned char opcode);
 bool instr_has_vex(unsigned char opcode);
 bool instr_has_rex(unsigned char opcode);
 bool instr_has_prefix(unsigned char opcode); // checks if the instruction
