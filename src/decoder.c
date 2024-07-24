@@ -15,7 +15,7 @@ Dinstruction *init_instruction() {
  */
 void zero_instruction(Dinstruction *decoded) {
   // save the mode in order to restore it after zeroing the struct
-  unsigned int mode = decoded->mode;
+  uint8_t mode = decoded->mode;
   memset(decoded, 0, sizeof(Dinstruction));
   decoded->mode = mode;
 }
@@ -29,7 +29,7 @@ void free_instrucion(Dinstruction *decoded) { free(decoded); }
  * Sets instruction operands according to status
  */
 void set_instruction_operand(Dinstruction *decoded, size_t op_size) {
-  unsigned long *field;
+  uint64_t *field;
   if (HAS_STATUS(decoded->status, STATUS_IMMEDIATE_OPERAND))
     field = &decoded->imm;
   else if (HAS_STATUS(decoded->status, STATUS_REL_OFFSET_OPERAND))
@@ -38,7 +38,7 @@ void set_instruction_operand(Dinstruction *decoded, size_t op_size) {
     field = &decoded->dir;
 
   for (size_t i = 0; i < op_size; i++) {
-    unsigned long temp =
+    uint64_t temp =
         decoded->buffer.bytes[decoded->buffer.size - op_size + i];
     temp = temp << (0x08 * i);
     *field += temp;
@@ -48,12 +48,12 @@ void set_instruction_operand(Dinstruction *decoded, size_t op_size) {
 /*
  * Decodes 32-bit instruction
  */
-bool decode32(Dinstruction *decoded, unsigned char *instruction) {
+bool decode32(Dinstruction *decoded, uchar8_t *instruction) {
   // TODO: ADD VALID PREFIX CHECK
   // EX: 66 0f 74 04 00 -> IS A VALID INSTRUCTION, WHILE f3 0f 74 04 00 IS NOT
 
   // https://sparksandflames.com/files/x86InstructionChart.html
-  unsigned char *i_ptr = instruction;
+  uchar8_t *i_ptr = instruction;
   while (instr_has_prefix(*i_ptr)) {
     decoded->status |= STATUS_PREFIX;
     if (*i_ptr == PREFIX_OPSIZE_OVERRIDE)
@@ -255,11 +255,11 @@ bool decode32(Dinstruction *decoded, unsigned char *instruction) {
 /*
  * Decodes 64-bit instruction
  */
-bool decode64(Dinstruction *decoded, unsigned char *instruction) {
+bool decode64(Dinstruction *decoded, uchar8_t *instruction) {
   //     In 64-bit mode, instruction formats do not change. Bits needed to
   //     define fields in the 64-bit context are provided by the
   // addition of REX prefixes.
-  unsigned char *i_ptr = instruction;
+  uchar8_t *i_ptr = instruction;
 
   while (instr_has_prefix(*i_ptr)) {
     decoded->status |= STATUS_PREFIX;
@@ -443,7 +443,7 @@ bool decode64(Dinstruction *decoded, unsigned char *instruction) {
   return false;
 }
 
-bool decode(Dinstruction *decoded, unsigned char *instruction) {
+bool decode(Dinstruction *decoded, uchar8_t *instruction) {
   switch (decoded->mode) {
   case 32:
     return decode32(decoded, instruction);

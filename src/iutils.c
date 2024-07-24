@@ -1,6 +1,6 @@
 #include "headers/iutils.h"
 
-bool instr_has_prefix(unsigned char opcode) {
+bool instr_has_prefix(uchar8_t opcode) {
   switch (opcode) {
   case PREFIX_LOCK:
   case PREFIX_REPNE_Z:
@@ -20,7 +20,7 @@ bool instr_has_prefix(unsigned char opcode) {
   }
 }
 
-bool instr_has_vex(unsigned char opcode) {
+bool instr_has_vex(uchar8_t opcode) {
   switch (opcode) {
   case 0xC5:
   case 0xC4:
@@ -30,7 +30,7 @@ bool instr_has_vex(unsigned char opcode) {
   }
 }
 
-bool instr_has_rex(unsigned char opcode) {
+bool instr_has_rex(uchar8_t opcode) {
   // REX prefixes are a set of 16 opcodes that span one row of the opcode map
   // and occupy entries 40H to 4FH. These opcodes represent valid instructions
   // (INC or DEC) in IA-32 operating modes and in compatibility mode. In 64-bit
@@ -589,7 +589,7 @@ bool instr_zero(Dinstruction *decoded) {
   }
 }
 
-bool instr_has_secondary_opcode(unsigned char opcode) {
+bool instr_has_secondary_opcode(uchar8_t opcode) {
   switch (opcode) {
   case 0x38:
   case 0x3A:
@@ -779,7 +779,7 @@ bool instr_has_valid_extension(Dinstruction *decoded) {
   return false;
 }
 
-bool instr_has_extended_opcode(unsigned char opcode) {
+bool instr_has_extended_opcode(uchar8_t opcode) {
   // it means that the instruction size is at least 2 bytes long
   if (opcode == 0x0F)
     return true;
@@ -963,7 +963,7 @@ bool instr_has_direct_addr_operand(Dinstruction *decoded) {
   }
 }
 
-size_t get_vex_size(unsigned char vex_byte) {
+size_t get_vex_size(uchar8_t vex_byte) {
   switch (vex_byte) {
   case 0xC5:
     return WORD_SZ;
@@ -989,7 +989,7 @@ size_t get_opcode_extension_operand_size(Dinstruction *decoded) {
   return 0x00;
 }
 
-size_t get_modrm_size(Dinstruction *decoded, unsigned char *i_ptr) {
+size_t get_modrm_size(Dinstruction *decoded, uchar8_t *i_ptr) {
   size_t modrm_size = 0;
   modrm_size += BYTE_SZ; // mod/rm byte
 
@@ -1000,7 +1000,7 @@ size_t get_modrm_size(Dinstruction *decoded, unsigned char *i_ptr) {
       // SIB MODE
       modrm_size += BYTE_SZ; // 1 sib byte follows mod/rm field  (SIB with no
                              // displacement)
-      unsigned int base = *(i_ptr + 1) & 7;
+      uint8_t base = *(i_ptr + 1) & 7;
       if (base == 5) {
         modrm_size +=
             DOUBLEWORD_SZ; // displacement follows SIB byte if base field is 5

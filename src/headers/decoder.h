@@ -2,7 +2,10 @@
 
 #include "defines.h"
 #include <stdbool.h>
+#include <stdint.h>
 #include <stdlib.h>
+
+typedef unsigned char uchar8_t;
 
 #define HAS_STATUS(s, x) ((s & x) > 0)
 typedef enum {
@@ -18,7 +21,7 @@ typedef enum {
 } Status;
 
 typedef struct {
-  unsigned int prefix[MAX_PREFIXES];
+  uint8_t prefix[MAX_PREFIXES];
   size_t size;
 } Prefix;
 
@@ -27,30 +30,30 @@ typedef struct {
 } Mnemonic;
 
 typedef struct {
-  unsigned int field;
-  unsigned int mod : 2;
-  unsigned int reg : 3;
-  unsigned int rm : 3;
+  uint8_t field;
+  uint8_t mod : 2;
+  uint8_t reg : 3;
+  uint8_t rm : 3;
 } Modrm;
 
 typedef struct {
-  unsigned int field;
-  unsigned int w : 1;
-  unsigned int r : 1;
-  unsigned int x : 1;
-  unsigned int b : 1;
+  uint8_t field;
+  uint8_t w : 1;
+  uint8_t r : 1;
+  uint8_t x : 1;
+  uint8_t b : 1;
 } Rex;
 
 typedef struct {
-  unsigned int field;
-  unsigned int scale : 2;
-  unsigned int index : 3;
-  unsigned int base : 3;
+  uint8_t field;
+  uint8_t scale : 2;
+  uint8_t index : 3;
+  uint8_t base : 3;
 } Sib;
 
 typedef struct {
   size_t size;
-  unsigned char bytes[MAX_INSTR_SIZE];
+  uchar8_t bytes[MAX_INSTR_SIZE];
 } Buffer;
 
 typedef struct {
@@ -63,20 +66,20 @@ typedef struct {
   Buffer buffer;           // instruction raw bytes
   Mnemonic mnemonic;       // mnemonic
   Operand operands;        // operands
-  unsigned int mode;       // 32-bit or 64-bit
-  unsigned int instr_type; // zero/other/modrm
+  uint8_t mode;            // 32-bit or 64-bit
+  uint8_t instr_type;      // zero/other/modrm
+  size_t operand_capacity; // amount of operands per instruction
 
-  Prefix prefixes;            // prefixes
-  Rex rex;                    // rex field
-  unsigned char op1;          // op1 is the primary opcode
-  unsigned char op2;          // op2 is the secondary opcode
-  Modrm modrm;                // modrm field
-  Sib sib;                    // sib field
-  unsigned long displacement; // disp field
-  unsigned long imm;          // immediate operand
-  unsigned long rel;          // relative addr operand
-  unsigned long dir;          // direct addr operand
-  size_t operand_capacity;    // amount of operands per instruction
+  Prefix prefixes; // prefixes
+  Rex rex;         // rex field
+  uchar8_t op1;    // op1 is the primary opcode
+  uchar8_t op2;    // op2 is the secondary opcode
+  Modrm modrm;     // modrm field
+  Sib sib;         // sib field
+  uint64_t disp;   // disp field
+  uint64_t imm;    // immediate operand
+  uint64_t rel;    // relative addr operand
+  uint64_t dir;    // direct addr operand
 } Dinstruction;
 
 Dinstruction *init_instruction();             // allocates memory for the struct
@@ -84,8 +87,8 @@ void free_instrucion(Dinstruction *decoded);  // frees the memory
 void zero_instruction(Dinstruction *decoded); // zeroes the struct
 void set_instruction_operand(Dinstruction *decoded, size_t op_size);
 bool decode(Dinstruction *decoded,
-            unsigned char *instruction); // general decode func
+            uchar8_t *instruction); // general decode func
 bool decode32(Dinstruction *decoded,
-              unsigned char *instruction); // 32bit specific
+              uchar8_t *instruction); // 32bit specific
 bool decode64(Dinstruction *decoded,
-              unsigned char *instruction); // 64bit specific
+              uchar8_t *instruction); // 64bit specific

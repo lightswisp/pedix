@@ -3,23 +3,29 @@
 #include <stdio.h>
 #include <string.h>
 
-bool set_operands32(Dinstruction *decoded, unsigned char instruction) {
+bool set_operands32(Dinstruction *decoded, uchar8_t instruction) {
   char *op;
   size_t op_len;
   // d = 0 (adding from register to memory)
   // d = 1 (adding from memory to register)
-  unsigned char d = (instruction & 2) >> 1;
+  uchar8_t d = (instruction & 2) >> 1;
   // s = 0 (8-bit operands)
   // s = 1 (16 or 32-bit operands)
-  unsigned char s = (instruction & 1);
+  uchar8_t s = (instruction & 1);
   switch (decoded->instr_type) {
   case INSTR_MODRM:
     switch (decoded->modrm.mod) {
     case 0:
-      // todo
+      // todo 
       break;
     case 1:
-      // todo
+      // mod == 01 (disp8 mode)
+      if (decoded->modrm.rm == 4){
+        // sib + disp8 mode
+      }
+      else{
+
+      }
       break;
     case 2:
       // todo
@@ -40,8 +46,8 @@ bool set_operands32(Dinstruction *decoded, unsigned char instruction) {
         reg1 = modrm_reg32[decoded->modrm.reg];
         reg2 = modrm_reg32[decoded->modrm.rm];
       }
-      unsigned int reg1_len = strlen(reg1);
-      unsigned int reg2_len = strlen(reg2);
+      uint8_t reg1_len = strlen(reg1);
+      uint8_t reg2_len = strlen(reg2);
       if (d == 0) {
         sprintf(decoded->operands.str, REG_TO_REG, reg2, reg1);
       } else {
@@ -83,12 +89,12 @@ bool set_operands32(Dinstruction *decoded, unsigned char instruction) {
   return false;
 }
 
-bool set_operands64(Dinstruction *decoded, unsigned char instruction) {
+bool set_operands64(Dinstruction *decoded, uchar8_t instruction) {
   // todo
   return false;
 }
 
-bool set_operands(Dinstruction *decoded, unsigned char instruction) {
+bool set_operands(Dinstruction *decoded, uchar8_t instruction) {
   switch (decoded->mode) {
   case 32:
     return set_operands32(decoded, instruction);

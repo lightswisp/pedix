@@ -1,15 +1,17 @@
 #include "decoder.h"
 #include <stdbool.h>
 
-bool set_mnemonic(Dinstruction *decoded, unsigned char instruction);
-bool set_mnemonic32(Dinstruction *decoded, unsigned char instruction);
-bool set_mnemonic64(Dinstruction *decoded, unsigned char instruction);
+bool set_mnemonic(Dinstruction *decoded, uchar8_t instruction);
+bool set_mnemonic32(Dinstruction *decoded, uchar8_t instruction);
+bool set_mnemonic64(Dinstruction *decoded, uchar8_t instruction);
 
+/* extended opcode with extensions and operand size override */
 static char *extd_ext_11b_66[0x100][0x08] = {
     [0x71] = {"", "", "vpsrlw", "", "vpsraw", "", "vpsllw", ""},
     [0x72] = {"", "", "vpsrld", "", "vpsrad", "", "vpslld", ""},
     [0x73] = {"", "", "vpsrlq", "vpsrldq", "", "", "vpsllq", "vpslldq"}};
 
+/* extended opcode with extensions and rep prefix */
 static char *extd_ext_11b_f3[0x100][0x08] = {
     [0xC7] = {"", "", "", "", "", "", "", "rdpid"},
     [0xAE] = {"rdfsbase", "rdgsbase", "wrfsbase", "wrgsbase"}};
