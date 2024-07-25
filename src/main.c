@@ -3,6 +3,8 @@
 #include "headers/operand.h"
 #include <stdio.h>
 
+#define INSTRUCTION_LIMIT 2
+
 int main(void) {
   // unsigned char instruction[] = { 0xB8, 0x00, 0x00, 0x00, 0x00, 0xBA, 0xFF,
   // 0xFF, 0xFF, 0xFF, 0x89, 0xD0, 0x48, 0x50, 0x59, 0xF7, 0xD8, 0xC1, 0xF8,
@@ -11,14 +13,14 @@ int main(void) {
   // 0x08, 0x66, 0x0F, 0x28, 0x40, 0x08 };
 
   /*
-      Example:
-      ADD opcode => [0 0 0 0 0 0 d s]
+      example:
+      add opcode => [0 0 0 0 0 0 d s]
       d = 0 if adding from register to memory
       d = 1 if adding from memory to register
       s = 0 if adding 8bit operands
       s = 1 if adding 16bit or 32bit operands
 
-      REMARK:
+      remark:
       d = 1 => instruction source is in reg field
       d = 0 => instruction destination is in reg field
 
@@ -49,19 +51,18 @@ int main(void) {
   // 0x89, 0xE2, 0x48, 0x83, 0xE4, 0xF0, 0x50, 0x54, 0x45, 0x31, 0xC0, 0x31,
   // 0xC9, 0x48, 0x8D, 0x3D, 0xCE, 0x00, 0x00, 0x00, 0xFF, 0x15, 0x5F, 0x2F,
   // 0x00, 0x00, 0xF4, 0x2E, 0x66, 0x0F, 0x1F, 0x04, 0x00, 0x0F, 0x1F, 0x00};
-
+ 
+  uint8_t offset, instructions, r;
   uchar8_t instruction[] = {0xBA, 0x11, 0x11, 0x22, 0x33, 0x03, 0xc8};
-  //  unsigned char instruction[] = {0xA8, 0x20, 0xE8, 0x3C, 0x30, 0x20, 0x10,
-  //                                 0x46, 0xe8, 0x11, 0x12, 0x13, 0x14};
   Dinstruction *decoded = init_instruction();
   decoded->mode = 32;
 
-  int offset = 0;
-  int instructions = 0;
-  while (instructions < 2) {
-    int r = decode(decoded, instruction + offset);
-    if (r == 0) {
-      printf("Error has occured while decoding!\n");
+  offset = 0;
+  instructions = 0;
+  while (instructions < INSTRUCTION_LIMIT) {
+    r = decode(decoded, instruction + offset);
+    if (!r) {
+      fprintf(stderr, "error has occured while decoding!\n");
       dump(decoded);
       break;
     }
@@ -73,8 +74,6 @@ int main(void) {
     instructions++;
     zero_instruction(decoded);
   }
-  // printf("result: %d\n", decode(instruction, decoded, mode));
-  // dump(decoded);
 
   free_instrucion(decoded);
   return 0;

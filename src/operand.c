@@ -3,6 +3,9 @@
 #include <stdio.h>
 #include <string.h>
 
+/*
+ * set operand string
+ */
 bool set_operands32(Dinstruction *decoded, uchar8_t instruction) {
   char *op;
   size_t op_len;
@@ -67,7 +70,7 @@ bool set_operands32(Dinstruction *decoded, uchar8_t instruction) {
     }
     op_len = strlen(op);
     memcpy(decoded->operands.str, op, op_len);
-    break;
+    return true;
   case INSTR_OTHER:
     if (HAS_STATUS(decoded->status, STATUS_OPSIZE_OVERRIDE)) {
       // 16-bit
@@ -81,14 +84,23 @@ bool set_operands32(Dinstruction *decoded, uchar8_t instruction) {
     if(HAS_STATUS(decoded->status, STATUS_IMMEDIATE_OPERAND))
       sprintf(decoded->operands.str, op, decoded->imm);
     else if(HAS_STATUS(decoded->status, STATUS_REL_OFFSET_OPERAND))
-      sprintf(decoded->operands.str, op, decoded->rel + decoded->operands.size + BYTE_SZ);
+      sprintf(decoded->operands.str, op, decoded->rel + decoded->operands.size + BYTE_LEN);
     else if(HAS_STATUS(decoded->status, STATUS_DIRECT_ADDR_OPERAND))
       sprintf(decoded->operands.str, op, decoded->dir >> (HAS_STATUS(decoded->status, STATUS_OPSIZE_OVERRIDE) ? 0x10 : 0x20), decoded->dir);
-    break;
+    else 
+      /* unknown status */
+      return false; 
+
+    return true;
   }
+
+  /* return false by default */
   return false;
 }
 
+/*
+ * set operand string
+ */
 bool set_operands64(Dinstruction *decoded, uchar8_t instruction) {
   // todo
   return false;

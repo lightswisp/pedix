@@ -6,14 +6,12 @@
 bool instr_has_secondary_opcode(uchar8_t opcode);
 bool instr_has_vex(uchar8_t opcode);
 bool instr_has_rex(uchar8_t opcode);
-bool instr_has_prefix(uchar8_t opcode); // checks if the instruction
-                                             // has prefixes (4 bytes max)
-bool instr_has_extended_opcode(
-    uchar8_t opcode); // checks if the instruction has 2-byte opcode
+bool instr_has_prefix(uchar8_t opcode); 
+bool instr_has_extended_opcode(uchar8_t opcode); 
 bool instr_has_opcode_extension(Dinstruction *decoded);
 bool instr_has_valid_extension(Dinstruction *decoded);
 
-bool instr_zero(Dinstruction *decoded); // if instruction has no operands
+bool instr_zero(Dinstruction *decoded); 
 bool instr_modrm(Dinstruction *decoded);
 bool instr_other(Dinstruction *decoded);
 
@@ -29,3 +27,5 @@ size_t get_operand_capacity64(Dinstruction *decoded);
 
 size_t get_modrm_size(Dinstruction *decoded, uchar8_t *i_ptr);
 size_t get_vex_size(uchar8_t vex_byte);
+
+void set_instruction_operand_fields(Dinstruction *decoded, size_t op_size);

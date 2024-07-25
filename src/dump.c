@@ -1,6 +1,6 @@
 #include "headers/dump.h"
 /*
- * Dumps all needed information about instruction
+ * dumps all needed information about instruction
  */
 void dump(Dinstruction *decoded) {
   printf("========================================\n");
@@ -43,6 +43,9 @@ void dump(Dinstruction *decoded) {
   printf("========================================\n\n");
 }
 
+/*
+ * prints to stdout 
+ */
 void print_instruction(Dinstruction *decoded) {
   if (decoded->operand_capacity == 0)
     printf("%s\n", decoded->mnemonic.str);

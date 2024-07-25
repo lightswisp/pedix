@@ -1,5 +1,8 @@
 #include "headers/iutils.h"
 
+/*
+ * check if instruction has any prefixes
+ */
 bool instr_has_prefix(uchar8_t opcode) {
   switch (opcode) {
   case PREFIX_LOCK:
@@ -20,6 +23,9 @@ bool instr_has_prefix(uchar8_t opcode) {
   }
 }
 
+/*
+ * check if instruction has vex
+ */
 bool instr_has_vex(uchar8_t opcode) {
   switch (opcode) {
   case 0xC5:
@@ -30,15 +36,18 @@ bool instr_has_vex(uchar8_t opcode) {
   }
 }
 
+/*
+ * check if instruction has rex
+ */
 bool instr_has_rex(uchar8_t opcode) {
-  // REX prefixes are a set of 16 opcodes that span one row of the opcode map
-  // and occupy entries 40H to 4FH. These opcodes represent valid instructions
-  // (INC or DEC) in IA-32 operating modes and in compatibility mode. In 64-bit
-  // mode, the same opcodes represent the instruction prefix REX and are not
-  // treated as individual instructions. The single-byte-opcode forms of the
-  // INC/DEC instructions are not available in 64-bit mode. INC/DEC
-  // functionality is still available using ModR/M forms of the same
-  // instructions (opcodes FF/0 and FF/1).
+  // rex prefixes are a set of 16 opcodes that span one row of the opcode map
+  // and occupy entries 40h to 4fh. these opcodes represent valid instructions
+  // (inc or dec) in ia-32 operating modes and in compatibility mode. in 64-bit
+  // mode, the same opcodes represent the instruction prefix rex and are not
+  // treated as individual instructions. the single-byte-opcode forms of the
+  // inc/dec instructions are not available in 64-bit mode. inc/dec
+  // functionality is still available using modr/m forms of the same
+  // instructions (opcodes ff/0 and ff/1).
   switch (opcode) {
   case 0x40:
   case 0x41:
@@ -62,6 +71,9 @@ bool instr_has_rex(uchar8_t opcode) {
   }
 }
 
+/*
+ * check if instruction has modrm byte
+ */
 bool instr_modrm(Dinstruction *decoded) {
   if (HAS_STATUS(decoded->status, STATUS_EXTENDED)) {
     switch (decoded->op1) {
@@ -336,6 +348,9 @@ bool instr_modrm(Dinstruction *decoded) {
   }
 }
 
+/*
+ * check if instruction is "other"
+ */
 bool instr_other(Dinstruction *decoded) {
   if (HAS_STATUS(decoded->status, STATUS_EXTENDED)) {
     switch (decoded->op1) {
@@ -450,6 +465,9 @@ bool instr_other(Dinstruction *decoded) {
   }
 }
 
+/* 
+ * check if instruction has zero/one operand
+ */
 bool instr_zero(Dinstruction *decoded) {
   if (HAS_STATUS(decoded->status, STATUS_EXTENDED)) {
     switch (decoded->op1) {
@@ -589,6 +607,9 @@ bool instr_zero(Dinstruction *decoded) {
   }
 }
 
+/*
+ * check if instruction has secondary opcode
+ */
 bool instr_has_secondary_opcode(uchar8_t opcode) {
   switch (opcode) {
   case 0x38:
@@ -598,9 +619,12 @@ bool instr_has_secondary_opcode(uchar8_t opcode) {
   return false;
 }
 
+/*
+ * check if instruction has opcode extension
+ */
 bool instr_has_opcode_extension(Dinstruction *decoded) {
-  // Table A-6. Opcode Extensions for One- and Two-byte Opcodes by Group Number
-  //  VEX.0F38 F3 todo
+  // table a-6. opcode extensions for one- and two-byte opcodes by group number
+  //  vex.0f38 f3 todo
   if (HAS_STATUS(decoded->status, STATUS_EXTENDED)) {
     switch (decoded->op1) {
     case 0x00:
@@ -642,9 +666,12 @@ bool instr_has_opcode_extension(Dinstruction *decoded) {
   }
 }
 
+/*
+ * check if instruction has valid extension
+ */
 bool instr_has_valid_extension(Dinstruction *decoded) {
-  // Table A-6. Opcode Extensions for One- and Two-byte Opcodes by Group Number
-  // TODO: add validation by  prefix
+  // table a-6. opcode extensions for one- and two-byte opcodes by group number
+  // todo: add validation by  prefix
   // check for  decoded->prefixes[0] in both  cases (extended and not)
   if (HAS_STATUS(decoded->status, STATUS_EXTENDED)) {
     switch (decoded->op1) {
@@ -779,6 +806,9 @@ bool instr_has_valid_extension(Dinstruction *decoded) {
   return false;
 }
 
+/* 
+ * check if instruction has extended opcode
+ */
 bool instr_has_extended_opcode(uchar8_t opcode) {
   // it means that the instruction size is at least 2 bytes long
   if (opcode == 0x0F)
@@ -786,6 +816,9 @@ bool instr_has_extended_opcode(uchar8_t opcode) {
   return false;
 }
 
+/*
+ * check if instruction has immediate operand
+ */
 bool instr_has_immediate_operand(Dinstruction *decoded) {
   if (HAS_STATUS(decoded->status, STATUS_EXTENDED)) {
     switch (decoded->op1) {
@@ -895,6 +928,9 @@ bool instr_has_immediate_operand(Dinstruction *decoded) {
   }
 }
 
+/*
+ * check if instruction has relative offset operand
+ */
 bool instr_has_rel_offset_operand(Dinstruction *decoded) {
   // relative address jumps
   if (HAS_STATUS(decoded->status, STATUS_EXTENDED)) {
@@ -952,6 +988,9 @@ bool instr_has_rel_offset_operand(Dinstruction *decoded) {
   return false;
 }
 
+/*
+ * check if instruction has direct addr operand
+ */
 bool instr_has_direct_addr_operand(Dinstruction *decoded) {
   // absolute address jump/call
   switch (decoded->op1) {
@@ -966,11 +1005,11 @@ bool instr_has_direct_addr_operand(Dinstruction *decoded) {
 size_t get_vex_size(uchar8_t vex_byte) {
   switch (vex_byte) {
   case 0xC5:
-    return WORD_SZ;
+    return WORD_LEN;
   case 0xC4:
-    return THREE_BYTE_SZ;
+    return THREE_BYTE_LEN;
   case 0x8F:
-    return THREE_BYTE_SZ;
+    return THREE_BYTE_LEN;
   }
   return 0;
 }
@@ -979,51 +1018,51 @@ size_t get_opcode_extension_operand_size(Dinstruction *decoded) {
   switch (decoded->op1) {
   case 0xF6:
     if (decoded->modrm.reg == 0x00) {
-      return BYTE_SZ;
+      return BYTE_LEN;
     }
   case 0xF7:
     if (decoded->modrm.reg == 0x00) {
-      return DOUBLEWORD_SZ;
+      return DOUBLEWORD_LEN;
     }
   }
   return 0x00;
 }
 
 size_t get_modrm_size(Dinstruction *decoded, uchar8_t *i_ptr) {
-  size_t modrm_size = 0;
-  modrm_size += BYTE_SZ; // mod/rm byte
+  /* modrm byte */
+  size_t modrm_size = BYTE_LEN;
 
   switch (decoded->modrm.mod) {
   case 0:
     switch (decoded->modrm.rm) {
     case 4:
-      // SIB MODE
-      modrm_size += BYTE_SZ; // 1 sib byte follows mod/rm field  (SIB with no
+      // sib mode
+      modrm_size += BYTE_LEN; // 1 sib byte follows mod/rm field  (sib with no
                              // displacement)
       uint8_t base = *(i_ptr + 1) & 7;
       if (base == 5) {
         modrm_size +=
-            DOUBLEWORD_SZ; // displacement follows SIB byte if base field is 5
+            DOUBLEWORD_LEN; // displacement follows sib byte if base field is 5
       }
       break;
     case 5:
       modrm_size +=
-          DOUBLEWORD_SZ; // 4 byte displacement field follows mod/rm field
-      // 32-bit Displacement-Only Mode
+          DOUBLEWORD_LEN; // 4 byte displacement field follows mod/rm field
+      // 32-bit displacement-only mode
       break;
     }
     break;
   case 1:
-    if (decoded->modrm.rm == 4) // SIB MODE
-      modrm_size += BYTE_SZ;
+    if (decoded->modrm.rm == 4) // sib mode
+      modrm_size += BYTE_LEN;
 
-    modrm_size += BYTE_SZ; // one byte signed displacement (disp8)
+    modrm_size += BYTE_LEN; // one byte signed displacement (disp8)
     break;
   case 2:
-    if (decoded->modrm.rm == 4) // SIB MODE
-      modrm_size += BYTE_SZ;
+    if (decoded->modrm.rm == 4) // sib mode
+      modrm_size += BYTE_LEN;
 
-    modrm_size += DOUBLEWORD_SZ; // four byte signed displacement (disp32)
+    modrm_size += DOUBLEWORD_LEN; // four byte signed displacement (disp32)
     break;
   case 3:
     // register addressing mode
@@ -1039,6 +1078,27 @@ size_t get_modrm_size(Dinstruction *decoded, uchar8_t *i_ptr) {
   }
 
   return modrm_size;
+}
+
+/*
+ * sets instruction operand fields according to status
+ */
+void set_instruction_operand_fields(Dinstruction *decoded, size_t op_size) {
+  uint64_t *field;
+  uint64_t temp;
+
+  if (HAS_STATUS(decoded->status, STATUS_IMMEDIATE_OPERAND))
+    field = &decoded->imm;
+  else if (HAS_STATUS(decoded->status, STATUS_REL_OFFSET_OPERAND))
+    field = &decoded->rel;
+  else if (HAS_STATUS(decoded->status, STATUS_DIRECT_ADDR_OPERAND))
+    field = &decoded->dir;
+
+  for (size_t i = 0; i < op_size; i++) {
+    temp = decoded->buffer.bytes[decoded->buffer.size - op_size + i];
+    temp = temp << (0x08 * i);
+    *field += temp;
+  }
 }
 
 size_t get_operand_capacity32(Dinstruction *decoded) {
@@ -1169,7 +1229,7 @@ size_t get_operand_size32(Dinstruction *decoded) {
       case 0x61:
       case 0x62:
       case 0x63:
-        return BYTE_SZ;
+        return BYTE_LEN;
       }
     case 0x20:
     case 0x21:
@@ -1189,7 +1249,7 @@ size_t get_operand_size32(Dinstruction *decoded) {
     case 0xC4:
     case 0xC5:
     case 0xC6:
-      return BYTE_SZ;
+      return BYTE_LEN;
     case 0x80:
     case 0x81:
     case 0x82:
@@ -1206,7 +1266,7 @@ size_t get_operand_size32(Dinstruction *decoded) {
     case 0x8D:
     case 0x8E:
     case 0x8F:
-      return DOUBLEWORD_SZ;
+      return DOUBLEWORD_LEN;
     }
   } else {
     switch (decoded->op1) {
@@ -1267,11 +1327,11 @@ size_t get_operand_size32(Dinstruction *decoded) {
     case 0xE1:
     case 0xE2:
     case 0xE3:
-      return BYTE_SZ;
+      return BYTE_LEN;
 
     case 0xC2:
     case 0xCA:
-      return WORD_SZ;
+      return WORD_LEN;
 
     case 0x05:
     case 0x0D:
@@ -1301,14 +1361,14 @@ size_t get_operand_size32(Dinstruction *decoded) {
     case 0xE8:
     case 0xE9:
 
-      return DOUBLEWORD_SZ;
+      return DOUBLEWORD_LEN;
 
     case 0xC8:
-      return (WORD_SZ + BYTE_SZ); // ENTER Iw Ib => Word + Byte = 3
+      return (WORD_LEN + BYTE_LEN); // enter iw ib => word + byte = 3
 
     case 0x9A:
     case 0xEA:
-      return (HAS_STATUS(decoded->status, STATUS_OPSIZE_OVERRIDE) ? DOUBLEWORD_SZ : ADDR_48_SZ);
+      return (HAS_STATUS(decoded->status, STATUS_OPSIZE_OVERRIDE) ? DOUBLEWORD_LEN : ADDR_48_LEN);
     }
   }
   return 0;
@@ -1325,7 +1385,7 @@ size_t get_operand_size64(Dinstruction *decoded) {
     case 0xBD:
     case 0xBE:
     case 0xBF:
-      return QUADWORD_SZ;
+      return QUADWORD_LEN;
     }
   }
   if (HAS_STATUS(decoded->status, STATUS_EXTENDED)) {
@@ -1352,7 +1412,7 @@ size_t get_operand_size64(Dinstruction *decoded) {
       case 0x61:
       case 0x62:
       case 0x63:
-        return BYTE_SZ;
+        return BYTE_LEN;
       }
     case 0x20:
     case 0x21:
@@ -1372,7 +1432,7 @@ size_t get_operand_size64(Dinstruction *decoded) {
     case 0xC4:
     case 0xC5:
     case 0xC6:
-      return BYTE_SZ;
+      return BYTE_LEN;
     case 0x80:
     case 0x81:
     case 0x82:
@@ -1389,7 +1449,7 @@ size_t get_operand_size64(Dinstruction *decoded) {
     case 0x8D:
     case 0x8E:
     case 0x8F:
-      return DOUBLEWORD_SZ;
+      return DOUBLEWORD_LEN;
     default:
       return 0;
     }
@@ -1452,11 +1512,11 @@ size_t get_operand_size64(Dinstruction *decoded) {
   case 0xE1:
   case 0xE2:
   case 0xE3:
-    return BYTE_SZ;
+    return BYTE_LEN;
 
   case 0xC2:
   case 0xCA:
-    return WORD_SZ;
+    return WORD_LEN;
 
   case 0x05:
   case 0x0D:
@@ -1481,20 +1541,20 @@ size_t get_operand_size64(Dinstruction *decoded) {
   case 0xBD:
   case 0xBE:
   case 0xBF:
-    return DOUBLEWORD_SZ;
+    return DOUBLEWORD_LEN;
 
   case 0xC8:
-    return (WORD_SZ + BYTE_SZ); // ENTER Iw Ib => Word + Byte = 3
+    return (WORD_LEN + BYTE_LEN); // enter iw ib => word + byte = 3
 
   case 0x9A:
   case 0xEA:
-    return ADDR_48_SZ;
+    return ADDR_48_LEN;
 
   case 0xA0:
   case 0xA1:
   case 0xA2:
   case 0xA3:
-    return QUADWORD_SZ;
+    return QUADWORD_LEN;
 
   default:
     return 0;

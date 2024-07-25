@@ -3,7 +3,7 @@
 #include <string.h>
 
 /*
- * Initializes the struct
+ * initializes the struct
  */
 Dinstruction *init_instruction() {
   Dinstruction *decoded = (Dinstruction *)calloc(1, sizeof(Dinstruction));
@@ -11,7 +11,7 @@ Dinstruction *init_instruction() {
 }
 
 /*
- * Zeroes the struct, but preserves the mode
+ * zeroes the struct, but preserves the mode
  */
 void zero_instruction(Dinstruction *decoded) {
   // save the mode in order to restore it after zeroing the struct
@@ -21,36 +21,16 @@ void zero_instruction(Dinstruction *decoded) {
 }
 
 /*
- * Frees the struct
+ * frees the struct
  */
 void free_instrucion(Dinstruction *decoded) { free(decoded); }
 
 /*
- * Sets instruction operands according to status
- */
-void set_instruction_operand(Dinstruction *decoded, size_t op_size) {
-  uint64_t *field;
-  if (HAS_STATUS(decoded->status, STATUS_IMMEDIATE_OPERAND))
-    field = &decoded->imm;
-  else if (HAS_STATUS(decoded->status, STATUS_REL_OFFSET_OPERAND))
-    field = &decoded->rel;
-  else if (HAS_STATUS(decoded->status, STATUS_DIRECT_ADDR_OPERAND))
-    field = &decoded->dir;
-
-  for (size_t i = 0; i < op_size; i++) {
-    uint64_t temp =
-        decoded->buffer.bytes[decoded->buffer.size - op_size + i];
-    temp = temp << (0x08 * i);
-    *field += temp;
-  }
-}
-
-/*
- * Decodes 32-bit instruction
+ * decodes 32-bit instruction
  */
 bool decode32(Dinstruction *decoded, uchar8_t *instruction) {
-  // TODO: ADD VALID PREFIX CHECK
-  // EX: 66 0f 74 04 00 -> IS A VALID INSTRUCTION, WHILE f3 0f 74 04 00 IS NOT
+  // todo: add valid prefix check
+  // ex: 66 0f 74 04 00 -> is a valid instruction, while f3 0f 74 04 00 is not
 
   // https://sparksandflames.com/files/x86InstructionChart.html
   uchar8_t *i_ptr = instruction;
@@ -60,8 +40,8 @@ bool decode32(Dinstruction *decoded, uchar8_t *instruction) {
       decoded->status |= STATUS_OPSIZE_OVERRIDE;
 
     decoded->prefixes.prefix[decoded->prefixes.size] = *i_ptr;
-    memcpy(decoded->buffer.bytes + decoded->buffer.size, i_ptr, BYTE_SZ);
-    decoded->buffer.size += BYTE_SZ;
+    memcpy(decoded->buffer.bytes + decoded->buffer.size, i_ptr, BYTE_LEN);
+    decoded->buffer.size += BYTE_LEN;
     decoded->prefixes.size = decoded->buffer.size;
     i_ptr++;
   }
@@ -74,20 +54,20 @@ bool decode32(Dinstruction *decoded, uchar8_t *instruction) {
   if (instr_has_extended_opcode(*i_ptr)) {
     // 0x0f (two byte opcode is gonna be decoded here)
     decoded->status |= STATUS_EXTENDED;
-    memcpy(decoded->buffer.bytes + decoded->buffer.size, i_ptr, BYTE_SZ);
-    decoded->buffer.size += BYTE_SZ;
+    memcpy(decoded->buffer.bytes + decoded->buffer.size, i_ptr, BYTE_LEN);
+    decoded->buffer.size += BYTE_LEN;
     i_ptr++;
 
     if (instr_has_secondary_opcode(*i_ptr)) {
       // if it has secondary opcode
       decoded->op1 = *i_ptr;
-      memcpy(decoded->buffer.bytes + decoded->buffer.size, i_ptr, BYTE_SZ);
-      decoded->buffer.size += BYTE_SZ;
+      memcpy(decoded->buffer.bytes + decoded->buffer.size, i_ptr, BYTE_LEN);
+      decoded->buffer.size += BYTE_LEN;
 
       i_ptr++;
       decoded->op2 = *i_ptr;
-      memcpy(decoded->buffer.bytes + decoded->buffer.size, i_ptr, BYTE_SZ);
-      decoded->buffer.size += BYTE_SZ;
+      memcpy(decoded->buffer.bytes + decoded->buffer.size, i_ptr, BYTE_LEN);
+      decoded->buffer.size += BYTE_LEN;
 
       i_ptr++;
       decoded->instr_type = INSTR_MODRM;
@@ -109,8 +89,8 @@ bool decode32(Dinstruction *decoded, uchar8_t *instruction) {
       // sgdt, sidt, lgdt, lidt, smsw, lmsw and invlpg instructions. да похуй
       // уже?
       switch (*i_ptr) {
-      // VMCALL, VMLAUNCH, VMRESUME, VMXOFF, MONITOR, MWAIT, XGETBV, XSETBV and
-      // RDTSCP
+      // vmcall, vmlaunch, vmresume, vmxoff, monitor, mwait, xgetbv, xsetbv and
+      // rdtscp
       case 0xC1:
       case 0xC2:
       case 0xC3:
@@ -121,8 +101,8 @@ bool decode32(Dinstruction *decoded, uchar8_t *instruction) {
       case 0xD1:
       case 0xF9:
         decoded->op2 = *i_ptr;
-        memcpy(decoded->buffer.bytes + decoded->buffer.size, i_ptr, WORD_SZ);
-        decoded->buffer.size += WORD_SZ;
+        memcpy(decoded->buffer.bytes + decoded->buffer.size, i_ptr, WORD_LEN);
+        decoded->buffer.size += WORD_LEN;
         decoded->operand_capacity = get_operand_capacity32(decoded);
         return true;
       default:
@@ -130,13 +110,14 @@ bool decode32(Dinstruction *decoded, uchar8_t *instruction) {
       }
     } else {
       decoded->op1 = *i_ptr;
-      memcpy(decoded->buffer.bytes + decoded->buffer.size, i_ptr, BYTE_SZ);
-      decoded->buffer.size += BYTE_SZ;
+      memcpy(decoded->buffer.bytes + decoded->buffer.size, i_ptr, BYTE_LEN);
+      decoded->buffer.size += BYTE_LEN;
 
       if (instr_zero(decoded)) {
         decoded->instr_type = INSTR_ZERO;
         decoded->operand_capacity = get_operand_capacity32(decoded);
-        return true; // if no other bytes are coming after
+        // if no other bytes are coming after
+        return true; 
       }
 
       if (instr_other(decoded)) {
@@ -159,7 +140,7 @@ bool decode32(Dinstruction *decoded, uchar8_t *instruction) {
         else
           return false;
 
-        set_instruction_operand(decoded, op_size);
+        set_instruction_operand_fields(decoded, op_size);
         return true;
       }
 
@@ -188,16 +169,18 @@ bool decode32(Dinstruction *decoded, uchar8_t *instruction) {
 
       return false;
     }
-  } else { // one byte opcode is gonna be here
+  } else { 
+    // one byte opcode is gonna be here
 
     decoded->op1 = *i_ptr;
-    memcpy(decoded->buffer.bytes + decoded->buffer.size, i_ptr, BYTE_SZ);
-    decoded->buffer.size += BYTE_SZ;
+    memcpy(decoded->buffer.bytes + decoded->buffer.size, i_ptr, BYTE_LEN);
+    decoded->buffer.size += BYTE_LEN;
 
     if (instr_zero(decoded)) {
       decoded->instr_type = INSTR_ZERO;
       decoded->operand_capacity = get_operand_capacity32(decoded);
-      return true; // if no other bytes are coming after
+      // if no other bytes are coming after
+      return true; 
     }
 
     if (instr_other(decoded)) {
@@ -221,7 +204,7 @@ bool decode32(Dinstruction *decoded, uchar8_t *instruction) {
       else
         return false;
 
-      set_instruction_operand(decoded, op_size);
+      set_instruction_operand_fields(decoded, op_size);
       return true;
     }
 
@@ -253,12 +236,12 @@ bool decode32(Dinstruction *decoded, uchar8_t *instruction) {
 }
 
 /*
- * Decodes 64-bit instruction
+ * decodes 64-bit instruction
  */
 bool decode64(Dinstruction *decoded, uchar8_t *instruction) {
-  //     In 64-bit mode, instruction formats do not change. Bits needed to
+  //     in 64-bit mode, instruction formats do not change. bits needed to
   //     define fields in the 64-bit context are provided by the
-  // addition of REX prefixes.
+  // addition of rex prefixes.
   uchar8_t *i_ptr = instruction;
 
   while (instr_has_prefix(*i_ptr)) {
@@ -267,16 +250,16 @@ bool decode64(Dinstruction *decoded, uchar8_t *instruction) {
       decoded->status |= STATUS_OPSIZE_OVERRIDE;
 
     decoded->prefixes.prefix[decoded->prefixes.size] = *i_ptr;
-    memcpy(decoded->buffer.bytes + decoded->buffer.size, i_ptr, BYTE_SZ);
-    decoded->buffer.size += BYTE_SZ;
+    memcpy(decoded->buffer.bytes + decoded->buffer.size, i_ptr, BYTE_LEN);
+    decoded->buffer.size += BYTE_LEN;
     decoded->prefixes.size = decoded->buffer.size;
     i_ptr++;
   }
 
   if (instr_has_rex(*i_ptr)) {
     decoded->status |= STATUS_REX;
-    memcpy(decoded->buffer.bytes + decoded->buffer.size, i_ptr, BYTE_SZ);
-    decoded->buffer.size += BYTE_SZ;
+    memcpy(decoded->buffer.bytes + decoded->buffer.size, i_ptr, BYTE_LEN);
+    decoded->buffer.size += BYTE_LEN;
     decoded->rex.field = *i_ptr;
     decoded->rex.w = (decoded->rex.field & 0x08) >> 3;
     decoded->rex.r = (decoded->rex.field & 0x04) >> 2;
@@ -288,19 +271,19 @@ bool decode64(Dinstruction *decoded, uchar8_t *instruction) {
   if (instr_has_extended_opcode(*i_ptr)) {
     // 0x0f (two byte opcode is gonna be decoded here)
     decoded->status |= STATUS_EXTENDED;
-    memcpy(decoded->buffer.bytes + decoded->buffer.size, i_ptr, BYTE_SZ);
-    decoded->buffer.size += BYTE_SZ;
+    memcpy(decoded->buffer.bytes + decoded->buffer.size, i_ptr, BYTE_LEN);
+    decoded->buffer.size += BYTE_LEN;
     i_ptr++;
     if (instr_has_secondary_opcode(*i_ptr)) {
       // if it has secondary opcode
       decoded->op1 = *i_ptr;
-      memcpy(decoded->buffer.bytes + decoded->buffer.size, i_ptr, BYTE_SZ);
-      decoded->buffer.size += BYTE_SZ;
+      memcpy(decoded->buffer.bytes + decoded->buffer.size, i_ptr, BYTE_LEN);
+      decoded->buffer.size += BYTE_LEN;
 
       i_ptr++;
       decoded->op2 = *i_ptr;
-      memcpy(decoded->buffer.bytes + decoded->buffer.size, i_ptr, BYTE_SZ);
-      decoded->buffer.size += BYTE_SZ;
+      memcpy(decoded->buffer.bytes + decoded->buffer.size, i_ptr, BYTE_LEN);
+      decoded->buffer.size += BYTE_LEN;
 
       i_ptr++;
       decoded->instr_type = INSTR_MODRM;
@@ -329,8 +312,8 @@ bool decode64(Dinstruction *decoded, uchar8_t *instruction) {
       case 0xD1:
       case 0xF9:
         decoded->op2 = *i_ptr;
-        memcpy(decoded->buffer.bytes + decoded->buffer.size, i_ptr, WORD_SZ);
-        decoded->buffer.size += WORD_SZ;
+        memcpy(decoded->buffer.bytes + decoded->buffer.size, i_ptr, WORD_LEN);
+        decoded->buffer.size += WORD_LEN;
         decoded->operand_capacity = get_operand_capacity64(decoded);
         return true;
       default:
@@ -338,13 +321,14 @@ bool decode64(Dinstruction *decoded, uchar8_t *instruction) {
       }
     } else {
       decoded->op1 = *i_ptr;
-      memcpy(decoded->buffer.bytes + decoded->buffer.size, i_ptr, BYTE_SZ);
-      decoded->buffer.size += BYTE_SZ;
+      memcpy(decoded->buffer.bytes + decoded->buffer.size, i_ptr, BYTE_LEN);
+      decoded->buffer.size += BYTE_LEN;
 
       if (instr_zero(decoded)) {
         decoded->instr_type = INSTR_ZERO;
         decoded->operand_capacity = get_operand_capacity64(decoded);
-        return true; // if no other bytes are coming after
+        // if no other bytes are coming after
+        return true;
       }
 
       if (instr_other(decoded)) {
@@ -395,13 +379,14 @@ bool decode64(Dinstruction *decoded, uchar8_t *instruction) {
   }
 
   decoded->op1 = *i_ptr;
-  memcpy(decoded->buffer.bytes + decoded->buffer.size, i_ptr, BYTE_SZ);
-  decoded->buffer.size += BYTE_SZ;
+  memcpy(decoded->buffer.bytes + decoded->buffer.size, i_ptr, BYTE_LEN);
+  decoded->buffer.size += BYTE_LEN;
 
   if (instr_zero(decoded)) {
     decoded->instr_type = INSTR_ZERO;
     decoded->operand_capacity = get_operand_capacity64(decoded);
-    return true; // if no other bytes are coming after
+    // if no other bytes are coming after
+    return true;
   }
 
   if (instr_other(decoded)) {

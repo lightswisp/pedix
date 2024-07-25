@@ -5,9 +5,9 @@
 #include <stdint.h>
 #include <stdlib.h>
 
-typedef unsigned char uchar8_t;
-
 #define HAS_STATUS(s, x) ((s & x) > 0)
+
+/* instruction bit flags */ 
 typedef enum {
   STATUS_VEX = 1 << 0,
   STATUS_REX = 1 << 1,
@@ -62,33 +62,52 @@ typedef struct {
 } Operand;
 
 typedef struct {
-  Status status;           // instruction status
-  Buffer buffer;           // instruction raw bytes
-  Mnemonic mnemonic;       // mnemonic
-  Operand operands;        // operands
-  uint8_t mode;            // 32-bit or 64-bit
-  uint8_t instr_type;      // zero/other/modrm
-  size_t operand_capacity; // amount of operands per instruction
+  /* instruction status */
+  Status status;         
+  /* instruction raw bytes */
+  Buffer buffer;           
+  /* mnemonic */
+  Mnemonic mnemonic;       
+  /* operands */
+  Operand operands;        
+  /* 32-bit or 64-bit */
+  uint8_t mode;            
+  /* zero/other/modrm */
+  uint8_t instr_type;  
+  /* amount of operands per instruction */
+  size_t operand_capacity;
 
-  Prefix prefixes; // prefixes
-  Rex rex;         // rex field
-  uchar8_t op1;    // op1 is the primary opcode
-  uchar8_t op2;    // op2 is the secondary opcode
-  Modrm modrm;     // modrm field
-  Sib sib;         // sib field
-  uint64_t disp;   // disp field
-  uint64_t imm;    // immediate operand
-  uint64_t rel;    // relative addr operand
-  uint64_t dir;    // direct addr operand
+  /* prefixes */
+  Prefix prefixes; 
+  /* rex field */
+  Rex rex;         
+  /* op1 is the primary opcode */
+  uchar8_t op1;    
+  /* op2 is the secondary opcode */
+  uchar8_t op2;    
+  /* modrm field */
+  Modrm modrm;    
+  /* sib field */
+  Sib sib;      
+  /* displacement field */
+  uint64_t disp;   
+  /* immediate operand field */
+  uint64_t imm;    
+  /* relative address operand field */
+  uint64_t rel;    
+  /* direct address operand field */
+  uint64_t dir;    
 } Dinstruction;
 
-Dinstruction *init_instruction();             // allocates memory for the struct
-void free_instrucion(Dinstruction *decoded);  // frees the memory
-void zero_instruction(Dinstruction *decoded); // zeroes the struct
-void set_instruction_operand(Dinstruction *decoded, size_t op_size);
-bool decode(Dinstruction *decoded,
-            uchar8_t *instruction); // general decode func
-bool decode32(Dinstruction *decoded,
-              uchar8_t *instruction); // 32bit specific
-bool decode64(Dinstruction *decoded,
-              uchar8_t *instruction); // 64bit specific
+/* allocates memory for the struct */
+Dinstruction *init_instruction();
+/* frees the memory */
+void free_instrucion(Dinstruction *decoded);  
+/* zeroes the struct */
+void zero_instruction(Dinstruction *decoded); 
+/* general decode func */
+bool decode(Dinstruction *decoded, uchar8_t *instruction);
+/* 32-bit specific */
+bool decode32(Dinstruction *decoded, uchar8_t *instruction);
+/* 64-bit specific */
+bool decode64(Dinstruction *decoded, uchar8_t *instruction);

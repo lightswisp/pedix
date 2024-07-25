@@ -3,7 +3,7 @@
 #include <string.h>
 
 /*
- * Sets decoded->mnemonic.str field
+ * sets decoded->mnemonic.str field
  */
 bool set_mnemonic32(Dinstruction *decoded, uchar8_t instruction) {
   if (HAS_STATUS(decoded->status, STATUS_EXTENDED)) {
@@ -14,7 +14,7 @@ bool set_mnemonic32(Dinstruction *decoded, uchar8_t instruction) {
         switch (decoded->prefixes.prefix[0]) {
         case 0x66:
           // handle extended with
-          // extension + mod 11B and 0x66
+          // extension + mod 11b and 0x66
           // prefix
           char *m_66 = extd_ext_11b_66[instruction][decoded->modrm.reg];
           size_t m_len = strlen(m_66);
@@ -22,7 +22,7 @@ bool set_mnemonic32(Dinstruction *decoded, uchar8_t instruction) {
           return true;
         case 0xF3:
           // handle extended with
-          // extension + mod 11B and 0xF3
+          // extension + mod 11b and 0xf3
           // prefix
           char *m_f3 = extd_ext_11b_f3[instruction][decoded->modrm.reg];
           memcpy(decoded->mnemonic.str, m_f3, strlen(m_f3));
@@ -52,7 +52,7 @@ bool set_mnemonic32(Dinstruction *decoded, uchar8_t instruction) {
           return true;
         case 0xF3:
           // handle extended with
-          // extension + mod mem and 0xF3
+          // extension + mod mem and 0xf3
           // prefix
           char *m_f3 = extd_ext_mem_f3[instruction][decoded->modrm.reg];
           memcpy(decoded->mnemonic.str, m_f3, strlen(m_f3));
@@ -73,7 +73,7 @@ bool set_mnemonic32(Dinstruction *decoded, uchar8_t instruction) {
     }
   } else {
     if (HAS_STATUS(decoded->status, STATUS_OPCODE_EXTENSION)) {
-      printf("regular! but with extension\n");
+      puts("regular! but with extension");
       // has extension (regular_opcode_with_extensions_table)
       if (decoded->modrm.mod == 0x03) { // register addressing
         char *m = reg_ext_11b[instruction][decoded->modrm.reg];
@@ -87,7 +87,7 @@ bool set_mnemonic32(Dinstruction *decoded, uchar8_t instruction) {
 
     } else {
       // regular opcode (regular_opcode_table)
-      printf("regular!\n");
+      puts("regular!");
       char *m = reg[instruction];
       size_t m_len = strlen(m);
       memcpy(decoded->mnemonic.str, m, m_len);

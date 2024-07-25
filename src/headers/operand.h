@@ -1,14 +1,14 @@
 #include "decoder.h"
 
-/* Ib or imm8 */
+/* ib or imm8 */
 #define OPERAND_BYTE "0x%02x"
-/* Iw Ic Iv or imm16 */
+/* iw ic iv or imm16 */
 #define OPERAND_WORD "0x%04x"
-/* Iv Id or imm32 */
+/* iv id or imm32 */
 #define OPERAND_DWORD "0x%08x"
-/* Ap 32/48 bit pointer */
+/* ap 32/48 bit pointer */
 #define OPERAND_48 "0x%lx"
-/* When register addressing (mod field = 3) */
+/* when register addressing (mod field = 3) */
 #define REG_TO_REG "%s,%s"
 
 bool set_operands(Dinstruction *decoded, uchar8_t instruction);
@@ -26,7 +26,7 @@ static char *modrm_reg32[] = {"eax", "ecx", "edx", "ebx",
 static char *modrm_reg64[] = {"rax", "rcx", "rdx", "rbx",
                               "rsp", "rbp", "rsi", "rdi"};
 
-/* INSTR_ZERO with 32-bit operands map */ 
+/* instr_zero with 32-bit operands map */ 
 static char *z_instr_op32[] = {[0x06] = "es",
                                [0x07] = "es",
                                [0x0e] = "cs",
@@ -131,7 +131,7 @@ static char *z_instr_op32[] = {[0x06] = "es",
                                [0xfc] = "",
                                [0xfd] = ""};
 
-/* INSTR_ZERO with 16-bit operands map */ 
+/* instr_zero with 16-bit operands map */ 
 static char *z_instr_op16[] = {[0x06] = "es",
                                [0x07] = "es",
                                [0x0e] = "cs",
@@ -236,7 +236,7 @@ static char *z_instr_op16[] = {[0x06] = "es",
                                [0xfc] = "",
                                [0xfd] = ""};
 
-/* INSTR_OTHER with 32-bit operands map */
+/* instr_other with 32-bit operands map */
 static char *o_instr_op32[] = {[0x04] = "al," OPERAND_BYTE,
                                [0x05] = "eax," OPERAND_DWORD,
                                [0x0c] = "al," OPERAND_BYTE,
@@ -312,7 +312,7 @@ static char *o_instr_op32[] = {[0x04] = "al," OPERAND_BYTE,
                                [0xeb] = OPERAND_BYTE};
 
 
-/* INSTR_OTHER with 16-bit operands map */
+/* instr_other with 16-bit operands map */
 static char *o_instr_op16[] = {[0x04] = "al," OPERAND_BYTE,
                                [0x05] = "ax," OPERAND_WORD,
                                [0x0c] = "al," OPERAND_BYTE,
