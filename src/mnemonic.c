@@ -1,3 +1,5 @@
+#define DEBUG
+
 #include "headers/mnemonic.h"
 #include <stdio.h>
 #include <string.h>
@@ -73,7 +75,9 @@ bool set_mnemonic32(Dinstruction *decoded, uchar8_t instruction) {
     }
   } else {
     if (HAS_STATUS(decoded->status, STATUS_OPCODE_EXTENSION)) {
+#ifdef DEBUG
       puts("regular! but with extension");
+#endif
       // has extension (regular_opcode_with_extensions_table)
       if (decoded->modrm.mod == 0x03) { // register addressing
         char *m = reg_ext_11b[instruction][decoded->modrm.reg];
@@ -87,7 +91,9 @@ bool set_mnemonic32(Dinstruction *decoded, uchar8_t instruction) {
 
     } else {
       // regular opcode (regular_opcode_table)
+#ifdef DEBUG
       puts("regular!");
+#endif
       char *m = reg[instruction];
       size_t m_len = strlen(m);
       memcpy(decoded->mnemonic.str, m, m_len);

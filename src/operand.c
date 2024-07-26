@@ -3,39 +3,77 @@
 #include <stdio.h>
 #include <string.h>
 
+#define GET_DIRECTION(d) ((d & 2) >> 1)
+#define GET_SIZE(s) (s & 1)
+
+#define REGISTER_ADDRESSING 3
+#define FOUR_BYTE_DISPLACEMENT 2
+#define ONE_BYTE_DISPLACEMENT 1
+#define SIB_OR_REGISTER_INDIRECT_ADDRESSING 0
+
 /*
  * set operand string
  */
 bool set_operands32(Dinstruction *decoded, uchar8_t instruction) {
+  // todo: add extended opcode check
   char *op;
+  char* modrm_fmt;
+  char *reg1, *reg2;
   size_t op_len;
+  uint8_t reg1_len, reg2_len;
   // d = 0 (adding from register to memory)
   // d = 1 (adding from memory to register)
-  uchar8_t d = (instruction & 2) >> 1;
+  uchar8_t d = GET_DIRECTION(instruction);
   // s = 0 (8-bit operands)
   // s = 1 (16 or 32-bit operands)
-  uchar8_t s = (instruction & 1);
+  uchar8_t s = GET_SIZE(instruction);
   switch (decoded->instr_type) {
   case INSTR_MODRM:
+
     switch (decoded->modrm.mod) {
-    case 0:
+    case SIB_OR_REGISTER_INDIRECT_ADDRESSING:
       // todo 
       break;
-    case 1:
+    case ONE_BYTE_DISPLACEMENT:
       // mod == 01 (disp8 mode)
-      if (decoded->modrm.rm == 4){
+      if (HAS_STATUS(decoded->status, STATUS_SIB)){
+        // todo
         // sib + disp8 mode
       }
       else{
-
+        if(s == 0){
+          // 8-bit operands
+          reg1 = modrm_reg8[decoded->modrm.reg];
+          reg2 = modrm_reg32[decoded->modrm.rm];
+          modrm_fmt = ONE_BYTE_DISP_OP_8_ADDRESSING;
+        } else if (HAS_STATUS(decoded->status, STATUS_OPSIZE_OVERRIDE)) {
+          // 16-bit operands
+          reg1 = modrm_reg8[decoded->modrm.reg];
+          reg2 = modrm_reg32[decoded->modrm.rm];
+          modrm_fmt = ONE_BYTE_DISP_OP_16_ADDRESSING;
+        } else {
+          // 32-bit operands
+          reg1 = modrm_reg32[decoded->modrm.reg];
+          reg2 = modrm_reg32[decoded->modrm.rm];
+          modrm_fmt = ONE_BYTE_DISP_OP_32_ADDRESSING;
+        }
+        reg1_len = strlen(reg1);
+        reg2_len = strlen(reg2);
+        char temp[50];
+        if (d == 0) {
+          sprintf(temp, modrm_fmt, reg2, decoded->displacement.field); 
+          sprintf(decoded->operands.str, REG_TO_MEM, temp, reg1);
+        } else {
+          sprintf(temp, modrm_fmt, reg2, decoded->displacement.field); 
+          sprintf(decoded->operands.str, MEM_TO_REG, reg1, temp);
+        }
       }
       break;
-    case 2:
+    case FOUR_BYTE_DISPLACEMENT:
       // todo
       break;
-    case 3:
+    case REGISTER_ADDRESSING:
       // mod == 11 (register addressing mode)
-      char *reg1, *reg2;
       if (s == 0) {
         // 8-bit operands
         reg1 = modrm_reg8[decoded->modrm.reg];
@@ -49,8 +87,8 @@ bool set_operands32(Dinstruction *decoded, uchar8_t instruction) {
         reg1 = modrm_reg32[decoded->modrm.reg];
         reg2 = modrm_reg32[decoded->modrm.rm];
       }
-      uint8_t reg1_len = strlen(reg1);
-      uint8_t reg2_len = strlen(reg2);
+      reg1_len = strlen(reg1);
+      reg2_len = strlen(reg2);
       if (d == 0) {
         sprintf(decoded->operands.str, REG_TO_REG, reg2, reg1);
       } else {
@@ -61,6 +99,7 @@ bool set_operands32(Dinstruction *decoded, uchar8_t instruction) {
     }
     break;
   case INSTR_ZERO:
+
     if (HAS_STATUS(decoded->status, STATUS_OPSIZE_OVERRIDE)) {
       // 16-bit
       op = z_instr_op16[instruction];
@@ -79,7 +118,7 @@ bool set_operands32(Dinstruction *decoded, uchar8_t instruction) {
       // 32-bit
       op = o_instr_op32[instruction];
     }
-    op_len = strlen(op);
+    //op_len = strlen(op);
     
     if(HAS_STATUS(decoded->status, STATUS_IMMEDIATE_OPERAND))
       sprintf(decoded->operands.str, op, decoded->imm);

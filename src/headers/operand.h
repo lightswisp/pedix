@@ -11,6 +11,14 @@
 /* when register addressing (mod field = 3) */
 #define REG_TO_REG "%s,%s"
 
+#define MEM_TO_REG "%s,%s"
+
+#define REG_TO_MEM "%s,%s" 
+
+#define ONE_BYTE_DISP_OP_8_ADDRESSING  "BYTE PTR [%s+0x%02x]"
+#define ONE_BYTE_DISP_OP_16_ADDRESSING "WORD PTR [%s+0x%02x]"
+#define ONE_BYTE_DISP_OP_32_ADDRESSING "DWORD PTR [%s+0x%02x]"
+
 bool set_operands(Dinstruction *decoded, uchar8_t instruction);
 bool set_operands32(Dinstruction *decoded, uchar8_t instruction);
 bool set_operands64(Dinstruction *decoded, uchar8_t instruction);
