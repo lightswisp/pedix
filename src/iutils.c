@@ -1028,80 +1028,79 @@ size_t get_opcode_extension_operand_size(Dinstruction *decoded) {
   return 0x00;
 }
 
-size_t get_modrm_size(Dinstruction *decoded, uchar8_t *i_ptr) {
-  /* modrm byte */
-  size_t modrm_size = BYTE_LEN;
+bool instr_has_sib(Dinstruction *decoded) {
+ /* |mod|rm|  
+  *  00 100 sib            mode                     
+  *  01 100 sib  +  disp8  mode
+  *  10 100 sib  +  disp32 mode
+  */
+  if  (decoded->modrm.rm  == 4 &&
+      (decoded->modrm.mod == 0 || decoded->modrm.mod == 1 ||
+       decoded->modrm.mod == 2))
+    return true;
+  return false;
+}
 
+bool instr_has_displacement(Dinstruction *decoded){
   switch (decoded->modrm.mod) {
   case 0:
-    switch (decoded->modrm.rm) {
-    case 4:
-      // sib mode
-      modrm_size += BYTE_LEN; // 1 sib byte follows mod/rm field  (sib with no
-                             // displacement)
-      uint8_t base = *(i_ptr + 1) & 7;
-      if (base == 5) {
-        modrm_size +=
-            DOUBLEWORD_LEN; // displacement follows sib byte if base field is 5
-      }
-      break;
-    case 5:
-      modrm_size +=
-          DOUBLEWORD_LEN; // 4 byte displacement field follows mod/rm field
-      // 32-bit displacement-only mode
-      break;
+    if (decoded->modrm.rm == 4) {
+      uint8_t base = decoded->sib.base & 0x07;
+      if (base == 5)
+        return true;
     }
+    else if (decoded->modrm.rm == 5)
+      return true;
     break;
   case 1:
-    if (decoded->modrm.rm == 4) // sib mode
-      modrm_size += BYTE_LEN;
+  case 2:
+    return true;
+  }
+  return false;
+}
 
-    modrm_size += BYTE_LEN; // one byte signed displacement (disp8)
+void set_sib(Dinstruction *decoded, uchar8_t *i_ptr){
+  decoded->sib.field = *i_ptr;
+  decoded->sib.size  = BYTE_LEN;
+  decoded->sib.scale = (decoded->sib.field & 0xC0) >> 6;
+  decoded->sib.index = (decoded->sib.field & 0x38) >> 3;
+  decoded->sib.base  = (decoded->sib.field & 0x07);
+}
+
+void set_displacement(Dinstruction *decoded){
+  size_t size;
+  switch (decoded->modrm.mod) {
+  case 0:
+    if (decoded->modrm.rm == 4) {
+      uint8_t base = decoded->sib.base & 0x07;
+      if (base == 5) {
+        size = DOUBLEWORD_LEN;
+        break;
+      }
+    } else if (decoded->modrm.rm == 5) {
+      size = DOUBLEWORD_LEN;
+      break;
+    }
+  case 1:
+    size = BYTE_LEN;
     break;
   case 2:
-    if (decoded->modrm.rm == 4) // sib mode
-      modrm_size += BYTE_LEN;
-
-    modrm_size += DOUBLEWORD_LEN; // four byte signed displacement (disp32)
-    break;
-  case 3:
-    // register addressing mode
+    size = DOUBLEWORD_LEN;
     break;
   }
 
-  if (instr_has_immediate_operand(decoded)) {
-    if (decoded->mode == 32) {
-      modrm_size += get_operand_size32(decoded);
-    } else {
-      modrm_size += get_operand_size64(decoded);
-    }
-  }
-
-  return modrm_size;
+  decoded->displacement.size = size;
 }
 
-/*
- * sets instruction operand fields according to status
- */
-void set_instruction_operand_fields(Dinstruction *decoded, size_t op_size) {
-  uint64_t *field;
-  uint64_t temp;
-
-  if (HAS_STATUS(decoded->status, STATUS_IMMEDIATE_OPERAND))
-    field = &decoded->imm;
-  else if (HAS_STATUS(decoded->status, STATUS_REL_OFFSET_OPERAND))
-    field = &decoded->rel;
-  else if (HAS_STATUS(decoded->status, STATUS_DIRECT_ADDR_OPERAND))
-    field = &decoded->dir;
-
-  for (size_t i = 0; i < op_size; i++) {
-    temp = decoded->buffer.bytes[decoded->buffer.size - op_size + i];
-    temp = temp << (0x08 * i);
-    *field += temp;
-  }
+void set_modrm(Dinstruction *decoded, uchar8_t *i_ptr) {
+  decoded->modrm.size = BYTE_LEN;
+  decoded->modrm.field = *i_ptr;
+  decoded->modrm.mod   = (decoded->modrm.field & 0xC0) >> 6;
+  decoded->modrm.reg   = (decoded->modrm.field & 0x38) >> 3;
+  decoded->modrm.rm    = (decoded->modrm.field & 0x07);
 }
 
-size_t get_operand_capacity32(Dinstruction *decoded) {
+void set_operand_capacity32(Dinstruction *decoded) {
   if (HAS_STATUS(decoded->status, STATUS_EXTENDED)) {
     // todo
     switch (decoded->instr_type) {}
@@ -1136,9 +1135,11 @@ size_t get_operand_capacity32(Dinstruction *decoded) {
       case 0xFB:
       case 0xFC:
       case 0xFD:
-        return 0;
+        decoded->operands.capacity = 0;
+        break;
       default:
-        return 1;
+        decoded->operands.capacity = 1;
+        break;
       }
     case INSTR_OTHER:
       switch (decoded->op1) {
@@ -1175,10 +1176,12 @@ size_t get_operand_capacity32(Dinstruction *decoded) {
       case 0xEA:
       case 0xEB:
         // jump/call/push
-        return 1;
+        decoded->operands.capacity = 1;
+        break;
       default:
         // all other
-        return 2;
+        decoded->operands.capacity = 2;
+        break;
       }
 
     case INSTR_MODRM:
@@ -1186,25 +1189,27 @@ size_t get_operand_capacity32(Dinstruction *decoded) {
       case 0x69:
       case 0x6B:
         // imul
-        return 3;
+        decoded->operands.capacity = 3;
+        break;
 
       case 0x8F:
         // pop
-        return 1;
+        decoded->operands.capacity = 1;
+        break;
       default:
-        return 2;
+        decoded->operands.capacity = 2;
+        break;
       }
     }
   }
-  return 0;
 }
 
-size_t get_operand_capacity64(Dinstruction *decoded) {
+void set_operand_capacity64(Dinstruction *decoded) {
   // todo
-  return 0;
+  return;
 }
 
-size_t get_operand_size32(Dinstruction *decoded) {
+void set_operand_size32(Dinstruction *decoded) {
   if (HAS_STATUS(decoded->status, STATUS_EXTENDED)) {
     switch (decoded->op1) {
     case 0x38:
@@ -1229,7 +1234,8 @@ size_t get_operand_size32(Dinstruction *decoded) {
       case 0x61:
       case 0x62:
       case 0x63:
-        return BYTE_LEN;
+        decoded->operands.size = BYTE_LEN;
+        break;
       }
     case 0x20:
     case 0x21:
@@ -1249,7 +1255,8 @@ size_t get_operand_size32(Dinstruction *decoded) {
     case 0xC4:
     case 0xC5:
     case 0xC6:
-      return BYTE_LEN;
+      decoded->operands.size = BYTE_LEN;
+      break;
     case 0x80:
     case 0x81:
     case 0x82:
@@ -1266,7 +1273,8 @@ size_t get_operand_size32(Dinstruction *decoded) {
     case 0x8D:
     case 0x8E:
     case 0x8F:
-      return DOUBLEWORD_LEN;
+      decoded->operands.size = DOUBLEWORD_LEN;
+      break;
     }
   } else {
     switch (decoded->op1) {
@@ -1327,11 +1335,13 @@ size_t get_operand_size32(Dinstruction *decoded) {
     case 0xE1:
     case 0xE2:
     case 0xE3:
-      return BYTE_LEN;
+      decoded->operands.size = BYTE_LEN;
+      break;
 
     case 0xC2:
     case 0xCA:
-      return WORD_LEN;
+      decoded->operands.size = WORD_LEN;
+      break;
 
     case 0x05:
     case 0x0D:
@@ -1360,21 +1370,22 @@ size_t get_operand_size32(Dinstruction *decoded) {
     case 0xC7:
     case 0xE8:
     case 0xE9:
-
-      return DOUBLEWORD_LEN;
+      decoded->operands.size = (HAS_STATUS(decoded->status, STATUS_OPSIZE_OVERRIDE) ? WORD_LEN: DOUBLEWORD_LEN);
+      break;
 
     case 0xC8:
-      return (WORD_LEN + BYTE_LEN); // enter iw ib => word + byte = 3
+      decoded->operands.size = (WORD_LEN + BYTE_LEN);
+      break;
 
     case 0x9A:
     case 0xEA:
-      return (HAS_STATUS(decoded->status, STATUS_OPSIZE_OVERRIDE) ? DOUBLEWORD_LEN : ADDR_48_LEN);
+      decoded->operands.size = (HAS_STATUS(decoded->status, STATUS_OPSIZE_OVERRIDE) ? DOUBLEWORD_LEN : ADDR_48_LEN);
+      break;
     }
   }
-  return 0;
 }
 
-size_t get_operand_size64(Dinstruction *decoded) {
+void set_operand_size64(Dinstruction *decoded) {
   if (HAS_STATUS(decoded->status, STATUS_REX)) {
     switch (decoded->op1) {
     case 0xB8:
@@ -1385,7 +1396,8 @@ size_t get_operand_size64(Dinstruction *decoded) {
     case 0xBD:
     case 0xBE:
     case 0xBF:
-      return QUADWORD_LEN;
+      decoded->operands.size = QUADWORD_LEN;
+      break;
     }
   }
   if (HAS_STATUS(decoded->status, STATUS_EXTENDED)) {
@@ -1412,7 +1424,8 @@ size_t get_operand_size64(Dinstruction *decoded) {
       case 0x61:
       case 0x62:
       case 0x63:
-        return BYTE_LEN;
+        decoded->operands.size = BYTE_LEN;
+        break;
       }
     case 0x20:
     case 0x21:
@@ -1432,7 +1445,8 @@ size_t get_operand_size64(Dinstruction *decoded) {
     case 0xC4:
     case 0xC5:
     case 0xC6:
-      return BYTE_LEN;
+      decoded->operands.size = BYTE_LEN;
+      break;
     case 0x80:
     case 0x81:
     case 0x82:
@@ -1449,9 +1463,8 @@ size_t get_operand_size64(Dinstruction *decoded) {
     case 0x8D:
     case 0x8E:
     case 0x8F:
-      return DOUBLEWORD_LEN;
-    default:
-      return 0;
+      decoded->operands.size = DOUBLEWORD_LEN;
+      break;
     }
   }
   switch (decoded->op1) {
@@ -1512,11 +1525,13 @@ size_t get_operand_size64(Dinstruction *decoded) {
   case 0xE1:
   case 0xE2:
   case 0xE3:
-    return BYTE_LEN;
+    decoded->operands.size = BYTE_LEN;
+    break;
 
   case 0xC2:
   case 0xCA:
-    return WORD_LEN;
+    decoded->operands.size = WORD_LEN;
+    break;
 
   case 0x05:
   case 0x0D:
@@ -1541,22 +1556,24 @@ size_t get_operand_size64(Dinstruction *decoded) {
   case 0xBD:
   case 0xBE:
   case 0xBF:
-    return DOUBLEWORD_LEN;
+    decoded->operands.size = DOUBLEWORD_LEN;
+    break;
 
   case 0xC8:
-    return (WORD_LEN + BYTE_LEN); // enter iw ib => word + byte = 3
+    decoded->operands.size = (WORD_LEN + BYTE_LEN);
+    break;
 
   case 0x9A:
   case 0xEA:
-    return ADDR_48_LEN;
+    decoded->operands.size = ADDR_48_LEN;
+    break;
 
   case 0xA0:
   case 0xA1:
   case 0xA2:
   case 0xA3:
-    return QUADWORD_LEN;
+    decoded->operands.size = QUADWORD_LEN;
+    break;
 
-  default:
-    return 0;
   }
 }

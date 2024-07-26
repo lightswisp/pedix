@@ -34,7 +34,7 @@ void dump(Dinstruction *decoded) {
   printf("instruction opcode 1: 0x%02X\n", decoded->op1);
   printf("instruction opcode 2: 0x%02X\n", decoded->op2);
   printf("instruction dir: %lld\n", decoded->dir);
-  printf("instruction operand capacity: %zu\n", decoded->operand_capacity);
+  printf("instruction operand capacity: %zu\n", decoded->operands.capacity);
   printf("raw bytes: ");
   for (size_t i = 0; i < decoded->buffer.size; i++) {
     printf("%02x ", decoded->buffer.bytes[i]);
@@ -47,7 +47,7 @@ void dump(Dinstruction *decoded) {
  * prints to stdout 
  */
 void print_instruction(Dinstruction *decoded) {
-  if (decoded->operand_capacity == 0)
+  if (decoded->operands.capacity == 0)
     printf("%s\n", decoded->mnemonic.str);
   else
     printf("%s %s\n", decoded->mnemonic.str, decoded->operands.str);

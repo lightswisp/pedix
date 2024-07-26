@@ -7,7 +7,7 @@
 
 #define HAS_STATUS(s, x) ((s & x) > 0)
 
-/* instruction bit flags */ 
+/* instruction bit flags */
 typedef enum {
   STATUS_VEX = 1 << 0,
   STATUS_REX = 1 << 1,
@@ -18,11 +18,14 @@ typedef enum {
   STATUS_DIRECT_ADDR_OPERAND = 1 << 6,
   STATUS_EXTENDED = 1 << 7,
   STATUS_OPSIZE_OVERRIDE = 1 << 8,
-} Status;
+  STATUS_SIB = 1 << 9,
+  STATUS_DISP = 1 << 10
+}
+Status;
 
 typedef struct {
-  uint8_t prefix[MAX_PREFIXES];
   size_t size;
+  uint8_t prefix[MAX_PREFIXES];
 } Prefix;
 
 typedef struct {
@@ -30,6 +33,7 @@ typedef struct {
 } Mnemonic;
 
 typedef struct {
+  size_t size;
   uint8_t field;
   uint8_t mod : 2;
   uint8_t reg : 3;
@@ -45,11 +49,17 @@ typedef struct {
 } Rex;
 
 typedef struct {
+  size_t size;
   uint8_t field;
   uint8_t scale : 2;
   uint8_t index : 3;
   uint8_t base : 3;
 } Sib;
+
+typedef struct{
+  size_t size;
+  uint64_t field; 
+} Displacement;
 
 typedef struct {
   size_t size;
@@ -58,6 +68,8 @@ typedef struct {
 
 typedef struct {
   size_t size;
+  /* amount of operands per instruction */
+  size_t capacity;
   char str[MAX_OPERAND_STR_LEN];
 } Operand;
 
@@ -74,8 +86,6 @@ typedef struct {
   uint8_t mode;            
   /* zero/other/modrm */
   uint8_t instr_type;  
-  /* amount of operands per instruction */
-  size_t operand_capacity;
 
   /* prefixes */
   Prefix prefixes; 
@@ -90,7 +100,7 @@ typedef struct {
   /* sib field */
   Sib sib;      
   /* displacement field */
-  uint64_t disp;   
+  Displacement displacement;   
   /* immediate operand field */
   uint64_t imm;    
   /* relative address operand field */
