@@ -3,3 +3,4 @@ test.c
 .vscode
 *.swp
 *.txt
+*.out
