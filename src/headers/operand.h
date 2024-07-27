@@ -21,14 +21,40 @@
 
 #define SCALE "%d"
 
-#define ONE_BYTE_DISP_OP_8_ADDRESSING  "BYTE PTR [" REGISTER "+" OPERAND_BYTE "]"
-#define ONE_BYTE_DISP_OP_16_ADDRESSING "WORD PTR [" REGISTER "+" OPERAND_BYTE "]"
-#define ONE_BYTE_DISP_OP_32_ADDRESSING "DWORD PTR [" REGISTER "+" OPERAND_BYTE "]"
+#define ONE_BYTE_DISP_OP_8_ADDRESSING "BYTE PTR [" REGISTER "+" OPERAND_BYTE "]"
 
-                                              /*     sib.base     sib.index    sib.scale    displacement  */
-#define SIB_ONE_BYTE_DISP_OP_8_ADDRESSING  "BYTE PTR [" REGISTER "+" REGISTER "*" SCALE "+" OPERAND_BYTE "]"
-#define SIB_ONE_BYTE_DISP_OP_16_ADDRESSING "WORD PTR [" REGISTER "+" REGISTER "*" SCALE "+" OPERAND_BYTE "]"
-#define SIB_ONE_BYTE_DISP_OP_32_ADDRESSING "DWORD PTR [" REGISTER "+" REGISTER "*" SCALE "+" OPERAND_BYTE "]"
+#define ONE_BYTE_DISP_OP_16_ADDRESSING                                         \
+  "WORD PTR [" REGISTER "+" OPERAND_BYTE "]"
+
+#define ONE_BYTE_DISP_OP_32_ADDRESSING                                         \
+  "DWORD PTR [" REGISTER "+" OPERAND_BYTE "]"
+
+#define SIB_ONE_BYTE_DISP_OP_8_ADDRESSING                                      \
+  "BYTE PTR [" REGISTER "+" REGISTER "*" SCALE "+" OPERAND_BYTE "]"
+
+#define SIB_ONE_BYTE_DISP_OP_16_ADDRESSING                                     \
+  "WORD PTR [" REGISTER "+" REGISTER "*" SCALE "+" OPERAND_BYTE "]"
+
+#define SIB_ONE_BYTE_DISP_OP_32_ADDRESSING                                     \
+  "DWORD PTR [" REGISTER "+" REGISTER "*" SCALE "+" OPERAND_BYTE "]"
+
+#define FOUR_BYTE_DISP_OP_8_ADDRESSING                                         \
+  "BYTE PTR [" REGISTER "+" OPERAND_DWORD "]"
+
+#define FOUR_BYTE_DISP_OP_16_ADDRESSING                                        \
+  "WORD PTR [" REGISTER "+" OPERAND_DWORD "]"
+
+#define FOUR_BYTE_DISP_OP_32_ADDRESSING                                        \
+  "DWORD PTR [" REGISTER "+" OPERAND_DWORD "]"
+
+#define SIB_FOUR_BYTE_DISP_OP_8_ADDRESSING                                     \
+  "BYTE PTR [" REGISTER "+" REGISTER "*" SCALE "+" OPERAND_DWORD "]"
+
+#define SIB_FOUR_BYTE_DISP_OP_16_ADDRESSING                                    \
+  "WORD PTR [" REGISTER "+" REGISTER "*" SCALE "+" OPERAND_DWORD "]"
+
+#define SIB_FOUR_BYTE_DISP_OP_32_ADDRESSING                                    \
+  "DWORD PTR [" REGISTER "+" REGISTER "*" SCALE "+" OPERAND_DWORD "]"
 
 bool set_operands(Dinstruction *decoded, uchar8_t instruction);
 bool set_operands32(Dinstruction *decoded, uchar8_t instruction);

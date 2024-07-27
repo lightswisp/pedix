@@ -37,7 +37,7 @@ bool set_operands32(Dinstruction *decoded, uchar8_t instruction) {
     case ONE_BYTE_DISPLACEMENT:
       // mod == 01 (disp8 mode)
       if (HAS_STATUS(decoded->status, STATUS_SIB)){
-        // sib + disp8 mode
+        /* sib + disp8 mode */
         if(s == 0){
           // 8-bit operands
           reg1 = modrm_reg8[decoded->modrm.reg];
@@ -56,14 +56,9 @@ bool set_operands32(Dinstruction *decoded, uchar8_t instruction) {
         index = modrm_reg32[decoded->sib.index];
         scale = 1 << decoded->sib.scale; 
         sprintf(temp, modrm_fmt, base, index, scale, decoded->displacement.field); 
-        if (d == 0) {
-          sprintf(decoded->operands.str, REG_TO_MEM, temp, reg1);
-        } else {
-          sprintf(decoded->operands.str, MEM_TO_REG, reg1, temp);
-        }
-
       }
       else{
+        /* disp8 mode */
         if(s == 0){
           // 8-bit operands
           reg1 = modrm_reg8[decoded->modrm.reg];
@@ -81,16 +76,61 @@ bool set_operands32(Dinstruction *decoded, uchar8_t instruction) {
           modrm_fmt = ONE_BYTE_DISP_OP_32_ADDRESSING;
         }
         sprintf(temp, modrm_fmt, reg2, decoded->displacement.field); 
-        if (d == 0) {
-          sprintf(decoded->operands.str, REG_TO_MEM, temp, reg1);
-        } else {
-          sprintf(decoded->operands.str, MEM_TO_REG, reg1, temp);
-        }
       }
+
+      if (d == 0)
+        sprintf(decoded->operands.str, REG_TO_MEM, temp, reg1);
+      else
+        sprintf(decoded->operands.str, MEM_TO_REG, reg1, temp);
+
       break;
     case FOUR_BYTE_DISPLACEMENT:
-      // todo
-      puts("FOUR_BYTE_DISPLACEMENT is not implemented yet!");
+      /* mod == 10 */
+      if (HAS_STATUS(decoded->status, STATUS_SIB)) {
+        /* sib + disp32*/
+        if (s == 0) {
+          // 8-bit operands
+          reg1 = modrm_reg8[decoded->modrm.reg];
+          modrm_fmt = SIB_FOUR_BYTE_DISP_OP_8_ADDRESSING;
+        } else if (HAS_STATUS(decoded->status, STATUS_OPSIZE_OVERRIDE)) {
+          // 16-bit operands
+          reg1 = modrm_reg8[decoded->modrm.reg];
+          modrm_fmt = SIB_FOUR_BYTE_DISP_OP_16_ADDRESSING;
+        } else {
+          // 32-bit operands
+          reg1 = modrm_reg32[decoded->modrm.reg];
+          modrm_fmt = SIB_FOUR_BYTE_DISP_OP_32_ADDRESSING;
+        }
+        base = modrm_reg32[decoded->sib.base];
+        index = modrm_reg32[decoded->sib.index];
+        scale = 1 << decoded->sib.scale;
+        sprintf(temp, modrm_fmt, base, index, scale, decoded->displacement.field);
+      } else {
+        /* disp32 */
+        if (s == 0) {
+          // 8-bit operands
+          reg1 = modrm_reg8[decoded->modrm.reg];
+          reg2 = modrm_reg32[decoded->modrm.rm];
+          modrm_fmt = FOUR_BYTE_DISP_OP_8_ADDRESSING;
+        } else if (HAS_STATUS(decoded->status, STATUS_OPSIZE_OVERRIDE)) {
+          // 16-bit operands
+          reg1 = modrm_reg8[decoded->modrm.reg];
+          reg2 = modrm_reg32[decoded->modrm.rm];
+          modrm_fmt = FOUR_BYTE_DISP_OP_16_ADDRESSING;
+        } else {
+          // 32-bit operands
+          reg1 = modrm_reg32[decoded->modrm.reg];
+          reg2 = modrm_reg32[decoded->modrm.rm];
+          modrm_fmt = FOUR_BYTE_DISP_OP_32_ADDRESSING;
+        }
+        sprintf(temp, modrm_fmt, reg2, decoded->displacement.field);
+      }
+
+      if (d == 0)
+        sprintf(decoded->operands.str, REG_TO_MEM, temp, reg1);
+      else
+        sprintf(decoded->operands.str, MEM_TO_REG, reg1, temp);
+
       break;
     case REGISTER_ADDRESSING:
       // mod == 11 (register addressing mode)
