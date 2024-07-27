@@ -6,22 +6,22 @@ bool set_mnemonic32(Dinstruction *decoded, uchar8_t instruction);
 bool set_mnemonic64(Dinstruction *decoded, uchar8_t instruction);
 
 /* extended opcode with extensions and operand size override */
-static char *extd_ext_11b_66[0x100][0x08] = {
+static const char *extd_ext_11b_66[0x100][0x08] = {
     [0x71] = {"", "", "vpsrlw", "", "vpsraw", "", "vpsllw", ""},
     [0x72] = {"", "", "vpsrld", "", "vpsrad", "", "vpslld", ""},
     [0x73] = {"", "", "vpsrlq", "vpsrldq", "", "", "vpsllq", "vpslldq"}};
 
 /* extended opcode with extensions and rep prefix */
-static char *extd_ext_11b_f3[0x100][0x08] = {
+static const char *extd_ext_11b_f3[0x100][0x08] = {
     [0xC7] = {"", "", "", "", "", "", "", "rdpid"},
     [0xAE] = {"rdfsbase", "rdgsbase", "wrfsbase", "wrgsbase"}};
 
-static char *extd_ext_11b_rm[0x08][0x08] = {
+static const char *extd_ext_11b_rm[0x08][0x08] = {
     [0x00] = {"", "vmcall", "vmlaunch", "vmresume", "vmxoff"},
     [0x01] = {"monitor", "mwait", "clac", "stac", "encls"},
     [0x07] = {"swapgs", "rdtscp"}};
 
-static char *extd_ext_11b[0x100][0x08] = {
+static const char *extd_ext_11b[0x100][0x08] = {
     [0x00] = {"sldt", "str", "lldt", "ltr", "verr", "verw"},
     [0x01] = {"", "", "", "", "smsw", "", "lmsw", "invlpg"},
     [0xBA] = {"", "", "", "", "bt", "bts", "btr", "btc"},
@@ -33,13 +33,13 @@ static char *extd_ext_11b[0x100][0x08] = {
     [0xAE] = {"", "", "", "", "", "lfence", "mfence", "sfence"},
     [0x18] = {"nop", "nop", "nop", "nop", "nop", "nop", "nop", "nop"}};
 
-static char *extd_ext_mem_66[0x100][0x08] = {
+static const char *extd_ext_mem_66[0x100][0x08] = {
     [0xC7] = {"", "", "", "", "", "", "vmclear"}};
 
-static char *extd_ext_mem_f3[0x100][0x08] = {
+static const char *extd_ext_mem_f3[0x100][0x08] = {
     [0xC7] = {"", "", "", "", "", "", "vmxon"}};
 
-static char *extd_ext_mem[0x100][0x08] = {
+static const char *extd_ext_mem[0x100][0x08] = {
     [0x00] = {"sldt", "str", "lldt", "ltr", "verr", "verw"},
     [0x01] = {"sgdt", "sidt", "lgdt", "lidt", "smsw", "", "lmsw", "invlpg"},
     [0xBA] = {"", "", "", "", "bt", "bts", "btr", "btc"},
@@ -50,11 +50,11 @@ static char *extd_ext_mem[0x100][0x08] = {
     [0x18] = {"prefetch", "prefetch", "prefetch", "prefetch", "nop", "nop",
               "nop", "nop"}};
 
-static char *extd[0x100] = { // 0x0f
+static const char *extd[0x100] = { // 0x0f
     "",     "",       "lar",  "lsl",    "", "syscall",
     "clts", "sysret", "invd", "wbindv", "", "ud2"};
 
-static char *reg_ext_11b[0x100][0x08] = {
+static const char *reg_ext_11b[0x100][0x08] = {
     [0x80] = {"add", "or", "adc", "sbb", "and", "sub", "xor", "cmp"},
     [0x81] = {"add", "or", "adc", "sbb", "and", "sub", "xor", "cmp"},
     [0x82] = {"add", "or", "adc", "sbb", "and", "sub", "xor", "cmp"},
@@ -74,7 +74,7 @@ static char *reg_ext_11b[0x100][0x08] = {
     [0xC7] = {"mov", "", "", "", "", "", "xbegin"},
 };
 
-static char *reg_ext_mem[0x100][0x08] = {
+static const char *reg_ext_mem[0x100][0x08] = {
     [0x80] = {"add", "or", "adc", "sbb", "and", "sub", "xor", "cmp"},
     [0x81] = {"add", "or", "adc", "sbb", "and", "sub", "xor", "cmp"},
     [0x82] = {"add", "or", "adc", "sbb", "and", "sub", "xor", "cmp"},
@@ -96,7 +96,7 @@ static char *reg_ext_mem[0x100][0x08] = {
 
 // mod/rm extension via reg (Table A-6. Opcode Extensions for One- and Two-byte
 // Opcodes by Group Number)
-static char *m_ex_table[0x100][0x08] = {
+static const char *m_ex_table[0x100][0x08] = {
     [0x80] = {"add", "or", "adc", "sbb", "and", "sub", "xor", "cmp"},
     [0x81] = {"add", "or", "adc", "sbb", "and", "sub", "xor", "cmp"},
     [0x82] = {"add", "or", "adc", "sbb", "and", "sub", "xor", "cmp"},
@@ -116,14 +116,14 @@ static char *m_ex_table[0x100][0x08] = {
     [0xFF] = {"inc", "dec", "call", "call", "jmp", "jmp", "push"}};
 
 // extended (0x0f) extension table
-static char *m_extd_ex_table[0x100][0x08] = {
+static const char *m_extd_ex_table[0x100][0x08] = {
     [0x00] = {"sldt", "str", "lldt", "ltr", "verr", "verw", "", ""},
     [0x01] = {"sgdt", "sidt", "lgdt", "lidt", "smsw", "", "lmsw",
               "invlpg"}, // -_- sorry
     [0xBA] = {"", "", "", "", "bt", "bts", "btr", "btc"},
 };
 
-static char *reg[0x100] = { // regular
+static const char *reg[0x100] = { // regular
     "add",    "add",   "add",     "add",    "add",    "add",    "push",
     "pop",    "or",    "or",      "or",     "or",     "or",     "or",
     "push",   " ",     "adc",     "adc",    "adc",    "adc",    "adc",

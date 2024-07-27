@@ -18,7 +18,7 @@ bool set_mnemonic32(Dinstruction *decoded, uchar8_t instruction) {
           // handle extended with
           // extension + mod 11b and 0x66
           // prefix
-          char *m_66 = extd_ext_11b_66[instruction][decoded->modrm.reg];
+          const char *m_66 = extd_ext_11b_66[instruction][decoded->modrm.reg];
           size_t m_len = strlen(m_66);
           memcpy(decoded->mnemonic.str, m_66, m_len);
           return true;
@@ -26,18 +26,18 @@ bool set_mnemonic32(Dinstruction *decoded, uchar8_t instruction) {
           // handle extended with
           // extension + mod 11b and 0xf3
           // prefix
-          char *m_f3 = extd_ext_11b_f3[instruction][decoded->modrm.reg];
+          const char *m_f3 = extd_ext_11b_f3[instruction][decoded->modrm.reg];
           memcpy(decoded->mnemonic.str, m_f3, strlen(m_f3));
           return true;
         }
         // no prefix here (but with modrm.mod == 11B)
         if (instruction == 0x01) {
           // vmcall, vmlaunch ...
-          char *m = extd_ext_11b_rm[decoded->modrm.reg][decoded->modrm.rm];
+          const char *m = extd_ext_11b_rm[decoded->modrm.reg][decoded->modrm.rm];
           memcpy(decoded->mnemonic.str, m, strlen(m));
           return true;
         } else {
-          char *m = extd_ext_11b[instruction][decoded->modrm.reg];
+          const char *m = extd_ext_11b[instruction][decoded->modrm.reg];
           memcpy(decoded->mnemonic.str, m, strlen(m));
 
           return true;
@@ -49,27 +49,27 @@ bool set_mnemonic32(Dinstruction *decoded, uchar8_t instruction) {
           // handle extended with
           // extension + mod mem and 0x66
           // prefix
-          char *m_66 = extd_ext_mem_66[instruction][decoded->modrm.reg];
+          const char *m_66 = extd_ext_mem_66[instruction][decoded->modrm.reg];
           memcpy(decoded->mnemonic.str, m_66, strlen(m_66));
           return true;
         case 0xF3:
           // handle extended with
           // extension + mod mem and 0xf3
           // prefix
-          char *m_f3 = extd_ext_mem_f3[instruction][decoded->modrm.reg];
+          const char *m_f3 = extd_ext_mem_f3[instruction][decoded->modrm.reg];
           memcpy(decoded->mnemonic.str, m_f3, strlen(m_f3));
           return true;
         }
 
         // no prefix here (but with modrm.mod == mem)
-        char *m = extd_ext_mem[instruction][decoded->modrm.reg];
+        const char *m = extd_ext_mem[instruction][decoded->modrm.reg];
         memcpy(decoded->mnemonic.str, m, strlen(m));
         return true;
       }
 
     } else {
       // just extended (extended_opcode_table)
-      char *extd_m = extd[instruction];
+      const char *extd_m = extd[instruction];
       memcpy(decoded->mnemonic.str, extd_m, strlen(extd_m));
       return true;
     }
@@ -80,11 +80,11 @@ bool set_mnemonic32(Dinstruction *decoded, uchar8_t instruction) {
 #endif
       // has extension (regular_opcode_with_extensions_table)
       if (decoded->modrm.mod == 0x03) { // register addressing
-        char *m = reg_ext_11b[instruction][decoded->modrm.reg];
+        const char *m = reg_ext_11b[instruction][decoded->modrm.reg];
         memcpy(decoded->mnemonic.str, m, strlen(m));
         return true;
       } else { // memory addressing
-        char *m = reg_ext_mem[instruction][decoded->modrm.reg];
+        const char *m = reg_ext_mem[instruction][decoded->modrm.reg];
         memcpy(decoded->mnemonic.str, m, strlen(m));
         return true;
       }
@@ -94,7 +94,7 @@ bool set_mnemonic32(Dinstruction *decoded, uchar8_t instruction) {
 #ifdef DEBUG
       puts("regular!");
 #endif
-      char *m = reg[instruction];
+      const char *m = reg[instruction];
       size_t m_len = strlen(m);
       memcpy(decoded->mnemonic.str, m, m_len);
       return true;

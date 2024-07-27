@@ -35,18 +35,18 @@ bool set_operands32(Dinstruction *decoded, uchar8_t instruction);
 bool set_operands64(Dinstruction *decoded, uchar8_t instruction);
 
 /* 8-bit registers */
-static char *modrm_reg8[] = {"al", "cl", "dl", "bl", "ah", "ch", "dh", "bh"};
+static const char *modrm_reg8[] = {"al", "cl", "dl", "bl", "ah", "ch", "dh", "bh"};
 /* 16-bit registers */
-static char *modrm_reg16[] = {"ax", "cx", "dx", "bx", "sp", "bp", "si", "di"};
+static const char *modrm_reg16[] = {"ax", "cx", "dx", "bx", "sp", "bp", "si", "di"};
 /* 32-bit registers */
-static char *modrm_reg32[] = {"eax", "ecx", "edx", "ebx",
+static const char *modrm_reg32[] = {"eax", "ecx", "edx", "ebx",
                               "esp", "ebp", "esi", "edi"};
 /* 64-bit registers */
-static char *modrm_reg64[] = {"rax", "rcx", "rdx", "rbx",
+static const char *modrm_reg64[] = {"rax", "rcx", "rdx", "rbx",
                               "rsp", "rbp", "rsi", "rdi"};
 
 /* instr_zero with 32-bit operands map */ 
-static char *z_instr_op32[] = {[0x06] = "es",
+static const char *z_instr_op32[] = {[0x06] = "es",
                                [0x07] = "es",
                                [0x0e] = "cs",
                                [0x16] = "ss",
@@ -151,7 +151,7 @@ static char *z_instr_op32[] = {[0x06] = "es",
                                [0xfd] = ""};
 
 /* instr_zero with 16-bit operands map */ 
-static char *z_instr_op16[] = {[0x06] = "es",
+static const char *z_instr_op16[] = {[0x06] = "es",
                                [0x07] = "es",
                                [0x0e] = "cs",
                                [0x16] = "ss",
@@ -256,7 +256,7 @@ static char *z_instr_op16[] = {[0x06] = "es",
                                [0xfd] = ""};
 
 /* instr_other with 32-bit operands map */
-static char *o_instr_op32[] = {[0x04] = "al," OPERAND_BYTE,
+static const char *o_instr_op32[] = {[0x04] = "al," OPERAND_BYTE,
                                [0x05] = "eax," OPERAND_DWORD,
                                [0x0c] = "al," OPERAND_BYTE,
                                [0x0d] = "eax," OPERAND_DWORD,
@@ -332,7 +332,7 @@ static char *o_instr_op32[] = {[0x04] = "al," OPERAND_BYTE,
 
 
 /* instr_other with 16-bit operands map */
-static char *o_instr_op16[] = {[0x04] = "al," OPERAND_BYTE,
+static const char *o_instr_op16[] = {[0x04] = "al," OPERAND_BYTE,
                                [0x05] = "ax," OPERAND_WORD,
                                [0x0c] = "al," OPERAND_BYTE,
                                [0x0d] = "ax," OPERAND_WORD,

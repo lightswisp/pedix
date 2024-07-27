@@ -19,7 +19,7 @@ bool set_operands32(Dinstruction *decoded, uchar8_t instruction) {
   // todo: add extended opcode check
   uint8_t scale;
   char temp[MAX_TEMP_FMT_LEN];
-  char *base, *index, *op, *modrm_fmt, *reg1, *reg2;
+  const char *base, *index, *op, *modrm_fmt, *reg1, *reg2;
   // d = 0 (adding from register to memory)
   // d = 1 (adding from memory to register)
   uchar8_t d = GET_DIRECTION(instruction);
