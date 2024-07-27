@@ -6,6 +6,7 @@
 #define GET_DIRECTION(d) ((d & 2) >> 1)
 #define GET_SIZE(s) (s & 1)
 
+#define MAX_TEMP_FMT_LEN 50
 #define REGISTER_ADDRESSING 3
 #define FOUR_BYTE_DISPLACEMENT 2
 #define ONE_BYTE_DISPLACEMENT 1
@@ -16,11 +17,9 @@
  */
 bool set_operands32(Dinstruction *decoded, uchar8_t instruction) {
   // todo: add extended opcode check
-  char *op;
-  char* modrm_fmt;
-  char *reg1, *reg2;
-  size_t op_len;
-  uint8_t reg1_len, reg2_len;
+  uint8_t scale;
+  char temp[MAX_TEMP_FMT_LEN];
+  char *base, *index, *op, *modrm_fmt, *reg1, *reg2;
   // d = 0 (adding from register to memory)
   // d = 1 (adding from memory to register)
   uchar8_t d = GET_DIRECTION(instruction);
@@ -33,12 +32,36 @@ bool set_operands32(Dinstruction *decoded, uchar8_t instruction) {
     switch (decoded->modrm.mod) {
     case SIB_OR_REGISTER_INDIRECT_ADDRESSING:
       // todo 
+      puts("SIB_OR_REGISTER_INDIRECT_ADDRESSING is not implemented yet!");
       break;
     case ONE_BYTE_DISPLACEMENT:
       // mod == 01 (disp8 mode)
       if (HAS_STATUS(decoded->status, STATUS_SIB)){
-        // todo
         // sib + disp8 mode
+        if(s == 0){
+          // 8-bit operands
+          reg1 = modrm_reg8[decoded->modrm.reg];
+          modrm_fmt = SIB_ONE_BYTE_DISP_OP_8_ADDRESSING;
+        } else if (HAS_STATUS(decoded->status, STATUS_OPSIZE_OVERRIDE)) {
+          // 16-bit operands
+          reg1 = modrm_reg8[decoded->modrm.reg];
+          modrm_fmt = SIB_ONE_BYTE_DISP_OP_16_ADDRESSING;
+        }
+        else{
+          // 32-bit operands
+          reg1 = modrm_reg32[decoded->modrm.reg];
+          modrm_fmt = SIB_ONE_BYTE_DISP_OP_32_ADDRESSING;
+        }
+        base = modrm_reg32[decoded->sib.base];
+        index = modrm_reg32[decoded->sib.index];
+        scale = 1 << decoded->sib.scale; 
+        sprintf(temp, modrm_fmt, base, index, scale, decoded->displacement.field); 
+        if (d == 0) {
+          sprintf(decoded->operands.str, REG_TO_MEM, temp, reg1);
+        } else {
+          sprintf(decoded->operands.str, MEM_TO_REG, reg1, temp);
+        }
+
       }
       else{
         if(s == 0){
@@ -57,20 +80,17 @@ bool set_operands32(Dinstruction *decoded, uchar8_t instruction) {
           reg2 = modrm_reg32[decoded->modrm.rm];
           modrm_fmt = ONE_BYTE_DISP_OP_32_ADDRESSING;
         }
-        reg1_len = strlen(reg1);
-        reg2_len = strlen(reg2);
-        char temp[50];
+        sprintf(temp, modrm_fmt, reg2, decoded->displacement.field); 
         if (d == 0) {
-          sprintf(temp, modrm_fmt, reg2, decoded->displacement.field); 
           sprintf(decoded->operands.str, REG_TO_MEM, temp, reg1);
         } else {
-          sprintf(temp, modrm_fmt, reg2, decoded->displacement.field); 
           sprintf(decoded->operands.str, MEM_TO_REG, reg1, temp);
         }
       }
       break;
     case FOUR_BYTE_DISPLACEMENT:
       // todo
+      puts("FOUR_BYTE_DISPLACEMENT is not implemented yet!");
       break;
     case REGISTER_ADDRESSING:
       // mod == 11 (register addressing mode)
@@ -87,8 +107,6 @@ bool set_operands32(Dinstruction *decoded, uchar8_t instruction) {
         reg1 = modrm_reg32[decoded->modrm.reg];
         reg2 = modrm_reg32[decoded->modrm.rm];
       }
-      reg1_len = strlen(reg1);
-      reg2_len = strlen(reg2);
       if (d == 0) {
         sprintf(decoded->operands.str, REG_TO_REG, reg2, reg1);
       } else {
@@ -107,8 +125,7 @@ bool set_operands32(Dinstruction *decoded, uchar8_t instruction) {
       // 32-bit
       op = z_instr_op32[instruction];
     }
-    op_len = strlen(op);
-    memcpy(decoded->operands.str, op, op_len);
+    sprintf(decoded->operands.str, SINGLE_OPERAND, op);
     return true;
   case INSTR_OTHER:
     if (HAS_STATUS(decoded->status, STATUS_OPSIZE_OVERRIDE)) {
@@ -118,7 +135,6 @@ bool set_operands32(Dinstruction *decoded, uchar8_t instruction) {
       // 32-bit
       op = o_instr_op32[instruction];
     }
-    //op_len = strlen(op);
     
     if(HAS_STATUS(decoded->status, STATUS_IMMEDIATE_OPERAND))
       sprintf(decoded->operands.str, op, decoded->imm);
