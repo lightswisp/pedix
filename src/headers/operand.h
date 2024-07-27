@@ -25,6 +25,20 @@
 #define INDIRECT_OP_16_ADDRESSING "WORD PTR [" REGISTER "]"
 #define INDIRECT_OP_32_ADDRESSING "DWORD PTR [" REGISTER "]"
 
+#define SIB_FOUR_BYTE_OP_8_NO_DISP_ADDRESSING                                  \
+  "BYTE PTR[" REGISTER "+" REGISTER "*" SCALE "]"
+#define SIB_FOUR_BYTE_OP_16_NO_DISP_ADDRESSING                                 \
+  "WORD PTR[" REGISTER "+" REGISTER "*" SCALE "]"
+#define SIB_FOUR_BYTE_OP_32_NO_DISP_ADDRESSING                                 \
+  "DWORD PTR[" REGISTER "+" REGISTER "*" SCALE "]"
+
+#define SIB_FOUR_BYTE_DISP_OP_8_NO_REG_ADDRESSING                              \
+  "BYTE PTR [" REGISTER "*" SCALE "+" OPERAND_DWORD "]"
+#define SIB_FOUR_BYTE_DISP_OP_16_NO_REG_ADDRESSING                             \
+  "WORD PTR [" REGISTER "*" SCALE "+" OPERAND_DWORD "]"
+#define SIB_FOUR_BYTE_DISP_OP_32_NO_REG_ADDRESSING                             \
+  "DWORD PTR [" REGISTER "*" SCALE "+" OPERAND_DWORD "]"
+
 #define ONE_BYTE_DISP_OP_8_ADDRESSING "BYTE PTR [" REGISTER "+" OPERAND_BYTE "]"
 
 #define ONE_BYTE_DISP_OP_16_ADDRESSING                                         \
