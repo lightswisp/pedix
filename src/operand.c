@@ -31,8 +31,36 @@ bool set_operands32(Dinstruction *decoded, uchar8_t instruction) {
 
     switch (decoded->modrm.mod) {
     case SIB_OR_REGISTER_INDIRECT_ADDRESSING:
-      // todo 
-      puts("SIB_OR_REGISTER_INDIRECT_ADDRESSING is not implemented yet!");
+      if (HAS_STATUS(decoded->status, STATUS_SIB)){
+        /* sib */
+      }
+      else{
+        /* register indirect addressing */
+        if (s == 0) {
+          // 8-bit operands
+          reg1 = modrm_reg8[decoded->modrm.reg];
+          reg2 = modrm_reg32[decoded->modrm.rm];
+          modrm_fmt = INDIRECT_OP_8_ADDRESSING;
+        } else if (HAS_STATUS(decoded->status, STATUS_OPSIZE_OVERRIDE)) {
+          // 16-bit operands
+          reg1 = modrm_reg16[decoded->modrm.reg];
+          reg2 = modrm_reg32[decoded->modrm.rm];
+          modrm_fmt = INDIRECT_OP_16_ADDRESSING;
+        } else {
+          // 32-bit operands
+          reg1 = modrm_reg32[decoded->modrm.reg];
+          reg2 = modrm_reg32[decoded->modrm.rm];
+          modrm_fmt = INDIRECT_OP_32_ADDRESSING;
+        }
+        snprintf(temp, MAX_TEMP_FMT_LEN, modrm_fmt, reg2,
+                 decoded->displacement.field);
+      }
+
+      if (d == 0)
+        snprintf(decoded->operands.str, MAX_TEMP_FMT_LEN, REG_TO_MEM, temp, reg1);
+      else
+        snprintf(decoded->operands.str, MAX_TEMP_FMT_LEN, MEM_TO_REG, reg1, temp);
+
       break;
     case ONE_BYTE_DISPLACEMENT:
       // mod == 01 (disp8 mode)
@@ -44,7 +72,7 @@ bool set_operands32(Dinstruction *decoded, uchar8_t instruction) {
           modrm_fmt = SIB_ONE_BYTE_DISP_OP_8_ADDRESSING;
         } else if (HAS_STATUS(decoded->status, STATUS_OPSIZE_OVERRIDE)) {
           // 16-bit operands
-          reg1 = modrm_reg8[decoded->modrm.reg];
+          reg1 = modrm_reg16[decoded->modrm.reg];
           modrm_fmt = SIB_ONE_BYTE_DISP_OP_16_ADDRESSING;
         }
         else{
@@ -66,7 +94,7 @@ bool set_operands32(Dinstruction *decoded, uchar8_t instruction) {
           modrm_fmt = ONE_BYTE_DISP_OP_8_ADDRESSING;
         } else if (HAS_STATUS(decoded->status, STATUS_OPSIZE_OVERRIDE)) {
           // 16-bit operands
-          reg1 = modrm_reg8[decoded->modrm.reg];
+          reg1 = modrm_reg16[decoded->modrm.reg];
           reg2 = modrm_reg32[decoded->modrm.rm];
           modrm_fmt = ONE_BYTE_DISP_OP_16_ADDRESSING;
         } else {
@@ -94,7 +122,7 @@ bool set_operands32(Dinstruction *decoded, uchar8_t instruction) {
           modrm_fmt = SIB_FOUR_BYTE_DISP_OP_8_ADDRESSING;
         } else if (HAS_STATUS(decoded->status, STATUS_OPSIZE_OVERRIDE)) {
           // 16-bit operands
-          reg1 = modrm_reg8[decoded->modrm.reg];
+          reg1 = modrm_reg16[decoded->modrm.reg];
           modrm_fmt = SIB_FOUR_BYTE_DISP_OP_16_ADDRESSING;
         } else {
           // 32-bit operands
@@ -114,7 +142,7 @@ bool set_operands32(Dinstruction *decoded, uchar8_t instruction) {
           modrm_fmt = FOUR_BYTE_DISP_OP_8_ADDRESSING;
         } else if (HAS_STATUS(decoded->status, STATUS_OPSIZE_OVERRIDE)) {
           // 16-bit operands
-          reg1 = modrm_reg8[decoded->modrm.reg];
+          reg1 = modrm_reg16[decoded->modrm.reg];
           reg2 = modrm_reg32[decoded->modrm.rm];
           modrm_fmt = FOUR_BYTE_DISP_OP_16_ADDRESSING;
         } else {
