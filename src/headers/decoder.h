@@ -101,12 +101,14 @@ typedef struct {
   Sib sib;      
   /* displacement field */
   Displacement displacement;   
-  /* immediate operand field */
-  uint64_t imm;    
-  /* relative address operand field */
-  uint64_t rel;    
-  /* direct address operand field */
-  uint64_t dir;    
+  union {
+    /* immediate operand field */
+    uint64_t imm;
+    /* relative address operand field */
+    uint64_t rel;
+    /* direct address operand field */
+    uint64_t dir;
+  };
 } Dinstruction;
 
 /* allocates memory for the struct */
@@ -117,7 +119,3 @@ void free_instrucion(Dinstruction *decoded);
 void zero_instruction(Dinstruction *decoded); 
 /* general decode func */
 bool decode(Dinstruction *decoded, uchar8_t *instruction);
-/* 32-bit specific */
-bool decode32(Dinstruction *decoded, uchar8_t *instruction);
-/* 64-bit specific */
-bool decode64(Dinstruction *decoded, uchar8_t *instruction);

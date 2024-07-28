@@ -15,7 +15,7 @@
 /*
  * set operand string
  */
-bool set_operands32(Dinstruction *decoded, uchar8_t instruction) {
+static bool set_operands32(Dinstruction *decoded, uchar8_t instruction) {
   // todo: add extended opcode check
   uint8_t scale;
   char temp[MAX_TEMP_FMT_LEN];
@@ -49,7 +49,7 @@ bool set_operands32(Dinstruction *decoded, uchar8_t instruction) {
           }
           index = modrm_reg32[decoded->sib.index];
           scale = 1 << decoded->sib.scale;
-          snprintf(temp, MAX_TEMP_FMT_LEN, modrm_fmt, index, scale,
+          snprintf(temp, MAX_TEMP_FMT_LEN + 1, modrm_fmt, index, scale,
                    decoded->displacement.field);
         }
         else{
@@ -70,7 +70,7 @@ bool set_operands32(Dinstruction *decoded, uchar8_t instruction) {
           base = modrm_reg32[decoded->sib.base];
           index = modrm_reg32[decoded->sib.index];
           scale = 1 << decoded->sib.scale;
-          snprintf(temp, MAX_TEMP_FMT_LEN, modrm_fmt, base, index, scale);
+          snprintf(temp, MAX_TEMP_FMT_LEN + 1, modrm_fmt, base, index, scale);
         }
       }
       else{
@@ -91,14 +91,14 @@ bool set_operands32(Dinstruction *decoded, uchar8_t instruction) {
           reg2 = modrm_reg32[decoded->modrm.rm];
           modrm_fmt = INDIRECT_OP_32_ADDRESSING;
         }
-        snprintf(temp, MAX_TEMP_FMT_LEN, modrm_fmt, reg2,
+        snprintf(temp, MAX_TEMP_FMT_LEN + 1, modrm_fmt, reg2,
                  decoded->displacement.field);
       }
 
       if (d == 0)
-        snprintf(decoded->operands.str, MAX_TEMP_FMT_LEN, REG_TO_MEM, temp, reg1);
+        snprintf(decoded->operands.str, MAX_TEMP_FMT_LEN + 1, REG_TO_MEM, temp, reg1);
       else
-        snprintf(decoded->operands.str, MAX_TEMP_FMT_LEN, MEM_TO_REG, reg1, temp);
+        snprintf(decoded->operands.str, MAX_TEMP_FMT_LEN + 1, MEM_TO_REG, reg1, temp);
 
       break;
     case ONE_BYTE_DISPLACEMENT:
@@ -122,7 +122,7 @@ bool set_operands32(Dinstruction *decoded, uchar8_t instruction) {
         base = modrm_reg32[decoded->sib.base];
         index = modrm_reg32[decoded->sib.index];
         scale = 1 << decoded->sib.scale; 
-        snprintf(temp, MAX_TEMP_FMT_LEN, modrm_fmt, base, index, scale, decoded->displacement.field); 
+        snprintf(temp, MAX_TEMP_FMT_LEN + 1, modrm_fmt, base, index, scale, decoded->displacement.field); 
       }
       else{
         /* disp8 mode */
@@ -142,13 +142,13 @@ bool set_operands32(Dinstruction *decoded, uchar8_t instruction) {
           reg2 = modrm_reg32[decoded->modrm.rm];
           modrm_fmt = ONE_BYTE_DISP_OP_32_ADDRESSING;
         }
-        snprintf(temp, MAX_TEMP_FMT_LEN, modrm_fmt, reg2, decoded->displacement.field); 
+        snprintf(temp, MAX_TEMP_FMT_LEN + 1, modrm_fmt, reg2, decoded->displacement.field); 
       }
 
       if (d == 0)
-        snprintf(decoded->operands.str, MAX_TEMP_FMT_LEN, REG_TO_MEM, temp, reg1);
+        snprintf(decoded->operands.str, MAX_TEMP_FMT_LEN + 1, REG_TO_MEM, temp, reg1);
       else
-        snprintf(decoded->operands.str, MAX_TEMP_FMT_LEN, MEM_TO_REG, reg1, temp);
+        snprintf(decoded->operands.str, MAX_TEMP_FMT_LEN + 1, MEM_TO_REG, reg1, temp);
 
       break;
     case FOUR_BYTE_DISPLACEMENT:
@@ -171,7 +171,7 @@ bool set_operands32(Dinstruction *decoded, uchar8_t instruction) {
         base = modrm_reg32[decoded->sib.base];
         index = modrm_reg32[decoded->sib.index];
         scale = 1 << decoded->sib.scale;
-        snprintf(temp, MAX_TEMP_FMT_LEN, modrm_fmt, base, index, scale, decoded->displacement.field);
+        snprintf(temp, MAX_TEMP_FMT_LEN + 1, modrm_fmt, base, index, scale, decoded->displacement.field);
       } else {
         /* disp32 */
         if (s == 0) {
@@ -190,13 +190,13 @@ bool set_operands32(Dinstruction *decoded, uchar8_t instruction) {
           reg2 = modrm_reg32[decoded->modrm.rm];
           modrm_fmt = FOUR_BYTE_DISP_OP_32_ADDRESSING;
         }
-        snprintf(temp, MAX_TEMP_FMT_LEN, modrm_fmt, reg2, decoded->displacement.field);
+        snprintf(temp, MAX_TEMP_FMT_LEN + 1, modrm_fmt, reg2, decoded->displacement.field);
       }
 
       if (d == 0)
-        snprintf(decoded->operands.str, MAX_TEMP_FMT_LEN, REG_TO_MEM, temp, reg1);
+        snprintf(decoded->operands.str, MAX_TEMP_FMT_LEN + 1, REG_TO_MEM, temp, reg1);
       else
-        snprintf(decoded->operands.str, MAX_TEMP_FMT_LEN, MEM_TO_REG, reg1, temp);
+        snprintf(decoded->operands.str, MAX_TEMP_FMT_LEN + 1, MEM_TO_REG, reg1, temp);
 
       break;
     case REGISTER_ADDRESSING:
@@ -215,9 +215,9 @@ bool set_operands32(Dinstruction *decoded, uchar8_t instruction) {
         reg2 = modrm_reg32[decoded->modrm.rm];
       }
       if (d == 0) {
-        snprintf(decoded->operands.str, MAX_TEMP_FMT_LEN, REG_TO_REG, reg2, reg1);
+        snprintf(decoded->operands.str, MAX_TEMP_FMT_LEN + 1, REG_TO_REG, reg2, reg1);
       } else {
-        snprintf(decoded->operands.str, MAX_TEMP_FMT_LEN, REG_TO_REG, reg1, reg2);
+        snprintf(decoded->operands.str, MAX_TEMP_FMT_LEN + 1, REG_TO_REG, reg1, reg2);
       }
 
       break;
@@ -232,7 +232,7 @@ bool set_operands32(Dinstruction *decoded, uchar8_t instruction) {
       // 32-bit
       op = z_instr_op32[instruction];
     }
-    snprintf(decoded->operands.str, MAX_TEMP_FMT_LEN, SINGLE_OPERAND, op);
+    snprintf(decoded->operands.str, MAX_TEMP_FMT_LEN + 1, SINGLE_OPERAND, op);
     return true;
   case INSTR_OTHER:
     if (HAS_STATUS(decoded->status, STATUS_OPSIZE_OVERRIDE)) {
@@ -244,12 +244,12 @@ bool set_operands32(Dinstruction *decoded, uchar8_t instruction) {
     }
 
     if (HAS_STATUS(decoded->status, STATUS_IMMEDIATE_OPERAND))
-      snprintf(decoded->operands.str, MAX_TEMP_FMT_LEN, op, decoded->imm);
+      snprintf(decoded->operands.str, MAX_TEMP_FMT_LEN + 1, op, decoded->imm);
     else if (HAS_STATUS(decoded->status, STATUS_REL_OFFSET_OPERAND))
-      snprintf(decoded->operands.str, MAX_TEMP_FMT_LEN, op,
+      snprintf(decoded->operands.str, MAX_TEMP_FMT_LEN + 1, op,
                decoded->rel + decoded->operands.size + BYTE_LEN);
     else if (HAS_STATUS(decoded->status, STATUS_DIRECT_ADDR_OPERAND))
-      snprintf(decoded->operands.str, MAX_TEMP_FMT_LEN, op,
+      snprintf(decoded->operands.str, MAX_TEMP_FMT_LEN + 1, op,
                decoded->dir >>
                    (HAS_STATUS(decoded->status, STATUS_OPSIZE_OVERRIDE) ? 0x10
                                                                         : 0x20),
@@ -268,7 +268,7 @@ bool set_operands32(Dinstruction *decoded, uchar8_t instruction) {
 /*
  * set operand string
  */
-bool set_operands64(Dinstruction *decoded, uchar8_t instruction) {
+static bool set_operands64(Dinstruction *decoded, uchar8_t instruction) {
   // todo
   return false;
 }
@@ -279,6 +279,7 @@ bool set_operands(Dinstruction *decoded, uchar8_t instruction) {
     return set_operands32(decoded, instruction);
   case 64:
     return set_operands64(decoded, instruction);
+  default:
+    return false;
   }
-  return false;
 }

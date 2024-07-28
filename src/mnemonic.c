@@ -7,7 +7,7 @@
 /*
  * sets decoded->mnemonic.str field
  */
-bool set_mnemonic32(Dinstruction *decoded, uchar8_t instruction) {
+static bool set_mnemonic32(Dinstruction *decoded, uchar8_t instruction) {
   if (HAS_STATUS(decoded->status, STATUS_EXTENDED)) {
     if (HAS_STATUS(decoded->status, STATUS_OPCODE_EXTENSION)) {
       // extended and has extension
@@ -103,7 +103,7 @@ bool set_mnemonic32(Dinstruction *decoded, uchar8_t instruction) {
   return false;
 }
 
-bool set_mnemonic64(Dinstruction *decoded, uchar8_t instruction) {
+static bool set_mnemonic64(Dinstruction *decoded, uchar8_t instruction) {
   return false;
 }
 bool set_mnemonic(Dinstruction *decoded, uchar8_t instruction) {
@@ -112,6 +112,8 @@ bool set_mnemonic(Dinstruction *decoded, uchar8_t instruction) {
     return set_mnemonic32(decoded, instruction);
   case 64:
     return set_mnemonic64(decoded, instruction);
+  default:
+    return false;
   }
 }
 

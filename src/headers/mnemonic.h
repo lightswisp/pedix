@@ -2,8 +2,6 @@
 #include <stdbool.h>
 
 bool set_mnemonic(Dinstruction *decoded, uchar8_t instruction);
-bool set_mnemonic32(Dinstruction *decoded, uchar8_t instruction);
-bool set_mnemonic64(Dinstruction *decoded, uchar8_t instruction);
 
 /* extended opcode with extensions and operand size override */
 static const char *extd_ext_11b_66[0x100][0x08] = {

@@ -29,7 +29,7 @@ void free_instrucion(Dinstruction *decoded) { free(decoded); }
 /*
  * decodes 32-bit instruction
  */
-bool decode32(Dinstruction *decoded, uchar8_t *instruction) {
+static bool decode32(Dinstruction *decoded, uchar8_t *instruction) {
   // todo: add valid prefix check
   // ex: 66 0f 74 04 00 -> is a valid instruction, while f3 0f 74 04 00 is not
 
@@ -326,7 +326,7 @@ bool decode32(Dinstruction *decoded, uchar8_t *instruction) {
 /*
  * decodes 64-bit instruction
  */
-bool decode64(Dinstruction *decoded, uchar8_t *instruction) {
+static bool decode64(Dinstruction *decoded, uchar8_t *instruction) {
   //     in 64-bit mode, instruction formats do not change. bits needed to
   //     define fields in the 64-bit context are provided by the
   // addition of rex prefixes.

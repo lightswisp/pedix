@@ -1,5 +1,7 @@
 #include "decoder.h"
 
+bool set_operands(Dinstruction *decoded, uchar8_t instruction);
+
 /* ib or imm8 */
 #define OPERAND_BYTE "0x%02x"
 /* iw ic iv or imm16 */
@@ -73,10 +75,6 @@
 
 #define SIB_FOUR_BYTE_DISP_OP_32_ADDRESSING                                    \
   "DWORD PTR [" REGISTER "+" REGISTER "*" SCALE "+" OPERAND_DWORD "]"
-
-bool set_operands(Dinstruction *decoded, uchar8_t instruction);
-bool set_operands32(Dinstruction *decoded, uchar8_t instruction);
-bool set_operands64(Dinstruction *decoded, uchar8_t instruction);
 
 /* 8-bit registers */
 static const char *modrm_reg8[] = {"al", "cl", "dl", "bl", "ah", "ch", "dh", "bh"};
