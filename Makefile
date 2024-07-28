@@ -2,7 +2,7 @@ default:main
 
 CC=gcc
 SRC=src
-CFLAGS=-g -Wall
+CFLAGS=-g 
 OUTFILE=main
 
 main:

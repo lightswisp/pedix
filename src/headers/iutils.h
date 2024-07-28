@@ -14,7 +14,6 @@ bool instr_has_sib(Dinstruction *decoded);
 bool instr_has_displacement(Dinstruction *decoded);
 
 bool instr_zero(Dinstruction *decoded); 
-bool instr_modrm(Dinstruction *decoded);
 bool instr_other(Dinstruction *decoded);
 
 bool instr_has_rel_offset_operand(Dinstruction *decoded);
@@ -29,6 +28,5 @@ size_t get_opcode_extension_operand_size(Dinstruction *decoded);
 
 size_t get_vex_size(uchar8_t vex_byte);
 
-void set_modrm(Dinstruction *decoded, uchar8_t *i_ptr);
 void set_sib(Dinstruction *decoded, uchar8_t *i_ptr);
 void set_displacement(Dinstruction *decoded);

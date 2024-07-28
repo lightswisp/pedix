@@ -1,8 +1,17 @@
 #include "headers/iutils.h"
 #include "headers/mnemonic.h"
+#include "headers/itable.h"
 #include <string.h>
 
-#define INC(x)(x++)
+#define POST_INC(x)(x++)
+#define PRE_INC(x)(++x)
+
+/* modrm helpers */
+#define MODRM_MOD(field) ((field & 0xC0) >> 6)
+#define MODRM_REG(field) ((field & 0x38) >> 3)
+#define MODRM_RM(field)  ((field & 0x07))
+
+
 /*
  * initializes the struct
  */
@@ -27,6 +36,32 @@ void zero_instruction(Dinstruction *decoded) {
 void free_instrucion(Dinstruction *decoded) { free(decoded); }
 
 /*
+ * decodes modrm
+ */
+static inline bool decode_modrm(Dinstruction *decoded, uchar8_t *i_ptr) {
+
+  if (HAS_STATUS(decoded->status, STATUS_EXTENDED) &&
+      !itable_modrm_reg_extended[decoded->op1])
+    /* 
+     * if extended instruction is not in the table 
+     */
+    return false;
+  else if (!itable_modrm_reg[decoded->op1])
+    /*
+     * if regular instruction is not in the table
+     */ 
+    return false;
+
+  /* decode it otherwise! */
+  decoded->modrm.size = BYTE_LEN;
+  decoded->modrm.field = *i_ptr;
+  decoded->modrm.mod = MODRM_MOD(decoded->modrm.field); 
+  decoded->modrm.reg = MODRM_REG(decoded->modrm.field); 
+  decoded->modrm.rm  = MODRM_RM(decoded->modrm.field); 
+  return true;
+}
+
+/*
  * decodes 32-bit instruction
  */
 static bool decode32(Dinstruction *decoded, uchar8_t *instruction) {
@@ -44,7 +79,7 @@ static bool decode32(Dinstruction *decoded, uchar8_t *instruction) {
     memcpy(decoded->buffer.bytes + decoded->buffer.size, i_ptr, BYTE_LEN);
     decoded->buffer.size += BYTE_LEN;
     decoded->prefixes.size = decoded->buffer.size;
-    INC(i_ptr);
+    POST_INC(i_ptr);
   }
 
   // 00-3f: arith-logical operations: add, adc,sub,sbb,and...
@@ -57,7 +92,7 @@ static bool decode32(Dinstruction *decoded, uchar8_t *instruction) {
     decoded->status |= STATUS_EXTENDED;
     memcpy(decoded->buffer.bytes + decoded->buffer.size, i_ptr, BYTE_LEN);
     decoded->buffer.size += BYTE_LEN;
-    INC(i_ptr);
+    POST_INC(i_ptr);
 
     if (instr_has_secondary_opcode(*i_ptr)) {
       // if it has secondary opcode
@@ -65,15 +100,17 @@ static bool decode32(Dinstruction *decoded, uchar8_t *instruction) {
       memcpy(decoded->buffer.bytes + decoded->buffer.size, i_ptr, BYTE_LEN);
       decoded->buffer.size += BYTE_LEN;
 
-      INC(i_ptr);
+      POST_INC(i_ptr);
       decoded->op2 = *i_ptr;
       memcpy(decoded->buffer.bytes + decoded->buffer.size, i_ptr, BYTE_LEN);
       decoded->buffer.size += BYTE_LEN;
 
-      INC(i_ptr);
-      decoded->instr_type = INSTR_MODRM;
+      POST_INC(i_ptr);
 
-      set_modrm(decoded, i_ptr);
+      if (!decode_modrm(decoded, i_ptr))
+        return false;
+
+      decoded->instr_type = INSTR_MODRM;
       decoded->buffer.bytes[decoded->buffer.size] = *i_ptr;
       decoded->buffer.size += decoded->modrm.size;
       i_ptr += decoded->modrm.size;
@@ -111,7 +148,7 @@ static bool decode32(Dinstruction *decoded, uchar8_t *instruction) {
       return true;
     } else if (*i_ptr == 0x01) {
       decoded->op1 = *i_ptr;
-      INC(i_ptr);
+      POST_INC(i_ptr);
       // actually this block of code is a whole mess, because it is not aware of
       // sgdt, sidt, lgdt, lidt, smsw, lmsw and invlpg instructions. да похуй
       // уже?
@@ -153,7 +190,7 @@ static bool decode32(Dinstruction *decoded, uchar8_t *instruction) {
         if (decoded->operands.size == 0)
           return false;
 
-        INC(i_ptr);
+        POST_INC(i_ptr);
         if (instr_has_immediate_operand(decoded)) {
           decoded->status |= STATUS_IMMEDIATE_OPERAND;
           memcpy(&decoded->imm, i_ptr, decoded->operands.size);
@@ -174,8 +211,7 @@ static bool decode32(Dinstruction *decoded, uchar8_t *instruction) {
         return true;
       }
 
-      if (instr_modrm(decoded)) {
-        INC(i_ptr);
+      if (decode_modrm(decoded, PRE_INC(i_ptr))) {
         decoded->instr_type = INSTR_MODRM;
 
         if (instr_has_opcode_extension(decoded) &&
@@ -186,7 +222,6 @@ static bool decode32(Dinstruction *decoded, uchar8_t *instruction) {
           decoded->buffer.size += op_size;
         }
 
-        set_modrm(decoded, i_ptr);
         decoded->buffer.bytes[decoded->buffer.size] = *i_ptr;
         decoded->buffer.size += decoded->modrm.size;
         i_ptr += decoded->modrm.size;
@@ -247,7 +282,7 @@ static bool decode32(Dinstruction *decoded, uchar8_t *instruction) {
       if (decoded->operands.size == 0)
         return false;
 
-      INC(i_ptr);
+      POST_INC(i_ptr);
 
       if (instr_has_immediate_operand(decoded)) {
         decoded->status |= STATUS_IMMEDIATE_OPERAND;
@@ -268,8 +303,7 @@ static bool decode32(Dinstruction *decoded, uchar8_t *instruction) {
       return true;
     }
 
-    if (instr_modrm(decoded)) {
-      INC(i_ptr);
+    if (decode_modrm(decoded, PRE_INC(i_ptr))) {
       decoded->instr_type = INSTR_MODRM;
 
       if (instr_has_opcode_extension(decoded) &&
@@ -280,7 +314,6 @@ static bool decode32(Dinstruction *decoded, uchar8_t *instruction) {
         decoded->buffer.size += op_size;
       }
 
-      set_modrm(decoded, i_ptr);
       decoded->buffer.bytes[decoded->buffer.size] = *i_ptr;
       decoded->buffer.size += decoded->modrm.size;
       i_ptr += decoded->modrm.size;
@@ -341,7 +374,7 @@ static bool decode64(Dinstruction *decoded, uchar8_t *instruction) {
     memcpy(decoded->buffer.bytes + decoded->buffer.size, i_ptr, BYTE_LEN);
     decoded->buffer.size += BYTE_LEN;
     decoded->prefixes.size = decoded->buffer.size;
-    INC(i_ptr);
+    POST_INC(i_ptr);
   }
 
   if (instr_has_rex(*i_ptr)) {
@@ -353,7 +386,7 @@ static bool decode64(Dinstruction *decoded, uchar8_t *instruction) {
     decoded->rex.r = (decoded->rex.field & 0x04) >> 2;
     decoded->rex.x = (decoded->rex.field & 0x02) >> 1;
     decoded->rex.b = (decoded->rex.field & 0x01);
-    INC(i_ptr);
+    POST_INC(i_ptr);
   }
 
   if (instr_has_extended_opcode(*i_ptr)) {
@@ -361,22 +394,24 @@ static bool decode64(Dinstruction *decoded, uchar8_t *instruction) {
     decoded->status |= STATUS_EXTENDED;
     memcpy(decoded->buffer.bytes + decoded->buffer.size, i_ptr, BYTE_LEN);
     decoded->buffer.size += BYTE_LEN;
-    INC(i_ptr);
+    POST_INC(i_ptr);
     if (instr_has_secondary_opcode(*i_ptr)) {
       // if it has secondary opcode
       decoded->op1 = *i_ptr;
       memcpy(decoded->buffer.bytes + decoded->buffer.size, i_ptr, BYTE_LEN);
       decoded->buffer.size += BYTE_LEN;
 
-      INC(i_ptr);
+      POST_INC(i_ptr);
       decoded->op2 = *i_ptr;
       memcpy(decoded->buffer.bytes + decoded->buffer.size, i_ptr, BYTE_LEN);
       decoded->buffer.size += BYTE_LEN;
 
-      INC(i_ptr);
-      decoded->instr_type = INSTR_MODRM;
+      POST_INC(i_ptr);
 
-      set_modrm(decoded, i_ptr);
+      if (!decode_modrm(decoded, i_ptr))
+        return false;
+
+      decoded->instr_type = INSTR_MODRM;
       decoded->buffer.bytes[decoded->buffer.size] = *i_ptr;
       decoded->buffer.size += decoded->modrm.size;
       i_ptr += decoded->modrm.size;
@@ -416,7 +451,7 @@ static bool decode64(Dinstruction *decoded, uchar8_t *instruction) {
       return true;
     } else if (*i_ptr == 0x01) {
       decoded->op1 = *i_ptr;
-      INC(i_ptr);
+      POST_INC(i_ptr);
       switch (*i_ptr) {
       case 0xC1:
       case 0xC2:
@@ -459,8 +494,7 @@ static bool decode64(Dinstruction *decoded, uchar8_t *instruction) {
         return true;
       }
 
-      if (instr_modrm(decoded)) {
-        INC(i_ptr);
+      if (decode_modrm(decoded, PRE_INC(i_ptr))) {
         decoded->instr_type = INSTR_MODRM;
 
         if (instr_has_opcode_extension(decoded) &&
@@ -471,7 +505,6 @@ static bool decode64(Dinstruction *decoded, uchar8_t *instruction) {
           decoded->buffer.size += op_size;
         }
 
-        set_modrm(decoded, i_ptr);
         decoded->buffer.bytes[decoded->buffer.size] = *i_ptr;
         decoded->buffer.size += decoded->modrm.size;
         i_ptr += decoded->modrm.size;
@@ -518,7 +551,7 @@ static bool decode64(Dinstruction *decoded, uchar8_t *instruction) {
     size_t vex_size = get_vex_size(*i_ptr);
     memcpy(decoded->buffer.bytes + decoded->buffer.size, i_ptr, vex_size);
     decoded->buffer.size += vex_size;
-    INC(i_ptr);
+    POST_INC(i_ptr);
   }
 
   decoded->op1 = *i_ptr;
@@ -544,8 +577,7 @@ static bool decode64(Dinstruction *decoded, uchar8_t *instruction) {
     return true;
   }
 
-  if (instr_modrm(decoded)) {
-    INC(i_ptr);
+  if (decode_modrm(decoded, PRE_INC(i_ptr))) {
     decoded->instr_type = INSTR_MODRM;
 
     if (instr_has_opcode_extension(decoded) &&
@@ -556,7 +588,6 @@ static bool decode64(Dinstruction *decoded, uchar8_t *instruction) {
       decoded->buffer.size += op_size;
     }
 
-    set_modrm(decoded, i_ptr);
     decoded->buffer.bytes[decoded->buffer.size] = *i_ptr;
     decoded->buffer.size += decoded->modrm.size;
     i_ptr += decoded->modrm.size;
