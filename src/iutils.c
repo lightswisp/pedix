@@ -1,5 +1,10 @@
 #include "headers/iutils.h"
 
+static void set_operand_size32(Dinstruction *decoded);
+static void set_operand_size64(Dinstruction *decoded);
+static void set_operand_capacity32(Dinstruction *decoded);
+static void set_operand_capacity64(Dinstruction *decoded);
+
 /*
  * check if instruction has any prefixes
  */
@@ -557,7 +562,7 @@ void set_displacement(Dinstruction *decoded){
 }
 
 
-void set_operand_capacity32(Dinstruction *decoded) {
+static void set_operand_capacity32(Dinstruction *decoded) {
   if (HAS_STATUS(decoded->status, STATUS_EXTENDED)) {
     // todo
     switch (decoded->instr_type) {}
@@ -661,12 +666,22 @@ void set_operand_capacity32(Dinstruction *decoded) {
   }
 }
 
-void set_operand_capacity64(Dinstruction *decoded) {
+static void set_operand_capacity64(Dinstruction *decoded) {
   // todo
   return;
 }
 
-void set_operand_size32(Dinstruction *decoded) {
+void set_operand_capacity(Dinstruction *decoded){
+  switch(decoded->mode){
+    case 32:
+      set_operand_capacity32(decoded);
+    case 64:
+      set_operand_capacity64(decoded);
+  }
+}
+
+
+static void set_operand_size32(Dinstruction *decoded) {
   if (HAS_STATUS(decoded->status, STATUS_EXTENDED)) {
     switch (decoded->op1) {
     case 0x38:
@@ -842,7 +857,7 @@ void set_operand_size32(Dinstruction *decoded) {
   }
 }
 
-void set_operand_size64(Dinstruction *decoded) {
+static void set_operand_size64(Dinstruction *decoded) {
   if (HAS_STATUS(decoded->status, STATUS_REX)) {
     switch (decoded->op1) {
     case 0xB8:
@@ -1032,5 +1047,14 @@ void set_operand_size64(Dinstruction *decoded) {
     decoded->operands.size = QUADWORD_LEN;
     break;
 
+  }
+}
+
+void set_operand_size(Dinstruction *decoded) {
+  switch (decoded->mode) {
+  case 32:
+    set_operand_size32(decoded);
+  case 64:
+    set_operand_size64(decoded);
   }
 }

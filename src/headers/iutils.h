@@ -17,10 +17,8 @@ bool instr_has_rel_offset_operand(Dinstruction *decoded);
 bool instr_has_immediate_operand(Dinstruction *decoded);
 bool instr_has_direct_addr_operand(Dinstruction *decoded);
 
-void set_operand_capacity32(Dinstruction *decoded);
-void set_operand_capacity64(Dinstruction *decoded); 
-void set_operand_size32(Dinstruction *decoded);
-void set_operand_size64(Dinstruction *decoded);
+void set_operand_capacity(Dinstruction *decoded);
+void set_operand_size(Dinstruction *decoded);
 size_t get_opcode_extension_operand_size(Dinstruction *decoded);
 
 size_t get_vex_size(uchar8_t vex_byte);

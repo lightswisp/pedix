@@ -78,7 +78,7 @@ static inline bool decode_zero(Dinstruction *decoded){
 
   /* otherwise return true and set operand capacity */
   decoded->instr_type = INSTR_ZERO;
-  set_operand_capacity32(decoded);
+  set_operand_capacity(decoded);
   return true;
 }
 
@@ -95,7 +95,7 @@ static inline bool decode_other(Dinstruction *decoded){
     return false;
 
   decoded->instr_type = INSTR_OTHER;
-  set_operand_size32(decoded);
+  set_operand_size(decoded);
   if (decoded->operands.size == 0)
     /* if for some reason it is still zero ? */
     return false;
@@ -176,7 +176,7 @@ static bool decode32(Dinstruction *decoded, uchar8_t *instruction) {
       }
 
       if (instr_has_immediate_operand(decoded)){
-        set_operand_size32(decoded);
+        set_operand_size(decoded);
         if (decoded->operands.size == 0) return false;
 
         memcpy(decoded->buffer.bytes + decoded->buffer.size, i_ptr, decoded->operands.size);
@@ -184,7 +184,7 @@ static bool decode32(Dinstruction *decoded, uchar8_t *instruction) {
         decoded->buffer.size += decoded->operands.size;
       }
 
-      set_operand_capacity32(decoded);
+      set_operand_capacity(decoded);
 
       return true;
     } else if (*i_ptr == 0x01) {
@@ -208,7 +208,7 @@ static bool decode32(Dinstruction *decoded, uchar8_t *instruction) {
         decoded->op2 = *i_ptr;
         memcpy(decoded->buffer.bytes + decoded->buffer.size, i_ptr, WORD_LEN);
         decoded->buffer.size += WORD_LEN;
-        set_operand_capacity32(decoded);
+        set_operand_capacity(decoded);
         return true;
       default:
         return false;
@@ -239,7 +239,7 @@ static bool decode32(Dinstruction *decoded, uchar8_t *instruction) {
         memcpy(decoded->buffer.bytes + decoded->buffer.size, i_ptr, decoded->operands.size);
         decoded->buffer.size += decoded->operands.size;
         
-        set_operand_capacity32(decoded);
+        set_operand_capacity(decoded);
 
         return true;
       }
@@ -279,7 +279,7 @@ static bool decode32(Dinstruction *decoded, uchar8_t *instruction) {
         }
 
         if (instr_has_immediate_operand(decoded)) {
-          set_operand_size32(decoded);
+          set_operand_size(decoded);
           if (decoded->operands.size == 0)
             return false;
 
@@ -288,7 +288,7 @@ static bool decode32(Dinstruction *decoded, uchar8_t *instruction) {
           memcpy(&decoded->imm, i_ptr, decoded->operands.size);
           decoded->buffer.size += decoded->operands.size;
         }
-        set_operand_capacity32(decoded);
+        set_operand_capacity(decoded);
         return true;
       }
 
@@ -321,7 +321,7 @@ static bool decode32(Dinstruction *decoded, uchar8_t *instruction) {
 
       memcpy(decoded->buffer.bytes + decoded->buffer.size, i_ptr, decoded->operands.size);
       decoded->buffer.size += decoded->operands.size;
-      set_operand_capacity32(decoded);
+      set_operand_capacity(decoded);
 
       return true;
     }
@@ -361,7 +361,7 @@ static bool decode32(Dinstruction *decoded, uchar8_t *instruction) {
       }
 
       if (instr_has_immediate_operand(decoded)) {
-        set_operand_size32(decoded);
+        set_operand_size(decoded);
         if (decoded->operands.size == 0)
           return false;
 
@@ -370,7 +370,7 @@ static bool decode32(Dinstruction *decoded, uchar8_t *instruction) {
         memcpy(&decoded->imm, i_ptr, decoded->operands.size);
         decoded->buffer.size += decoded->operands.size;
       }
-      set_operand_capacity32(decoded);
+      set_operand_capacity(decoded);
       return true;
     }
   }
@@ -458,7 +458,7 @@ static bool decode64(Dinstruction *decoded, uchar8_t *instruction) {
       }
 
       if (instr_has_immediate_operand(decoded)) {
-        set_operand_size64(decoded);
+        set_operand_size(decoded);
         if (decoded->operands.size == 0)
           return false;
 
@@ -467,7 +467,7 @@ static bool decode64(Dinstruction *decoded, uchar8_t *instruction) {
         memcpy(&decoded->imm, i_ptr, decoded->operands.size);
         decoded->buffer.size += decoded->operands.size;
       }
-      set_operand_capacity64(decoded);
+      set_operand_capacity(decoded);
 
       return true;
     } else if (*i_ptr == 0x01) {
@@ -486,7 +486,7 @@ static bool decode64(Dinstruction *decoded, uchar8_t *instruction) {
         decoded->op2 = *i_ptr;
         memcpy(decoded->buffer.bytes + decoded->buffer.size, i_ptr, WORD_LEN);
         decoded->buffer.size += WORD_LEN;
-        set_operand_capacity64(decoded);
+        set_operand_capacity(decoded);
         return true;
       default:
         return false;
@@ -502,7 +502,7 @@ static bool decode64(Dinstruction *decoded, uchar8_t *instruction) {
       if (decode_other(decoded)) {
         memcpy(decoded->buffer.bytes + decoded->buffer.size, i_ptr, decoded->operands.size);
         decoded->buffer.size += decoded->operands.size;
-        set_operand_capacity64(decoded);
+        set_operand_capacity(decoded);
         return true;
       }
 
@@ -541,7 +541,7 @@ static bool decode64(Dinstruction *decoded, uchar8_t *instruction) {
         }
 
         if (instr_has_immediate_operand(decoded)) {
-          set_operand_size64(decoded);
+          set_operand_size(decoded);
           if (decoded->operands.size == 0)
             return false;
 
@@ -550,7 +550,7 @@ static bool decode64(Dinstruction *decoded, uchar8_t *instruction) {
           memcpy(&decoded->imm, i_ptr, decoded->operands.size);
           decoded->buffer.size += decoded->operands.size;
         }
-        set_operand_capacity64(decoded);
+        set_operand_capacity(decoded);
         return true;
       }
     }
@@ -575,7 +575,7 @@ static bool decode64(Dinstruction *decoded, uchar8_t *instruction) {
   if (decode_other(decoded)) {
     memcpy(decoded->buffer.bytes + decoded->buffer.size, i_ptr, decoded->operands.size);
     decoded->buffer.size += decoded->operands.size;
-    set_operand_capacity64(decoded);
+    set_operand_capacity(decoded);
     return true;
   }
 
@@ -614,7 +614,7 @@ static bool decode64(Dinstruction *decoded, uchar8_t *instruction) {
     }
 
     if (instr_has_immediate_operand(decoded)) {
-      set_operand_size64(decoded);
+      set_operand_size(decoded);
       if (decoded->operands.size == 0)
         return false;
 
@@ -623,7 +623,7 @@ static bool decode64(Dinstruction *decoded, uchar8_t *instruction) {
       memcpy(&decoded->imm, i_ptr, decoded->operands.size);
       decoded->buffer.size += decoded->operands.size;
     }
-    set_operand_capacity64(decoded);
+    set_operand_capacity(decoded);
     return true;
   }
 
