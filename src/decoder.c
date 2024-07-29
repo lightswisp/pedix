@@ -36,7 +36,7 @@ void zero_instruction(Dinstruction *decoded) {
 void free_instrucion(Dinstruction *decoded) { free(decoded); }
 
 /*
- * decodes modrm
+ * decodes instruction that contains modrm
  */
 static inline bool decode_modrm(Dinstruction *decoded, uchar8_t *i_ptr) {
 
@@ -53,11 +53,53 @@ static inline bool decode_modrm(Dinstruction *decoded, uchar8_t *i_ptr) {
     return false;
 
   /* decode it otherwise! */
+  decoded->instr_type = INSTR_MODRM;
   decoded->modrm.size = BYTE_LEN;
   decoded->modrm.field = *i_ptr;
   decoded->modrm.mod = MODRM_MOD(decoded->modrm.field); 
   decoded->modrm.reg = MODRM_REG(decoded->modrm.field); 
   decoded->modrm.rm  = MODRM_RM(decoded->modrm.field); 
+  return true;
+}
+
+/*
+ * decodes zero-type instruction
+ */
+static inline bool decode_zero(Dinstruction *decoded){
+
+  if (HAS_STATUS(decoded->status, STATUS_EXTENDED) &&
+      !itable_zero_extended[decoded->op1])
+    /* if extended instruction is not in the table */
+    return false;
+
+  else if (!itable_zero_reg[decoded->op1])
+    /* if regular instruction is not in the table */
+    return false;
+
+  /* otherwise return true and set operand capacity */
+  decoded->instr_type = INSTR_ZERO;
+  set_operand_capacity32(decoded);
+  return true;
+}
+
+/*
+ * decodes other-type instruction
+ */
+static inline bool decode_other(Dinstruction *decoded){
+
+  if (HAS_STATUS(decoded->status, STATUS_EXTENDED) &&
+      !itable_other_extended[decoded->op1])
+    return false;
+
+  else if (!itable_other_reg[decoded->op1])
+    return false;
+
+  decoded->instr_type = INSTR_OTHER;
+  set_operand_size32(decoded);
+  if (decoded->operands.size == 0)
+    /* if for some reason it is still zero ? */
+    return false;
+
   return true;
 }
 
@@ -110,7 +152,6 @@ static bool decode32(Dinstruction *decoded, uchar8_t *instruction) {
       if (!decode_modrm(decoded, i_ptr))
         return false;
 
-      decoded->instr_type = INSTR_MODRM;
       decoded->buffer.bytes[decoded->buffer.size] = *i_ptr;
       decoded->buffer.size += decoded->modrm.size;
       i_ptr += decoded->modrm.size;
@@ -177,18 +218,10 @@ static bool decode32(Dinstruction *decoded, uchar8_t *instruction) {
       memcpy(decoded->buffer.bytes + decoded->buffer.size, i_ptr, BYTE_LEN);
       decoded->buffer.size += BYTE_LEN;
 
-      if (instr_zero(decoded)) {
-        decoded->instr_type = INSTR_ZERO;
-        set_operand_capacity32(decoded);
-        // if no other bytes are coming after
+      if (decode_zero(decoded)) 
         return true; 
-      }
 
-      if (instr_other(decoded)) {
-        decoded->instr_type = INSTR_OTHER;
-        set_operand_size32(decoded);
-        if (decoded->operands.size == 0)
-          return false;
+      if (decode_other(decoded)) {
 
         POST_INC(i_ptr);
         if (instr_has_immediate_operand(decoded)) {
@@ -212,7 +245,6 @@ static bool decode32(Dinstruction *decoded, uchar8_t *instruction) {
       }
 
       if (decode_modrm(decoded, PRE_INC(i_ptr))) {
-        decoded->instr_type = INSTR_MODRM;
 
         if (instr_has_opcode_extension(decoded) &&
             instr_has_valid_extension(decoded)) {
@@ -269,19 +301,10 @@ static bool decode32(Dinstruction *decoded, uchar8_t *instruction) {
     memcpy(decoded->buffer.bytes + decoded->buffer.size, i_ptr, BYTE_LEN);
     decoded->buffer.size += BYTE_LEN;
 
-    if (instr_zero(decoded)) {
-      decoded->instr_type = INSTR_ZERO;
-      set_operand_capacity32(decoded);
-      // if no other bytes are coming after
+    if (decode_zero(decoded)) 
       return true; 
-    }
 
-    if (instr_other(decoded)) {
-      decoded->instr_type = INSTR_OTHER;
-      set_operand_size32(decoded);
-      if (decoded->operands.size == 0)
-        return false;
-
+    if (decode_other(decoded)) {
       POST_INC(i_ptr);
 
       if (instr_has_immediate_operand(decoded)) {
@@ -304,7 +327,6 @@ static bool decode32(Dinstruction *decoded, uchar8_t *instruction) {
     }
 
     if (decode_modrm(decoded, PRE_INC(i_ptr))) {
-      decoded->instr_type = INSTR_MODRM;
 
       if (instr_has_opcode_extension(decoded) &&
           instr_has_valid_extension(decoded)) {
@@ -411,7 +433,6 @@ static bool decode64(Dinstruction *decoded, uchar8_t *instruction) {
       if (!decode_modrm(decoded, i_ptr))
         return false;
 
-      decoded->instr_type = INSTR_MODRM;
       decoded->buffer.bytes[decoded->buffer.size] = *i_ptr;
       decoded->buffer.size += decoded->modrm.size;
       i_ptr += decoded->modrm.size;
@@ -475,19 +496,10 @@ static bool decode64(Dinstruction *decoded, uchar8_t *instruction) {
       memcpy(decoded->buffer.bytes + decoded->buffer.size, i_ptr, BYTE_LEN);
       decoded->buffer.size += BYTE_LEN;
 
-      if (instr_zero(decoded)) {
-        decoded->instr_type = INSTR_ZERO;
-        set_operand_capacity64(decoded);
-        // if no other bytes are coming after
+      if (decode_zero(decoded)) 
         return true;
-      }
 
-      if (instr_other(decoded)) {
-        decoded->instr_type = INSTR_OTHER;
-        set_operand_size64(decoded);
-        if (decoded->operands.size == 0)
-          return false;
-
+      if (decode_other(decoded)) {
         memcpy(decoded->buffer.bytes + decoded->buffer.size, i_ptr, decoded->operands.size);
         decoded->buffer.size += decoded->operands.size;
         set_operand_capacity64(decoded);
@@ -495,7 +507,6 @@ static bool decode64(Dinstruction *decoded, uchar8_t *instruction) {
       }
 
       if (decode_modrm(decoded, PRE_INC(i_ptr))) {
-        decoded->instr_type = INSTR_MODRM;
 
         if (instr_has_opcode_extension(decoded) &&
             instr_has_valid_extension(decoded)) {
@@ -558,19 +569,10 @@ static bool decode64(Dinstruction *decoded, uchar8_t *instruction) {
   memcpy(decoded->buffer.bytes + decoded->buffer.size, i_ptr, BYTE_LEN);
   decoded->buffer.size += BYTE_LEN;
 
-  if (instr_zero(decoded)) {
-    decoded->instr_type = INSTR_ZERO;
-    set_operand_capacity64(decoded);
-    // if no other bytes are coming after
+  if (decode_zero(decoded)) 
     return true;
-  }
 
-  if (instr_other(decoded)) {
-    decoded->instr_type = INSTR_OTHER;
-    set_operand_size64(decoded);
-    if (decoded->operands.size == 0)
-      return false;
-
+  if (decode_other(decoded)) {
     memcpy(decoded->buffer.bytes + decoded->buffer.size, i_ptr, decoded->operands.size);
     decoded->buffer.size += decoded->operands.size;
     set_operand_capacity64(decoded);
@@ -578,7 +580,6 @@ static bool decode64(Dinstruction *decoded, uchar8_t *instruction) {
   }
 
   if (decode_modrm(decoded, PRE_INC(i_ptr))) {
-    decoded->instr_type = INSTR_MODRM;
 
     if (instr_has_opcode_extension(decoded) &&
         instr_has_valid_extension(decoded)) {

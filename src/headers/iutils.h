@@ -13,9 +13,6 @@ bool instr_has_valid_extension(Dinstruction *decoded);
 bool instr_has_sib(Dinstruction *decoded);
 bool instr_has_displacement(Dinstruction *decoded);
 
-bool instr_zero(Dinstruction *decoded); 
-bool instr_other(Dinstruction *decoded);
-
 bool instr_has_rel_offset_operand(Dinstruction *decoded);
 bool instr_has_immediate_operand(Dinstruction *decoded);
 bool instr_has_direct_addr_operand(Dinstruction *decoded);
