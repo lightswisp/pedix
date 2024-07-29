@@ -222,7 +222,7 @@ static bool set_operands32(Dinstruction *decoded, uchar8_t instruction) {
 
       break;
     }
-    break;
+    return true;
   case INSTR_ZERO:
 
     if (HAS_STATUS(decoded->status, STATUS_OPSIZE_OVERRIDE)) {
