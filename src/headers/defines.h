@@ -8,6 +8,9 @@ enum Types {
   INSTR_OTHER = 3,
 };
 
+#define MODE_32 32
+#define MODE_64 64
+
 #define SET_BREAKPOINT asm volatile("int3");
 #define MAX_OPERAND_STR_LEN 100 
 #define MAX_MNEMONIC_STR_LEN 17

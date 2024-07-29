@@ -2,7 +2,7 @@
 /*
  * dumps all needed information about instruction
  */
-void dump(Dinstruction *decoded) {
+void dump_instruction(Dinstruction *decoded) {
   printf("========================================\n");
 
   printf("instruction mode: %d\n", decoded->mode);
