@@ -30,11 +30,11 @@ bool set_operands(Dinstruction *decoded, uchar8_t instruction);
 #define INDIRECT_OP_32_ADDRESSING "DWORD PTR [" REGISTER "]"
 
 #define SIB_FOUR_BYTE_OP_8_NO_DISP_ADDRESSING                                  \
-  "BYTE PTR[" REGISTER "+" REGISTER "*" SCALE "]"
+  "BYTE PTR [" REGISTER "+" REGISTER "*" SCALE "]"
 #define SIB_FOUR_BYTE_OP_16_NO_DISP_ADDRESSING                                 \
-  "WORD PTR[" REGISTER "+" REGISTER "*" SCALE "]"
+  "WORD PTR [" REGISTER "+" REGISTER "*" SCALE "]"
 #define SIB_FOUR_BYTE_OP_32_NO_DISP_ADDRESSING                                 \
-  "DWORD PTR[" REGISTER "+" REGISTER "*" SCALE "]"
+  "DWORD PTR [" REGISTER "+" REGISTER "*" SCALE "]"
 
 #define SIB_FOUR_BYTE_DISP_OP_8_NO_REG_ADDRESSING                              \
   "BYTE PTR [" REGISTER "*" SCALE "+" OPERAND_DWORD "]"

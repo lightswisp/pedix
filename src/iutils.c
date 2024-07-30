@@ -213,63 +213,65 @@ bool instr_has_valid_extension(Dinstruction *decoded) {
     case 0x18:
       return true;
     }
-  }
-  switch (decoded->op1) {
-  case 0x80:
-  case 0x81:
-  case 0x82:
-  case 0x83:
-    return true;
-  case 0x8F:
-    switch (decoded->modrm.reg) {
-    case 0x00:
+  } else {
+    // regular
+    switch (decoded->op1) {
+    case 0x80:
+    case 0x81:
+    case 0x82:
+    case 0x83:
       return true;
-    default:
-      return false;
-    }
-  case 0xC0:
-  case 0xC1:
-  case 0xD0:
-  case 0xD1:
-  case 0xD2:
-  case 0xD3:
-    switch (decoded->modrm.reg) {
-    case 0x06:
-      return false;
-    default:
-      return true;
-    }
-  case 0xF6:
-  case 0xF7:
-    switch (decoded->modrm.reg) {
-    case 0x01:
-      return false;
-    default:
-      return true;
-    }
-  case 0xFE:
-    switch (decoded->modrm.reg) {
-    case 0x00:
-    case 0x01:
-      return true;
-    default:
-      return false;
-    }
-  case 0xFF:
-    switch (decoded->modrm.reg) {
-    case 0x07:
-      return false;
-    default:
-      return true;
-    }
-  case 0xC6:
-  case 0xC7:
-    switch (decoded->modrm.reg) {
-    case 0x00:
-    case 0x07:
-      return true;
-    default:
-      return false;
+    case 0x8F:
+      switch (decoded->modrm.reg) {
+      case 0x00:
+        return true;
+      default:
+        return false;
+      }
+    case 0xC0:
+    case 0xC1:
+    case 0xD0:
+    case 0xD1:
+    case 0xD2:
+    case 0xD3:
+      switch (decoded->modrm.reg) {
+      case 0x06:
+        return false;
+      default:
+        return true;
+      }
+    case 0xF6:
+    case 0xF7:
+      switch (decoded->modrm.reg) {
+      case 0x01:
+        return false;
+      default:
+        return true;
+      }
+    case 0xFE:
+      switch (decoded->modrm.reg) {
+      case 0x00:
+      case 0x01:
+        return true;
+      default:
+        return false;
+      }
+    case 0xFF:
+      switch (decoded->modrm.reg) {
+      case 0x07:
+        return false;
+      default:
+        return true;
+      }
+    case 0xC6:
+    case 0xC7:
+      switch (decoded->modrm.reg) {
+      case 0x00:
+      case 0x07:
+        return true;
+      default:
+        return false;
+      }
     }
   }
   return false;
@@ -675,8 +677,10 @@ void set_operand_capacity(Dinstruction *decoded){
   switch(decoded->mode){
     case 32:
       set_operand_capacity32(decoded);
+      break;
     case 64:
       set_operand_capacity64(decoded);
+      break;
   }
 }
 
@@ -1054,7 +1058,9 @@ void set_operand_size(Dinstruction *decoded) {
   switch (decoded->mode) {
   case 32:
     set_operand_size32(decoded);
+    break;
   case 64:
     set_operand_size64(decoded);
+    break;
   }
 }

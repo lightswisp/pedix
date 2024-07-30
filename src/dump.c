@@ -1,4 +1,5 @@
 #include "headers/dump.h"
+#include <stdio.h>
 /*
  * dumps all needed information about instruction
  */
@@ -36,7 +37,7 @@ void dump_instruction(Dinstruction *decoded) {
   printf("instruction operand capacity: %zu\n", decoded->operands.capacity);
   printf("raw bytes: ");
   for (size_t i = 0; i < decoded->buffer.size; i++) {
-    printf("%02x ", decoded->buffer.bytes[i]);
+    printf("0x%02X ", decoded->buffer.bytes[i]);
   }
   putchar('\n');
   printf("========================================\n\n");
