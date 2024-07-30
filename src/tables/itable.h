@@ -1,6 +1,7 @@
+#pragma once
 #include <stdbool.h>
 
-bool itable_modrm_reg[] = {
+const bool itable_modrm_reg[] = {
     [0x00] = true, [0x01] = true, [0x02] = true, [0x03] = true, [0x0D] = true,
     [0x10] = true, [0x11] = true, [0x12] = true, [0x13] = true, [0x14] = true,
     [0x15] = true, [0x16] = true, [0x17] = true, [0x18] = true, [0x19] = true,
@@ -39,7 +40,7 @@ bool itable_modrm_reg[] = {
     [0xF7] = true, [0xF8] = true, [0xF9] = true, [0xFA] = true, [0xFB] = true,
     [0xFC] = true, [0xFD] = true, [0xFE] = true, [0xFF] = true, [0x1F] = true};
 
-bool itable_modrm_reg_extended[] = {
+const bool itable_modrm_reg_extended[] = {
     [0x00] = true, [0x01] = true, [0x02] = true, [0x03] = true, [0x0D] = true,
     [0x10] = true, [0x11] = true, [0x12] = true, [0x13] = true, [0x14] = true,
     [0x15] = true, [0x16] = true, [0x17] = true, [0x18] = true, [0x19] = true,
@@ -78,7 +79,7 @@ bool itable_modrm_reg_extended[] = {
     [0xF7] = true, [0xF8] = true, [0xF9] = true, [0xFA] = true, [0xFB] = true,
     [0xFC] = true, [0xFD] = true, [0xFE] = true, [0xFF] = true, [0x1F] = true};
 
-bool itable_zero_reg[] = {
+const bool itable_zero_reg[] = {
     [0x06] = true, [0x07] = true, [0x0E] = true, [0x16] = true, [0x17] = true,
     [0x1E] = true, [0x1F] = true, [0x27] = true, [0x2F] = true, [0x37] = true,
     [0x3F] = true, [0x40] = true, [0x41] = true, [0x42] = true, [0x43] = true,
@@ -100,7 +101,7 @@ bool itable_zero_reg[] = {
     [0xFB] = true, [0xFC] = true, [0xFD] = true,
 };
 
-bool itable_zero_extended[] = {
+const bool itable_zero_extended[] = {
     [0x05] = true, [0x06] = true, [0x07] = true, [0x08] = true, [0x09] = true,
     [0x0B] = true, [0x30] = true, [0x31] = true, [0x32] = true, [0x33] = true,
     [0x34] = true, [0x35] = true, [0x37] = true, [0x77] = true, [0xA0] = true,
@@ -109,7 +110,7 @@ bool itable_zero_extended[] = {
     [0xCD] = true, [0xCE] = true, [0xCF] = true,
 };
 
-bool itable_other_extended[] = {
+const bool itable_other_extended[] = {
     [0x20] = true, [0x21] = true, [0x22] = true, [0x23] = true, [0x24] = true,
     [0x26] = true, [0x50] = true, [0x80] = true, [0x81] = true, [0x82] = true,
     [0x83] = true, [0x84] = true, [0x85] = true, [0x86] = true, [0x87] = true,
@@ -117,7 +118,7 @@ bool itable_other_extended[] = {
     [0x8D] = true, [0x8E] = true, [0x8F] = true,
 };
 
-bool itable_other_reg[] = {
+const bool itable_other_reg[] = {
     [0x04] = true, [0x05] = true, [0x0C] = true, [0x0D] = true, [0x14] = true,
     [0x15] = true, [0x1C] = true, [0x1D] = true, [0x24] = true, [0x25] = true,
     [0x2C] = true, [0x2D] = true, [0x34] = true, [0x35] = true, [0x3C] = true,

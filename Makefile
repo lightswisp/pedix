@@ -1,7 +1,7 @@
 .PHONY: clean test build_test build_main run main
 default:main
 
-CC=gcc
+CC=clang
 SRC  = $(wildcard src/*.c)
 TEST = $(wildcard test/*.c)
 EXTENSION=exe

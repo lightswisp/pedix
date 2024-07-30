@@ -1,6 +1,6 @@
 #include "headers/iutils.h"
-#include "headers/mnemonic.h"
-#include "headers/itable.h"
+#include "headers/decoder.h"
+#include "tables/itable.h"
 #include <string.h>
 
 #define POST_INC(x)(x++)

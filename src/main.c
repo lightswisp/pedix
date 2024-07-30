@@ -1,5 +1,6 @@
 #include "headers/decoder.h"
 #include "headers/dump.h"
+#include "headers/mnemonic.h"
 #include "headers/operand.h"
 #include <stdio.h>
 

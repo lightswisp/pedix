@@ -1,5 +1,5 @@
 #include "iutils.h"
-#include "mnemonic.h"
+#include "decoder.h"
 #include <stdio.h>
 
 void dump_instruction(Dinstruction *decoded);             
