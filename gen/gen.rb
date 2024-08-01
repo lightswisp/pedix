@@ -213,8 +213,6 @@ instructions.each{|i|
   puts i.opcode
 }
 
-# arr.uniq.map{|e| e = { e => arr.select{|e2| e2 == e}}}
-
 # fix operands
 # use Operand class to set :operand1, :operand2, ...
 
