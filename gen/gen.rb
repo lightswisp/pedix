@@ -35,6 +35,106 @@ PREFIXES = [PREFIX_LOCK,
             PREFIX_OPSIZE_OVERRIDE,
             PREFIX_ASZ_OVERRIDE] 
 
+OPERAND_MAP = {
+  "imm8" => "IMM8",
+  "imm16" => "IMM16",
+  "imm32" => "IMM32",
+  "imm64" => "IMM64",
+  "al"  => "al",
+  "cl"  => "cl",
+  "dl"  =>"dl",
+  "bl"  => "bl",
+  "ah"  =>"ah",
+  "ch"  =>"ch",
+  "dh"  =>"dh",
+  "bh"  => "bh",
+  "spl" => "spl",
+  "bpl" => "bpl",
+  "ax"  =>"ax",
+  "cx"  =>"cx",
+  "dx"  =>"dx",
+  "bx"  =>"bx",
+  "sp"  =>"sp",
+  "bp"  =>"bp",
+  "si"  =>"si",
+  "di"  =>"di",
+  "sil" => "sil",
+  "dil" => "dil",
+  "eax" => "eax",
+  "ecx" =>"ecx",
+  "edx" =>"edx",
+  "ebx" =>"ebx",
+  "esp" =>"esp",
+  "ebp" =>"ebp",
+  "esi" =>"esi",
+  "edi" => "edi",
+  "rax" =>"rax",
+  "rcx" =>"rcx",
+  "rdx" =>"rdx",
+  "rbx" =>"rbx",
+  "rsp" =>"rsp",
+  "rbp" =>"rbp",
+  "rsi" =>"rsi",
+  "rdi" => "rdi",
+  "r/m8" => "MODRM_RM8",
+  "r/m16" => "MODRM_RM16",
+  "r/m32" => "MODRM_RM32",
+  "r/m64" => "MODRM_RM64",
+  "r8b" =>"r8b",
+  "r8w" =>"r8w",
+  "r8d" =>"r8d",
+  "r8" =>"r8",
+  "r9b" =>"r9b",
+  "r9w" =>"r9w",
+  "r9d" =>"r9d",
+  "r9" =>"r9",
+  "r10b" =>"r10b",
+  "r10w" =>"r10w",
+  "r10d" =>"r10d",
+  "r10" =>"r10",
+  "r11b" =>"r11b",
+  "r11w" =>"r11w",
+  "r11d" =>"r11d",
+  "r11" =>"r11",
+  "r12b" =>"r12b",
+  "r12w" =>"r12w",
+  "r12d" =>"r12d",
+  "r12" =>"r12",
+  "r13b" =>"r13b",
+  "r13w" =>"r13w",
+  "r13d" =>"r13d",
+  "r13" =>"r13",
+  "r14b" =>"r14b",
+  "r14w" =>"r14w",
+  "r14d" =>"r14d",
+  "r14" =>"r14",
+  "r15b" =>"r15b",
+  "r15w" =>"r15w",
+  "r15d" =>"r15d",
+  "r15" =>"r15",
+  "r16" => "r16",  # One of the word general-purpose registers: AX, CX, DX, BX, SP, BP, SI, DI
+  "r32" => "r32",  # One of the doubleword general-purpose registers: EAX, ECX, EDX, EBX, ESP, EBP, ESI, EDI
+  "r64" => "r64",  # One of the quadword general-purpose registers: RAX, RBX, RCX, RDX, RDI, RSI, RBP, RSP, R8–R15
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 class Instruction 
   attr_accessor :instruction, :opcode, :valid_64, :valid_32, :valid_16, :feature_flags, :operand1, :operand2, :operand3, :operand4, :no_prefix, :prefixes
 
@@ -59,6 +159,9 @@ class Instruction
   def count()
     return @@count
   end
+  def set_operand(n, v)
+    instance_variable_set("@operand#{n}", v)
+  end
 end
 
 class Operand 
@@ -72,12 +175,12 @@ end
 csv = CSV.read("x86.csv")
 instructions = []
 
-csv.each{|row|
+csv.each do |row|
   # removing sse,avx,etc (for now!)
  if row[5].nil? || row[5].empty?
     instructions << Instruction.new(row)
   end
-}
+end
 
 # replace rexes with appropriate bytes
 instructions.map! do |instruction| 
@@ -143,7 +246,7 @@ end
 
 
 # deleting duplicates that follow ST(i)
-instructions.each.with_index{|instruction, i|
+instructions.each.with_index do |instruction, i|
   if instruction.opcode.include?("+i")
     to_find = instruction.opcode.sub("+i", "").split(" ")
     to_find[-1] = (to_find[-1].to_i(16)+1).to_s(16).upcase
@@ -151,7 +254,7 @@ instructions.each.with_index{|instruction, i|
 
     instructions.delete_if{|row_to_find| row_to_find.opcode == to_find}
   end
-}
+end
 
 # expand all instructions with ST(i)
 
@@ -185,7 +288,7 @@ end.flatten!
 # all prefix bytes that were eaten are supposed to be checked 
 # according to this required attribute.
 
-instructions.each{|instruction|
+instructions.each do |instruction|
   first_byte = instruction.opcode.split(" ")
   if first_byte.size < 2
     instructions.delete(instruction)
@@ -196,10 +299,9 @@ instructions.each{|instruction|
     instruction.prefixes << first_byte 
     instruction.opcode = instruction.opcode[3..-1]
   end
-}
+end
 
 # remove spaces between operands
-
 instructions.each do |instruction|
   if(instruction.instruction.count(" ") > 1)
     dirty_portion = instruction.instruction.index(" ")+1
@@ -208,20 +310,69 @@ instructions.each do |instruction|
 end
 
 
+# downcase em 
+instructions.each do |instruction|
+  instruction.instruction.downcase! 
+end
 
-instructions.each{|i|
-  puts i.opcode
-}
 
 # fix operands
 # use Operand class to set :operand1, :operand2, ...
 
-#instructions.filter! do |instruction|
-#  ((instruction.operand1.nil?   ||
-#  instruction.operand1.empty?   ||
-#  instruction.operand1 == "NA") &&
-#  instruction.instruction.include?(" ") 
-#  )
-#end 
+instructions.each do |instruction|
+  splitted_instruction = instruction.instruction.split(" ")
+  if splitted_instruction.size > 1
+    # just throw the mnemonic part away
+    splitted_instruction.shift
+    splitted_instruction.each do |portion|
+      splitted_portion = portion.split(",")
+      if splitted_portion.size > 1
+        # more then one operand
+        splitted_portion.each.with_index do |el, i|
+          operand = OPERAND_MAP[el]
+          if operand.nil? 
+            # for debugging
+            printf("we are at: %d/%d\n", instructions.index(instruction), instructions.size)
+            printf("el: %s\n", el)
+            printf("splitted_portion: %s\n", splitted_portion)
+            printf("splitted_instruction: %s\n", splitted_instruction)
+            printf("unhandled portion: %s\n", portion)
+            puts
+            pp(instruction)
+            exit(false)
+          end
+          instruction.set_operand(i+1, OPERAND_MAP[el])
+        end
+      else 
+        instruction.operand1 = portion
+      end
+#      case portion 
+#        when /imm/
+#          if splitted_portion.size > 1
+#            # more then one operand
+#            splitted_portion.each.with_index do |el, i|
+#              instruction.set_operand(i+1, OPERAND_MAP[el])
+#            end
+#          else 
+#            instruction.operand1 = portion
+#          end 
+#          pp instruction
+#        when /r8/
+#        else 
+#          # for debugging
+#          printf("splitted_portion: %s\n", splitted_portion)
+#          printf("splitted_instruction: %s\n", splitted_instruction)
+#          printf("unhandled portion: %s\n", portion)
+#          puts
+#          pp(instruction)
+#          exit(false)
+#      end
+    end
+  end
+end
+
+pp instructions 
 
 
+# group_by 
+# in the end!
