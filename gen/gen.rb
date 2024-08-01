@@ -70,16 +70,14 @@ class Operand
 end
 
 csv = CSV.read("x86.csv")
-
 instructions = []
 
 csv.each{|row|
   # removing sse,avx,etc (for now!)
-  if row[5].nil? || row[5].empty?
+ if row[5].nil? || row[5].empty?
     instructions << Instruction.new(row)
   end
 }
-
 
 # replace rexes with appropriate bytes
 instructions.map! do |instruction| 
@@ -155,6 +153,33 @@ instructions.each.with_index{|instruction, i|
   end
 }
 
+# expand all instructions with ST(i)
+
+instructions.map! do |instruction|
+
+  if instruction.opcode.include?("+i")
+    (0..7).to_a.map do |i|
+      to_find = instruction.opcode.sub("+i", "").split(" ")
+      to_find[-1] = (to_find[-1].to_i(16)+i).to_s(16).upcase
+      to_find = to_find.join(" ")
+      Instruction.new([
+        instruction.instruction.sub("i", i.to_s),
+        to_find,
+        instruction.valid_64,
+        instruction.valid_32,
+        instruction.valid_16,
+        instruction.feature_flags,
+        instruction.operand1,
+        instruction.operand2,
+        instruction.operand3,
+        instruction.operand4
+      ])
+    end
+  else 
+    instruction
+  end
+end.flatten!
+
 # remove prefixes and set them as required attributes.
 # because when we will parse the instruction inside our c code, 
 # all prefix bytes that were eaten are supposed to be checked 
@@ -162,7 +187,10 @@ instructions.each.with_index{|instruction, i|
 
 instructions.each{|instruction|
   first_byte = instruction.opcode.split(" ")
-  next if first_byte.size < 2
+  if first_byte.size < 2
+    instructions.delete(instruction)
+    next 
+  end
   first_byte = first_byte.first.to_i(16)
   if PREFIXES.include?(first_byte) 
     instruction.prefixes << first_byte 
@@ -170,7 +198,22 @@ instructions.each{|instruction|
   end
 }
 
-pp instructions
+# remove spaces between operands
+
+instructions.each do |instruction|
+  if(instruction.instruction.count(" ") > 1)
+    dirty_portion = instruction.instruction.index(" ")+1
+    instruction.instruction[dirty_portion..-1] = instruction.instruction[dirty_portion..-1].delete(" ")
+  end
+end
+
+
+
+instructions.each{|i|
+  puts i.opcode
+}
+
+# arr.uniq.map{|e| e = { e => arr.select{|e2| e2 == e}}}
 
 # fix operands
 # use Operand class to set :operand1, :operand2, ...
