@@ -35,108 +35,85 @@ PREFIXES = [PREFIX_LOCK,
             PREFIX_OPSIZE_OVERRIDE,
             PREFIX_ASZ_OVERRIDE] 
 
-OPERAND_MAP = {
+IMMEDIATES_MAP = {
   "imm8" => "IMM8",
   "imm16" => "IMM16",
   "imm32" => "IMM32",
   "imm64" => "IMM64",
-  "al"  => "al",
-  "cl"  => "cl",
-  "dl"  =>"dl",
-  "bl"  => "bl",
-  "ah"  =>"ah",
-  "ch"  =>"ch",
-  "dh"  =>"dh",
-  "bh"  => "bh",
-  "spl" => "spl",
-  "bpl" => "bpl",
-  "ax"  =>"ax",
-  "cx"  =>"cx",
-  "dx"  =>"dx",
-  "bx"  =>"bx",
-  "sp"  =>"sp",
-  "bp"  =>"bp",
-  "si"  =>"si",
-  "di"  =>"di",
-  "sil" => "sil",
-  "dil" => "dil",
-  "eax" => "eax",
-  "ecx" =>"ecx",
-  "edx" =>"edx",
-  "ebx" =>"ebx",
-  "esp" =>"esp",
-  "ebp" =>"ebp",
-  "esi" =>"esi",
-  "edi" => "edi",
-  "rax" =>"rax",
-  "rcx" =>"rcx",
-  "rdx" =>"rdx",
-  "rbx" =>"rbx",
-  "rsp" =>"rsp",
-  "rbp" =>"rbp",
-  "rsi" =>"rsi",
-  "rdi" => "rdi",
-  "r/m8" => "MODRM_RM8",
-  "r/m16" => "MODRM_RM16",
-  "r/m32" => "MODRM_RM32",
-  "r/m64" => "MODRM_RM64",
-  "r8b" =>"r8b",
-  "r8w" =>"r8w",
-  "r8d" =>"r8d",
-  "r8" =>"r8",
-  "r9b" =>"r9b",
-  "r9w" =>"r9w",
-  "r9d" =>"r9d",
-  "r9" =>"r9",
-  "r10b" =>"r10b",
-  "r10w" =>"r10w",
-  "r10d" =>"r10d",
-  "r10" =>"r10",
-  "r11b" =>"r11b",
-  "r11w" =>"r11w",
-  "r11d" =>"r11d",
-  "r11" =>"r11",
-  "r12b" =>"r12b",
-  "r12w" =>"r12w",
-  "r12d" =>"r12d",
-  "r12" =>"r12",
-  "r13b" =>"r13b",
-  "r13w" =>"r13w",
-  "r13d" =>"r13d",
-  "r13" =>"r13",
-  "r14b" =>"r14b",
-  "r14w" =>"r14w",
-  "r14d" =>"r14d",
-  "r14" =>"r14",
-  "r15b" =>"r15b",
-  "r15w" =>"r15w",
-  "r15d" =>"r15d",
-  "r15" =>"r15",
-  "r16" => "r16",  # One of the word general-purpose registers: AX, CX, DX, BX, SP, BP, SI, DI
-  "r32" => "r32",  # One of the doubleword general-purpose registers: EAX, ECX, EDX, EBX, ESP, EBP, ESI, EDI
-  "r64" => "r64",  # One of the quadword general-purpose registers: RAX, RBX, RCX, RDX, RDI, RSI, RBP, RSP, R8–R15
 }
 
+SEGMENT_REGISTERS_MAP = {
+  "ES" => "ES",
+  "FS" => "FS",
+  "GS" => "GS",
+  "SS" => "SS",
+  "DS" => "DS",
+  "CS" => "CS"
+}
 
+REGISTERS_MAP = {
+  "AL"  => "AL",
+  "CL"  => "CL",
+  "DL"  =>"DL",
+  "BL"  => "BL",
+  "AH"  =>"AH",
+  "CH"  =>"CH",
+  "DH"  =>"DH",
+  "BH"  => "BH",
+  "SPL" => "SPL",
+  "BPL" => "BPL",
+  "AX"  =>"AX",
+  "CX"  =>"CX",
+  "DX"  =>"DX",
+  "BX"  =>"BX",
+  "SP"  =>"SP",
+  "BP"  =>"BP",
+  "SI"  =>"SI",
+  "DI"  =>"DI",
+  "SIL" => "SIL",
+  "DIL" => "DIL",
+  "EAX" => "EAX",
+  "ECX" =>"ECX",
+  "EDX" =>"EDX",
+  "EBX" =>"EBX",
+  "ESP" =>"ESP",
+  "EBP" =>"EBP",
+  "ESI" =>"ESI",
+  "EDI" => "EDI",
+  "RAX" =>"RAX",
+  "RCX" =>"RCX",
+  "RDX" =>"RDX",
+  "RBX" =>"RBX",
+  "RSP" =>"RSP",
+  "RBP" =>"RBP",
+  "RSI" =>"RSI",
+  "RDI" => "RDI",
+}
 
+MODRM_MAP = {
+  "ModRM:reg" => {
+    "r8" => "MODRM_REG8",
+    "r16" => "MODRM_REG16",
+    "r32" => "MODRM_REG32"
+  },
 
+  "ModRM:r/m" => {
+    "r/m8" => "MODRM_RM8",
+    "r/m16" => "MODRM_RM16",
+    "r/m32" => "MODRM_RM32"
+  }
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+OPERANDS_MAP = {}.merge(REGISTERS_MAP)
+                 .merge(IMMEDIATES_MAP)
+                 .merge(MODRM_MAP)
+                 .merge(SEGMENT_REGISTERS_MAP)
 
 class Instruction 
-  attr_accessor :instruction, :opcode, :valid_64, :valid_32, :valid_16, :feature_flags, :operand1, :operand2, :operand3, :operand4, :no_prefix, :prefixes
+  attr_accessor :instruction, :opcode, :valid_64, 
+                :valid_32, :valid_16, :feature_flags, 
+                :operand1, :operand2, :operand3, 
+                :operand4, :no_prefix, :prefixes
 
   @@count = 0
   def initialize(row)
@@ -159,16 +136,26 @@ class Instruction
   def count()
     return @@count
   end
+
   def set_operand(n, v)
     instance_variable_set("@operand#{n}", v)
   end
-end
 
-class Operand 
-  # set once again all of the operands according to the instruction and opcode flags 
-  def initialize(instruction, opcode) 
-    @instruction = instruction 
-    @opcode = opcode
+  def get_operand(n)
+    instance_variable_get("@operand#{n}")
+  end
+
+  def generate_operand(el, existing_operand)
+    # for debugging
+    printf("searching for %s\n", el)
+
+    if existing_operand.include?("ModRM:reg")
+      return OPERANDS_MAP["ModRM:reg"][el]
+    elsif existing_operand.include?("ModRM:r/m")
+      return OPERANDS_MAP["ModRM:r/m"][el]
+    else 
+      return OPERANDS_MAP[el]
+    end
   end
 end
 
@@ -183,6 +170,7 @@ csv.each do |row|
 end
 
 # replace rexes with appropriate bytes
+
 instructions.map! do |instruction| 
 
   # REX => 0x40 to 0x4f
@@ -246,6 +234,7 @@ end
 
 
 # deleting duplicates that follow ST(i)
+
 instructions.each.with_index do |instruction, i|
   if instruction.opcode.include?("+i")
     to_find = instruction.opcode.sub("+i", "").split(" ")
@@ -302,6 +291,7 @@ instructions.each do |instruction|
 end
 
 # remove spaces between operands
+
 instructions.each do |instruction|
   if(instruction.instruction.count(" ") > 1)
     dirty_portion = instruction.instruction.index(" ")+1
@@ -310,11 +300,11 @@ instructions.each do |instruction|
 end
 
 
-# downcase em 
-instructions.each do |instruction|
-  instruction.instruction.downcase! 
-end
+# sort them by first operand
 
+instructions.sort_by!{|instruction|
+  instruction.opcode.split(" ").first.to_i(16)
+}
 
 # fix operands
 # use Operand class to set :operand1, :operand2, ...
@@ -329,7 +319,10 @@ instructions.each do |instruction|
       if splitted_portion.size > 1
         # more then one operand
         splitted_portion.each.with_index do |el, i|
-          operand = OPERAND_MAP[el]
+          operand = instruction.generate_operand(
+            el,
+            instruction.get_operand(i+1)
+          )
           if operand.nil? 
             # for debugging
             printf("we are at: %d/%d\n", instructions.index(instruction), instructions.size)
@@ -341,38 +334,54 @@ instructions.each do |instruction|
             pp(instruction)
             exit(false)
           end
-          instruction.set_operand(i+1, OPERAND_MAP[el])
+          instruction.set_operand(i+1, operand)
+          # remove operand
+          instruction.instruction.sub!(el, "")
         end
+        # remove comma
+        instruction.instruction.sub!(",", "") 
+        # remove spaces
+        instruction.instruction.strip!
       else 
-        instruction.operand1 = portion
+        operand = instruction.generate_operand(
+          splitted_instruction.first,
+          instruction.get_operand(1)
+        )
+        if operand.nil? 
+          # for debugging
+          printf("we are at: %d/%d\n", instructions.index(instruction), instructions.size)
+          printf("splitted_portion: %s\n", splitted_portion)
+          printf("splitted_instruction: %s\n", splitted_instruction)
+          puts
+          pp(instruction)
+          exit(false)
+        end
+        instruction.operand1 = operand 
+        # remove operand
+        instruction.instruction.sub!(splitted_instruction.first, "")
+        # remove spaces
+        instruction.instruction.strip!
       end
-#      case portion 
-#        when /imm/
-#          if splitted_portion.size > 1
-#            # more then one operand
-#            splitted_portion.each.with_index do |el, i|
-#              instruction.set_operand(i+1, OPERAND_MAP[el])
-#            end
-#          else 
-#            instruction.operand1 = portion
-#          end 
-#          pp instruction
-#        when /r8/
-#        else 
-#          # for debugging
-#          printf("splitted_portion: %s\n", splitted_portion)
-#          printf("splitted_instruction: %s\n", splitted_instruction)
-#          printf("unhandled portion: %s\n", portion)
-#          puts
-#          pp(instruction)
-#          exit(false)
-#      end
+        pp instruction
     end
   end
 end
 
-pp instructions 
 
+#return 
+#
+#
+#instructions.filter! do |instruction|
+#  instruction.opcode.include?("/r") && instruction.operand1.include?("r/m") && !instruction.instruction.include?("r/m")
+#end
+#puts instructions.size
+#
+#pp instructions 
+
+# downcase em 
+#instructions.each do |instruction|
+#  instruction.instruction.downcase! 
+#end
 
 # group_by 
 # in the end!
