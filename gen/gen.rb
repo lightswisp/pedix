@@ -6,34 +6,47 @@ require "csv"
 
 # np => no prefix 
 
-# prefix bytes
-PREFIX_LOCK            = 0xF0            
-PREFIX_REPNE_Z         = 0xF2         
-PREFIX_REP_E_Z         = 0xF3         
-PREFIX_CS              = 0x2E              
-PREFIX_SS              = 0x36              
-PREFIX_DS              = 0x3E              
-PREFIX_ES              = 0x26              
-PREFIX_FS              = 0x64              
-PREFIX_GS              = 0x65              
-PREFIX_BNT             = 0x2E             
-PREFIX_BT              = 0x3E              
-PREFIX_OPSIZE_OVERRIDE = 0x66 
-PREFIX_ASZ_OVERRIDE    = 0x67    
+# flags 
+module Flags 
+  FLAGS_VOID                    = 0 << 0;
+  FLAGS_MODRM                   = 1 << 0;
+  FLAGS_CODE_OFFSET             = 1 << 1;
+  FLAGS_IMMEDIATE               = 1 << 2;
+  FLAGS_MODRM_REG_MULTIPLEXING  = 1 << 3;
+  FLAGS_ST_FPU                  = 1 << 4;
+  FLAGS_NO_MODIFIERS            = 1 << 5;
+end
 
-PREFIXES = [PREFIX_LOCK,          
-            PREFIX_REPNE_Z, 
-            PREFIX_REP_E_Z,       
-            PREFIX_CS,            
-            PREFIX_SS,            
-            PREFIX_DS,            
-            PREFIX_ES,            
-            PREFIX_FS,            
-            PREFIX_GS,            
-            PREFIX_BNT,           
-            PREFIX_BT,            
-            PREFIX_OPSIZE_OVERRIDE,
-            PREFIX_ASZ_OVERRIDE] 
+# prefix bytes
+module Prefixes
+  PREFIX_LOCK            = 0xF0            
+  PREFIX_REPNE_Z         = 0xF2         
+  PREFIX_REP_E_Z         = 0xF3         
+  PREFIX_CS              = 0x2E              
+  PREFIX_SS              = 0x36              
+  PREFIX_DS              = 0x3E              
+  PREFIX_ES              = 0x26              
+  PREFIX_FS              = 0x64              
+  PREFIX_GS              = 0x65              
+  PREFIX_BNT             = 0x2E             
+  PREFIX_BT              = 0x3E              
+  PREFIX_OPSIZE_OVERRIDE = 0x66 
+  PREFIX_ASZ_OVERRIDE    = 0x67    
+end
+
+PREFIXES = [Prefixes::PREFIX_LOCK,          
+            Prefixes::PREFIX_REPNE_Z, 
+            Prefixes::PREFIX_REP_E_Z,       
+            Prefixes::PREFIX_CS,            
+            Prefixes::PREFIX_SS,            
+            Prefixes::PREFIX_DS,            
+            Prefixes::PREFIX_ES,            
+            Prefixes::PREFIX_FS,            
+            Prefixes::PREFIX_GS,            
+            Prefixes::PREFIX_BNT,           
+            Prefixes::PREFIX_BT,            
+            Prefixes::PREFIX_OPSIZE_OVERRIDE,
+            Prefixes::PREFIX_ASZ_OVERRIDE] 
 
 IMMEDIATES_MAP = {
   "imm8" => "IMM8",
@@ -90,6 +103,10 @@ REGISTERS_MAP = {
   "RDI" => "RDI",
 }
 
+MULTIPLEXED_MODRM_MAP = {
+
+}
+
 MODRM_MAP = {
   "ModRM:reg" => {
     "r8" => "MODRM_REG8",
@@ -108,6 +125,7 @@ OPERANDS_MAP = {}.merge(REGISTERS_MAP)
                  .merge(IMMEDIATES_MAP)
                  .merge(MODRM_MAP)
                  .merge(SEGMENT_REGISTERS_MAP)
+                 .merge(MULTIPLEXED_MODRM_MAP)
 
 class Instruction 
   attr_accessor :instruction, :opcode, :valid_64, 
@@ -117,20 +135,22 @@ class Instruction
 
   @@count = 0
   def initialize(row)
-      @instruction = row[0] 
-      @opcode = row[1] 
-      @valid_64 = row[2] 
-      @valid_32 = row[3] 
-      @valid_16 = row[4] 
-      @feature_flags = row[5] 
-      @operand1 = row[6] 
-      @operand2 = row[7] 
-      @operand3 = row[8] 
-      @operand4 = row[9] 
-      @no_prefix = false
-      @prefixes  = []
+      @instruction    = row[0] 
+      @opcode         = row[1] 
+      @valid_64       = row[2] 
+      @valid_32       = row[3] 
+      @valid_16       = row[4] 
+      @feature_flags  = row[5] 
+      @operand1       = row[6] 
+      @operand2       = row[7] 
+      @operand3       = row[8] 
+      @operand4       = row[9] 
+      @no_prefix      = false
+      @prefixes       = []
+      @flags          = Flags::FLAGS_VOID 
 
-      @@count += 1
+
+      @@count         += 1
   end
 
   def count()
@@ -145,14 +165,50 @@ class Instruction
     instance_variable_get("@operand#{n}")
   end
 
+  def set_flags()
+    case @opcode 
+      when /\/r/
+        # modrm
+        @flags |= Flags::FLAGS_MODRM 
+      when /\/\d/
+        #  digit between 0 and 7 indicates that the modr/m byte of the instruction uses only the r/m (register or memory) operand. 
+        #  the reg field contains the digit that provides an extension to the instruction's opcode.
+        #digit = @opcode.scan(/\/\d/).first.delete("/")
+        @flags |= Flags::FLAGS_MODRM_REG_MULTIPLEXING
+      when /ib/, /iw/, /id/, /io/
+        # immediate 
+        @flags |= Flags::FLAGS_IMMEDIATE
+      when /c./
+        # code offset
+        @flags |= Flags::FLAGS_CODE_OFFSET
+      when /\+i/
+        # number used in floating-point instructions when one of the operands is st(i) from the fpu register stack.
+        @flags |= Flags::FLAGS_ST_FPU 
+      else 
+        @flags |= Flags::FLAGS_NO_MODIFIERS
+    end
+  end
+
+  def has_flags(flags)
+   return ((@flags & flags) > 0) 
+  end
+
   def generate_operand(el, existing_operand)
     # for debugging
     printf("searching for %s\n", el)
+    if has_flags(Flags::FLAGS_MODRM)
+      # modrm
+      if existing_operand.include?("ModRM:reg")
+        return OPERANDS_MAP["ModRM:reg"][el]
+      elsif existing_operand.include?("ModRM:r/m")
+        return OPERANDS_MAP["ModRM:r/m"][el]
+      else 
+        # ???????
+        return nil
+      end
 
-    if existing_operand.include?("ModRM:reg")
-      return OPERANDS_MAP["ModRM:reg"][el]
-    elsif existing_operand.include?("ModRM:r/m")
-      return OPERANDS_MAP["ModRM:r/m"][el]
+    elsif has_flags(Flags::FLAGS_MODRM_REG_MULTIPLEXING)
+
     else 
       return OPERANDS_MAP[el]
     end
@@ -272,6 +328,23 @@ instructions.map! do |instruction|
   end
 end.flatten!
 
+# expand all instructions with +rb, +rw, +rd, +ro
+
+instructions.filter!{|i| i.opcode.include?("+r")} # remove after expanding PLS
+
+#instructions.map! do |instruction|
+#  if instruction.opcode.include?("+r")
+#    
+#    if instruction 
+#  else 
+#    instruction
+#  end
+#end
+
+  pp instructions
+
+return 
+
 # remove prefixes and set them as required attributes.
 # because when we will parse the instruction inside our c code, 
 # all prefix bytes that were eaten are supposed to be checked 
@@ -284,7 +357,7 @@ instructions.each do |instruction|
     next 
   end
   first_byte = first_byte.first.to_i(16)
-  if PREFIXES.include?(first_byte) 
+  if PREFIXES.inc66 0f c8lude?(first_byte) 
     instruction.prefixes << first_byte 
     instruction.opcode = instruction.opcode[3..-1]
   end
@@ -305,6 +378,11 @@ end
 instructions.sort_by!{|instruction|
   instruction.opcode.split(" ").first.to_i(16)
 }
+
+# set flags
+instructions.each do |instruction|
+  instruction.set_flags()
+end
 
 # fix operands
 # use Operand class to set :operand1, :operand2, ...
