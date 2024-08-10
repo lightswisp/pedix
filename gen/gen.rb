@@ -266,13 +266,22 @@ OPERANDS_MAP = {}.merge(IMMEDIATES_MAP)
                  .merge(XMM_MAP)
                  .merge(MM_MAP)
 
+OpcodeField = Struct.new(:type, :value); 
+
 class Instruction 
   def initialize(row)
-    @prefix = row[0].content.strip.empty?? nil : row[0].content.strip
+    @prefix = row[0].content.strip.empty?? 0x00 : row[0].content.strip.to_i(16)
     @extended_opcode = row[1].content.strip.empty?? false : true 
-    @primary_opcode = row[2].content.strip 
-    @secondary_opcode = row[3].content.strip 
-    @opcode_field = row[4].content.strip 
+    @primary_opcode = row[2].content.strip.to_i(16) 
+    @secondary_opcode = row[3].content.strip.empty?? -1 : row[3].content.strip.to_i(16)
+    tof = row[4].content.strip
+    if tof.empty?
+      @opcode_field = OpcodeField.new(0, 0);
+    elsif tof == "r"
+      @opcode_field = OpcodeField.new(1, 0);
+    else 
+      @opcode_field = OpcodeField.new(2, tof.to_i);
+    end
     @mnemonic = row[10].content.strip.downcase 
     @operand1 = row[11].content.strip.downcase 
     @operand2 = row[12].content.strip.downcase 
@@ -294,6 +303,35 @@ class Instruction
       instance_variable_set("@operand#{i+1}", operand_to_set)
     end  
     return true 
+  end
+
+  def generate_c_instruction_struct()
+#  Instruction test = {
+#    .extended_opcode = false, 
+#    .mnemonic = "add",
+#    .opcode_field = {.type = FIELD_MULTIPLEXED_MOD_RM, .value = 3},
+#    .operand1 = 54,
+#    .operand2 = 0,
+#    .operand3 = 0,
+#    .operand4 = 0,
+#    .prefix = 0x66,
+#    .primary_opcode = 0x01,
+#    .secondary_opcode = -1 
+#  };  
+    temp =  "  {\n"
+    temp << "   .extended_opcode = #{@extended_opcode},\n" 
+    temp << "   .mnemonic = \"#{@mnemonic}\",\n" 
+    temp << "   .opcode_field = {.type = #{@opcode_field[:type]}, .value = #{@opcode_field[:value]} },\n" 
+    temp << "   .operand1 = #{@operand1},\n" 
+    temp << "   .operand2 = #{@operand2},\n" 
+    temp << "   .operand3 = #{@operand3},\n" 
+    temp << "   .operand4 = #{@operand4},\n" 
+    temp << "   .prefix = #{@prefix},\n" 
+    temp << "   .primary_opcode = #{@primary_opcode},\n" 
+    temp << "   .secondary_opcode = #{@secondary_opcode},\n" 
+    temp << "  },\n"
+
+    return temp
   end
   
 end
@@ -330,6 +368,35 @@ extended_rows.each do |row|
     pp instruction 
     exit(false)
   end
-  pp instruction
   extended_instructions << instruction
 end
+
+# file gen part 
+
+c_file =  "/* auto generated using gen.rb \n"
+c_file << " * time: #{Time.now}\n"
+c_file << " */\n\n"
+c_file << "#pragma once\n"
+c_file << "#include <stdbool.h>\n"
+c_file << "#include <stdint.h>\n"
+c_file << "#include \"tabledef.h\"\n\n"
+
+# regular table 32-bit
+
+c_file << "const Instruction regular_table_32[#{regular_instructions.size}] = {\n"
+
+for instruction in regular_instructions 
+  c_file << instruction.generate_c_instruction_struct()
+end
+c_file << "};\n\n// end regular\n\n"
+
+# extended table 32-bit
+
+c_file << "const Instruction extended_table_32[#{extended_instructions.size}] = {\n"
+
+for instruction in extended_instructions 
+  c_file << instruction.generate_c_instruction_struct()
+end
+c_file << "};\n\n// end extended\n\n"
+
+File.write("tables.h", c_file)
