@@ -1418,7 +1418,7 @@
 <TBODY id="x40"><TR>
 <TD></TD>
 <TD></TD>
-<TD colspan="2">40+r</TD>
+<TD colspan="2">40</TD>
 <TD></TD>
 <TD></TD>
 <TD></TD>
@@ -1427,7 +1427,7 @@
 <TD></TD>
 <TD></TD>
 <TD>INC</TD>
-<td><b>r16/32</b></td>
+<td><b>r+16/32</b></td>
 <td></td>
 <td></td>
 <td></td>
@@ -1439,10 +1439,181 @@
 <TD></TD>
 <td>Increment by 1</td>
 </TR></TBODY>
+
+
+<TBODY id="x41"><TR>
+<TD></TD>
+<TD></TD>
+<TD colspan="2">41</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>INC</TD>
+<td><b>r+16/32</b></td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>o..szap.</TD>
+<TD>o..szap.</TD>
+<TD></TD>
+<TD></TD>
+<td>Increment by 1</td>
+</TR></TBODY>
+<TBODY id="x42"><TR>
+<TD></TD>
+<TD></TD>
+<TD colspan="2">42</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>INC</TD>
+<td><b>r+16/32</b></td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>o..szap.</TD>
+<TD>o..szap.</TD>
+<TD></TD>
+<TD></TD>
+<td>Increment by 1</td>
+</TR></TBODY>
+<TBODY id="x43"><TR>
+<TD></TD>
+<TD></TD>
+<TD colspan="2">43</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>INC</TD>
+<td><b>r+16/32</b></td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>o..szap.</TD>
+<TD>o..szap.</TD>
+<TD></TD>
+<TD></TD>
+<td>Increment by 1</td>
+</TR></TBODY>
+<TBODY id="x44"><TR>
+<TD></TD>
+<TD></TD>
+<TD colspan="2">44</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>INC</TD>
+<td><b>r+16/32</b></td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>o..szap.</TD>
+<TD>o..szap.</TD>
+<TD></TD>
+<TD></TD>
+<td>Increment by 1</td>
+</TR></TBODY>
+<TBODY id="x45"><TR>
+<TD></TD>
+<TD></TD>
+<TD colspan="2">45</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>INC</TD>
+<td><b>r+16/32</b></td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>o..szap.</TD>
+<TD>o..szap.</TD>
+<TD></TD>
+<TD></TD>
+<td>Increment by 1</td>
+</TR></TBODY>
+<TBODY id="x46"><TR>
+<TD></TD>
+<TD></TD>
+<TD colspan="2">46</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>INC</TD>
+<td><b>r+16/32</b></td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>o..szap.</TD>
+<TD>o..szap.</TD>
+<TD></TD>
+<TD></TD>
+<td>Increment by 1</td>
+</TR></TBODY>
+<TBODY id="x47"><TR>
+<TD></TD>
+<TD></TD>
+<TD colspan="2">47</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>INC</TD>
+<td><b>r+16/32</b></td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>o..szap.</TD>
+<TD>o..szap.</TD>
+<TD></TD>
+<TD></TD>
+<td>Increment by 1</td>
+</TR></TBODY>
+
 <TBODY id="x48"><TR>
 <TD></TD>
 <TD></TD>
-<TD colspan="2">48+r</TD>
+<TD colspan="2">48</TD>
 <TD></TD>
 <TD></TD>
 <TD></TD>
@@ -1451,7 +1622,31 @@
 <TD></TD>
 <TD></TD>
 <TD>DEC</TD>
-<td><b>r16/32</b></td>
+<td><b>r+16/32</b></td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>o..szap.</TD>
+<TD>o..szap.</TD>
+<TD></TD>
+<TD></TD>
+<td>Decrement by 1</td>
+</TR></TBODY>
+<TBODY id="x49"><TR>
+<TD></TD>
+<TD></TD>
+<TD colspan="2">49</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>DEC</TD>
+<td><b>r+16/32</b></td>
 <td></td>
 <td></td>
 <td></td>
@@ -1466,7 +1661,7 @@
 <TBODY id="x50"><TR>
 <TD></TD>
 <TD></TD>
-<TD colspan="2">50+r</TD>
+<TD colspan="2">50</TD>
 <TD></TD>
 <TD></TD>
 <TD></TD>
@@ -1475,7 +1670,7 @@
 <TD></TD>
 <TD></TD>
 <TD>PUSH</TD>
-<td>r16/32</td>
+<td>r+16/32</td>
 <td></td>
 <td></td>
 <td></td>
@@ -1487,10 +1682,181 @@
 <TD></TD>
 <td>Push Word, Doubleword or Quadword Onto the Stack</td>
 </TR></TBODY>
+
+
+<TBODY id="x51"><TR>
+<TD></TD>
+<TD></TD>
+<TD colspan="2">51</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>PUSH</TD>
+<td>r+16/32</td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<td>Push Word, Doubleword or Quadword Onto the Stack</td>
+</TR></TBODY>
+<TBODY id="x52"><TR>
+<TD></TD>
+<TD></TD>
+<TD colspan="2">52</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>PUSH</TD>
+<td>r+16/32</td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<td>Push Word, Doubleword or Quadword Onto the Stack</td>
+</TR></TBODY>
+<TBODY id="x53"><TR>
+<TD></TD>
+<TD></TD>
+<TD colspan="2">53</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>PUSH</TD>
+<td>r+16/32</td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<td>Push Word, Doubleword or Quadword Onto the Stack</td>
+</TR></TBODY>
+<TBODY id="x54"><TR>
+<TD></TD>
+<TD></TD>
+<TD colspan="2">54</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>PUSH</TD>
+<td>r+16/32</td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<td>Push Word, Doubleword or Quadword Onto the Stack</td>
+</TR></TBODY>
+<TBODY id="x55"><TR>
+<TD></TD>
+<TD></TD>
+<TD colspan="2">55</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>PUSH</TD>
+<td>r+16/32</td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<td>Push Word, Doubleword or Quadword Onto the Stack</td>
+</TR></TBODY>
+<TBODY id="x56"><TR>
+<TD></TD>
+<TD></TD>
+<TD colspan="2">56</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>PUSH</TD>
+<td>r+16/32</td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<td>Push Word, Doubleword or Quadword Onto the Stack</td>
+</TR></TBODY>
+<TBODY id="x57"><TR>
+<TD></TD>
+<TD></TD>
+<TD colspan="2">57</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>PUSH</TD>
+<td>r+16/32</td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<td>Push Word, Doubleword or Quadword Onto the Stack</td>
+</TR></TBODY>
+
 <TBODY id="x58"><TR>
 <TD></TD>
 <TD></TD>
-<TD colspan="2">58+r</TD>
+<TD colspan="2">58</TD>
 <TD></TD>
 <TD></TD>
 <TD></TD>
@@ -1499,7 +1865,7 @@
 <TD></TD>
 <TD></TD>
 <TD>POP</TD>
-<td><b>r16/32</b></td>
+<td><b>r+16/32</b></td>
 <td></td>
 <td></td>
 <td></td>
@@ -1511,6 +1877,33 @@
 <TD></TD>
 <td>Pop a Value from the Stack</td>
 </TR></TBODY>
+
+
+<TBODY id="x59"><TR>
+<TD></TD>
+<TD></TD>
+<TD colspan="2">59</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>POP</TD>
+<td><b>r+16/32</b></td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<td>Pop a Value from the Stack</td>
+</TR></TBODY>
+
 <TBODY><TR>
 <TD></TD>
 <TD></TD>
@@ -3478,30 +3871,6 @@
 <TD></TD>
 <td>Pop a Value from the Stack</td>
 </TR></TBODY>
-<TBODY id="x90"><TR>
-<TD></TD>
-<TD></TD>
-<TD colspan="2">90+r</TD>
-<TD></TD>
-<TD></TD>
-<TD></TD>
-<TD></TD>
-<TD></TD>
-<TD></TD>
-<TD></TD>
-<TD>XCHG</TD>
-<td><b>r16/32</b></td>
-<td><b>eAX</b></td>
-<td></td>
-<td></td>
-<td rowspan="1"></td>
-<TD></TD>
-<TD></TD>
-<TD></TD>
-<TD></TD>
-<TD></TD>
-<td>Exchange Register/Memory with Register</td>
-</TR></TBODY>
 <TBODY><TR>
 <TD></TD>
 <TD></TD>
@@ -3551,6 +3920,177 @@
 <TD></TD>
 <td>Spin Loop Hint</td>
 </TR></TBODY>
+<TBODY id="x91"><TR>
+<TD></TD>
+<TD></TD>
+<TD colspan="2">91</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>XCHG</TD>
+<td><b>r+16/32</b></td>
+<td><b>eAX</b></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<td>Exchange Register/Memory with Register</td>
+</TR></TBODY>
+
+
+<TBODY id="x92"><TR>
+<TD></TD>
+<TD></TD>
+<TD colspan="2">92</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>XCHG</TD>
+<td><b>r+16/32</b></td>
+<td><b>eAX</b></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<td>Exchange Register/Memory with Register</td>
+</TR></TBODY>
+<TBODY id="x93"><TR>
+<TD></TD>
+<TD></TD>
+<TD colspan="2">93</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>XCHG</TD>
+<td><b>r+16/32</b></td>
+<td><b>eAX</b></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<td>Exchange Register/Memory with Register</td>
+</TR></TBODY>
+<TBODY id="x94"><TR>
+<TD></TD>
+<TD></TD>
+<TD colspan="2">94</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>XCHG</TD>
+<td><b>r+16/32</b></td>
+<td><b>eAX</b></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<td>Exchange Register/Memory with Register</td>
+</TR></TBODY>
+<TBODY id="x95"><TR>
+<TD></TD>
+<TD></TD>
+<TD colspan="2">95</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>XCHG</TD>
+<td><b>r+16/32</b></td>
+<td><b>eAX</b></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<td>Exchange Register/Memory with Register</td>
+</TR></TBODY>
+<TBODY id="x96"><TR>
+<TD></TD>
+<TD></TD>
+<TD colspan="2">96</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>XCHG</TD>
+<td><b>r+16/32</b></td>
+<td><b>eAX</b></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<td>Exchange Register/Memory with Register</td>
+</TR></TBODY>
+<TBODY id="x97"><TR>
+<TD></TD>
+<TD></TD>
+<TD colspan="2">97</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>XCHG</TD>
+<td><b>r+16/32</b></td>
+<td><b>eAX</b></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<td>Exchange Register/Memory with Register</td>
+</TR></TBODY>
+
 <TBODY id="x98"><TR>
 <TD></TD>
 <TD></TD>
@@ -4410,7 +4950,7 @@
 <TBODY id="xB0"><TR>
 <TD></TD>
 <TD></TD>
-<TD colspan="2">B0+r</TD>
+<TD colspan="2">B0</TD>
 <TD></TD>
 <TD></TD>
 <TD></TD>
@@ -4419,7 +4959,7 @@
 <TD></TD>
 <TD></TD>
 <TD>MOV</TD>
-<td><b>r8</b></td>
+<td><b>r+8</b></td>
 <td>imm8</td>
 <td></td>
 <td></td>
@@ -4431,10 +4971,12 @@
 <TD></TD>
 <td>Move</td>
 </TR></TBODY>
-<TBODY id="xB8"><TR>
+
+
+<TBODY id="xB1"><TR>
 <TD></TD>
 <TD></TD>
-<TD colspan="2">B8+r</TD>
+<TD colspan="2">B1</TD>
 <TD></TD>
 <TD></TD>
 <TD></TD>
@@ -4443,7 +4985,176 @@
 <TD></TD>
 <TD></TD>
 <TD>MOV</TD>
-<td><b>r16/32</b></td>
+<td><b>r+8</b></td>
+<td>imm8</td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<td>Move</td>
+</TR></TBODY>
+<TBODY id="xB2"><TR>
+<TD></TD>
+<TD></TD>
+<TD colspan="2">B2</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>MOV</TD>
+<td><b>r+8</b></td>
+<td>imm8</td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<td>Move</td>
+</TR></TBODY>
+<TBODY id="xB3"><TR>
+<TD></TD>
+<TD></TD>
+<TD colspan="2">B3</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>MOV</TD>
+<td><b>r+8</b></td>
+<td>imm8</td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<td>Move</td>
+</TR></TBODY>
+<TBODY id="xB4"><TR>
+<TD></TD>
+<TD></TD>
+<TD colspan="2">B4</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>MOV</TD>
+<td><b>r+8</b></td>
+<td>imm8</td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<td>Move</td>
+</TR></TBODY>
+<TBODY id="xB5"><TR>
+<TD></TD>
+<TD></TD>
+<TD colspan="2">B5</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>MOV</TD>
+<td><b>r+8</b></td>
+<td>imm8</td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<td>Move</td>
+</TR></TBODY>
+<TBODY id="xB6"><TR>
+<TD></TD>
+<TD></TD>
+<TD colspan="2">B6</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>MOV</TD>
+<td><b>r+8</b></td>
+<td>imm8</td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<td>Move</td>
+</TR></TBODY>
+<TBODY id="xB7"><TR>
+<TD></TD>
+<TD></TD>
+<TD colspan="2">B7</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>MOV</TD>
+<td><b>r+8</b></td>
+<td>imm8</td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<td>Move</td>
+</TR></TBODY>
+
+<TBODY id="xB8"><TR>
+<TD></TD>
+<TD></TD>
+<TD colspan="2">B8</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>MOV</TD>
+<td><b>r+16/32</b></td>
 <td>imm16/32</td>
 <td></td>
 <td></td>
@@ -4455,6 +5166,177 @@
 <TD></TD>
 <td>Move</td>
 </TR></TBODY>
+
+
+<TBODY id="xB9"><TR>
+<TD></TD>
+<TD></TD>
+<TD colspan="2">B9</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>MOV</TD>
+<td><b>r+16/32</b></td>
+<td>imm16/32</td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<td>Move</td>
+</TR></TBODY>
+<TBODY id="xBA"><TR>
+<TD></TD>
+<TD></TD>
+<TD colspan="2">BA</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>MOV</TD>
+<td><b>r+16/32</b></td>
+<td>imm16/32</td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<td>Move</td>
+</TR></TBODY>
+<TBODY id="xBB"><TR>
+<TD></TD>
+<TD></TD>
+<TD colspan="2">BB</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>MOV</TD>
+<td><b>r+16/32</b></td>
+<td>imm16/32</td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<td>Move</td>
+</TR></TBODY>
+<TBODY id="xBC"><TR>
+<TD></TD>
+<TD></TD>
+<TD colspan="2">BC</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>MOV</TD>
+<td><b>r+16/32</b></td>
+<td>imm16/32</td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<td>Move</td>
+</TR></TBODY>
+<TBODY id="xBD"><TR>
+<TD></TD>
+<TD></TD>
+<TD colspan="2">BD</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>MOV</TD>
+<td><b>r+16/32</b></td>
+<td>imm16/32</td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<td>Move</td>
+</TR></TBODY>
+<TBODY id="xBE"><TR>
+<TD></TD>
+<TD></TD>
+<TD colspan="2">BE</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>MOV</TD>
+<td><b>r+16/32</b></td>
+<td>imm16/32</td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<td>Move</td>
+</TR></TBODY>
+<TBODY id="xBF"><TR>
+<TD></TD>
+<TD></TD>
+<TD colspan="2">BF</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>MOV</TD>
+<td><b>r+16/32</b></td>
+<td>imm16/32</td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<td>Move</td>
+</TR></TBODY>
+
 <TBODY id="xC0"><TR id="xC0_0">
 <TD></TD>
 <TD></TD>
@@ -6466,30 +7348,6 @@
 <TD></TD>
 <td>Exchange Register Contents</td>
 </TR></TBODY>
-<TBODY><TR>
-<TD></TD>
-<TD></TD>
-<TD>D9</TD>
-<td>C9</td>
-<TD CLASS="highlight">1</TD>
-<TD></TD>
-<TD></TD>
-<TD></TD>
-<TD></TD>
-<TD></TD>
-<TD>FXCH</TD>
-<td><b><i>ST</i></b></td>
-<td><b><i>ST1</i></b></td>
-<td></td>
-<td></td>
-<td rowspan="1"></td>
-<TD></TD>
-<TD>0123</TD>
-<TD>.1..</TD>
-<TD>0.23</TD>
-<TD></TD>
-<td>Exchange Register Contents</td>
-</TR></TBODY>
 <TBODY><TR id="xD9_2">
 <TD></TD>
 <TD></TD>
@@ -6519,7 +7377,7 @@
 <TD></TD>
 <TD>D9</TD>
 <td>D0</td>
-<TD CLASS="highlight">2</TD>
+<TD CLASS="highlight"></TD>
 <TD></TD>
 <TD></TD>
 <TD></TD>
@@ -6616,7 +7474,7 @@
 <TD></TD>
 <TD>D9</TD>
 <td>E0</td>
-<TD CLASS="highlight">4</TD>
+<TD CLASS="highlight"></TD>
 <TD></TD>
 <TD></TD>
 <TD></TD>
@@ -6640,7 +7498,7 @@
 <TD></TD>
 <TD>D9</TD>
 <td>E1</td>
-<TD CLASS="highlight">4</TD>
+<TD CLASS="highlight"></TD>
 <TD></TD>
 <TD></TD>
 <TD></TD>
@@ -6664,7 +7522,7 @@
 <TD></TD>
 <TD>D9</TD>
 <td>E4</td>
-<TD CLASS="highlight">4</TD>
+<TD CLASS="highlight"></TD>
 <TD></TD>
 <TD></TD>
 <TD></TD>
@@ -6688,7 +7546,7 @@
 <TD></TD>
 <TD>D9</TD>
 <td>E5</td>
-<TD CLASS="highlight">4</TD>
+<TD CLASS="highlight"></TD>
 <TD></TD>
 <TD></TD>
 <TD></TD>
@@ -6736,7 +7594,7 @@
 <TD></TD>
 <TD>D9</TD>
 <td>E8</td>
-<TD CLASS="highlight">5</TD>
+<TD CLASS="highlight"></TD>
 <TD></TD>
 <TD></TD>
 <TD></TD>
@@ -6760,7 +7618,7 @@
 <TD></TD>
 <TD>D9</TD>
 <td>E9</td>
-<TD CLASS="highlight">5</TD>
+<TD CLASS="highlight"></TD>
 <TD></TD>
 <TD></TD>
 <TD></TD>
@@ -6784,7 +7642,7 @@
 <TD></TD>
 <TD>D9</TD>
 <td>EA</td>
-<TD CLASS="highlight">5</TD>
+<TD CLASS="highlight"></TD>
 <TD></TD>
 <TD></TD>
 <TD></TD>
@@ -6808,7 +7666,7 @@
 <TD></TD>
 <TD>D9</TD>
 <td>EB</td>
-<TD CLASS="highlight">5</TD>
+<TD CLASS="highlight"></TD>
 <TD></TD>
 <TD></TD>
 <TD></TD>
@@ -6832,7 +7690,7 @@
 <TD></TD>
 <TD>D9</TD>
 <td>EC</td>
-<TD CLASS="highlight">5</TD>
+<TD CLASS="highlight"></TD>
 <TD></TD>
 <TD></TD>
 <TD></TD>
@@ -6856,7 +7714,7 @@
 <TD></TD>
 <TD>D9</TD>
 <td>ED</td>
-<TD CLASS="highlight">5</TD>
+<TD CLASS="highlight"></TD>
 <TD></TD>
 <TD></TD>
 <TD></TD>
@@ -6880,7 +7738,7 @@
 <TD></TD>
 <TD>D9</TD>
 <td>EE</td>
-<TD CLASS="highlight">5</TD>
+<TD CLASS="highlight"></TD>
 <TD></TD>
 <TD></TD>
 <TD></TD>
@@ -6952,7 +7810,7 @@
 <TD></TD>
 <TD>D9</TD>
 <td>F0</td>
-<TD CLASS="highlight">6</TD>
+<TD CLASS="highlight"></TD>
 <TD></TD>
 <TD></TD>
 <TD></TD>
@@ -6976,7 +7834,7 @@
 <TD></TD>
 <TD>D9</TD>
 <td>F1</td>
-<TD CLASS="highlight">6</TD>
+<TD CLASS="highlight"></TD>
 <TD></TD>
 <TD></TD>
 <TD></TD>
@@ -7000,7 +7858,7 @@
 <TD></TD>
 <TD>D9</TD>
 <td>F2</td>
-<TD CLASS="highlight">6</TD>
+<TD CLASS="highlight"></TD>
 <TD></TD>
 <TD></TD>
 <TD></TD>
@@ -7024,7 +7882,7 @@
 <TD></TD>
 <TD>D9</TD>
 <td>F3</td>
-<TD CLASS="highlight">6</TD>
+<TD CLASS="highlight"></TD>
 <TD></TD>
 <TD></TD>
 <TD></TD>
@@ -7048,7 +7906,7 @@
 <TD></TD>
 <TD>D9</TD>
 <td>F4</td>
-<TD CLASS="highlight">6</TD>
+<TD CLASS="highlight"></TD>
 <TD></TD>
 <TD></TD>
 <TD></TD>
@@ -7072,7 +7930,7 @@
 <TD></TD>
 <TD>D9</TD>
 <td>F5</td>
-<TD CLASS="highlight">6</TD>
+<TD CLASS="highlight"></TD>
 <TD></TD>
 <TD></TD>
 <TD></TD>
@@ -7096,7 +7954,7 @@
 <TD></TD>
 <TD>D9</TD>
 <td>F6</td>
-<TD CLASS="highlight">6</TD>
+<TD CLASS="highlight"></TD>
 <TD></TD>
 <TD></TD>
 <TD></TD>
@@ -7120,7 +7978,7 @@
 <TD></TD>
 <TD>D9</TD>
 <td>F7</td>
-<TD CLASS="highlight">6</TD>
+<TD CLASS="highlight"></TD>
 <TD></TD>
 <TD></TD>
 <TD></TD>
@@ -7192,7 +8050,7 @@
 <TD></TD>
 <TD>D9</TD>
 <td>F8</td>
-<TD CLASS="highlight">7</TD>
+<TD CLASS="highlight"></TD>
 <TD></TD>
 <TD></TD>
 <TD></TD>
@@ -7216,7 +8074,7 @@
 <TD></TD>
 <TD>D9</TD>
 <td>F9</td>
-<TD CLASS="highlight">7</TD>
+<TD CLASS="highlight"></TD>
 <TD></TD>
 <TD></TD>
 <TD></TD>
@@ -7240,7 +8098,7 @@
 <TD></TD>
 <TD>D9</TD>
 <td>FA</td>
-<TD CLASS="highlight">7</TD>
+<TD CLASS="highlight"></TD>
 <TD></TD>
 <TD></TD>
 <TD></TD>
@@ -7264,7 +8122,7 @@
 <TD></TD>
 <TD>D9</TD>
 <td>FB</td>
-<TD CLASS="highlight">7</TD>
+<TD CLASS="highlight"></TD>
 <TD></TD>
 <TD></TD>
 <TD></TD>
@@ -7288,7 +8146,7 @@
 <TD></TD>
 <TD>D9</TD>
 <td>FC</td>
-<TD CLASS="highlight">7</TD>
+<TD CLASS="highlight"></TD>
 <TD></TD>
 <TD></TD>
 <TD></TD>
@@ -7312,7 +8170,7 @@
 <TD></TD>
 <TD>D9</TD>
 <td>FD</td>
-<TD CLASS="highlight">7</TD>
+<TD CLASS="highlight"></TD>
 <TD></TD>
 <TD></TD>
 <TD></TD>
@@ -7336,7 +8194,7 @@
 <TD></TD>
 <TD>D9</TD>
 <td>FE</td>
-<TD CLASS="highlight">7</TD>
+<TD CLASS="highlight"></TD>
 <TD></TD>
 <TD></TD>
 <TD></TD>
@@ -7360,7 +8218,7 @@
 <TD></TD>
 <TD>D9</TD>
 <td>FF</td>
-<TD CLASS="highlight">7</TD>
+<TD CLASS="highlight"></TD>
 <TD></TD>
 <TD></TD>
 <TD></TD>
@@ -7624,15 +8482,15 @@
 <TD></TD>
 <TD>DA</TD>
 <td>E9</td>
-<TD CLASS="highlight">5</TD>
+<TD CLASS="highlight"></TD>
 <TD>03+</TD>
 <TD></TD>
 <TD></TD>
 <TD></TD>
 <TD>P</TD>
 <TD>FUCOMPP</TD>
-<td><i>ST</i></td>
-<td><i>ST1</i></td>
+<td><i></i></td>
+<td><i></i></td>
 <td></td>
 <td></td>
 <td rowspan="1"></td>
@@ -7888,14 +8746,14 @@
 <TD></TD>
 <TD>DB</TD>
 <td>E0</td>
-<TD CLASS="highlight">4</TD>
+<TD CLASS="highlight"></TD>
 <TD>01+</TD>
 <TD>D<A HREF="#gen_note_FNENI_DBE0_FNDISI_DBE1"><SUP>6</SUP></A>
 </TD>
 <TD></TD>
 <TD></TD>
 <TD></TD>
-<TD>FNENI<i> nop</i>
+<TD>FNENI nop</i>
 </TD>
 <td></td>
 <td></td>
@@ -7914,14 +8772,14 @@
 <TD></TD>
 <TD>DB</TD>
 <td>E1</td>
-<TD CLASS="highlight">4</TD>
+<TD CLASS="highlight"></TD>
 <TD>01+</TD>
 <TD>D<A HREF="#gen_note_FNENI_DBE0_FNDISI_DBE1"><SUP>6</SUP></A>
 </TD>
 <TD></TD>
 <TD></TD>
 <TD></TD>
-<TD>FNDISI<i> nop</i>
+<TD>FNDISI nop</i>
 </TD>
 <td></td>
 <td></td>
@@ -7940,7 +8798,7 @@
 <TD></TD>
 <TD>DB</TD>
 <td>E2</td>
-<TD CLASS="highlight">4</TD>
+<TD CLASS="highlight"></TD>
 <TD></TD>
 <TD></TD>
 <TD></TD>
@@ -7964,7 +8822,7 @@
 <TD></TD>
 <TD>DB</TD>
 <td>E2</td>
-<TD CLASS="highlight">4</TD>
+<TD CLASS="highlight"></TD>
 <TD></TD>
 <TD></TD>
 <TD></TD>
@@ -7988,7 +8846,7 @@
 <TD></TD>
 <TD>DB</TD>
 <td>E3</td>
-<TD CLASS="highlight">4</TD>
+<TD CLASS="highlight"></TD>
 <TD></TD>
 <TD></TD>
 <TD></TD>
@@ -8012,7 +8870,7 @@
 <TD></TD>
 <TD>DB</TD>
 <td>E3</td>
-<TD CLASS="highlight">4</TD>
+<TD CLASS="highlight"></TD>
 <TD></TD>
 <TD></TD>
 <TD></TD>
@@ -8036,14 +8894,14 @@
 <TD></TD>
 <TD>DB</TD>
 <td>E4</td>
-<TD CLASS="highlight">4</TD>
+<TD CLASS="highlight"></TD>
 <TD>03+</TD>
 <TD>D<A HREF="#gen_note_FNSETPM_DBE4"><SUP>7</SUP></A>
 </TD>
 <TD></TD>
 <TD></TD>
 <TD></TD>
-<TD>FNSETPM<i> nop</i>
+<TD>FNSETPM nop</i>
 </TD>
 <td></td>
 <td></td>
@@ -8780,30 +9638,6 @@
 <TD></TD>
 <td>Unordered Compare Floating Point Values</td>
 </TR></TBODY>
-<TBODY><TR>
-<TD></TD>
-<TD></TD>
-<TD>DD</TD>
-<td>E1</td>
-<TD CLASS="highlight">4</TD>
-<TD>03+</TD>
-<TD></TD>
-<TD></TD>
-<TD></TD>
-<TD></TD>
-<TD>FUCOM</TD>
-<td><i>ST</i></td>
-<td><i>ST1</i></td>
-<td></td>
-<td></td>
-<td rowspan="1"></td>
-<TD></TD>
-<TD>0123</TD>
-<TD>0123</TD>
-<TD></TD>
-<TD></TD>
-<td>Unordered Compare Floating Point Values</td>
-</TR></TBODY>
 <TBODY><TR id="xDD_5">
 <TD></TD>
 <TD></TD>
@@ -8818,30 +9652,6 @@
 <TD>FUCOMP</TD>
 <td><i>ST</i></td>
 <td>STi</td>
-<td></td>
-<td></td>
-<td rowspan="1"></td>
-<TD></TD>
-<TD>0123</TD>
-<TD>0123</TD>
-<TD></TD>
-<TD></TD>
-<td>Unordered Compare Floating Point Values and Pop</td>
-</TR></TBODY>
-<TBODY><TR>
-<TD></TD>
-<TD></TD>
-<TD>DD</TD>
-<td>E9</td>
-<TD CLASS="highlight">5</TD>
-<TD>03+</TD>
-<TD></TD>
-<TD></TD>
-<TD></TD>
-<TD>p</TD>
-<TD>FUCOMP</TD>
-<td><i>ST</i></td>
-<td><i>ST1</i></td>
 <td></td>
 <td></td>
 <td rowspan="1"></td>
@@ -8996,30 +9806,6 @@
 <TD></TD>
 <td>Add and Pop</td>
 </TR></TBODY>
-<TBODY><TR>
-<TD></TD>
-<TD></TD>
-<TD>DE</TD>
-<td>C1</td>
-<TD CLASS="highlight">0</TD>
-<TD></TD>
-<TD></TD>
-<TD></TD>
-<TD></TD>
-<TD>p</TD>
-<TD>FADDP</TD>
-<td><b><i>ST1</i></b></td>
-<td><i>ST</i></td>
-<td></td>
-<td></td>
-<td rowspan="1"></td>
-<TD></TD>
-<TD>0123</TD>
-<TD>.1..</TD>
-<TD>0.23</TD>
-<TD></TD>
-<td>Add and Pop</td>
-</TR></TBODY>
 <TBODY><TR id="xDE_1">
 <TD></TD>
 <TD></TD>
@@ -9058,30 +9844,6 @@
 <TD>FMULP</TD>
 <td><b>STi</b></td>
 <td>ST</td>
-<td></td>
-<td></td>
-<td rowspan="1"></td>
-<TD></TD>
-<TD>0123</TD>
-<TD>.1..</TD>
-<TD>0.23</TD>
-<TD></TD>
-<td>Multiply and Pop</td>
-</TR></TBODY>
-<TBODY><TR>
-<TD></TD>
-<TD></TD>
-<TD>DE</TD>
-<td>C9</td>
-<TD CLASS="highlight">1</TD>
-<TD></TD>
-<TD></TD>
-<TD></TD>
-<TD></TD>
-<TD>p</TD>
-<TD>FMULP</TD>
-<td><b><i>ST1</i></b></td>
-<td><i>ST</i></td>
 <td></td>
 <td></td>
 <td rowspan="1"></td>
@@ -9170,7 +9932,7 @@
 <TD></TD>
 <TD>DE</TD>
 <td>D9</td>
-<TD CLASS="highlight">3</TD>
+<TD CLASS="highlight"></TD>
 <TD></TD>
 <TD></TD>
 <TD></TD>
@@ -9237,30 +9999,6 @@
 <TD></TD>
 <td>Reverse Subtract and Pop</td>
 </TR></TBODY>
-<TBODY><TR>
-<TD></TD>
-<TD></TD>
-<TD>DE</TD>
-<td>E1</td>
-<TD CLASS="highlight">4</TD>
-<TD></TD>
-<TD></TD>
-<TD></TD>
-<TD></TD>
-<TD>p</TD>
-<TD>FSUBRP</TD>
-<td><b><i>ST1</i></b></td>
-<td><i>ST</i></td>
-<td></td>
-<td></td>
-<td rowspan="1"></td>
-<TD></TD>
-<TD>0123</TD>
-<TD>.1..</TD>
-<TD>0.23</TD>
-<TD></TD>
-<td>Reverse Subtract and Pop</td>
-</TR></TBODY>
 <TBODY><TR id="xDE_5">
 <TD></TD>
 <TD></TD>
@@ -9299,30 +10037,6 @@
 <TD>FSUBP</TD>
 <td><b>STi</b></td>
 <td>ST</td>
-<td></td>
-<td></td>
-<td rowspan="1"></td>
-<TD></TD>
-<TD>0123</TD>
-<TD>.1..</TD>
-<TD>0.23</TD>
-<TD></TD>
-<td>Subtract and Pop</td>
-</TR></TBODY>
-<TBODY><TR>
-<TD></TD>
-<TD></TD>
-<TD>DE</TD>
-<td>E9</td>
-<TD CLASS="highlight">5</TD>
-<TD></TD>
-<TD></TD>
-<TD></TD>
-<TD></TD>
-<TD>p</TD>
-<TD>FSUBP</TD>
-<td><b><i>ST1</i></b></td>
-<td><i>ST</i></td>
 <td></td>
 <td></td>
 <td rowspan="1"></td>
@@ -9381,30 +10095,6 @@
 <TD></TD>
 <td>Reverse Divide and Pop</td>
 </TR></TBODY>
-<TBODY><TR>
-<TD></TD>
-<TD></TD>
-<TD>DE</TD>
-<td>F1</td>
-<TD CLASS="highlight">6</TD>
-<TD></TD>
-<TD></TD>
-<TD></TD>
-<TD></TD>
-<TD>p</TD>
-<TD>FDIVRP</TD>
-<td><b><i>ST1</i></b></td>
-<td><i>ST</i></td>
-<td></td>
-<td></td>
-<td rowspan="1"></td>
-<TD></TD>
-<TD>0123</TD>
-<TD>.1..</TD>
-<TD>0.23</TD>
-<TD></TD>
-<td>Reverse Divide and Pop</td>
-</TR></TBODY>
 <TBODY><TR id="xDE_7">
 <TD></TD>
 <TD></TD>
@@ -9443,30 +10133,6 @@
 <TD>FDIVP</TD>
 <td><b>STi</b></td>
 <td>ST</td>
-<td></td>
-<td></td>
-<td rowspan="1"></td>
-<TD></TD>
-<TD>0123</TD>
-<TD>.1..</TD>
-<TD>0.23</TD>
-<TD></TD>
-<td>Divide and Pop</td>
-</TR></TBODY>
-<TBODY><TR>
-<TD></TD>
-<TD></TD>
-<TD>DE</TD>
-<td>F9</td>
-<TD CLASS="highlight">7</TD>
-<TD></TD>
-<TD></TD>
-<TD></TD>
-<TD></TD>
-<TD>p</TD>
-<TD>FDIVP</TD>
-<td><b><i>ST1</i></b></td>
-<td><i>ST</i></td>
 <td></td>
 <td></td>
 <td rowspan="1"></td>
@@ -9702,7 +10368,7 @@
 <TD></TD>
 <TD>DF</TD>
 <td>E0</td>
-<TD CLASS="highlight">4</TD>
+<TD CLASS="highlight"></TD>
 <TD>02+</TD>
 <TD></TD>
 <TD></TD>
@@ -11308,7 +11974,7 @@
 <TD>0F</TD>
 <TD>01</TD>
 <td>C1</td>
-<TD CLASS="highlight">0</TD>
+<TD CLASS="highlight"></TD>
 <TD>P4++</TD>
 <TD>D<A HREF="#gen_note_VMX_vs_SVM"><SUP>24</SUP></A>
 </TD>
@@ -11333,7 +11999,7 @@
 <TD>0F</TD>
 <TD>01</TD>
 <td>C2</td>
-<TD CLASS="highlight">0</TD>
+<TD CLASS="highlight"></TD>
 <TD>P4++</TD>
 <TD>D<A HREF="#gen_note_VMX_vs_SVM"><SUP>24</SUP></A>
 </TD>
@@ -11358,7 +12024,7 @@
 <TD>0F</TD>
 <TD>01</TD>
 <td>C3</td>
-<TD CLASS="highlight">0</TD>
+<TD CLASS="highlight"></TD>
 <TD>P4++</TD>
 <TD>D<A HREF="#gen_note_VMX_vs_SVM"><SUP>24</SUP></A>
 </TD>
@@ -11383,7 +12049,7 @@
 <TD>0F</TD>
 <TD>01</TD>
 <td>C4</td>
-<TD CLASS="highlight">0</TD>
+<TD CLASS="highlight"></TD>
 <TD>P4++</TD>
 <TD>D<A HREF="#gen_note_VMX_vs_SVM"><SUP>24</SUP></A>
 </TD>
@@ -11432,7 +12098,7 @@
 <TD>0F</TD>
 <TD>01</TD>
 <td>C8</td>
-<TD CLASS="highlight">1</TD>
+<TD CLASS="highlight"></TD>
 <TD>P4++</TD>
 <TD></TD>
 <TD></TD>
@@ -11456,7 +12122,7 @@
 <TD>0F</TD>
 <TD>01</TD>
 <td>C9</td>
-<TD CLASS="highlight">1</TD>
+<TD CLASS="highlight"></TD>
 <TD>P4++</TD>
 <TD></TD>
 <TD></TD>
@@ -11504,7 +12170,7 @@
 <TD>0F</TD>
 <TD>01</TD>
 <td>D0</td>
-<TD CLASS="highlight">2</TD>
+<TD CLASS="highlight"></TD>
 <TD>C2++</TD>
 <TD></TD>
 <TD></TD>
@@ -11528,7 +12194,7 @@
 <TD>0F</TD>
 <TD>01</TD>
 <td>D1</td>
-<TD CLASS="highlight">2</TD>
+<TD CLASS="highlight"></TD>
 <TD>C2++</TD>
 <TD></TD>
 <TD></TD>
@@ -11658,7 +12324,7 @@
 <TD>0F</TD>
 <TD>01</TD>
 <td>F9</td>
-<TD CLASS="highlight">7</TD>
+<TD CLASS="highlight"></TD>
 <TD>C7+</TD>
 <TD></TD>
 <TD></TD>
@@ -11744,6 +12410,31 @@
 <td></td>
 </tr>
 </TBODY>
+<TBODY id="x0F05"><TR>
+<TD></TD>
+<TD>0F</TD>
+<TD>05</TD>
+<td></td>
+<TD></TD>
+<TD></TD>
+<TD>D<A HREF="#gen_note_SYSCALL_0F05"><SUP>15</SUP></A>
+</TD>
+<TD>E</TD>
+<TD></TD>
+<TD></TD>
+<TD>SYSCALL</TD>
+<td><b><i></i></b></td>
+<td><b><i></i></b></td>
+<td><b><i></i></b></td>
+<td><span title="dst: RCX dst: R11 dst: SS src: EFlags src: IA32_LSTAR src: IA32_FMASK "></span></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<td>Fast System Call</td>
+</TR></TBODY>
 <TBODY id="x0F06"><TR>
 <TD></TD>
 <TD>0F</TD>
@@ -22192,7 +22883,7 @@
 <TBODY id="x0FC8"><TR>
 <TD></TD>
 <TD>0F</TD>
-<TD colspan="2">C8+r</TD>
+<TD colspan="2">C8</TD>
 <TD></TD>
 <TD>04+</TD>
 <TD>D<A HREF="#gen_note_BSWAP_0FC8"><SUP>22</SUP></A>
@@ -22200,8 +22891,9 @@
 <TD></TD>
 <TD></TD>
 <TD></TD>
+<TD></TD>
 <TD>BSWAP</TD>
-<td><b>r16/32</b></td>
+<td><b>r+16/32</b></td>
 <td></td>
 <td></td>
 <td></td>
@@ -22213,6 +22905,184 @@
 <TD></TD>
 <td>Byte Swap</td>
 </TR></TBODY>
+
+
+<TBODY id="x0FC9"><TR>
+<TD></TD>
+<TD>0F</TD>
+<TD colspan="2">C9</TD>
+<TD></TD>
+<TD>04+</TD>
+<TD>D<A HREF="#gen_note_BSWAP_0FC8"><SUP>22</SUP></A>
+</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>BSWAP</TD>
+<td><b>r+16/32</b></td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<td>Byte Swap</td>
+</TR></TBODY>
+<TBODY id="x0FCA"><TR>
+<TD></TD>
+<TD>0F</TD>
+<TD colspan="2">CA</TD>
+<TD></TD>
+<TD>04+</TD>
+<TD>D<A HREF="#gen_note_BSWAP_0FC8"><SUP>22</SUP></A>
+</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>BSWAP</TD>
+<td><b>r+16/32</b></td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<td>Byte Swap</td>
+</TR></TBODY>
+<TBODY id="x0FCB"><TR>
+<TD></TD>
+<TD>0F</TD>
+<TD colspan="2">CB</TD>
+<TD></TD>
+<TD>04+</TD>
+<TD>D<A HREF="#gen_note_BSWAP_0FC8"><SUP>22</SUP></A>
+</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>BSWAP</TD>
+<td><b>r+16/32</b></td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<td>Byte Swap</td>
+</TR></TBODY>
+<TBODY id="x0FCC"><TR>
+<TD></TD>
+<TD>0F</TD>
+<TD colspan="2">CC</TD>
+<TD></TD>
+<TD>04+</TD>
+<TD>D<A HREF="#gen_note_BSWAP_0FC8"><SUP>22</SUP></A>
+</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>BSWAP</TD>
+<td><b>r+16/32</b></td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<td>Byte Swap</td>
+</TR></TBODY>
+<TBODY id="x0FCD"><TR>
+<TD></TD>
+<TD>0F</TD>
+<TD colspan="2">CD</TD>
+<TD></TD>
+<TD>04+</TD>
+<TD>D<A HREF="#gen_note_BSWAP_0FC8"><SUP>22</SUP></A>
+</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>BSWAP</TD>
+<td><b>r+16/32</b></td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<td>Byte Swap</td>
+</TR></TBODY>
+<TBODY id="x0FCE"><TR>
+<TD></TD>
+<TD>0F</TD>
+<TD colspan="2">CE</TD>
+<TD></TD>
+<TD>04+</TD>
+<TD>D<A HREF="#gen_note_BSWAP_0FC8"><SUP>22</SUP></A>
+</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>BSWAP</TD>
+<td><b>r+16/32</b></td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<td>Byte Swap</td>
+</TR></TBODY>
+<TBODY id="x0FCF"><TR>
+<TD></TD>
+<TD>0F</TD>
+<TD colspan="2">CF</TD>
+<TD></TD>
+<TD>04+</TD>
+<TD>D<A HREF="#gen_note_BSWAP_0FC8"><SUP>22</SUP></A>
+</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>BSWAP</TD>
+<td><b>r+16/32</b></td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<td>Byte Swap</td>
+</TR></TBODY>
+
 <TBODY id="x0FD0"><TR>
 <TD>66</TD>
 <TD>0F</TD>

@@ -1,15 +1,15 @@
 #include "headers/decoder.h"
 #include "headers/dump.h"
-#include "headers/mnemonic.h"
-#include "headers/operand.h"
 #include <stdio.h>
 
 #define INSTRUCTION_LIMIT 1 
 
 int main(void) {
-  uint8_t offset, instructions, result;
+  // todo: add valid prefix check
+  // ex: 66 0f 74 04 00 -> is a valid instruction, while f3 0f 74 04 00 is not
+  uint8_t offset, instructions;
   //uchar8_t instruction[] = {0xBA, 0x11, 0x11, 0x22, 0x33, 0x66, 0x69, 0x00, 0x00, 0x00,0x00, 0x04, 0x55, 0x11, 0x11, 0x11, 0x11};
-  uchar8_t instruction[] = {0xC7, 0xC0, 0x50, 0x11, 0x11, 0x11};
+  uchar8_t instruction[] = {0xE8, 0xA4, 0x55, 0x77, 0x00, 0x1C, 0x00, 0x00, 0x00, 0x34, 0x12};
   Dinstruction *decoded = init_instruction();
   decoded->mode = MODE_32;
 
@@ -19,17 +19,11 @@ int main(void) {
   instructions = 0;
 
   while (instructions < INSTRUCTION_LIMIT) {
-    result = decode(decoded, instruction + offset);
-    if (!result)
-      goto decode_error;
+    decode(decoded, instruction + offset);
 
-    dump_instruction(decoded);
-    if(!set_mnemonic(decoded, decoded->op1))
-      goto mnemonic_error;
-
-    if(!set_operands(decoded, decoded->op1))
-      goto operands_error;
-
+#ifdef DEBUG
+    dump_instruction(decoded->instruction);
+#endif
     /* if everything went well */
     print_instruction(decoded);
     /* eat bytes */
@@ -40,20 +34,7 @@ int main(void) {
     zero_instruction(decoded);
   }
 
-cleanup:
   free_instrucion(decoded);
   return 0;
-
-decode_error:
-  fprintf(stderr, "error has occured while decoding!\n");
-  goto cleanup;
-
-mnemonic_error:
-  fprintf(stderr, "error has occured while setting mnemonic!\n");
-  goto cleanup;
-
-operands_error:
-  fprintf(stderr, "error has occured while setting operands!\n");
-  goto cleanup;
 }
 

@@ -1,54 +1,21 @@
 #include "headers/dump.h"
 #include <stdio.h>
-/*
- * dumps all needed information about instruction
- */
-void dump_instruction(Dinstruction *decoded) {
-  printf("========================================\n");
 
-  printf("instruction mode: %d\n", decoded->mode);
-  printf("instruction size: %lu\n", decoded->buffer.size);
-  printf("has_prefix: %d\n", HAS_STATUS(decoded->status, STATUS_PREFIX));
-  printf("0x0f extended: %d\n", HAS_STATUS(decoded->status, STATUS_EXTENDED));
-
-  if (decoded->instr_type) {
-    switch (decoded->instr_type) {
-    case INSTR_ZERO:
-      printf("type: zero\n");
-      break;
-    case INSTR_MODRM:
-      printf("type: mod/rm\n");
-      break;
-    case INSTR_OTHER:
-      printf("type: other\n");
-      break;
-    }
-  }
-
-  if (HAS_STATUS(decoded->status, STATUS_PREFIX)) {
-    for (size_t i = 0; i < decoded->prefixes.size; i++) {
-      printf("instruction prefix %zu: 0x%02X\n", i,
-             decoded->prefixes.prefix[i]);
-    }
-  }
-
-  printf("instruction opcode 1: 0x%02X\n", decoded->op1);
-  printf("instruction opcode 2: 0x%02X\n", decoded->op2);
-  printf("instruction operand capacity: %zu\n", decoded->operands.capacity);
-  printf("raw bytes: ");
-  for (size_t i = 0; i < decoded->buffer.size; i++) {
-    printf("0x%02X ", decoded->buffer.bytes[i]);
-  }
-  putchar('\n');
-  printf("========================================\n\n");
+void dump_instruction(Instruction *instruction) {
+  printf("#<Instruction:%p\n", instruction);
+  printf("  extended_opcode=%d\n", instruction->extended_opcode);
+  printf("  mnemonic=%s\n", instruction->mnemonic);
+  printf("  opcode_field=<type=%d, value=%d>\n", instruction->opcode_field.type,
+         instruction->opcode_field.value);
+  printf("  operand1=%d\n", instruction->operand1);
+  printf("  operand2=%d\n", instruction->operand2);
+  printf("  operand3=%d\n", instruction->operand3);
+  printf("  operand4=%d\n", instruction->operand4);
+  printf("  prefix=%d\n", instruction->prefix);
+  printf("  primary_opcode=%d\n", instruction->primary_opcode);
+  printf("  secondary_opcode=%d>\n", instruction->secondary_opcode);
 }
 
-/*
- * prints to stdout 
- */
 void print_instruction(Dinstruction *decoded) {
-  if (decoded->operands.capacity == 0)
-    printf("%s\n", decoded->mnemonic.str);
-  else
-    printf("%s %s\n", decoded->mnemonic.str, decoded->operands.str);
+  printf("%s\n", decoded->text);
 }

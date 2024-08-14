@@ -1,7 +1,10 @@
+#pragma once
 #include <stdint.h>
 #include <stdbool.h>
+#include <stddef.h>
 
-#define MAX_MNEMONIC_LEN 50
+// at the moment, vgf2p8affineinvqb at 17 bytes is the longest mnemonic in intel's docs
+#define MAX_MNEMONIC_LEN 17  
 
 typedef enum{
   FIELD_VOID               = 0,
@@ -125,7 +128,7 @@ typedef enum{
 
   OPERAND_MM                = 96,
   OPERAND_MM_M_64           = 97,
-} Operand;
+} _Operand;
 
 typedef enum {
   PREFIX_VOID            = 0x00,
@@ -142,17 +145,22 @@ typedef enum {
   PREFIX_BT              = 0x3E,
   PREFIX_OPSIZE_OVERRIDE = 0x66,
   PREFIX_ASZ_OVERRIDE    = 0x67
-} Prefix;
+} _Prefix;
 
 typedef struct {
   bool extended_opcode; // false if not 0x0f
   const char mnemonic[MAX_MNEMONIC_LEN]; // text representation of the mnemonic
   Field opcode_field; 
-  Operand operand1;
-  Operand operand2;
-  Operand operand3;
-  Operand operand4;
-  Prefix  prefix;
+  _Operand operand1;
+  _Operand operand2;
+  _Operand operand3;
+  _Operand operand4;
+  _Prefix  prefix;
   uint8_t primary_opcode;
-  int secondary_opcode;
+  int secondary_opcode; // -1 if there is no secondary opcode
 } Instruction;
+
+typedef struct{
+  size_t size;
+  Instruction* instructions;
+} InstructionContainer;

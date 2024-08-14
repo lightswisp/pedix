@@ -111,6 +111,9 @@ module Operands
 
   MM                = 96;
   MM_M_64           = 97;
+
+  R_PLUS_16_32      = 98;
+  R_PLUS_8          = 99;
 end
 
 SEGMENTS_MAP = {
@@ -239,6 +242,11 @@ MM_MAP = {
   "mm/m64" => Operands::MM_M_64
 }
 
+OPCODE_3_BIT_MAP = {
+  "r+16/32" => Operands::R_PLUS_16_32,
+  "r+8"     => Operands::R_PLUS_8,
+}
+
 MODRM_MAP = {
   "r"        => Operands::R_ALL,
   "r/m"      => Operands::RM_ALL,
@@ -265,10 +273,12 @@ OPERANDS_MAP = {}.merge(IMMEDIATES_MAP)
                  .merge(FPU_MAP)
                  .merge(XMM_MAP)
                  .merge(MM_MAP)
+                 .merge(OPCODE_3_BIT_MAP)
 
 OpcodeField = Struct.new(:type, :value); 
 
 class Instruction 
+  attr_accessor :primary_opcode, :mnemonic
   def initialize(row)
     @prefix = row[0].content.strip.empty?? 0x00 : row[0].content.strip.to_i(16)
     @extended_opcode = row[1].content.strip.empty?? false : true 
@@ -306,18 +316,6 @@ class Instruction
   end
 
   def generate_c_instruction_struct()
-#  Instruction test = {
-#    .extended_opcode = false, 
-#    .mnemonic = "add",
-#    .opcode_field = {.type = FIELD_MULTIPLEXED_MOD_RM, .value = 3},
-#    .operand1 = 54,
-#    .operand2 = 0,
-#    .operand3 = 0,
-#    .operand4 = 0,
-#    .prefix = 0x66,
-#    .primary_opcode = 0x01,
-#    .secondary_opcode = -1 
-#  };  
     temp =  "  {\n"
     temp << "   .extended_opcode = #{@extended_opcode},\n" 
     temp << "   .mnemonic = \"#{@mnemonic}\",\n" 
@@ -336,7 +334,7 @@ class Instruction
   
 end
 
-parsed = Nokogiri::HTML.parse(File.read("coder32.html"))
+parsed = Nokogiri::HTML.parse(File.read("x86_32.lst"))
 
 tables = parsed.xpath("//table")
 
@@ -371,32 +369,60 @@ extended_rows.each do |row|
   extended_instructions << instruction
 end
 
-# file gen part 
+# regular 
+regular_grouped = regular_instructions.group_by{|n| n.primary_opcode}
 
-c_file =  "/* auto generated using gen.rb \n"
-c_file << " * time: #{Time.now}\n"
-c_file << " */\n\n"
-c_file << "#pragma once\n"
-c_file << "#include <stdbool.h>\n"
-c_file << "#include <stdint.h>\n"
-c_file << "#include \"tabledef.h\"\n\n"
+tables_file =  "/* (tables.h) auto generated using gen.rb \n"
+tables_file << " * time: #{Time.now}\n"
+tables_file << " */\n\n"
+tables_file << "#pragma once\n"
+tables_file << "#include <stdbool.h>\n"
+tables_file << "#include <stdint.h>\n"
+tables_file << "#include \"instructions.h\"\n\n"
 
-# regular table 32-bit
+instructions_file =  "/* (instructions.h) auto generated using gen.rb \n"
+instructions_file << " * time: #{Time.now}\n"
+instructions_file << " */\n\n"
+instructions_file << "#pragma once\n"
+instructions_file << "#include <stdbool.h>\n"
+instructions_file << "#include <stdint.h>\n"
+instructions_file << "#include \"tabledef.h\"\n\n"
 
-c_file << "const Instruction regular_table_32[#{regular_instructions.size}] = {\n"
+tables_file << "InstructionContainer regular_table_32[0x100] = {\n"
 
-for instruction in regular_instructions 
-  c_file << instruction.generate_c_instruction_struct()
+regular_grouped.each do |k,v|
+  iname = "REGULAR_#{v[0].mnemonic.upcase}_#{k}"
+  instructions_file << "Instruction #{iname}[#{v.size}] = {\n"
+  
+  tables_file << "  [0x#{k.to_s(16)}] = { .size = #{v.size}, .instructions = (Instruction*)&#{iname} },\n"
+
+  v.each do |instruction|
+    instructions_file << instruction.generate_c_instruction_struct()
+  end
+
+  instructions_file << "};\n\n"
 end
-c_file << "};\n\n// end regular\n\n"
 
-# extended table 32-bit
+tables_file << "};\n // regular end\n"
+instructions_file << "// regular end \n"
 
-c_file << "const Instruction extended_table_32[#{extended_instructions.size}] = {\n"
+extended_grouped = extended_instructions.group_by{|n| n.primary_opcode}
+tables_file << "InstructionContainer extended_table_32[0x100] = {\n"
+extended_grouped.each do |k,v|
+  iname = "EXTENDED_#{v[0].mnemonic.upcase}_#{k}"
+  instructions_file << "Instruction #{iname}[#{v.size}] = {\n"
 
-for instruction in extended_instructions 
-  c_file << instruction.generate_c_instruction_struct()
+  tables_file << "  [0x#{k.to_s(16)}] = { .size = #{v.size}, .instructions = (Instruction*)&#{iname} },\n"
+  
+  v.each do |instruction|
+    instructions_file << instruction.generate_c_instruction_struct()
+  end
+
+  instructions_file << "};\n\n"
 end
-c_file << "};\n\n// end extended\n\n"
 
-File.write("tables.h", c_file)
+tables_file << "};\n // extended end\n"
+instructions_file << "// extended end"
+
+File.write("instructions.h", instructions_file)
+File.write("tables.h", tables_file)
