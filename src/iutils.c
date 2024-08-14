@@ -298,9 +298,9 @@ void set_modrm(Dinstruction *decoded, uchar8_t *instruction) {
 void set_sib(Dinstruction *decoded, uchar8_t *instruction){
   decoded->sib.size  = BYTE_LEN;
   decoded->sib.field = *instruction;
-  decoded->sib.scale = (decoded->sib.field & 0xC0) >> 6;
-  decoded->sib.index = (decoded->sib.field & 0x38) >> 3;
-  decoded->sib.base  = (decoded->sib.field & 0x07);
+  decoded->sib.scale = SIB_SCALE(decoded->sib.field); 
+  decoded->sib.index = SIB_INDEX(decoded->sib.field);
+  decoded->sib.base  = SIB_BASE(decoded->sib.field); 
 }
 
 void set_displacement(Dinstruction *decoded){

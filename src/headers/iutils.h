@@ -8,6 +8,11 @@
 #define MODRM_REG(field) ((field & 0x38) >> 3)
 #define MODRM_RM(field)  ((field & 0x07))
 
+/* sib helpers */
+#define SIB_SCALE(field) ((field & 0xC0) >> 6)
+#define SIB_INDEX(field) ((field & 0x38) >> 3)
+#define SIB_BASE(field)  ((field & 0x07))
+
 bool instr_has_immediate_operand(Dinstruction *decoded);
 bool instr_has_rel_offset_operand(Dinstruction *decoded);
 bool instr_has_direct_addr_operand(Dinstruction *decoded);
