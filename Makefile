@@ -13,7 +13,6 @@ main: build_main run
 
 test: build_test run clean
 
-
 build_main:
 	$(CC) $(SRC) $(CFLAGS) -o $(OUTFILE).$(EXTENSION)
 

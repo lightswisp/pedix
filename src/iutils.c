@@ -300,7 +300,7 @@ void set_sib(Dinstruction *decoded, uchar8_t *instruction){
   decoded->sib.field = *instruction;
   decoded->sib.scale = SIB_SCALE(decoded->sib.field); 
   decoded->sib.index = SIB_INDEX(decoded->sib.field);
-  decoded->sib.base  = SIB_BASE(decoded->sib.field); 
+  decoded->sib.base  = SIB_BASE(decoded->sib.field);; 
 }
 
 void set_displacement(Dinstruction *decoded){

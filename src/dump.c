@@ -16,6 +16,15 @@ void dump_instruction(Instruction *instruction) {
   printf("  secondary_opcode=%d>\n", instruction->secondary_opcode);
 }
 
-void print_instruction(Dinstruction *decoded) {
-  printf("%s\n", decoded->text);
+static char *get_bytes(Dinstruction *decoded){
+  char *temp = calloc(MAX_INSTR_SIZE*3+1, 1);
+  for(uchar8_t i = 0; i < decoded->buffer.size; i++)
+    sprintf(temp+3*i, "%.2x ", decoded->buffer.bytes[i]);
+  return temp;
+}
+
+void print_instruction(Dinstruction *decoded, uint64_t offset) {
+  char *bytes = get_bytes(decoded); 
+  printf("%08x: %20s\t%s\n", offset, bytes, decoded->text);
+  free(bytes);
 }

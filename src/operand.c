@@ -58,6 +58,24 @@
 
 static void set_operand_by_id32(Dinstruction *decoded, _Operand id, char* dst){
   switch (id) {
+  case OPERAND_IMM_8: 
+    sprintf(dst, OPERAND_BYTE, decoded->imm);
+    break;
+  case OPERAND_IMM_16: 
+    sprintf(dst, OPERAND_WORD, decoded->imm);
+    break;
+  case OPERAND_IMM_32: 
+    sprintf(dst, OPERAND_DWORD, decoded->imm);
+    break;
+  case OPERAND_IMM_16_32: 
+    if (instr_has_specific_prefix(decoded, PREFIX_OPSIZE_OVERRIDE))
+      sprintf(dst, OPERAND_WORD, decoded->imm);
+    else 
+      sprintf(dst, OPERAND_BYTE, decoded->imm);
+    break;
+  case OPERAND_ONE: 
+    strcpy(dst, "1");
+    break;
   case OPERAND_RM_8:
     SET_OPERAND_RM_BY_SIZE(8);
     break;
@@ -78,9 +96,6 @@ static void set_operand_by_id32(Dinstruction *decoded, _Operand id, char* dst){
     else
       strcpy(dst, modrm_reg32[decoded->modrm.reg]);
     break;
-  case OPERAND_IMM_16_32:
-    sprintf(dst, OPERAND_DWORD, decoded->imm);
-    break;
   case OPERAND_M_ALL:
       SET_OPERAND_RM_BY_SIZE(32);
     break;
@@ -92,6 +107,15 @@ static void set_operand_by_id32(Dinstruction *decoded, _Operand id, char* dst){
       sprintf(dst, OPERAND_WORD, decoded->rel);
     else
       sprintf(dst, OPERAND_DWORD, decoded->rel);
+    break;
+  case R_PLUS_8:
+    strcpy(dst, modrm_reg8[decoded->buffer.bytes[0] & 0x07]);
+    break;
+  case R_PLUS_16_32:
+    if (instr_has_specific_prefix(decoded, PREFIX_OPSIZE_OVERRIDE))
+      strcpy(dst, modrm_reg16[decoded->buffer.bytes[0] & 0x07]);
+    else
+      strcpy(dst, modrm_reg32[decoded->buffer.bytes[0] & 0x07]);
     break;
 
   default:

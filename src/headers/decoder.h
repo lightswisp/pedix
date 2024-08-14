@@ -66,6 +66,7 @@ typedef struct {
     uint64_t dir;
   };
   Instruction* instruction;
+  uint64_t base_address;
 } Dinstruction;
 
 Dinstruction *init_instruction();

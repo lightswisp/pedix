@@ -128,6 +128,8 @@ typedef enum{
 
   OPERAND_MM                = 96,
   OPERAND_MM_M_64           = 97,
+  R_PLUS_16_32              = 98,
+  R_PLUS_8                  = 99,
 } _Operand;
 
 typedef enum {
