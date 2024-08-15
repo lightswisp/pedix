@@ -1,5 +1,5 @@
 
-# x86 decoder
+# Portable and Efficient DIssasembler for linuX (PEDIX)
 Simple and small x86 instruction decoder
 
 
