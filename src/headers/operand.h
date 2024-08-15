@@ -1,8 +1,8 @@
 #pragma once
 #include "decoder.h"
 
-void set_operands(Dinstruction *decoded);
-void merge_operands(Dinstruction *decoded);
+void pedix_set_operands(Dinstruction *decoded);
+void pedix_merge_operands(Dinstruction *decoded);
 
 /* 8-bit registers */
 static const char *modrm_reg8[] = {"al", "cl", "dl", "bl", "ah", "ch", "dh", "bh"};

@@ -18,34 +18,34 @@
 #define MANDATORY_PREFIX_CHECK(decoded)                                                  \
   if (decoded->instruction->prefix != PREFIX_VOID)                             \
     assert("mandatory prefix is missing" &&                                    \
-           instr_has_specific_prefix(decoded, decoded->instruction->prefix));
+           pedix_instr_has_specific_prefix(decoded, decoded->instruction->prefix));
 
-Dinstruction *init_instruction() {
+Dinstruction *pedix_init_instruction() {
   Dinstruction *decoded = (Dinstruction *)calloc(1, sizeof(Dinstruction));
   assert("calloc failed" && decoded != NULL);
   return decoded;
 }
 
-void zero_instruction(Dinstruction *decoded) {
+void pedix_zero_instruction(Dinstruction *decoded) {
   // save the mode in order to restore it after zeroing the struct
   uint8_t mode = decoded->mode;
   memset(decoded, 0, sizeof(Dinstruction));
   decoded->mode = mode;
 }
 
-void free_instrucion(Dinstruction *decoded) { 
+void pedix_free_instrucion(Dinstruction *decoded) { 
   free(decoded); 
 }
 
-static void decode32(Dinstruction *decoded, uchar8_t *instruction) {
-  while (instr_has_prefix(*instruction)) {
+static void pedix_decode32(Dinstruction *decoded, uchar8_t *instruction) {
+  while (pedix_instr_has_prefix(*instruction)) {
     decoded->prefixes.prefix[decoded->prefixes.size] = *instruction;
     SET_BUFFER(decoded, instruction, BYTE_LEN);
     decoded->prefixes.size = decoded->buffer.size;
     NEXT_BYTE(instruction);
   }
 
-  if (instr_has_extended_opcode(*instruction)) {
+  if (pedix_instr_has_extended_opcode(*instruction)) {
     // 0x0f (two byte opcode is gonna be decoded here)
     SET_BUFFER(decoded, instruction, WORD_LEN);
     NEXT_BYTE(instruction);
@@ -63,7 +63,7 @@ static void decode32(Dinstruction *decoded, uchar8_t *instruction) {
       }
     } else {
       // find the best match
-      Instruction* best_match_instruction = find_best_match(container, decoded, instruction);
+      Instruction* best_match_instruction = pedix_find_best_match(container, decoded, instruction);
       assert("can't find instruction" && best_match_instruction != NULL);
       NEXT_BYTE(instruction);
       decoded->instruction = best_match_instruction;
@@ -90,7 +90,7 @@ static void decode32(Dinstruction *decoded, uchar8_t *instruction) {
       }
     } else {
       // find the best match
-      Instruction *best_match_instruction = find_best_match(container, decoded, instruction);
+      Instruction *best_match_instruction = pedix_find_best_match(container, decoded, instruction);
       assert("can't find instruction" && best_match_instruction != NULL);
 
       NEXT_BYTE(instruction);
@@ -106,18 +106,18 @@ static void decode32(Dinstruction *decoded, uchar8_t *instruction) {
   if (decoded->instruction->opcode_field.type == FIELD_MOD_RM ||
       decoded->instruction->opcode_field.type == FIELD_MULTIPLEXED_MOD_RM) {
     // if it has modrm
-    set_modrm(decoded, instruction);
+    pedix_set_modrm(decoded, instruction);
     SET_BUFFER(decoded, instruction, BYTE_LEN);
     NEXT_BYTE(instruction);
     // it can have sib byte only and only when modrm is present
-    if (instr_has_sib(decoded)) {
-      set_sib(decoded, instruction);
+    if (pedix_instr_has_sib(decoded)) {
+      pedix_set_sib(decoded, instruction);
       SET_BUFFER(decoded, instruction, decoded->sib.size);
       NEXT_BYTES(instruction, decoded->sib.size);
     }
     // sib byte must be parsed first, and only after that we are free to check for displacement 
-    if(instr_has_displacement(decoded)){
-      set_displacement(decoded);
+    if(pedix_instr_has_displacement(decoded)){
+      pedix_set_displacement(decoded);
       SET_BUFFER(decoded, instruction, decoded->displacement.size);
       memcpy(&decoded->displacement.field, instruction, decoded->displacement.size); 
       NEXT_BYTES(instruction, decoded->displacement.size);
@@ -125,23 +125,23 @@ static void decode32(Dinstruction *decoded, uchar8_t *instruction) {
   }
 
   uint64_t len;
-  if((len = set_immediate_operand_if_present(decoded, instruction))){
+  if((len = pedix_set_immediate_operand_if_present(decoded, instruction))){
     SET_BUFFER(decoded, instruction, len);
   }
-  else if ((len = set_relative_offset_operand_if_present(decoded, instruction))){
+  else if ((len = pedix_set_relative_offset_operand_if_present(decoded, instruction))){
     SET_BUFFER(decoded, instruction, len);
   }
 
   // set mnemonic
-  set_mnemonic(decoded);
+  pedix_set_mnemonic(decoded);
   // set operands if we have at least operand1 set
   if (decoded->instruction->operand1 != OPERAND_VOID) {
-    set_operands(decoded);
-    merge_operands(decoded);
+    pedix_set_operands(decoded);
+    pedix_merge_operands(decoded);
   }
 }
 
-static void decode64(Dinstruction *decoded, uchar8_t *instruction) {
+static void pedix_decode64(Dinstruction *decoded, uchar8_t *instruction) {
   assert(!"64-bit mode is not yet implemented");
   //     in 64-bit mode, instruction formats do not change. bits needed to
   //     define fields in the 64-bit context are provided by the
@@ -393,13 +393,13 @@ static void decode64(Dinstruction *decoded, uchar8_t *instruction) {
   //  return false;
 }
 
-void decode(Dinstruction *decoded, uchar8_t *instruction) {
+void pedix_decode(Dinstruction *decoded, uchar8_t *instruction) {
   switch (decoded->mode) {
   case MODE_32:
-    decode32(decoded, instruction);
+    pedix_decode32(decoded, instruction);
     break;
   case MODE_64:
-    decode64(decoded, instruction);
+    pedix_decode64(decoded, instruction);
     break;
   default:
     assert(!"illegal mode selected");

@@ -100,7 +100,7 @@
  * this function sets dst according to modrm RM field and operand size
  * +4 in call trace
  */
-static void set_operand_m_by_size(Dinstruction *decoded, char* dst, uint8_t size){
+static void pedix_set_operand_m_by_size(Dinstruction *decoded, char* dst, uint8_t size){
   switch(size){
     case 8: 
       SET_OPERAND_M_BY_SIZE(8);
@@ -120,7 +120,7 @@ static void set_operand_m_by_size(Dinstruction *decoded, char* dst, uint8_t size
  * this function sets dst according to modrm RM field and operand size
  * +4 in call trace
  */
-static void set_operand_rm_by_size(Dinstruction *decoded, char* dst, uint8_t size){
+static void pedix_set_operand_rm_by_size(Dinstruction *decoded, char* dst, uint8_t size){
   switch(size){
     case 8: 
       SET_OPERAND_RM_BY_SIZE(8);
@@ -140,7 +140,7 @@ static void set_operand_rm_by_size(Dinstruction *decoded, char* dst, uint8_t siz
  * it sets dst according to id
  * +3 in call trace 
  */
-static void set_operand_by_id32(Dinstruction *decoded, _Operand id, char* dst){
+static void pedix_set_operand_by_id32(Dinstruction *decoded, _Operand id, char* dst){
   switch (id) {
   case OPERAND_IMM_8: 
     sprintf(dst, OPERAND_BYTE, decoded->imm);
@@ -152,13 +152,13 @@ static void set_operand_by_id32(Dinstruction *decoded, _Operand id, char* dst){
     sprintf(dst, OPERAND_DWORD, decoded->imm);
     break;
   case OPERAND_IMM_16_32:
-    if (instr_has_specific_prefix(decoded, PREFIX_OPSIZE_OVERRIDE))
+    if (pedix_instr_has_specific_prefix(decoded, PREFIX_OPSIZE_OVERRIDE))
       sprintf(dst, OPERAND_WORD, decoded->imm);
     else 
       sprintf(dst, OPERAND_BYTE, decoded->imm);
     break;
   case OPERAND_REG_EAX: 
-    if (instr_has_specific_prefix(decoded, PREFIX_OPSIZE_OVERRIDE))
+    if (pedix_instr_has_specific_prefix(decoded, PREFIX_OPSIZE_OVERRIDE))
       strcpy(dst, "ax");
     else 
       strcpy(dst, "eax");
@@ -167,36 +167,36 @@ static void set_operand_by_id32(Dinstruction *decoded, _Operand id, char* dst){
     strcpy(dst, "1");
     break;
   case OPERAND_RM_8:
-    set_operand_rm_by_size(decoded, dst, 8);
+    pedix_set_operand_rm_by_size(decoded, dst, 8);
     break;
   case OPERAND_R_8:
     strcpy(dst, modrm_reg8[decoded->modrm.reg]);
     break;
   case OPERAND_RM_16_32:
-    if (instr_has_specific_prefix(decoded, PREFIX_OPSIZE_OVERRIDE)){
-      set_operand_rm_by_size(decoded, dst, 16);
+    if (pedix_instr_has_specific_prefix(decoded, PREFIX_OPSIZE_OVERRIDE)){
+      pedix_set_operand_rm_by_size(decoded, dst, 16);
     }
     else{
-      set_operand_rm_by_size(decoded, dst, 32);
+      pedix_set_operand_rm_by_size(decoded, dst, 32);
     }
     break;
   case OPERAND_R_16_32:
-    if (instr_has_specific_prefix(decoded, PREFIX_OPSIZE_OVERRIDE))
+    if (pedix_instr_has_specific_prefix(decoded, PREFIX_OPSIZE_OVERRIDE))
       strcpy(dst, modrm_reg16[decoded->modrm.reg]);
     else
       strcpy(dst, modrm_reg32[decoded->modrm.reg]);
     break;
   case OPERAND_M_8:
-    set_operand_m_by_size(decoded, dst, 8);
+    pedix_set_operand_m_by_size(decoded, dst, 8);
     break;
   case OPERAND_M_ALL:
-    set_operand_m_by_size(decoded, dst, 32);
+    pedix_set_operand_m_by_size(decoded, dst, 32);
     break;
   case OPERAND_REL_8:
     sprintf(dst, OPERAND_BYTE, decoded->rel);
     break;
   case OPERAND_REL_16_32: 
-    if (instr_has_specific_prefix(decoded, PREFIX_OPSIZE_OVERRIDE))
+    if (pedix_instr_has_specific_prefix(decoded, PREFIX_OPSIZE_OVERRIDE))
       sprintf(dst, OPERAND_WORD, decoded->rel);
     else
       sprintf(dst, OPERAND_DWORD, decoded->rel);
@@ -205,7 +205,7 @@ static void set_operand_by_id32(Dinstruction *decoded, _Operand id, char* dst){
     strcpy(dst, modrm_reg8[decoded->buffer.bytes[0] & 0x07]);
     break;
   case R_PLUS_16_32:
-    if (instr_has_specific_prefix(decoded, PREFIX_OPSIZE_OVERRIDE))
+    if (pedix_instr_has_specific_prefix(decoded, PREFIX_OPSIZE_OVERRIDE))
       strcpy(dst, modrm_reg16[decoded->buffer.bytes[0] & 0x07]);
     else
       strcpy(dst, modrm_reg32[decoded->buffer.bytes[0] & 0x07]);
@@ -222,19 +222,19 @@ static void set_operand_by_id32(Dinstruction *decoded, _Operand id, char* dst){
  * decoded->instruction->operand1
  * +2 in call trace
  */ 
-static void set_operand_by_n32(Dinstruction *decoded, uint8_t n){
+static void pedix_set_operand_by_n32(Dinstruction *decoded, uint8_t n){
   switch(n){
     case 1:
-      set_operand_by_id32(decoded, decoded->instruction->operand1, decoded->operand1);
+      pedix_set_operand_by_id32(decoded, decoded->instruction->operand1, decoded->operand1);
       break;
     case 2:
-      set_operand_by_id32(decoded, decoded->instruction->operand2, decoded->operand2);
+      pedix_set_operand_by_id32(decoded, decoded->instruction->operand2, decoded->operand2);
       break;
     case 3:
-      set_operand_by_id32(decoded, decoded->instruction->operand3, decoded->operand3);
+      pedix_set_operand_by_id32(decoded, decoded->instruction->operand3, decoded->operand3);
       break;
     case 4:
-      set_operand_by_id32(decoded, decoded->instruction->operand4, decoded->operand4);
+      pedix_set_operand_by_id32(decoded, decoded->instruction->operand4, decoded->operand4);
       break;
 
     default: 
@@ -246,23 +246,23 @@ static void set_operand_by_n32(Dinstruction *decoded, uint8_t n){
  * it cares only about which operands are present
  * +1 in call trace
  */
-static void set_operands32(Dinstruction *decoded) {
+static void pedix_set_operands32(Dinstruction *decoded) {
   // operand1 is assumed to be present
-  set_operand_by_n32(decoded, 1);
+  pedix_set_operand_by_n32(decoded, 1);
   if (decoded->instruction->operand2 != OPERAND_VOID)
-      set_operand_by_n32(decoded, 2);
+      pedix_set_operand_by_n32(decoded, 2);
   if (decoded->instruction->operand3 != OPERAND_VOID)
-      set_operand_by_n32(decoded, 3);
+      pedix_set_operand_by_n32(decoded, 3);
   if (decoded->instruction->operand4 != OPERAND_VOID)
-      set_operand_by_n32(decoded, 4);
+      pedix_set_operand_by_n32(decoded, 4);
 }
 
-static void set_operands64(Dinstruction *decoded) {
+static void pedix_set_operands64(Dinstruction *decoded) {
   // todo
-  assert(!"set_operands64 is not implemented yet!");
+  assert(!"pedix_set_operands64 is not implemented yet!");
 }
 
-void merge_operands(Dinstruction *decoded) {
+void pedix_merge_operands(Dinstruction *decoded) {
   if (decoded->instruction->operand1 != OPERAND_VOID){
       // add space
       decoded->text[strlen(decoded->text)] = 0x20;
@@ -286,13 +286,13 @@ void merge_operands(Dinstruction *decoded) {
 /*
  * general-purpose function that cares only about bit depth
  */
-void set_operands(Dinstruction *decoded) {
+void pedix_set_operands(Dinstruction *decoded) {
   switch (decoded->mode) {
   case MODE_32:
-      set_operands32(decoded);
+      pedix_set_operands32(decoded);
       break;
   case MODE_64:
-      set_operands64(decoded);
+      pedix_set_operands64(decoded);
       break;
   default:
       assert(!"illegal mode selected");

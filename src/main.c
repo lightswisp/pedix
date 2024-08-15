@@ -16,7 +16,7 @@ int main(void) {
       0x14, 0xE0, 0xFF, 0xFF, 0x52, 0x89, 0xC3, 0xE8, 0x89, 0xFE, 0xFF,
       0xFF, 0x83, 0xC4, 0x10, 0xB8, 0x00, 0x00, 0x00, 0x00, 0x8D, 0x65,
       0xF8, 0x59, 0x5B, 0x5D, 0x8D, 0x61, 0xFC, 0xC3, 0x0f, 0x18, 0x00};
-  Dinstruction *decoded = init_instruction();
+  Dinstruction *decoded = pedix_init_instruction();
   decoded->mode = MODE_32;
 
   /* curr offset */
@@ -25,22 +25,22 @@ int main(void) {
   instructions = 0;
 
   while (instructions < INSTRUCTION_LIMIT) {
-    decode(decoded, instruction + offset);
+   pedix_decode(decoded, instruction + offset);
 
 #ifdef DEBUG
-    dump_instruction(decoded->instruction);
+    pedix_dump_instruction(decoded->instruction);
 #endif
     /* if everything went well */
-    print_instruction(decoded, offset);
+    pedix_print_instruction(decoded, offset);
     /* eat bytes */
     offset += decoded->buffer.size;
     /* go to the next instruction */
     instructions++;
     /* zero the struct */
-    zero_instruction(decoded);
+    pedix_zero_instruction(decoded);
   }
 
-  free_instrucion(decoded);
+  pedix_free_instrucion(decoded);
   return 0;
 }
 

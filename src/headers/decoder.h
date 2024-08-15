@@ -6,6 +6,11 @@
 #include "../../gen/tabledef.h"
 #include "defines.h"
 
+Dinstruction *pedix_init_instruction();
+void pedix_free_instrucion(Dinstruction *decoded);  
+void pedix_zero_instruction(Dinstruction *decoded); 
+void pedix_decode(Dinstruction *decoded, uchar8_t *instruction);
+
 typedef struct {
   size_t size;
   uint8_t prefix[MAX_PREFIXES];
@@ -68,8 +73,3 @@ typedef struct {
   Instruction* instruction;
   uint64_t base_address;
 } Dinstruction;
-
-Dinstruction *init_instruction();
-void free_instrucion(Dinstruction *decoded);  
-void zero_instruction(Dinstruction *decoded); 
-void decode(Dinstruction *decoded, uchar8_t *instruction);

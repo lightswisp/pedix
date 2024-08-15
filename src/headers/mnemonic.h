@@ -1,5 +1,5 @@
 #include "decoder.h"
 #include "defines.h"
 
-void set_mnemonic(Dinstruction *decoded);
+void pedix_set_mnemonic(Dinstruction *decoded);
 
