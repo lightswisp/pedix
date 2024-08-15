@@ -287,7 +287,9 @@ Instruction *find_best_match(InstructionContainer container, Dinstruction *decod
 #ifdef DEBUG
       if (secondary_opcode != -1) {
         // remove the opcode field from the table please!
+#if defined(__x86_64__) || defined(__i386__)
         SET_BREAKPOINT;
+#endif
       }
 #endif
       if (MODRM_REG(instruction[offset]) == value)

@@ -4,7 +4,9 @@ typedef unsigned char uchar8_t;
 #define MODE_32 32 
 #define MODE_64 64
 
-#define SET_BREAKPOINT asm volatile("int3");
+#if defined(__x86_64__) || defined(__i386__)
+  #define SET_BREAKPOINT asm volatile("int3");
+#endif
 #define MAX_OPERAND_STR_LEN 50 
 #define MAX_PREFIXES 4
 #define MAX_TEXT_LEN 100
