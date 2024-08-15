@@ -1,5 +1,5 @@
 /* (instructions.h) auto generated using gen.rb 
- * time: 2024-08-14 03:14:58 -0400
+ * time: 2024-08-15 11:51:14 -0400
  */
 
 #pragma once
@@ -1192,6 +1192,96 @@ Instruction REGULAR_POP_89[1] = {
   },
 };
 
+Instruction REGULAR_POP_90[1] = {
+  {
+   .extended_opcode = false,
+   .mnemonic = "pop",
+   .opcode_field = {.type = 0, .value = 0 },
+   .operand1 = 98,
+   .operand2 = 0,
+   .operand3 = 0,
+   .operand4 = 0,
+   .prefix = 0,
+   .primary_opcode = 90,
+   .secondary_opcode = -1,
+  },
+};
+
+Instruction REGULAR_POP_91[1] = {
+  {
+   .extended_opcode = false,
+   .mnemonic = "pop",
+   .opcode_field = {.type = 0, .value = 0 },
+   .operand1 = 98,
+   .operand2 = 0,
+   .operand3 = 0,
+   .operand4 = 0,
+   .prefix = 0,
+   .primary_opcode = 91,
+   .secondary_opcode = -1,
+  },
+};
+
+Instruction REGULAR_POP_92[1] = {
+  {
+   .extended_opcode = false,
+   .mnemonic = "pop",
+   .opcode_field = {.type = 0, .value = 0 },
+   .operand1 = 98,
+   .operand2 = 0,
+   .operand3 = 0,
+   .operand4 = 0,
+   .prefix = 0,
+   .primary_opcode = 92,
+   .secondary_opcode = -1,
+  },
+};
+
+Instruction REGULAR_POP_93[1] = {
+  {
+   .extended_opcode = false,
+   .mnemonic = "pop",
+   .opcode_field = {.type = 0, .value = 0 },
+   .operand1 = 98,
+   .operand2 = 0,
+   .operand3 = 0,
+   .operand4 = 0,
+   .prefix = 0,
+   .primary_opcode = 93,
+   .secondary_opcode = -1,
+  },
+};
+
+Instruction REGULAR_POP_94[1] = {
+  {
+   .extended_opcode = false,
+   .mnemonic = "pop",
+   .opcode_field = {.type = 0, .value = 0 },
+   .operand1 = 98,
+   .operand2 = 0,
+   .operand3 = 0,
+   .operand4 = 0,
+   .prefix = 0,
+   .primary_opcode = 94,
+   .secondary_opcode = -1,
+  },
+};
+
+Instruction REGULAR_POP_95[1] = {
+  {
+   .extended_opcode = false,
+   .mnemonic = "pop",
+   .opcode_field = {.type = 0, .value = 0 },
+   .operand1 = 98,
+   .operand2 = 0,
+   .operand3 = 0,
+   .operand4 = 0,
+   .prefix = 0,
+   .primary_opcode = 95,
+   .secondary_opcode = -1,
+  },
+};
+
 Instruction REGULAR_PUSHAD_96[1] = {
   {
    .extended_opcode = false,
@@ -1317,7 +1407,7 @@ Instruction REGULAR_INS_108[1] = {
    .extended_opcode = false,
    .mnemonic = "ins",
    .opcode_field = {.type = 0, .value = 0 },
-   .operand1 = 55,
+   .operand1 = 0,
    .operand2 = 25,
    .operand3 = 0,
    .operand4 = 0,
@@ -1360,7 +1450,7 @@ Instruction REGULAR_OUTS_110[1] = {
    .mnemonic = "outs",
    .opcode_field = {.type = 0, .value = 0 },
    .operand1 = 25,
-   .operand2 = 55,
+   .operand2 = 0,
    .operand3 = 0,
    .operand4 = 0,
    .prefix = 0,
@@ -2541,8 +2631,8 @@ Instruction REGULAR_MOVS_164[1] = {
    .extended_opcode = false,
    .mnemonic = "movs",
    .opcode_field = {.type = 0, .value = 0 },
-   .operand1 = 55,
-   .operand2 = 55,
+   .operand1 = 0,
+   .operand2 = 0,
    .operand3 = 0,
    .operand4 = 0,
    .prefix = 0,
@@ -2583,8 +2673,8 @@ Instruction REGULAR_CMPS_166[1] = {
    .extended_opcode = false,
    .mnemonic = "cmps",
    .opcode_field = {.type = 0, .value = 0 },
-   .operand1 = 55,
-   .operand2 = 55,
+   .operand1 = 0,
+   .operand2 = 0,
    .operand3 = 0,
    .operand4 = 0,
    .prefix = 0,
@@ -2655,8 +2745,8 @@ Instruction REGULAR_STOS_170[1] = {
    .extended_opcode = false,
    .mnemonic = "stos",
    .opcode_field = {.type = 0, .value = 0 },
-   .operand1 = 55,
-   .operand2 = 15,
+   .operand1 = 0,
+   .operand2 = 0,
    .operand3 = 0,
    .operand4 = 0,
    .prefix = 0,
@@ -2698,7 +2788,7 @@ Instruction REGULAR_LODS_172[1] = {
    .mnemonic = "lods",
    .opcode_field = {.type = 0, .value = 0 },
    .operand1 = 15,
-   .operand2 = 55,
+   .operand2 = 0,
    .operand3 = 0,
    .operand4 = 0,
    .prefix = 0,
@@ -2739,8 +2829,8 @@ Instruction REGULAR_SCAS_174[1] = {
    .extended_opcode = false,
    .mnemonic = "scas",
    .opcode_field = {.type = 0, .value = 0 },
-   .operand1 = 55,
-   .operand2 = 15,
+   .operand1 = 0,
+   .operand2 = 0,
    .operand3 = 0,
    .operand4 = 0,
    .prefix = 0,
@@ -4200,7 +4290,7 @@ Instruction REGULAR_FLD_217[39] = {
    .extended_opcode = false,
    .mnemonic = "fldz",
    .opcode_field = {.type = 0, .value = 0 },
-   .operand1 = 84,
+   .operand1 = 0,
    .operand2 = 0,
    .operand3 = 0,
    .operand4 = 0,
@@ -7109,6 +7199,33 @@ Instruction EXTENDED_PREFETCHNTA_24[8] = {
   },
 };
 
+Instruction EXTENDED_ENDBR32_30[2] = {
+  {
+   .extended_opcode = true,
+   .mnemonic = "endbr32",
+   .opcode_field = {.type = 0, .value = 0 },
+   .operand1 = 0,
+   .operand2 = 0,
+   .operand3 = 0,
+   .operand4 = 0,
+   .prefix = 243,
+   .primary_opcode = 30,
+   .secondary_opcode = 251,
+  },
+  {
+   .extended_opcode = true,
+   .mnemonic = "hint_nop",
+   .opcode_field = {.type = 0, .value = 0 },
+   .operand1 = 14,
+   .operand2 = 0,
+   .operand3 = 0,
+   .operand4 = 0,
+   .prefix = 0,
+   .primary_opcode = 30,
+   .secondary_opcode = -1,
+  },
+};
+
 Instruction EXTENDED_HINT_NOP_25[1] = {
   {
    .extended_opcode = true,
@@ -7180,21 +7297,6 @@ Instruction EXTENDED_HINT_NOP_29[1] = {
    .operand4 = 0,
    .prefix = 0,
    .primary_opcode = 29,
-   .secondary_opcode = -1,
-  },
-};
-
-Instruction EXTENDED_HINT_NOP_30[1] = {
-  {
-   .extended_opcode = true,
-   .mnemonic = "hint_nop",
-   .opcode_field = {.type = 0, .value = 0 },
-   .operand1 = 14,
-   .operand2 = 0,
-   .operand3 = 0,
-   .operand4 = 0,
-   .prefix = 0,
-   .primary_opcode = 30,
    .secondary_opcode = -1,
   },
 };

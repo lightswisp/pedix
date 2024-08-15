@@ -1,0 +1,46 @@
+endbr32
+push ebp
+mov ebp,esp
+push ebx
+call 0xffffff58
+add ebx,0x2eb7
+sub esp,0x04
+cmp BYTE PTR [ebx+0x0000001c],0x00
+jnz 0x29
+mov eax,DWORD PTR [ebx+0xfffffff0]
+test eax,eax
+jz 0x13
+sub esp,0x0c
+push DWORD PTR [ebx+0x00000018]
+call 0xfffffeee
+add esp,0x10
+call 0xffffff36
+mov BYTE PTR [ebx+0x0000001c],0x01
+mov ebx,DWORD PTR [ebp+0xfc]
+leave
+retn
+lea esi,DWORD PTR [esi+esp*1+0x00]
+
+
+endbr32
+push ebp
+mov ebp, esp
+push ebx
+call 0xFFFFFF58
+add ebx, 0x2EB7
+sub esp, 0x04
+cmp byte ptr [ebx+0x1C], 0x00
+jnz 0x00000029
+mov eax, [ebx-0x10]
+test eax, eax
+jz 0x00000013
+sub esp, 0x0C
+push [ebx+0x18]
+call 0xFFFFFEEE
+add esp, 0x10
+call 0xFFFFFF36
+mov byte ptr [ebx+0x1C], 0x01
+mov ebx, [ebp-0x04]
+leave
+ret
+lea esi, [esi]

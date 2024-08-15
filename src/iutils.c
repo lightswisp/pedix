@@ -111,6 +111,11 @@ size_t get_vex_size(uchar8_t vex_byte) {
   return 0;
 }
 
+/*
+ * sets the immediate operand field if present
+ * if it succeeds, immediate byte length is returned
+ * zero is returned otherwise
+ */
 uint64_t set_immediate_operand_if_present(Dinstruction *decoded, uchar8_t* instruction){
   if(HAS_IMMEDIATE(decoded, 1)){
     SET_IMMEDIATE_BY_N(decoded, instruction, 1);
@@ -127,6 +132,11 @@ uint64_t set_immediate_operand_if_present(Dinstruction *decoded, uchar8_t* instr
   return 0;
 }
 
+/*
+ * sets the relative offset operand field if present
+ * if it succeeds, relative offset byte length is returned
+ * zero is returned otherwise
+ */
 uint64_t set_relative_offset_operand_if_present(Dinstruction *decoded, uchar8_t* instruction){
   if(HAS_RELATIVE(decoded, 1)){
     SET_RELATIVE_BY_N(decoded, instruction, 1);
@@ -143,6 +153,11 @@ uint64_t set_relative_offset_operand_if_present(Dinstruction *decoded, uchar8_t*
   return 0;
 }
 
+/*
+ * sets the direct address operand field if present
+ * if it succeeds, direct address byte length is returned
+ * zero is returned otherwise
+ */
 uint64_t set_direct_address_operand_if_present(Dinstruction *decoded, uchar8_t* instruction){
   // todo
   return 0;
@@ -185,6 +200,14 @@ bool instr_has_displacement(Dinstruction *decoded){
   return false;
 }
 
+/*
+ * in situations where instruction container consists of more then one instruction,
+ * this function is used to find the best match in a for loop
+ * matching criterias are: prefix, primary opcode, secondary opcode and operand field.
+ * if there is no match, we decrease the temp_score by one
+ * if there is a match, we increase the temp_score by one
+ * if there is an exact hit, we return the instruction pointer immediately.
+ */ 
 Instruction *find_best_match(InstructionContainer container, Dinstruction *decoded, uchar8_t *instruction){
   uint8_t max_score, max_i;
 

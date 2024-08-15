@@ -1,7 +1,7 @@
 .PHONY: clean test build_test build_main run main
 default:main
 
-DEBUG=-DDEBUG
+DEBUG=
 CC=clang
 SRC  = $(wildcard src/*.c)
 TEST = $(wildcard test/*.c)

@@ -1904,6 +1904,157 @@
 <td>Pop a Value from the Stack</td>
 </TR></TBODY>
 
+<TBODY id="x5a"><TR>
+<TD></TD>
+<TD></TD>
+<TD colspan="2">5A</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>POP</TD>
+<td><b>r+16/32</b></td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<td>Pop a Value from the Stack</td>
+</TR></TBODY>
+
+<TBODY id="x5B"><TR>
+<TD></TD>
+<TD></TD>
+<TD colspan="2">5B</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>POP</TD>
+<td><b>r+16/32</b></td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<td>Pop a Value from the Stack</td>
+</TR></TBODY>
+
+<TBODY id="x5C"><TR>
+<TD></TD>
+<TD></TD>
+<TD colspan="2">5C</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>POP</TD>
+<td><b>r+16/32</b></td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<td>Pop a Value from the Stack</td>
+</TR></TBODY>
+
+<TBODY id="x5D"><TR>
+<TD></TD>
+<TD></TD>
+<TD colspan="2">5D</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>POP</TD>
+<td><b>r+16/32</b></td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<td>Pop a Value from the Stack</td>
+</TR></TBODY>
+
+<TBODY id="x5E"><TR>
+<TD></TD>
+<TD></TD>
+<TD colspan="2">5E</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>POP</TD>
+<td><b>r+16/32</b></td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<td>Pop a Value from the Stack</td>
+</TR></TBODY>
+
+<TBODY id="x5F"><TR>
+<TD></TD>
+<TD></TD>
+<TD colspan="2">5F</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>POP</TD>
+<td><b>r+16/32</b></td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<td>Pop a Value from the Stack</td>
+</TR></TBODY>
+
+
 <TBODY><TR>
 <TD></TD>
 <TD></TD>
@@ -2110,7 +2261,7 @@
 </TD>
 <TD ROWSPAN="2"></TD>
 <TD>INS</TD>
-<td><b>m8</b></td>
+<td></td>
 <td>DX</td>
 <td></td>
 <td></td>
@@ -2124,7 +2275,7 @@
 </TR>
 <tr class="nbb">
 <TD>INSB</TD>
-<td><b><i>m8</i></b></td>
+<td></td>
 <td><i>DX</i></td>
 <td></td>
 <td></td>
@@ -2213,7 +2364,7 @@
 <TD ROWSPAN="2"></TD>
 <TD>OUTS</TD>
 <td><b>DX</b></td>
-<td>m8</td>
+<td></td>
 <td></td>
 <td></td>
 <td rowspan="2"></td>
@@ -2227,7 +2378,7 @@
 <tr class="nbb">
 <TD>OUTSB</TD>
 <td><b><i>DX</i></b></td>
-<td><i>m8</i></td>
+<td></td>
 <td></td>
 <td></td>
 </tr>
@@ -4417,8 +4568,8 @@
 <TD ROWSPAN="2"></TD>
 <TD ROWSPAN="2"></TD>
 <TD>MOVS</TD>
-<td><b>m8</b></td>
-<td>m8</td>
+<td></td>
+<td></td>
 <td></td>
 <td></td>
 <td rowspan="2"></td>
@@ -4431,8 +4582,8 @@
 </TR>
 <tr class="nbb">
 <TD>MOVSB</TD>
-<td><b><i>m8</i></b></td>
-<td><i>m8</i></td>
+<td></td>
+<td></td>
 <td></td>
 <td></td>
 </tr>
@@ -4516,8 +4667,8 @@
 <TD ROWSPAN="2"></TD>
 <TD ROWSPAN="2"></TD>
 <TD>CMPS</TD>
-<td>m8</td>
-<td>m8</td>
+<td></td>
+<td></td>
 <td></td>
 <td></td>
 <td rowspan="2"></td>
@@ -4530,8 +4681,8 @@
 </TR>
 <tr class="nbb">
 <TD>CMPSB</TD>
-<td><i>m8</i></td>
-<td><i>m8</i></td>
+<td></td>
+<td></td>
 <td></td>
 <td></td>
 </tr>
@@ -4663,8 +4814,8 @@
 <TD ROWSPAN="2"></TD>
 <TD ROWSPAN="2"></TD>
 <TD>STOS</TD>
-<td><b>m8</b></td>
-<td><i>AL</i></td>
+<td></td>
+<td></td>
 <td></td>
 <td></td>
 <td rowspan="2"></td>
@@ -4677,8 +4828,8 @@
 </TR>
 <tr class="nbb">
 <TD>STOSB</TD>
-<td><b><i>m8</i></b></td>
-<td><i>AL</i></td>
+<td></td>
+<td></td>
 <td></td>
 <td></td>
 </tr>
@@ -4763,7 +4914,7 @@
 <TD ROWSPAN="2"></TD>
 <TD>LODS</TD>
 <td><b><i>AL</i></b></td>
-<td>m8</td>
+<td></td>
 <td></td>
 <td></td>
 <td rowspan="2"></td>
@@ -4776,8 +4927,8 @@
 </TR>
 <tr class="nbb">
 <TD>LODSB</TD>
-<td><b><i>AL</i></b></td>
-<td><i>m8</i></td>
+<td></td>
+<td></td>
 <td></td>
 <td></td>
 </tr>
@@ -4861,8 +5012,8 @@
 <TD ROWSPAN="2"></TD>
 <TD ROWSPAN="2"></TD>
 <TD>SCAS</TD>
-<td>m8</td>
-<td><i>AL</i></td>
+<td></td>
+<td></td>
 <td></td>
 <td></td>
 <td rowspan="2"></td>
@@ -4875,8 +5026,8 @@
 </TR>
 <tr class="nbb">
 <TD>SCASB</TD>
-<td><i>m8</i></td>
-<td><i>AL</i></td>
+<td></td>
+<td></td>
 <td></td>
 <td></td>
 </tr>
@@ -7745,7 +7896,7 @@
 <TD></TD>
 <TD>s</TD>
 <TD>FLDZ</TD>
-<td><b><i>ST</i></b></td>
+<td><b><i></i></b></td>
 <td></td>
 <td></td>
 <td></td>
@@ -13252,6 +13403,33 @@
 <TD></TD>
 <td>Prefetch Data Into Caches</td>
 </TR></TBODY>
+
+
+<TBODY><TR id="xF30F1E_4">
+<TD>F3</TD>
+<TD>0F</TD>
+<TD>1E</TD>
+<TD CLASS="highlight">FB</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<td>ENDBR32</td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<td>ENDBR</td>
+</TR></TBODY>
+
+
 <TBODY><TR id="x0F18_4">
 <TD></TD>
 <TD>0F</TD>

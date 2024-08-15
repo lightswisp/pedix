@@ -25,6 +25,6 @@ static char *get_bytes(Dinstruction *decoded){
 
 void print_instruction(Dinstruction *decoded, uint64_t offset) {
   char *bytes = get_bytes(decoded); 
-  printf("%08x: %20s\t%s\n", offset, bytes, decoded->text);
+  printf("%08x: %25s\t%s\n", offset, bytes, decoded->text);
   free(bytes);
 }

@@ -13,6 +13,46 @@
 #define MOD_ONE_BYTE_DISPLACEMENT 1
 #define MOD_SIB_OR_REGISTER_INDIRECT_ADDRESSING 0
 
+#define SET_OPERAND_M_BY_SIZE(SZ)                                              \
+  switch (decoded->modrm.mod) {                                                \
+  case MOD_SIB_OR_REGISTER_INDIRECT_ADDRESSING:                                \
+    if (decoded->sib.size) {                                                   \
+      if (decoded->sib.base == 5) {                                            \
+        sprintf(dst, SIB_FOUR_BYTE_DISP_NO_REG_ADDRESSING_OP##SZ,              \
+                modrm_reg32[decoded->modrm.rm], 1 << decoded->sib.scale,       \
+                decoded->displacement.field);                                  \
+      } else {                                                                 \
+        sprintf(dst, SIB_FOUR_BYTE_NO_DISP_ADDRESSING_OP##SZ,                  \
+                modrm_reg32[decoded->sib.base],                                \
+                modrm_reg32[decoded->sib.index], 1 << decoded->sib.scale);     \
+      }                                                                        \
+    } else {                                                                   \
+      sprintf(dst, INDIRECT_ADDRESSING_OP##SZ,                                 \
+              modrm_reg32[decoded->modrm.rm]);                                 \
+    }                                                                          \
+    break;                                                                     \
+  case MOD_ONE_BYTE_DISPLACEMENT:                                              \
+    if (decoded->sib.size) {                                                   \
+      sprintf(dst, SIB_ONE_BYTE_DISP_ADDRESSING_OP##SZ,                        \
+              modrm_reg32[decoded->sib.base], modrm_reg32[decoded->sib.index], \
+              1 << decoded->sib.scale, decoded->displacement.field);           \
+    } else {                                                                   \
+      sprintf(dst, ONE_BYTE_DISP_ADDRESSING_OP##SZ,                            \
+              modrm_reg32[decoded->modrm.rm], decoded->displacement.field);    \
+    }                                                                          \
+    break;                                                                     \
+  case MOD_FOUR_BYTE_DISPLACEMENT:                                             \
+    if (decoded->sib.size) {                                                   \
+      sprintf(dst, SIB_FOUR_BYTE_DISP_ADDRESSING_OP##SZ,                       \
+              modrm_reg32[decoded->sib.base], modrm_reg32[decoded->sib.index], \
+              1 << decoded->sib.scale, decoded->displacement.field);           \
+    } else {                                                                   \
+      sprintf(dst, FOUR_BYTE_DISP_ADDRESSING_OP##SZ,                           \
+              modrm_reg32[decoded->modrm.rm], decoded->displacement.field);    \
+    }                                                                          \
+    break;                                                                     \
+  }
+
 #define SET_OPERAND_RM_BY_SIZE(SZ)                                             \
   switch (decoded->modrm.mod) {                                                \
   case MOD_SIB_OR_REGISTER_INDIRECT_ADDRESSING:                                \
@@ -56,6 +96,50 @@
     break;                                                                     \
   }
 
+/*
+ * this function sets dst according to modrm RM field and operand size
+ * +4 in call trace
+ */
+static void set_operand_m_by_size(Dinstruction *decoded, char* dst, uint8_t size){
+  switch(size){
+    case 8: 
+      SET_OPERAND_M_BY_SIZE(8);
+      break;
+    case 16:
+      SET_OPERAND_M_BY_SIZE(16);
+      break;
+    case 32: 
+      SET_OPERAND_M_BY_SIZE(32);
+      break;
+    default: 
+      assert(!"illegal operand size");
+  }
+}
+
+/*
+ * this function sets dst according to modrm RM field and operand size
+ * +4 in call trace
+ */
+static void set_operand_rm_by_size(Dinstruction *decoded, char* dst, uint8_t size){
+  switch(size){
+    case 8: 
+      SET_OPERAND_RM_BY_SIZE(8);
+      break;
+    case 16:
+      SET_OPERAND_RM_BY_SIZE(16);
+      break;
+    case 32: 
+      SET_OPERAND_RM_BY_SIZE(32);
+      break;
+    default: 
+      assert(!"illegal operand size");
+  }
+}
+
+/*
+ * it sets dst according to id
+ * +3 in call trace 
+ */
 static void set_operand_by_id32(Dinstruction *decoded, _Operand id, char* dst){
   switch (id) {
   case OPERAND_IMM_8: 
@@ -67,27 +151,33 @@ static void set_operand_by_id32(Dinstruction *decoded, _Operand id, char* dst){
   case OPERAND_IMM_32: 
     sprintf(dst, OPERAND_DWORD, decoded->imm);
     break;
-  case OPERAND_IMM_16_32: 
+  case OPERAND_IMM_16_32:
     if (instr_has_specific_prefix(decoded, PREFIX_OPSIZE_OVERRIDE))
       sprintf(dst, OPERAND_WORD, decoded->imm);
     else 
       sprintf(dst, OPERAND_BYTE, decoded->imm);
     break;
+  case OPERAND_REG_EAX: 
+    if (instr_has_specific_prefix(decoded, PREFIX_OPSIZE_OVERRIDE))
+      strcpy(dst, "ax");
+    else 
+      strcpy(dst, "eax");
+    break;
   case OPERAND_ONE: 
     strcpy(dst, "1");
     break;
   case OPERAND_RM_8:
-    SET_OPERAND_RM_BY_SIZE(8);
+    set_operand_rm_by_size(decoded, dst, 8);
     break;
   case OPERAND_R_8:
     strcpy(dst, modrm_reg8[decoded->modrm.reg]);
     break;
   case OPERAND_RM_16_32:
     if (instr_has_specific_prefix(decoded, PREFIX_OPSIZE_OVERRIDE)){
-      SET_OPERAND_RM_BY_SIZE(16);
+      set_operand_rm_by_size(decoded, dst, 16);
     }
     else{
-      SET_OPERAND_RM_BY_SIZE(32);
+      set_operand_rm_by_size(decoded, dst, 32);
     }
     break;
   case OPERAND_R_16_32:
@@ -96,8 +186,11 @@ static void set_operand_by_id32(Dinstruction *decoded, _Operand id, char* dst){
     else
       strcpy(dst, modrm_reg32[decoded->modrm.reg]);
     break;
+  case OPERAND_M_8:
+    set_operand_m_by_size(decoded, dst, 8);
+    break;
   case OPERAND_M_ALL:
-      SET_OPERAND_RM_BY_SIZE(32);
+    set_operand_m_by_size(decoded, dst, 32);
     break;
   case OPERAND_REL_8:
     sprintf(dst, OPERAND_BYTE, decoded->rel);
@@ -124,6 +217,11 @@ static void set_operand_by_id32(Dinstruction *decoded, _Operand id, char* dst){
   }
 }
 
+/*
+ * it sets specific N operand's text field by its id that is stored in
+ * decoded->instruction->operand1
+ * +2 in call trace
+ */ 
 static void set_operand_by_n32(Dinstruction *decoded, uint8_t n){
   switch(n){
     case 1:
@@ -144,10 +242,13 @@ static void set_operand_by_n32(Dinstruction *decoded, uint8_t n){
   }
 }
 
+/* 
+ * it cares only about which operands are present
+ * +1 in call trace
+ */
 static void set_operands32(Dinstruction *decoded) {
-  //assert(!"set_operands32 is not implemented yet!");
-  if (decoded->instruction->operand1 != OPERAND_VOID)
-      set_operand_by_n32(decoded, 1);
+  // operand1 is assumed to be present
+  set_operand_by_n32(decoded, 1);
   if (decoded->instruction->operand2 != OPERAND_VOID)
       set_operand_by_n32(decoded, 2);
   if (decoded->instruction->operand3 != OPERAND_VOID)
@@ -182,6 +283,9 @@ void merge_operands(Dinstruction *decoded) {
   }
 }
 
+/*
+ * general-purpose function that cares only about bit depth
+ */
 void set_operands(Dinstruction *decoded) {
   switch (decoded->mode) {
   case MODE_32:

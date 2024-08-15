@@ -1,5 +1,5 @@
 /* (tables.h) auto generated using gen.rb 
- * time: 2024-08-14 03:14:58 -0400
+ * time: 2024-08-15 11:51:14 -0400
  */
 
 #pragma once
@@ -87,6 +87,12 @@ InstructionContainer regular_table_32[0x100] = {
   [0x57] = { .size = 1, .instructions = (Instruction*)&REGULAR_PUSH_87 },
   [0x58] = { .size = 1, .instructions = (Instruction*)&REGULAR_POP_88 },
   [0x59] = { .size = 1, .instructions = (Instruction*)&REGULAR_POP_89 },
+  [0x5a] = { .size = 1, .instructions = (Instruction*)&REGULAR_POP_90 },
+  [0x5b] = { .size = 1, .instructions = (Instruction*)&REGULAR_POP_91 },
+  [0x5c] = { .size = 1, .instructions = (Instruction*)&REGULAR_POP_92 },
+  [0x5d] = { .size = 1, .instructions = (Instruction*)&REGULAR_POP_93 },
+  [0x5e] = { .size = 1, .instructions = (Instruction*)&REGULAR_POP_94 },
+  [0x5f] = { .size = 1, .instructions = (Instruction*)&REGULAR_POP_95 },
   [0x60] = { .size = 1, .instructions = (Instruction*)&REGULAR_PUSHAD_96 },
   [0x61] = { .size = 1, .instructions = (Instruction*)&REGULAR_POPAD_97 },
   [0x62] = { .size = 1, .instructions = (Instruction*)&REGULAR_BOUND_98 },
@@ -262,12 +268,12 @@ InstructionContainer extended_table_32[0x100] = {
   [0x16] = { .size = 4, .instructions = (Instruction*)&EXTENDED_MOVLHPS_22 },
   [0x17] = { .size = 2, .instructions = (Instruction*)&EXTENDED_MOVHPS_23 },
   [0x18] = { .size = 8, .instructions = (Instruction*)&EXTENDED_PREFETCHNTA_24 },
+  [0x1e] = { .size = 2, .instructions = (Instruction*)&EXTENDED_ENDBR32_30 },
   [0x19] = { .size = 1, .instructions = (Instruction*)&EXTENDED_HINT_NOP_25 },
   [0x1a] = { .size = 1, .instructions = (Instruction*)&EXTENDED_HINT_NOP_26 },
   [0x1b] = { .size = 1, .instructions = (Instruction*)&EXTENDED_HINT_NOP_27 },
   [0x1c] = { .size = 1, .instructions = (Instruction*)&EXTENDED_HINT_NOP_28 },
   [0x1d] = { .size = 1, .instructions = (Instruction*)&EXTENDED_HINT_NOP_29 },
-  [0x1e] = { .size = 1, .instructions = (Instruction*)&EXTENDED_HINT_NOP_30 },
   [0x1f] = { .size = 8, .instructions = (Instruction*)&EXTENDED_NOP_31 },
   [0x20] = { .size = 2, .instructions = (Instruction*)&EXTENDED_MOV_32 },
   [0x21] = { .size = 2, .instructions = (Instruction*)&EXTENDED_MOV_33 },
