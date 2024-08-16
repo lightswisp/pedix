@@ -1,27 +1,24 @@
-.PHONY: clean test build_test build_main run main
-default:main
+SRC_DIR=src
+OBJ_DIR=build
 
-DEBUG=
-CC=clang
-SRC  = $(wildcard src/*.c)
-TEST = $(wildcard test/*.c)
-EXTENSION=exe
-CFLAGS=-g -Wformat=0 -Wno-implicit $(DEBUG) 
-OUTFILE=main
+OUT=main.exe
+CFLAGS=-DDEBUG
+CC=gcc
 
-main: build_main run
+SRCS := $(shell find $(SRC_DIR) -name *.c)
+OBJS := $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
-test: build_test run clean
+all: pedix 
 
-build_main:
-	$(CC) $(SRC) $(CFLAGS) -o $(OUTFILE).$(EXTENSION)
+pedix: $(OBJS)
+	$(CC) $^ -o $(OUT)
 
-build_test:
-	$(CC) $(filter-out src/main.c src/dump.c, $(SRC)) $(TEST) $(CFLAGS) -o $(OUTFILE).$(EXTENSION)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	@mkdir -p $(@D)
+	$(CC) $(CFLAGS) -c $< -o $@
 
-run: 
-	./$(OUTFILE).$(EXTENSION)
+.PHONY: clean
 
 clean:
-	rm *.exe 
+	rm $(OBJ_DIR)/*.o
 
