@@ -5,7 +5,7 @@ OUT=main.exe
 CFLAGS=-DDEBUG
 CC=gcc
 
-SRCS := $(shell find $(SRC_DIR) -name *.c)
+SRCS := $(shell find $(SRC_DIR) -name "*.c")
 OBJS := $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 all: pedix 
@@ -17,7 +17,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(@D)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-.PHONY: clean
+.PHONY: all clean
 
 clean:
 	rm $(OBJ_DIR)/*.o
