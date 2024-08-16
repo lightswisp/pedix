@@ -3,4 +3,5 @@
 *.swp
 *.txt
 *.out
+*.o
 test.csv
