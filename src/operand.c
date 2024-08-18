@@ -172,6 +172,12 @@ static void pedix_set_operand_by_id32(Dinstruction *decoded, _Operand id, char* 
   case OPERAND_R_8:
     strcpy(dst, modrm_reg8[decoded->modrm.reg]);
     break;
+  case OPERAND_R_16: 
+    strcpy(dst, modrm_reg16[decoded->modrm.reg]);
+    break;
+  case OPERAND_R_32: 
+    strcpy(dst, modrm_reg32[decoded->modrm.reg]);
+    break;
   case OPERAND_RM_16_32:
     if (pedix_instr_has_specific_prefix(decoded, PREFIX_OPSIZE_OVERRIDE)){
       pedix_set_operand_rm_by_size(decoded, dst, 16);
