@@ -7,10 +7,10 @@ void pedix_dump_instruction(Instruction *instruction) {
   printf("  mnemonic=%s\n", instruction->mnemonic);
   printf("  opcode_field=<type=%d, value=%d>\n", instruction->opcode_field.type,
          instruction->opcode_field.value);
-  printf("  operand1=%d\n", instruction->operand1);
-  printf("  operand2=%d\n", instruction->operand2);
-  printf("  operand3=%d\n", instruction->operand3);
-  printf("  operand4=%d\n", instruction->operand4);
+  printf("  operands={%d, %d, %d, %d},\n", instruction->operands.operand[0],
+                                           instruction->operands.operand[1], 
+                                           instruction->operands.operand[2],
+                                           instruction->operands.operand[3]);
   printf("  prefix=%d\n", instruction->prefix);
   printf("  primary_opcode=%d\n", instruction->primary_opcode);
   printf("  secondary_opcode=%d>\n", instruction->secondary_opcode);

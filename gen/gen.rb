@@ -293,24 +293,26 @@ class Instruction
       @opcode_field = OpcodeField.new(2, tof.to_i);
     end
     @mnemonic = row[10].content.strip.downcase 
-    @operand1 = row[11].content.strip.downcase 
-    @operand2 = row[12].content.strip.downcase 
-    @operand3 = row[13].content.strip.downcase 
-    @operand4 = row[14].content.strip.downcase 
+    @operands = [
+      row[11].content.strip.downcase, 
+      row[12].content.strip.downcase, 
+      row[13].content.strip.downcase, 
+      row[14].content.strip.downcase 
+    ]
   end
 
   def set_operand()
     4.times do |i|
-      operand =  instance_variable_get("@operand#{i+1}")
+      operand = @operands[i]
       if operand.empty?
-        instance_variable_set("@operand#{i+1}", Operands::VOID)
+        @operands[i] = Operands::VOID
         next
       end
 
       operand_to_set = OPERANDS_MAP[operand]
       return false if operand_to_set.nil?
       
-      instance_variable_set("@operand#{i+1}", operand_to_set)
+      @operands[i] = operand_to_set
     end  
     return true 
   end
@@ -320,10 +322,7 @@ class Instruction
     temp << "   .extended_opcode = #{@extended_opcode},\n" 
     temp << "   .mnemonic = \"#{@mnemonic}\",\n" 
     temp << "   .opcode_field = {.type = #{@opcode_field[:type]}, .value = #{@opcode_field[:value]} },\n" 
-    temp << "   .operand1 = #{@operand1},\n" 
-    temp << "   .operand2 = #{@operand2},\n" 
-    temp << "   .operand3 = #{@operand3},\n" 
-    temp << "   .operand4 = #{@operand4},\n" 
+    temp << "   .operands = {.size = #{@operands.filter{|o| !o.zero?}.size}, .operand = {#{@operands.join(',')}}},\n" 
     temp << "   .prefix = #{@prefix},\n" 
     temp << "   .primary_opcode = #{@primary_opcode},\n" 
     temp << "   .secondary_opcode = #{@secondary_opcode},\n" 

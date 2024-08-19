@@ -5,6 +5,7 @@
 
 // at the moment, vgf2p8affineinvqb at 17 bytes is the longest mnemonic in intel's docs
 #define MAX_MNEMONIC_LEN 17  
+#define MAX_OPERANDS     4
 
 typedef enum{
   FIELD_VOID               = 0,
@@ -16,6 +17,7 @@ typedef struct{
   FieldType type;
   uint8_t value;
 } Field;
+
 
 typedef enum{
   OPERAND_VOID              = 0, 
@@ -132,6 +134,11 @@ typedef enum{
   R_PLUS_8                  = 99,
 } _Operand;
 
+typedef struct{
+  size_t size; 
+  _Operand operand[MAX_OPERANDS];
+} Operands;
+
 typedef enum {
   PREFIX_VOID            = 0x00,
   PREFIX_LOCK            = 0xF0,
@@ -153,10 +160,7 @@ typedef struct {
   bool extended_opcode; // false if not 0x0f
   const char mnemonic[MAX_MNEMONIC_LEN]; // text representation of the mnemonic
   Field opcode_field; 
-  _Operand operand1;
-  _Operand operand2;
-  _Operand operand3;
-  _Operand operand4;
+  Operands operands;
   _Prefix  prefix;
   uint8_t primary_opcode;
   int secondary_opcode; // -1 if there is no secondary opcode

@@ -55,10 +55,7 @@ typedef struct {
   Sib sib;      
   Displacement displacement;   
 
-  char operand1[MAX_OPERAND_STR_LEN]; 
-  char operand2[MAX_OPERAND_STR_LEN]; 
-  char operand3[MAX_OPERAND_STR_LEN]; 
-  char operand4[MAX_OPERAND_STR_LEN]; 
+  char operands[MAX_OPERANDS][MAX_OPERAND_STR_LEN];
 
   union {
     uint64_t imm;

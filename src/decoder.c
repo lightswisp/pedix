@@ -134,8 +134,8 @@ static void pedix_decode32(Dinstruction *decoded, uchar8_t *instruction) {
 
   // set mnemonic
   pedix_set_mnemonic(decoded);
-  // set operands if we have at least operand1 set
-  if (decoded->instruction->operand1 != OPERAND_VOID) {
+  // set operands if we have at least first set
+  if (decoded->instruction->operands.operand[0] != OPERAND_VOID) {
     pedix_set_operands(decoded);
     pedix_merge_operands(decoded);
   }

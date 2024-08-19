@@ -223,44 +223,14 @@ static void pedix_set_operand_by_id32(Dinstruction *decoded, _Operand id, char* 
   }
 }
 
-/*
- * it sets specific N operand's text field by its id that is stored in
- * decoded->instruction->operand1
- * +2 in call trace
- */ 
-static void pedix_set_operand_by_n32(Dinstruction *decoded, uint8_t n){
-  switch(n){
-    case 1:
-      pedix_set_operand_by_id32(decoded, decoded->instruction->operand1, decoded->operand1);
-      break;
-    case 2:
-      pedix_set_operand_by_id32(decoded, decoded->instruction->operand2, decoded->operand2);
-      break;
-    case 3:
-      pedix_set_operand_by_id32(decoded, decoded->instruction->operand3, decoded->operand3);
-      break;
-    case 4:
-      pedix_set_operand_by_id32(decoded, decoded->instruction->operand4, decoded->operand4);
-      break;
-
-    default: 
-      assert(!"wrong operand num");
-  }
-}
-
-/* 
- * it cares only about which operands are present
- * +1 in call trace
- */
 static void pedix_set_operands32(Dinstruction *decoded) {
   // operand1 is assumed to be present
-  pedix_set_operand_by_n32(decoded, 1);
-  if (decoded->instruction->operand2 != OPERAND_VOID)
-      pedix_set_operand_by_n32(decoded, 2);
-  if (decoded->instruction->operand3 != OPERAND_VOID)
-      pedix_set_operand_by_n32(decoded, 3);
-  if (decoded->instruction->operand4 != OPERAND_VOID)
-      pedix_set_operand_by_n32(decoded, 4);
+  for(size_t i = 0; i < decoded->instruction->operands.size; i++){
+    if(decoded->instruction->operands.operand[i] == OPERAND_VOID)
+      break;
+
+    pedix_set_operand_by_id32(decoded, decoded->instruction->operands.operand[i], decoded->operands[i]);
+  }
 }
 
 static void pedix_set_operands64(Dinstruction *decoded) {
@@ -269,23 +239,15 @@ static void pedix_set_operands64(Dinstruction *decoded) {
 }
 
 void pedix_merge_operands(Dinstruction *decoded) {
-  if (decoded->instruction->operand1 != OPERAND_VOID){
+  if (decoded->instruction->operands.operand[0] != OPERAND_VOID){
       // add space
       decoded->text[strlen(decoded->text)] = 0x20;
-      strcat(decoded->text, decoded->operand1);
+      strcat(decoded->text, decoded->operands[0]);
   }
-  if (decoded->instruction->operand2 != OPERAND_VOID){
-      // add comma
+
+  for(size_t i = 1; i < decoded->instruction->operands.size; i++){
       decoded->text[strlen(decoded->text)] = 0x2c;
-      strcat(decoded->text, decoded->operand2);
-  }
-  if (decoded->instruction->operand3 != OPERAND_VOID){
-      decoded->text[strlen(decoded->text)] = 0x2c;
-      strcat(decoded->text, decoded->operand3);
-  }
-  if (decoded->instruction->operand4 != OPERAND_VOID){
-      decoded->text[strlen(decoded->text)] = 0x2c;
-      strcat(decoded->text, decoded->operand4);
+      strcat(decoded->text, decoded->operands[i]);
   }
 }
 

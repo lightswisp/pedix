@@ -6,64 +6,13 @@
   #include <stdio.h>
 #endif
 
-#define HAS_IMMEDIATE(decoded, n)                                              \
-  (decoded->instruction->operand##n == OPERAND_IMM_8 ||                        \
-   decoded->instruction->operand##n == OPERAND_IMM_16 ||                       \
-   decoded->instruction->operand##n == OPERAND_IMM_32 ||                       \
-   decoded->instruction->operand##n == OPERAND_IMM_16_32)
+#define HAS_IMMEDIATE(operand)                                                 \
+  (operand == OPERAND_IMM_8 || operand == OPERAND_IMM_16 ||                    \
+   operand == OPERAND_IMM_32 || operand == OPERAND_IMM_16_32)
 
-#define HAS_RELATIVE(decoded, n)                                               \
-  (decoded->instruction->operand##n == OPERAND_REL_8 ||                        \
-   decoded->instruction->operand##n == OPERAND_REL_16 ||                       \
-   decoded->instruction->operand##n == OPERAND_REL_32 ||                       \
-   decoded->instruction->operand##n == OPERAND_REL_16_32)
-
-#define SET_RELATIVE_BY_N(decoded, instruction, n)                             \
-  switch (decoded->instruction->operand##n) {                                  \
-  case OPERAND_REL_8:                                                          \
-    memcpy(&decoded->rel, instruction, BYTE_LEN);                              \
-    decoded->rel += decoded->buffer.size + BYTE_LEN;                           \
-    return BYTE_LEN;                                                           \
-  case OPERAND_REL_16:                                                         \
-    memcpy(&decoded->rel, instruction, WORD_LEN);                              \
-    decoded->rel += decoded->buffer.size + WORD_LEN;                           \
-    return WORD_LEN;                                                           \
-  case OPERAND_REL_32:                                                         \
-    memcpy(&decoded->rel, instruction, DOUBLEWORD_LEN);                        \
-    decoded->rel += decoded->buffer.size + DOUBLEWORD_LEN;                     \
-    return DOUBLEWORD_LEN;                                                     \
-  case OPERAND_REL_16_32:                                                      \
-    if (pedix_instr_has_specific_prefix(decoded, PREFIX_OPSIZE_OVERRIDE)) {          \
-      memcpy(&decoded->rel, instruction, WORD_LEN);                            \
-      decoded->rel += decoded->buffer.size + WORD_LEN;                         \
-      return WORD_LEN;                                                         \
-    } else {                                                                   \
-      memcpy(&decoded->rel, instruction, DOUBLEWORD_LEN);                      \
-      decoded->rel += decoded->buffer.size + DOUBLEWORD_LEN;                   \
-      return DOUBLEWORD_LEN;                                                   \
-    }                                                                          \
-  }
-
-#define SET_IMMEDIATE_BY_N(decoded, instruction, n)                            \
-  switch (decoded->instruction->operand##n) {                                  \
-  case OPERAND_IMM_8:                                                          \
-    memcpy(&decoded->imm, instruction, BYTE_LEN);                              \
-    return BYTE_LEN;                                                           \
-  case OPERAND_IMM_16:                                                         \
-    memcpy(&decoded->imm, instruction, WORD_LEN);                              \
-    return WORD_LEN;                                                           \
-  case OPERAND_IMM_32:                                                         \
-    memcpy(&decoded->imm, instruction, DOUBLEWORD_LEN);                        \
-    return DOUBLEWORD_LEN;                                                     \
-  case OPERAND_IMM_16_32:                                                      \
-    if (pedix_instr_has_specific_prefix(decoded, PREFIX_OPSIZE_OVERRIDE)) {          \
-      memcpy(&decoded->imm, instruction, WORD_LEN);                            \
-      return WORD_LEN;                                                         \
-    } else {                                                                   \
-      memcpy(&decoded->imm, instruction, DOUBLEWORD_LEN);                      \
-      return DOUBLEWORD_LEN;                                                   \
-    }                                                                          \
-  }
+#define HAS_RELATIVE(operand)                                                  \
+  (operand == OPERAND_REL_8 || operand == OPERAND_REL_16 ||                    \
+   operand == OPERAND_REL_32 || operand == OPERAND_REL_16_32)
 
 /*
  * check if instruction has any prefixes
@@ -117,17 +66,28 @@ size_t pedix_get_vex_size(uchar8_t vex_byte) {
  * zero is returned otherwise
  */
 uint64_t pedix_set_immediate_operand_if_present(Dinstruction *decoded, uchar8_t* instruction){
-  if(HAS_IMMEDIATE(decoded, 1)){
-    SET_IMMEDIATE_BY_N(decoded, instruction, 1);
-  }
-  else if(HAS_IMMEDIATE(decoded, 2)){
-    SET_IMMEDIATE_BY_N(decoded, instruction, 2);
-  }
-  else if(HAS_IMMEDIATE(decoded, 3)){
-    SET_IMMEDIATE_BY_N(decoded, instruction, 3);
-  }
-  else if(HAS_IMMEDIATE(decoded, 4)){
-    SET_IMMEDIATE_BY_N(decoded, instruction, 4);
+  for(size_t i = 0; i < decoded->instruction->operands.size; i++){
+    if(HAS_IMMEDIATE(decoded->instruction->operands.operand[i])){
+      switch (decoded->instruction->operands.operand[i]) {
+      case OPERAND_IMM_8:
+        memcpy(&decoded->imm, instruction, BYTE_LEN);
+        return BYTE_LEN;
+      case OPERAND_IMM_16:
+        memcpy(&decoded->imm, instruction, WORD_LEN);
+        return WORD_LEN;
+      case OPERAND_IMM_32:
+        memcpy(&decoded->imm, instruction, DOUBLEWORD_LEN);
+        return DOUBLEWORD_LEN;
+      case OPERAND_IMM_16_32:
+        if (pedix_instr_has_specific_prefix(decoded, PREFIX_OPSIZE_OVERRIDE)) {
+          memcpy(&decoded->imm, instruction, WORD_LEN);
+          return WORD_LEN;
+        } else {
+          memcpy(&decoded->imm, instruction, DOUBLEWORD_LEN);
+          return DOUBLEWORD_LEN;
+        }
+      }
+    }
   }
   return 0;
 }
@@ -138,17 +98,33 @@ uint64_t pedix_set_immediate_operand_if_present(Dinstruction *decoded, uchar8_t*
  * zero is returned otherwise
  */
 uint64_t pedix_set_relative_offset_operand_if_present(Dinstruction *decoded, uchar8_t* instruction){
-  if(HAS_RELATIVE(decoded, 1)){
-    SET_RELATIVE_BY_N(decoded, instruction, 1);
-  }
-  else if(HAS_RELATIVE(decoded, 2)){
-    SET_RELATIVE_BY_N(decoded, instruction, 2);
-  }
-  else if(HAS_RELATIVE(decoded, 3)){
-    SET_RELATIVE_BY_N(decoded, instruction, 3);
-  }
-  else if(HAS_RELATIVE(decoded, 4)){
-    SET_RELATIVE_BY_N(decoded, instruction, 4);
+  for(size_t i = 0; i < decoded->instruction->operands.size; i++){
+    if(HAS_RELATIVE(decoded->instruction->operands.operand[i])){
+      switch (decoded->instruction->operands.operand[i]) {
+      case OPERAND_REL_8:
+        memcpy(&decoded->rel, instruction, BYTE_LEN);
+        decoded->rel += decoded->buffer.size + BYTE_LEN;
+        return BYTE_LEN;
+      case OPERAND_REL_16:
+        memcpy(&decoded->rel, instruction, WORD_LEN);
+        decoded->rel += decoded->buffer.size + WORD_LEN;
+        return WORD_LEN;
+      case OPERAND_REL_32:
+        memcpy(&decoded->rel, instruction, DOUBLEWORD_LEN);
+        decoded->rel += decoded->buffer.size + DOUBLEWORD_LEN;
+        return DOUBLEWORD_LEN;
+      case OPERAND_REL_16_32:
+        if (pedix_instr_has_specific_prefix(decoded, PREFIX_OPSIZE_OVERRIDE)) {
+          memcpy(&decoded->rel, instruction, WORD_LEN);
+          decoded->rel += decoded->buffer.size + WORD_LEN;
+          return WORD_LEN;
+        } else {
+          memcpy(&decoded->rel, instruction, DOUBLEWORD_LEN);
+          decoded->rel += decoded->buffer.size + DOUBLEWORD_LEN;
+          return DOUBLEWORD_LEN;
+        }
+      }
+    }
   }
   return 0;
 }
