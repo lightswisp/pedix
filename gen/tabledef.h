@@ -163,7 +163,7 @@ typedef struct {
   Operands operands;
   _Prefix  prefix;
   uint8_t primary_opcode;
-  int secondary_opcode; // -1 if there is no secondary opcode
+  short secondary_opcode; // -1 if there is no secondary opcode
 } Instruction;
 
 typedef struct{
