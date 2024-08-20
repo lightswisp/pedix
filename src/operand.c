@@ -5,8 +5,9 @@
 #include <string.h>
 #include <assert.h>
 
-#define GET_DIRECTION(d) ((d & 2) >> 1)
-#define GET_SIZE(s) (s & 1)
+const char *modrm_reg8[]  = {"al", "cl", "dl", "bl", "ah", "ch", "dh", "bh"};
+const char *modrm_reg16[] = {"ax", "cx", "dx", "bx", "sp", "bp", "si", "di"};
+const char *modrm_reg32[] = {"eax", "ecx", "edx", "ebx", "esp", "ebp", "esi", "edi"};
 
 #define MOD_REGISTER_ADDRESSING 3
 #define MOD_FOUR_BYTE_DISPLACEMENT 2
@@ -20,7 +21,7 @@
       if (decoded->sib.base == 5) {                                            \
         sprintf(dst, SIB_FOUR_BYTE_DISP_NO_REG_ADDRESSING_OP##SZ,              \
                 modrm_reg32[decoded->modrm.rm], 1 << decoded->sib.scale,       \
-                decoded->displacement.field);                                  \
+                (uint32_t)decoded->displacement.field);                        \
       } else {                                                                 \
         sprintf(dst, SIB_FOUR_BYTE_NO_DISP_ADDRESSING_OP##SZ,                  \
                 modrm_reg32[decoded->sib.base],                                \
@@ -35,20 +36,22 @@
     if (decoded->sib.size) {                                                   \
       sprintf(dst, SIB_ONE_BYTE_DISP_ADDRESSING_OP##SZ,                        \
               modrm_reg32[decoded->sib.base], modrm_reg32[decoded->sib.index], \
-              1 << decoded->sib.scale, decoded->displacement.field);           \
+              1 << decoded->sib.scale, (uchar8_t)decoded->displacement.field); \
     } else {                                                                   \
       sprintf(dst, ONE_BYTE_DISP_ADDRESSING_OP##SZ,                            \
-              modrm_reg32[decoded->modrm.rm], decoded->displacement.field);    \
+              modrm_reg32[decoded->modrm.rm],                                  \
+              (uchar8_t)decoded->displacement.field);                          \
     }                                                                          \
     break;                                                                     \
   case MOD_FOUR_BYTE_DISPLACEMENT:                                             \
     if (decoded->sib.size) {                                                   \
       sprintf(dst, SIB_FOUR_BYTE_DISP_ADDRESSING_OP##SZ,                       \
               modrm_reg32[decoded->sib.base], modrm_reg32[decoded->sib.index], \
-              1 << decoded->sib.scale, decoded->displacement.field);           \
+              1 << decoded->sib.scale, (uint32_t)decoded->displacement.field); \
     } else {                                                                   \
       sprintf(dst, FOUR_BYTE_DISP_ADDRESSING_OP##SZ,                           \
-              modrm_reg32[decoded->modrm.rm], decoded->displacement.field);    \
+              modrm_reg32[decoded->modrm.rm],                                  \
+              (uint32_t)decoded->displacement.field);                          \
     }                                                                          \
     break;                                                                     \
   }
@@ -60,7 +63,7 @@
       if (decoded->sib.base == 5) {                                            \
         sprintf(dst, SIB_FOUR_BYTE_DISP_NO_REG_ADDRESSING_OP##SZ,              \
                 modrm_reg32[decoded->modrm.rm], 1 << decoded->sib.scale,       \
-                decoded->displacement.field);                                  \
+                (uint32_t)decoded->displacement.field);                        \
       } else {                                                                 \
         sprintf(dst, SIB_FOUR_BYTE_NO_DISP_ADDRESSING_OP##SZ,                  \
                 modrm_reg32[decoded->sib.base],                                \
@@ -75,20 +78,22 @@
     if (decoded->sib.size) {                                                   \
       sprintf(dst, SIB_ONE_BYTE_DISP_ADDRESSING_OP##SZ,                        \
               modrm_reg32[decoded->sib.base], modrm_reg32[decoded->sib.index], \
-              1 << decoded->sib.scale, decoded->displacement.field);           \
+              1 << decoded->sib.scale, (uchar8_t)decoded->displacement.field); \
     } else {                                                                   \
       sprintf(dst, ONE_BYTE_DISP_ADDRESSING_OP##SZ,                            \
-              modrm_reg32[decoded->modrm.rm], decoded->displacement.field);    \
+              modrm_reg32[decoded->modrm.rm],                                  \
+              (uchar8_t)decoded->displacement.field);                          \
     }                                                                          \
     break;                                                                     \
   case MOD_FOUR_BYTE_DISPLACEMENT:                                             \
     if (decoded->sib.size) {                                                   \
       sprintf(dst, SIB_FOUR_BYTE_DISP_ADDRESSING_OP##SZ,                       \
               modrm_reg32[decoded->sib.base], modrm_reg32[decoded->sib.index], \
-              1 << decoded->sib.scale, decoded->displacement.field);           \
+              1 << decoded->sib.scale, (uint32_t)decoded->displacement.field); \
     } else {                                                                   \
       sprintf(dst, FOUR_BYTE_DISP_ADDRESSING_OP##SZ,                           \
-              modrm_reg32[decoded->modrm.rm], decoded->displacement.field);    \
+              modrm_reg32[decoded->modrm.rm],                                  \
+              (uint32_t)decoded->displacement.field);                          \
     }                                                                          \
     break;                                                                     \
   case MOD_REGISTER_ADDRESSING:                                                \
@@ -143,25 +148,28 @@ static void pedix_set_operand_rm_by_size(Dinstruction *decoded, char* dst, uint8
 static void pedix_set_operand_by_id32(Dinstruction *decoded, _Operand id, char* dst){
   switch (id) {
   case OPERAND_IMM_8: 
-    sprintf(dst, OPERAND_BYTE, decoded->imm);
+    sprintf(dst, OPERAND_BYTE, (uchar8_t)decoded->imm);
     break;
   case OPERAND_IMM_16: 
-    sprintf(dst, OPERAND_WORD, decoded->imm);
+    sprintf(dst, OPERAND_WORD, (uint16_t)decoded->imm);
     break;
   case OPERAND_IMM_32: 
-    sprintf(dst, OPERAND_DWORD, decoded->imm);
+    sprintf(dst, OPERAND_DWORD, (uint32_t)decoded->imm);
     break;
   case OPERAND_IMM_16_32:
     if (pedix_instr_has_specific_prefix(decoded, PREFIX_OPSIZE_OVERRIDE))
-      sprintf(dst, OPERAND_WORD, decoded->imm);
+      sprintf(dst, OPERAND_WORD, (uint16_t)decoded->imm);
     else 
-      sprintf(dst, OPERAND_BYTE, decoded->imm);
+      sprintf(dst, OPERAND_BYTE, (uchar8_t)decoded->imm);
     break;
   case OPERAND_REG_EAX: 
     if (pedix_instr_has_specific_prefix(decoded, PREFIX_OPSIZE_OVERRIDE))
       strcpy(dst, "ax");
     else 
       strcpy(dst, "eax");
+    break;
+  case OPERAND_REG_AL: 
+    strcpy(dst, "al");
     break;
   case OPERAND_ONE: 
     strcpy(dst, "1");
@@ -199,13 +207,13 @@ static void pedix_set_operand_by_id32(Dinstruction *decoded, _Operand id, char* 
     pedix_set_operand_m_by_size(decoded, dst, 32);
     break;
   case OPERAND_REL_8:
-    sprintf(dst, OPERAND_BYTE, decoded->rel);
+    sprintf(dst, OPERAND_BYTE, (uchar8_t)decoded->rel);
     break;
   case OPERAND_REL_16_32: 
     if (pedix_instr_has_specific_prefix(decoded, PREFIX_OPSIZE_OVERRIDE))
-      sprintf(dst, OPERAND_WORD, decoded->rel);
+      sprintf(dst, OPERAND_WORD, (uint16_t)decoded->rel);
     else
-      sprintf(dst, OPERAND_DWORD, decoded->rel);
+      sprintf(dst, OPERAND_DWORD, (uint32_t)decoded->rel);
     break;
   case R_PLUS_8:
     strcpy(dst, modrm_reg8[decoded->buffer.bytes[0] & 0x07]);

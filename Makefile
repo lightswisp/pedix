@@ -2,7 +2,7 @@ SRC_DIR=src
 OBJ_DIR=build
 
 OUT=main.exe
-CFLAGS=-DDEBUG
+CFLAGS=-DDEBUG -Wall -Werror -pedantic 
 CC=gcc
 
 SRCS := $(shell find $(SRC_DIR) -name "*.c")

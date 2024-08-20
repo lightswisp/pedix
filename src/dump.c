@@ -2,7 +2,7 @@
 #include <stdio.h>
 
 void pedix_dump_instruction(Instruction *instruction) {
-  printf("#<Instruction:%p\n", instruction);
+  printf("#<Instruction:%p\n", (void*)instruction);
   printf("  extended_opcode=%d\n", instruction->extended_opcode);
   printf("  mnemonic=%s\n", instruction->mnemonic);
   printf("  opcode_field=<type=%d, value=%d>\n", instruction->opcode_field.type,
@@ -25,6 +25,6 @@ static char *pedix_get_bytes(Dinstruction *decoded){
 
 void pedix_print_instruction(Dinstruction *decoded, uint64_t offset) {
   char *bytes = pedix_get_bytes(decoded); 
-  printf("%08x: %25s\t%s\n", offset, bytes, decoded->text);
+  printf("%08lx: %25s\t%s\n", offset, bytes, decoded->text);
   free(bytes);
 }

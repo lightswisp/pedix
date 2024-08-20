@@ -86,6 +86,8 @@ uint64_t pedix_set_immediate_operand_if_present(Dinstruction *decoded, uchar8_t*
           memcpy(&decoded->imm, instruction, DOUBLEWORD_LEN);
           return DOUBLEWORD_LEN;
         }
+      default:
+        assert(!"this should never happen...");
       }
     }
   }
@@ -123,6 +125,8 @@ uint64_t pedix_set_relative_offset_operand_if_present(Dinstruction *decoded, uch
           decoded->rel += decoded->buffer.size + DOUBLEWORD_LEN;
           return DOUBLEWORD_LEN;
         }
+      default:
+        assert("this should never happen...");
       }
     }
   }

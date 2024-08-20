@@ -15,10 +15,11 @@
   memcpy(decoded->buffer.bytes + decoded->buffer.size, i_ptr, len);            \
   decoded->buffer.size += len;
 
-#define MANDATORY_PREFIX_CHECK(decoded)                                                  \
+#define MANDATORY_PREFIX_CHECK(decoded)                                        \
   if (decoded->instruction->prefix != PREFIX_VOID)                             \
     assert("mandatory prefix is missing" &&                                    \
-           pedix_instr_has_specific_prefix(decoded, decoded->instruction->prefix));
+           pedix_instr_has_specific_prefix(decoded,                            \
+                                           decoded->instruction->prefix));
 
 Dinstruction *pedix_init_instruction() {
   Dinstruction *decoded = (Dinstruction *)calloc(1, sizeof(Dinstruction));
