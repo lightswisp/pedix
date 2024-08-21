@@ -20,7 +20,7 @@ const char *modrm_reg32[] = {"eax", "ecx", "edx", "ebx", "esp", "ebp", "esi", "e
     if (decoded->sib.size) {                                                   \
       if (decoded->sib.base == 5) {                                            \
         sprintf(dst, SIB_FOUR_BYTE_DISP_NO_REG_ADDRESSING_OP##SZ,              \
-                modrm_reg32[decoded->modrm.rm], 1 << decoded->sib.scale,       \
+                modrm_reg32[decoded->sib.index], 1 << decoded->sib.scale,      \
                 (uint32_t)decoded->displacement.field);                        \
       } else {                                                                 \
         sprintf(dst, SIB_FOUR_BYTE_NO_DISP_ADDRESSING_OP##SZ,                  \
@@ -62,7 +62,7 @@ const char *modrm_reg32[] = {"eax", "ecx", "edx", "ebx", "esp", "ebp", "esi", "e
     if (decoded->sib.size) {                                                   \
       if (decoded->sib.base == 5) {                                            \
         sprintf(dst, SIB_FOUR_BYTE_DISP_NO_REG_ADDRESSING_OP##SZ,              \
-                modrm_reg32[decoded->modrm.rm], 1 << decoded->sib.scale,       \
+                modrm_reg32[decoded->sib.index], 1 << decoded->sib.scale,      \
                 (uint32_t)decoded->displacement.field);                        \
       } else {                                                                 \
         sprintf(dst, SIB_FOUR_BYTE_NO_DISP_ADDRESSING_OP##SZ,                  \
