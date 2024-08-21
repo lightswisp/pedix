@@ -2,7 +2,14 @@
 # Portable and Efficient DIssasembler for linuX (PEDIX)
 Simple and small x86 instruction decoder
 
-
+# Current state
+- [x]  16-bit instructions
+- [x]  32-bit instructions
+- [ ]  64-bit instructions
+- [ ]  XOP instruction set 
+- [ ]  VEX prefixes 
+- [ ]  3Dnow!
+- [x]  FPU instruction set 
 
 ## Run Locally
 
