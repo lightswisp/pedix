@@ -160,7 +160,7 @@ static void pedix_set_operand_by_id32(Dinstruction *decoded, _Operand id, char* 
     if (pedix_instr_has_specific_prefix(decoded, PREFIX_OPSIZE_OVERRIDE))
       sprintf(dst, OPERAND_WORD, (uint16_t)decoded->imm);
     else 
-      sprintf(dst, OPERAND_DWORD, (uchar32_t)decoded->imm);
+      sprintf(dst, OPERAND_DWORD, (uint32_t)decoded->imm);
     break;
   case OPERAND_REG_EAX: 
     if (pedix_instr_has_specific_prefix(decoded, PREFIX_OPSIZE_OVERRIDE))
