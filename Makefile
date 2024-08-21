@@ -17,8 +17,10 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(@D)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-.PHONY: all clean
+.PHONY: run all clean
 
 clean:
 	rm $(OBJ_DIR)/*.o
 
+run: 
+	./$(OUT)
