@@ -28,8 +28,12 @@ const char *modrm_reg32[] = {"eax", "ecx", "edx", "ebx", "esp", "ebp", "esi", "e
                 modrm_reg32[decoded->sib.index], 1 << decoded->sib.scale);     \
       }                                                                        \
     } else {                                                                   \
-      sprintf(dst, INDIRECT_ADDRESSING_OP##SZ,                                 \
-              modrm_reg32[decoded->modrm.rm]);                                 \
+      if (decoded->modrm.rm == 5)                                              \
+        sprintf(dst, DISPLACEMENT_ONLY_MODE,                                   \
+                (uint32_t)decoded->displacement.field);                        \
+      else                                                                     \
+        sprintf(dst, INDIRECT_ADDRESSING_OP##SZ,                               \
+                modrm_reg32[decoded->modrm.rm]);                               \
     }                                                                          \
     break;                                                                     \
   case MOD_ONE_BYTE_DISPLACEMENT:                                              \
@@ -70,8 +74,12 @@ const char *modrm_reg32[] = {"eax", "ecx", "edx", "ebx", "esp", "ebp", "esi", "e
                 modrm_reg32[decoded->sib.index], 1 << decoded->sib.scale);     \
       }                                                                        \
     } else {                                                                   \
-      sprintf(dst, INDIRECT_ADDRESSING_OP##SZ,                                 \
-              modrm_reg32[decoded->modrm.rm]);                                 \
+      if (decoded->modrm.rm == 5)                                              \
+        sprintf(dst, DISPLACEMENT_ONLY_MODE,                                   \
+                (uint32_t)decoded->displacement.field);                        \
+      else                                                                     \
+        sprintf(dst, INDIRECT_ADDRESSING_OP##SZ,                               \
+                modrm_reg32[decoded->modrm.rm]);                               \
     }                                                                          \
     break;                                                                     \
   case MOD_ONE_BYTE_DISPLACEMENT:                                              \

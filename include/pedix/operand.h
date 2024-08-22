@@ -33,6 +33,8 @@ extern const char *modrm_reg32[];
 #define INDIRECT_ADDRESSING_OP16 "WORD PTR [" REGISTER "]"
 #define INDIRECT_ADDRESSING_OP32 "DWORD PTR [" REGISTER "]"
 
+#define DISPLACEMENT_ONLY_MODE "DWORD PTR [" OPERAND_DWORD "]"
+
 #define SIB_FOUR_BYTE_NO_DISP_ADDRESSING_OP8                                  \
   "BYTE PTR [" REGISTER "+" REGISTER "*" SCALE "]"
 #define SIB_FOUR_BYTE_NO_DISP_ADDRESSING_OP16                                 \
