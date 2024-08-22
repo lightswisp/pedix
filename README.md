@@ -10,6 +10,7 @@ Simple and small x86 instruction decoder
 - [ ]  VEX prefixes 
 - [ ]  3Dnow!
 - [x]  FPU instruction set 
+- [ ]  Parsing ELF files 
 
 ## Run Locally
 
