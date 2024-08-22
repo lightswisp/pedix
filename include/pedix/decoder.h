@@ -55,6 +55,8 @@ typedef struct {
   Sib sib;      
   Displacement displacement;   
 
+  // should be either empty, or contain fs:, gs:, cs:, ss:, ds: you get it ;)
+  char segment_text[MAX_SEGMENT_TEXT_LEN];
   char operands[MAX_OPERANDS][MAX_OPERAND_STR_LEN];
 
   union {

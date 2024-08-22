@@ -10,6 +10,7 @@ typedef unsigned char uchar8_t;
 #define MAX_OPERAND_STR_LEN 50 
 #define MAX_PREFIXES 4
 #define MAX_TEXT_LEN 100
+#define MAX_SEGMENT_TEXT_LEN 10
 #define MAX_INSTR_SIZE 0x0F
 #define BYTE_LEN                                                                \
   0x01 // operand type b (byte, regardless of operand-size attribute)
