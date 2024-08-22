@@ -1,6 +1,6 @@
-#include "headers/operand.h"
-#include "headers/defines.h"
-#include "headers/iutils.h"
+#include <pedix/operand.h>
+#include <pedix/defines.h>
+#include <pedix/iutils.h>
 #include <stdio.h>
 #include <string.h>
 #include <assert.h>

@@ -423,5 +423,5 @@ end
 tables_file << "};\n // extended end\n"
 instructions_file << "// extended end"
 
-File.write("instructions.h", instructions_file)
-File.write("tables.h", tables_file)
+File.write("../include/pedix/tables/instructions.h", instructions_file)
+File.write("../include/pedix/tables/tables.h", tables_file)

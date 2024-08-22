@@ -1,7 +1,7 @@
 #include <string.h>
 #include <assert.h>
-#include "headers/iutils.h"
-#include "../gen/tabledef.h"
+#include <pedix/iutils.h>
+#include <pedix/tables/tabledef.h>
 #ifdef DEBUG 
   #include <stdio.h>
 #endif

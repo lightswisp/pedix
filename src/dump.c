@@ -1,4 +1,4 @@
-#include "headers/dump.h"
+#include <pedix/dump.h>
 #include <stdio.h>
 
 void pedix_dump_instruction(Instruction *instruction) {

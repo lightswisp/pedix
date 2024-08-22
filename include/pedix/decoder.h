@@ -3,8 +3,8 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <stddef.h>
-#include "../../gen/tabledef.h"
 #include "defines.h"
+#include "tables/tabledef.h"
 
 typedef struct {
   size_t size;

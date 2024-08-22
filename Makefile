@@ -1,8 +1,9 @@
+INCLUDE_DIR=include
 SRC_DIR=src
 OBJ_DIR=build
 
 OUT=main.exe
-CFLAGS=-DDEBUG -ggdb -Wall -Werror -pedantic 
+CFLAGS=-I$(INCLUDE_DIR) -ggdb -Wall -Werror -pedantic 
 CC=gcc
 
 SRCS := $(shell find $(SRC_DIR) -name "*.c")

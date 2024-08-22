@@ -2,11 +2,11 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <assert.h>
-#include "headers/mnemonic.h"
-#include "headers/iutils.h"
-#include "headers/decoder.h"
-#include "headers/operand.h"
-#include "../gen/tables.h"
+#include <pedix/mnemonic.h>
+#include <pedix/iutils.h>
+#include <pedix/decoder.h>
+#include <pedix/operand.h>
+#include <pedix/tables/tables.h>
 
 #define NEXT_BYTE(i)(i++)
 #define NEXT_BYTES(i, n)(i+=n)
