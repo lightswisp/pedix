@@ -24,24 +24,24 @@
   (prefix == PREFIX_CS || prefix == PREFIX_SS || prefix == PREFIX_DS ||        \
    prefix == PREFIX_ES || prefix == PREFIX_FS || prefix == PREFIX_GS)
 
-Dinstruction *pedix_init_instruction() {
-  Dinstruction *decoded = (Dinstruction *)calloc(1, sizeof(Dinstruction));
+decoded_instruction_t *pedix_init_instruction() {
+  decoded_instruction_t *decoded = (decoded_instruction_t *)calloc(1, sizeof(decoded_instruction_t));
   assert("calloc failed" && decoded != NULL);
   return decoded;
 }
 
-void pedix_zero_instruction(Dinstruction *decoded) {
+void pedix_zero_instruction(decoded_instruction_t *decoded) {
   // save the mode in order to restore it after zeroing the struct
   uint8_t mode = decoded->mode;
-  memset(decoded, 0, sizeof(Dinstruction));
+  memset(decoded, 0, sizeof(decoded_instruction_t));
   decoded->mode = mode;
 }
 
-void pedix_free_instrucion(Dinstruction *decoded) { 
+void pedix_free_instrucion(decoded_instruction_t *decoded) { 
   free(decoded); 
 }
 
-static void pedix_decode32(Dinstruction *decoded, uchar8_t *instruction) {
+static void pedix_decode32(decoded_instruction_t *decoded, uchar8_t *instruction) {
   while (pedix_instr_has_prefix(*instruction)) {
     decoded->prefixes.prefix[decoded->prefixes.size] = *instruction;
     if(SEGMENT_PREFIX_CHECK(*instruction)){
@@ -64,7 +64,7 @@ static void pedix_decode32(Dinstruction *decoded, uchar8_t *instruction) {
     SET_BUFFER(decoded, instruction, WORD_LEN);
     NEXT_BYTE(instruction);
     
-    InstructionContainer container = extended_table_32[*instruction];
+    instruction_container_t container = extended_table_32[*instruction];
     assert("non-zero instruction container" && container.size != 0);
 
     if (container.size == 1) {
@@ -77,7 +77,7 @@ static void pedix_decode32(Dinstruction *decoded, uchar8_t *instruction) {
       }
     } else {
       // find the best match
-      Instruction* best_match_instruction = pedix_find_best_match(container, decoded, instruction);
+      instruction_t* best_match_instruction = pedix_find_best_match(container, decoded, instruction);
       assert("can't find instruction" && best_match_instruction != NULL);
       NEXT_BYTE(instruction);
       decoded->instruction = best_match_instruction;
@@ -91,7 +91,7 @@ static void pedix_decode32(Dinstruction *decoded, uchar8_t *instruction) {
     // one byte opcode is gonna be here
     SET_BUFFER(decoded, instruction, BYTE_LEN);
 
-    InstructionContainer container = regular_table_32[*instruction];
+    instruction_container_t container = regular_table_32[*instruction];
     assert("non-zero instruction container" && container.size != 0);
 
     if (container.size == 1) {
@@ -104,7 +104,7 @@ static void pedix_decode32(Dinstruction *decoded, uchar8_t *instruction) {
       }
     } else {
       // find the best match
-      Instruction *best_match_instruction = pedix_find_best_match(container, decoded, instruction);
+      instruction_t *best_match_instruction = pedix_find_best_match(container, decoded, instruction);
       assert("can't find instruction" && best_match_instruction != NULL);
 
       NEXT_BYTE(instruction);
@@ -155,7 +155,7 @@ static void pedix_decode32(Dinstruction *decoded, uchar8_t *instruction) {
   }
 }
 
-static void pedix_decode64(Dinstruction *decoded, uchar8_t *instruction) {
+static void pedix_decode64(decoded_instruction_t *decoded, uchar8_t *instruction) {
   assert(!"64-bit mode is not yet implemented");
   //     in 64-bit mode, instruction formats do not change. bits needed to
   //     define fields in the 64-bit context are provided by the
@@ -407,7 +407,7 @@ static void pedix_decode64(Dinstruction *decoded, uchar8_t *instruction) {
   //  return false;
 }
 
-void pedix_decode(Dinstruction *decoded, uchar8_t *instruction) {
+void pedix_decode(decoded_instruction_t *decoded, uchar8_t *instruction) {
   switch (decoded->mode) {
   case MODE_32:
     pedix_decode32(decoded, instruction);

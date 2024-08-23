@@ -1,5 +1,5 @@
 /* (instructions.h) auto generated using gen.rb 
- * time: 2024-08-22 02:03:20 -0400
+ * time: 2024-08-23 00:49:07 -0400
  */
 
 #pragma once
@@ -7,7 +7,7 @@
 #include <stdint.h>
 #include "tabledef.h"
 
-Instruction REGULAR_ADD_0[1] = {
+instruction_t REGULAR_ADD_0[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "add",
@@ -19,7 +19,7 @@ Instruction REGULAR_ADD_0[1] = {
   },
 };
 
-Instruction REGULAR_ADD_1[1] = {
+instruction_t REGULAR_ADD_1[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "add",
@@ -31,7 +31,7 @@ Instruction REGULAR_ADD_1[1] = {
   },
 };
 
-Instruction REGULAR_ADD_2[1] = {
+instruction_t REGULAR_ADD_2[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "add",
@@ -43,7 +43,7 @@ Instruction REGULAR_ADD_2[1] = {
   },
 };
 
-Instruction REGULAR_ADD_3[1] = {
+instruction_t REGULAR_ADD_3[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "add",
@@ -55,7 +55,7 @@ Instruction REGULAR_ADD_3[1] = {
   },
 };
 
-Instruction REGULAR_ADD_4[1] = {
+instruction_t REGULAR_ADD_4[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "add",
@@ -67,7 +67,7 @@ Instruction REGULAR_ADD_4[1] = {
   },
 };
 
-Instruction REGULAR_ADD_5[1] = {
+instruction_t REGULAR_ADD_5[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "add",
@@ -79,7 +79,7 @@ Instruction REGULAR_ADD_5[1] = {
   },
 };
 
-Instruction REGULAR_PUSH_6[1] = {
+instruction_t REGULAR_PUSH_6[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "push",
@@ -91,7 +91,7 @@ Instruction REGULAR_PUSH_6[1] = {
   },
 };
 
-Instruction REGULAR_POP_7[1] = {
+instruction_t REGULAR_POP_7[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "pop",
@@ -103,7 +103,7 @@ Instruction REGULAR_POP_7[1] = {
   },
 };
 
-Instruction REGULAR_OR_8[1] = {
+instruction_t REGULAR_OR_8[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "or",
@@ -115,7 +115,7 @@ Instruction REGULAR_OR_8[1] = {
   },
 };
 
-Instruction REGULAR_OR_9[1] = {
+instruction_t REGULAR_OR_9[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "or",
@@ -127,7 +127,7 @@ Instruction REGULAR_OR_9[1] = {
   },
 };
 
-Instruction REGULAR_OR_10[1] = {
+instruction_t REGULAR_OR_10[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "or",
@@ -139,7 +139,7 @@ Instruction REGULAR_OR_10[1] = {
   },
 };
 
-Instruction REGULAR_OR_11[1] = {
+instruction_t REGULAR_OR_11[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "or",
@@ -151,7 +151,7 @@ Instruction REGULAR_OR_11[1] = {
   },
 };
 
-Instruction REGULAR_OR_12[1] = {
+instruction_t REGULAR_OR_12[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "or",
@@ -163,7 +163,7 @@ Instruction REGULAR_OR_12[1] = {
   },
 };
 
-Instruction REGULAR_OR_13[1] = {
+instruction_t REGULAR_OR_13[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "or",
@@ -175,7 +175,7 @@ Instruction REGULAR_OR_13[1] = {
   },
 };
 
-Instruction REGULAR_PUSH_14[1] = {
+instruction_t REGULAR_PUSH_14[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "push",
@@ -187,7 +187,7 @@ Instruction REGULAR_PUSH_14[1] = {
   },
 };
 
-Instruction REGULAR_ADC_16[1] = {
+instruction_t REGULAR_ADC_16[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "adc",
@@ -199,7 +199,7 @@ Instruction REGULAR_ADC_16[1] = {
   },
 };
 
-Instruction REGULAR_ADC_17[1] = {
+instruction_t REGULAR_ADC_17[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "adc",
@@ -211,7 +211,7 @@ Instruction REGULAR_ADC_17[1] = {
   },
 };
 
-Instruction REGULAR_ADC_18[1] = {
+instruction_t REGULAR_ADC_18[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "adc",
@@ -223,7 +223,7 @@ Instruction REGULAR_ADC_18[1] = {
   },
 };
 
-Instruction REGULAR_ADC_19[1] = {
+instruction_t REGULAR_ADC_19[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "adc",
@@ -235,7 +235,7 @@ Instruction REGULAR_ADC_19[1] = {
   },
 };
 
-Instruction REGULAR_ADC_20[1] = {
+instruction_t REGULAR_ADC_20[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "adc",
@@ -247,7 +247,7 @@ Instruction REGULAR_ADC_20[1] = {
   },
 };
 
-Instruction REGULAR_ADC_21[1] = {
+instruction_t REGULAR_ADC_21[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "adc",
@@ -259,7 +259,7 @@ Instruction REGULAR_ADC_21[1] = {
   },
 };
 
-Instruction REGULAR_PUSH_22[1] = {
+instruction_t REGULAR_PUSH_22[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "push",
@@ -271,7 +271,7 @@ Instruction REGULAR_PUSH_22[1] = {
   },
 };
 
-Instruction REGULAR_POP_23[1] = {
+instruction_t REGULAR_POP_23[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "pop",
@@ -283,7 +283,7 @@ Instruction REGULAR_POP_23[1] = {
   },
 };
 
-Instruction REGULAR_SBB_24[1] = {
+instruction_t REGULAR_SBB_24[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "sbb",
@@ -295,7 +295,7 @@ Instruction REGULAR_SBB_24[1] = {
   },
 };
 
-Instruction REGULAR_SBB_25[1] = {
+instruction_t REGULAR_SBB_25[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "sbb",
@@ -307,7 +307,7 @@ Instruction REGULAR_SBB_25[1] = {
   },
 };
 
-Instruction REGULAR_SBB_26[1] = {
+instruction_t REGULAR_SBB_26[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "sbb",
@@ -319,7 +319,7 @@ Instruction REGULAR_SBB_26[1] = {
   },
 };
 
-Instruction REGULAR_SBB_27[1] = {
+instruction_t REGULAR_SBB_27[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "sbb",
@@ -331,7 +331,7 @@ Instruction REGULAR_SBB_27[1] = {
   },
 };
 
-Instruction REGULAR_SBB_28[1] = {
+instruction_t REGULAR_SBB_28[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "sbb",
@@ -343,7 +343,7 @@ Instruction REGULAR_SBB_28[1] = {
   },
 };
 
-Instruction REGULAR_SBB_29[1] = {
+instruction_t REGULAR_SBB_29[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "sbb",
@@ -355,7 +355,7 @@ Instruction REGULAR_SBB_29[1] = {
   },
 };
 
-Instruction REGULAR_PUSH_30[1] = {
+instruction_t REGULAR_PUSH_30[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "push",
@@ -367,7 +367,7 @@ Instruction REGULAR_PUSH_30[1] = {
   },
 };
 
-Instruction REGULAR_POP_31[1] = {
+instruction_t REGULAR_POP_31[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "pop",
@@ -379,7 +379,7 @@ Instruction REGULAR_POP_31[1] = {
   },
 };
 
-Instruction REGULAR_AND_32[1] = {
+instruction_t REGULAR_AND_32[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "and",
@@ -391,7 +391,7 @@ Instruction REGULAR_AND_32[1] = {
   },
 };
 
-Instruction REGULAR_AND_33[1] = {
+instruction_t REGULAR_AND_33[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "and",
@@ -403,7 +403,7 @@ Instruction REGULAR_AND_33[1] = {
   },
 };
 
-Instruction REGULAR_AND_34[1] = {
+instruction_t REGULAR_AND_34[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "and",
@@ -415,7 +415,7 @@ Instruction REGULAR_AND_34[1] = {
   },
 };
 
-Instruction REGULAR_AND_35[1] = {
+instruction_t REGULAR_AND_35[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "and",
@@ -427,7 +427,7 @@ Instruction REGULAR_AND_35[1] = {
   },
 };
 
-Instruction REGULAR_AND_36[1] = {
+instruction_t REGULAR_AND_36[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "and",
@@ -439,7 +439,7 @@ Instruction REGULAR_AND_36[1] = {
   },
 };
 
-Instruction REGULAR_AND_37[1] = {
+instruction_t REGULAR_AND_37[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "and",
@@ -451,7 +451,7 @@ Instruction REGULAR_AND_37[1] = {
   },
 };
 
-Instruction REGULAR_DAA_39[1] = {
+instruction_t REGULAR_DAA_39[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "daa",
@@ -463,7 +463,7 @@ Instruction REGULAR_DAA_39[1] = {
   },
 };
 
-Instruction REGULAR_SUB_40[1] = {
+instruction_t REGULAR_SUB_40[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "sub",
@@ -475,7 +475,7 @@ Instruction REGULAR_SUB_40[1] = {
   },
 };
 
-Instruction REGULAR_SUB_41[1] = {
+instruction_t REGULAR_SUB_41[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "sub",
@@ -487,7 +487,7 @@ Instruction REGULAR_SUB_41[1] = {
   },
 };
 
-Instruction REGULAR_SUB_42[1] = {
+instruction_t REGULAR_SUB_42[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "sub",
@@ -499,7 +499,7 @@ Instruction REGULAR_SUB_42[1] = {
   },
 };
 
-Instruction REGULAR_SUB_43[1] = {
+instruction_t REGULAR_SUB_43[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "sub",
@@ -511,7 +511,7 @@ Instruction REGULAR_SUB_43[1] = {
   },
 };
 
-Instruction REGULAR_SUB_44[1] = {
+instruction_t REGULAR_SUB_44[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "sub",
@@ -523,7 +523,7 @@ Instruction REGULAR_SUB_44[1] = {
   },
 };
 
-Instruction REGULAR_SUB_45[1] = {
+instruction_t REGULAR_SUB_45[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "sub",
@@ -535,7 +535,7 @@ Instruction REGULAR_SUB_45[1] = {
   },
 };
 
-Instruction REGULAR_DAS_47[1] = {
+instruction_t REGULAR_DAS_47[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "das",
@@ -547,7 +547,7 @@ Instruction REGULAR_DAS_47[1] = {
   },
 };
 
-Instruction REGULAR_XOR_48[1] = {
+instruction_t REGULAR_XOR_48[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "xor",
@@ -559,7 +559,7 @@ Instruction REGULAR_XOR_48[1] = {
   },
 };
 
-Instruction REGULAR_XOR_49[1] = {
+instruction_t REGULAR_XOR_49[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "xor",
@@ -571,7 +571,7 @@ Instruction REGULAR_XOR_49[1] = {
   },
 };
 
-Instruction REGULAR_XOR_50[1] = {
+instruction_t REGULAR_XOR_50[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "xor",
@@ -583,7 +583,7 @@ Instruction REGULAR_XOR_50[1] = {
   },
 };
 
-Instruction REGULAR_XOR_51[1] = {
+instruction_t REGULAR_XOR_51[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "xor",
@@ -595,7 +595,7 @@ Instruction REGULAR_XOR_51[1] = {
   },
 };
 
-Instruction REGULAR_XOR_52[1] = {
+instruction_t REGULAR_XOR_52[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "xor",
@@ -607,7 +607,7 @@ Instruction REGULAR_XOR_52[1] = {
   },
 };
 
-Instruction REGULAR_XOR_53[1] = {
+instruction_t REGULAR_XOR_53[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "xor",
@@ -619,7 +619,7 @@ Instruction REGULAR_XOR_53[1] = {
   },
 };
 
-Instruction REGULAR_AAA_55[1] = {
+instruction_t REGULAR_AAA_55[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "aaa",
@@ -631,7 +631,7 @@ Instruction REGULAR_AAA_55[1] = {
   },
 };
 
-Instruction REGULAR_CMP_56[1] = {
+instruction_t REGULAR_CMP_56[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "cmp",
@@ -643,7 +643,7 @@ Instruction REGULAR_CMP_56[1] = {
   },
 };
 
-Instruction REGULAR_CMP_57[1] = {
+instruction_t REGULAR_CMP_57[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "cmp",
@@ -655,7 +655,7 @@ Instruction REGULAR_CMP_57[1] = {
   },
 };
 
-Instruction REGULAR_CMP_58[1] = {
+instruction_t REGULAR_CMP_58[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "cmp",
@@ -667,7 +667,7 @@ Instruction REGULAR_CMP_58[1] = {
   },
 };
 
-Instruction REGULAR_CMP_59[1] = {
+instruction_t REGULAR_CMP_59[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "cmp",
@@ -679,7 +679,7 @@ Instruction REGULAR_CMP_59[1] = {
   },
 };
 
-Instruction REGULAR_CMP_60[1] = {
+instruction_t REGULAR_CMP_60[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "cmp",
@@ -691,7 +691,7 @@ Instruction REGULAR_CMP_60[1] = {
   },
 };
 
-Instruction REGULAR_CMP_61[1] = {
+instruction_t REGULAR_CMP_61[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "cmp",
@@ -703,7 +703,7 @@ Instruction REGULAR_CMP_61[1] = {
   },
 };
 
-Instruction REGULAR_AAS_63[1] = {
+instruction_t REGULAR_AAS_63[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "aas",
@@ -715,7 +715,7 @@ Instruction REGULAR_AAS_63[1] = {
   },
 };
 
-Instruction REGULAR_INC_64[1] = {
+instruction_t REGULAR_INC_64[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "inc",
@@ -727,7 +727,7 @@ Instruction REGULAR_INC_64[1] = {
   },
 };
 
-Instruction REGULAR_INC_65[1] = {
+instruction_t REGULAR_INC_65[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "inc",
@@ -739,7 +739,7 @@ Instruction REGULAR_INC_65[1] = {
   },
 };
 
-Instruction REGULAR_INC_66[1] = {
+instruction_t REGULAR_INC_66[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "inc",
@@ -751,7 +751,7 @@ Instruction REGULAR_INC_66[1] = {
   },
 };
 
-Instruction REGULAR_INC_67[1] = {
+instruction_t REGULAR_INC_67[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "inc",
@@ -763,7 +763,7 @@ Instruction REGULAR_INC_67[1] = {
   },
 };
 
-Instruction REGULAR_INC_68[1] = {
+instruction_t REGULAR_INC_68[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "inc",
@@ -775,7 +775,7 @@ Instruction REGULAR_INC_68[1] = {
   },
 };
 
-Instruction REGULAR_INC_69[1] = {
+instruction_t REGULAR_INC_69[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "inc",
@@ -787,7 +787,7 @@ Instruction REGULAR_INC_69[1] = {
   },
 };
 
-Instruction REGULAR_INC_70[1] = {
+instruction_t REGULAR_INC_70[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "inc",
@@ -799,7 +799,7 @@ Instruction REGULAR_INC_70[1] = {
   },
 };
 
-Instruction REGULAR_INC_71[1] = {
+instruction_t REGULAR_INC_71[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "inc",
@@ -811,7 +811,7 @@ Instruction REGULAR_INC_71[1] = {
   },
 };
 
-Instruction REGULAR_DEC_72[1] = {
+instruction_t REGULAR_DEC_72[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "dec",
@@ -823,7 +823,7 @@ Instruction REGULAR_DEC_72[1] = {
   },
 };
 
-Instruction REGULAR_DEC_73[1] = {
+instruction_t REGULAR_DEC_73[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "dec",
@@ -835,7 +835,7 @@ Instruction REGULAR_DEC_73[1] = {
   },
 };
 
-Instruction REGULAR_PUSH_80[1] = {
+instruction_t REGULAR_PUSH_80[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "push",
@@ -847,7 +847,7 @@ Instruction REGULAR_PUSH_80[1] = {
   },
 };
 
-Instruction REGULAR_PUSH_81[1] = {
+instruction_t REGULAR_PUSH_81[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "push",
@@ -859,7 +859,7 @@ Instruction REGULAR_PUSH_81[1] = {
   },
 };
 
-Instruction REGULAR_PUSH_82[1] = {
+instruction_t REGULAR_PUSH_82[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "push",
@@ -871,7 +871,7 @@ Instruction REGULAR_PUSH_82[1] = {
   },
 };
 
-Instruction REGULAR_PUSH_83[1] = {
+instruction_t REGULAR_PUSH_83[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "push",
@@ -883,7 +883,7 @@ Instruction REGULAR_PUSH_83[1] = {
   },
 };
 
-Instruction REGULAR_PUSH_84[1] = {
+instruction_t REGULAR_PUSH_84[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "push",
@@ -895,7 +895,7 @@ Instruction REGULAR_PUSH_84[1] = {
   },
 };
 
-Instruction REGULAR_PUSH_85[1] = {
+instruction_t REGULAR_PUSH_85[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "push",
@@ -907,7 +907,7 @@ Instruction REGULAR_PUSH_85[1] = {
   },
 };
 
-Instruction REGULAR_PUSH_86[1] = {
+instruction_t REGULAR_PUSH_86[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "push",
@@ -919,7 +919,7 @@ Instruction REGULAR_PUSH_86[1] = {
   },
 };
 
-Instruction REGULAR_PUSH_87[1] = {
+instruction_t REGULAR_PUSH_87[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "push",
@@ -931,7 +931,7 @@ Instruction REGULAR_PUSH_87[1] = {
   },
 };
 
-Instruction REGULAR_POP_88[1] = {
+instruction_t REGULAR_POP_88[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "pop",
@@ -943,7 +943,7 @@ Instruction REGULAR_POP_88[1] = {
   },
 };
 
-Instruction REGULAR_POP_89[1] = {
+instruction_t REGULAR_POP_89[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "pop",
@@ -955,7 +955,7 @@ Instruction REGULAR_POP_89[1] = {
   },
 };
 
-Instruction REGULAR_POP_90[1] = {
+instruction_t REGULAR_POP_90[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "pop",
@@ -967,7 +967,7 @@ Instruction REGULAR_POP_90[1] = {
   },
 };
 
-Instruction REGULAR_POP_91[1] = {
+instruction_t REGULAR_POP_91[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "pop",
@@ -979,7 +979,7 @@ Instruction REGULAR_POP_91[1] = {
   },
 };
 
-Instruction REGULAR_POP_92[1] = {
+instruction_t REGULAR_POP_92[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "pop",
@@ -991,7 +991,7 @@ Instruction REGULAR_POP_92[1] = {
   },
 };
 
-Instruction REGULAR_POP_93[1] = {
+instruction_t REGULAR_POP_93[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "pop",
@@ -1003,7 +1003,7 @@ Instruction REGULAR_POP_93[1] = {
   },
 };
 
-Instruction REGULAR_POP_94[1] = {
+instruction_t REGULAR_POP_94[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "pop",
@@ -1015,7 +1015,7 @@ Instruction REGULAR_POP_94[1] = {
   },
 };
 
-Instruction REGULAR_POP_95[1] = {
+instruction_t REGULAR_POP_95[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "pop",
@@ -1027,7 +1027,7 @@ Instruction REGULAR_POP_95[1] = {
   },
 };
 
-Instruction REGULAR_PUSHAD_96[1] = {
+instruction_t REGULAR_PUSHAD_96[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "pushad",
@@ -1039,7 +1039,7 @@ Instruction REGULAR_PUSHAD_96[1] = {
   },
 };
 
-Instruction REGULAR_POPAD_97[1] = {
+instruction_t REGULAR_POPAD_97[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "popad",
@@ -1051,7 +1051,7 @@ Instruction REGULAR_POPAD_97[1] = {
   },
 };
 
-Instruction REGULAR_BOUND_98[1] = {
+instruction_t REGULAR_BOUND_98[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "bound",
@@ -1063,7 +1063,7 @@ Instruction REGULAR_BOUND_98[1] = {
   },
 };
 
-Instruction REGULAR_ARPL_99[1] = {
+instruction_t REGULAR_ARPL_99[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "arpl",
@@ -1075,7 +1075,7 @@ Instruction REGULAR_ARPL_99[1] = {
   },
 };
 
-Instruction REGULAR_PUSH_104[1] = {
+instruction_t REGULAR_PUSH_104[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "push",
@@ -1087,7 +1087,7 @@ Instruction REGULAR_PUSH_104[1] = {
   },
 };
 
-Instruction REGULAR_IMUL_105[1] = {
+instruction_t REGULAR_IMUL_105[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "imul",
@@ -1099,7 +1099,7 @@ Instruction REGULAR_IMUL_105[1] = {
   },
 };
 
-Instruction REGULAR_PUSH_106[1] = {
+instruction_t REGULAR_PUSH_106[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "push",
@@ -1111,7 +1111,7 @@ Instruction REGULAR_PUSH_106[1] = {
   },
 };
 
-Instruction REGULAR_IMUL_107[1] = {
+instruction_t REGULAR_IMUL_107[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "imul",
@@ -1123,7 +1123,7 @@ Instruction REGULAR_IMUL_107[1] = {
   },
 };
 
-Instruction REGULAR_INS_108[1] = {
+instruction_t REGULAR_INS_108[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "ins",
@@ -1135,7 +1135,7 @@ Instruction REGULAR_INS_108[1] = {
   },
 };
 
-Instruction REGULAR_INS_109[2] = {
+instruction_t REGULAR_INS_109[2] = {
   {
    .extended_opcode = false,
    .mnemonic = "ins",
@@ -1156,7 +1156,7 @@ Instruction REGULAR_INS_109[2] = {
   },
 };
 
-Instruction REGULAR_OUTS_110[1] = {
+instruction_t REGULAR_OUTS_110[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "outs",
@@ -1168,7 +1168,7 @@ Instruction REGULAR_OUTS_110[1] = {
   },
 };
 
-Instruction REGULAR_OUTS_111[2] = {
+instruction_t REGULAR_OUTS_111[2] = {
   {
    .extended_opcode = false,
    .mnemonic = "outs",
@@ -1189,7 +1189,7 @@ Instruction REGULAR_OUTS_111[2] = {
   },
 };
 
-Instruction REGULAR_JO_112[1] = {
+instruction_t REGULAR_JO_112[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "jo",
@@ -1201,7 +1201,7 @@ Instruction REGULAR_JO_112[1] = {
   },
 };
 
-Instruction REGULAR_JNO_113[1] = {
+instruction_t REGULAR_JNO_113[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "jno",
@@ -1213,7 +1213,7 @@ Instruction REGULAR_JNO_113[1] = {
   },
 };
 
-Instruction REGULAR_JB_114[1] = {
+instruction_t REGULAR_JB_114[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "jb",
@@ -1225,7 +1225,7 @@ Instruction REGULAR_JB_114[1] = {
   },
 };
 
-Instruction REGULAR_JNB_115[1] = {
+instruction_t REGULAR_JNB_115[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "jnb",
@@ -1237,7 +1237,7 @@ Instruction REGULAR_JNB_115[1] = {
   },
 };
 
-Instruction REGULAR_JZ_116[1] = {
+instruction_t REGULAR_JZ_116[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "jz",
@@ -1249,7 +1249,7 @@ Instruction REGULAR_JZ_116[1] = {
   },
 };
 
-Instruction REGULAR_JNZ_117[1] = {
+instruction_t REGULAR_JNZ_117[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "jnz",
@@ -1261,7 +1261,7 @@ Instruction REGULAR_JNZ_117[1] = {
   },
 };
 
-Instruction REGULAR_JBE_118[1] = {
+instruction_t REGULAR_JBE_118[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "jbe",
@@ -1273,7 +1273,7 @@ Instruction REGULAR_JBE_118[1] = {
   },
 };
 
-Instruction REGULAR_JNBE_119[1] = {
+instruction_t REGULAR_JNBE_119[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "jnbe",
@@ -1285,7 +1285,7 @@ Instruction REGULAR_JNBE_119[1] = {
   },
 };
 
-Instruction REGULAR_JS_120[1] = {
+instruction_t REGULAR_JS_120[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "js",
@@ -1297,7 +1297,7 @@ Instruction REGULAR_JS_120[1] = {
   },
 };
 
-Instruction REGULAR_JNS_121[1] = {
+instruction_t REGULAR_JNS_121[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "jns",
@@ -1309,7 +1309,7 @@ Instruction REGULAR_JNS_121[1] = {
   },
 };
 
-Instruction REGULAR_JP_122[1] = {
+instruction_t REGULAR_JP_122[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "jp",
@@ -1321,7 +1321,7 @@ Instruction REGULAR_JP_122[1] = {
   },
 };
 
-Instruction REGULAR_JNP_123[1] = {
+instruction_t REGULAR_JNP_123[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "jnp",
@@ -1333,7 +1333,7 @@ Instruction REGULAR_JNP_123[1] = {
   },
 };
 
-Instruction REGULAR_JL_124[1] = {
+instruction_t REGULAR_JL_124[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "jl",
@@ -1345,7 +1345,7 @@ Instruction REGULAR_JL_124[1] = {
   },
 };
 
-Instruction REGULAR_JNL_125[1] = {
+instruction_t REGULAR_JNL_125[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "jnl",
@@ -1357,7 +1357,7 @@ Instruction REGULAR_JNL_125[1] = {
   },
 };
 
-Instruction REGULAR_JLE_126[1] = {
+instruction_t REGULAR_JLE_126[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "jle",
@@ -1369,7 +1369,7 @@ Instruction REGULAR_JLE_126[1] = {
   },
 };
 
-Instruction REGULAR_JNLE_127[1] = {
+instruction_t REGULAR_JNLE_127[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "jnle",
@@ -1381,7 +1381,7 @@ Instruction REGULAR_JNLE_127[1] = {
   },
 };
 
-Instruction REGULAR_ADD_128[8] = {
+instruction_t REGULAR_ADD_128[8] = {
   {
    .extended_opcode = false,
    .mnemonic = "add",
@@ -1456,7 +1456,7 @@ Instruction REGULAR_ADD_128[8] = {
   },
 };
 
-Instruction REGULAR_ADD_129[8] = {
+instruction_t REGULAR_ADD_129[8] = {
   {
    .extended_opcode = false,
    .mnemonic = "add",
@@ -1531,7 +1531,7 @@ Instruction REGULAR_ADD_129[8] = {
   },
 };
 
-Instruction REGULAR_ADD_130[8] = {
+instruction_t REGULAR_ADD_130[8] = {
   {
    .extended_opcode = false,
    .mnemonic = "add",
@@ -1606,7 +1606,7 @@ Instruction REGULAR_ADD_130[8] = {
   },
 };
 
-Instruction REGULAR_ADD_131[8] = {
+instruction_t REGULAR_ADD_131[8] = {
   {
    .extended_opcode = false,
    .mnemonic = "add",
@@ -1681,7 +1681,7 @@ Instruction REGULAR_ADD_131[8] = {
   },
 };
 
-Instruction REGULAR_TEST_132[1] = {
+instruction_t REGULAR_TEST_132[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "test",
@@ -1693,7 +1693,7 @@ Instruction REGULAR_TEST_132[1] = {
   },
 };
 
-Instruction REGULAR_TEST_133[1] = {
+instruction_t REGULAR_TEST_133[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "test",
@@ -1705,7 +1705,7 @@ Instruction REGULAR_TEST_133[1] = {
   },
 };
 
-Instruction REGULAR_XCHG_134[1] = {
+instruction_t REGULAR_XCHG_134[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "xchg",
@@ -1717,7 +1717,7 @@ Instruction REGULAR_XCHG_134[1] = {
   },
 };
 
-Instruction REGULAR_XCHG_135[1] = {
+instruction_t REGULAR_XCHG_135[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "xchg",
@@ -1729,7 +1729,7 @@ Instruction REGULAR_XCHG_135[1] = {
   },
 };
 
-Instruction REGULAR_MOV_136[1] = {
+instruction_t REGULAR_MOV_136[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "mov",
@@ -1741,7 +1741,7 @@ Instruction REGULAR_MOV_136[1] = {
   },
 };
 
-Instruction REGULAR_MOV_137[1] = {
+instruction_t REGULAR_MOV_137[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "mov",
@@ -1753,7 +1753,7 @@ Instruction REGULAR_MOV_137[1] = {
   },
 };
 
-Instruction REGULAR_MOV_138[1] = {
+instruction_t REGULAR_MOV_138[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "mov",
@@ -1765,7 +1765,7 @@ Instruction REGULAR_MOV_138[1] = {
   },
 };
 
-Instruction REGULAR_MOV_139[1] = {
+instruction_t REGULAR_MOV_139[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "mov",
@@ -1777,7 +1777,7 @@ Instruction REGULAR_MOV_139[1] = {
   },
 };
 
-Instruction REGULAR_MOV_140[1] = {
+instruction_t REGULAR_MOV_140[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "mov",
@@ -1789,7 +1789,7 @@ Instruction REGULAR_MOV_140[1] = {
   },
 };
 
-Instruction REGULAR_LEA_141[1] = {
+instruction_t REGULAR_LEA_141[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "lea",
@@ -1801,7 +1801,7 @@ Instruction REGULAR_LEA_141[1] = {
   },
 };
 
-Instruction REGULAR_MOV_142[1] = {
+instruction_t REGULAR_MOV_142[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "mov",
@@ -1813,7 +1813,7 @@ Instruction REGULAR_MOV_142[1] = {
   },
 };
 
-Instruction REGULAR_POP_143[1] = {
+instruction_t REGULAR_POP_143[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "pop",
@@ -1825,7 +1825,7 @@ Instruction REGULAR_POP_143[1] = {
   },
 };
 
-Instruction REGULAR_NOP_144[2] = {
+instruction_t REGULAR_NOP_144[2] = {
   {
    .extended_opcode = false,
    .mnemonic = "nop",
@@ -1846,7 +1846,7 @@ Instruction REGULAR_NOP_144[2] = {
   },
 };
 
-Instruction REGULAR_XCHG_145[1] = {
+instruction_t REGULAR_XCHG_145[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "xchg",
@@ -1858,7 +1858,7 @@ Instruction REGULAR_XCHG_145[1] = {
   },
 };
 
-Instruction REGULAR_XCHG_146[1] = {
+instruction_t REGULAR_XCHG_146[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "xchg",
@@ -1870,7 +1870,7 @@ Instruction REGULAR_XCHG_146[1] = {
   },
 };
 
-Instruction REGULAR_XCHG_147[1] = {
+instruction_t REGULAR_XCHG_147[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "xchg",
@@ -1882,7 +1882,7 @@ Instruction REGULAR_XCHG_147[1] = {
   },
 };
 
-Instruction REGULAR_XCHG_148[1] = {
+instruction_t REGULAR_XCHG_148[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "xchg",
@@ -1894,7 +1894,7 @@ Instruction REGULAR_XCHG_148[1] = {
   },
 };
 
-Instruction REGULAR_XCHG_149[1] = {
+instruction_t REGULAR_XCHG_149[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "xchg",
@@ -1906,7 +1906,7 @@ Instruction REGULAR_XCHG_149[1] = {
   },
 };
 
-Instruction REGULAR_XCHG_150[1] = {
+instruction_t REGULAR_XCHG_150[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "xchg",
@@ -1918,7 +1918,7 @@ Instruction REGULAR_XCHG_150[1] = {
   },
 };
 
-Instruction REGULAR_XCHG_151[1] = {
+instruction_t REGULAR_XCHG_151[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "xchg",
@@ -1930,7 +1930,7 @@ Instruction REGULAR_XCHG_151[1] = {
   },
 };
 
-Instruction REGULAR_CBW_152[2] = {
+instruction_t REGULAR_CBW_152[2] = {
   {
    .extended_opcode = false,
    .mnemonic = "cbw",
@@ -1951,7 +1951,7 @@ Instruction REGULAR_CBW_152[2] = {
   },
 };
 
-Instruction REGULAR_CDQ_153[1] = {
+instruction_t REGULAR_CDQ_153[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "cdq",
@@ -1963,7 +1963,7 @@ Instruction REGULAR_CDQ_153[1] = {
   },
 };
 
-Instruction REGULAR_CALLF_154[1] = {
+instruction_t REGULAR_CALLF_154[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "callf",
@@ -1975,7 +1975,7 @@ Instruction REGULAR_CALLF_154[1] = {
   },
 };
 
-Instruction REGULAR_FWAIT_155[1] = {
+instruction_t REGULAR_FWAIT_155[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "fwait",
@@ -1987,7 +1987,7 @@ Instruction REGULAR_FWAIT_155[1] = {
   },
 };
 
-Instruction REGULAR_PUSHFD_156[1] = {
+instruction_t REGULAR_PUSHFD_156[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "pushfd",
@@ -1999,7 +1999,7 @@ Instruction REGULAR_PUSHFD_156[1] = {
   },
 };
 
-Instruction REGULAR_POPFD_157[1] = {
+instruction_t REGULAR_POPFD_157[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "popfd",
@@ -2011,7 +2011,7 @@ Instruction REGULAR_POPFD_157[1] = {
   },
 };
 
-Instruction REGULAR_SAHF_158[1] = {
+instruction_t REGULAR_SAHF_158[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "sahf",
@@ -2023,7 +2023,7 @@ Instruction REGULAR_SAHF_158[1] = {
   },
 };
 
-Instruction REGULAR_LAHF_159[1] = {
+instruction_t REGULAR_LAHF_159[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "lahf",
@@ -2035,7 +2035,7 @@ Instruction REGULAR_LAHF_159[1] = {
   },
 };
 
-Instruction REGULAR_MOV_160[1] = {
+instruction_t REGULAR_MOV_160[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "mov",
@@ -2047,7 +2047,7 @@ Instruction REGULAR_MOV_160[1] = {
   },
 };
 
-Instruction REGULAR_MOV_161[1] = {
+instruction_t REGULAR_MOV_161[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "mov",
@@ -2059,7 +2059,7 @@ Instruction REGULAR_MOV_161[1] = {
   },
 };
 
-Instruction REGULAR_MOV_162[1] = {
+instruction_t REGULAR_MOV_162[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "mov",
@@ -2071,7 +2071,7 @@ Instruction REGULAR_MOV_162[1] = {
   },
 };
 
-Instruction REGULAR_MOV_163[1] = {
+instruction_t REGULAR_MOV_163[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "mov",
@@ -2083,7 +2083,7 @@ Instruction REGULAR_MOV_163[1] = {
   },
 };
 
-Instruction REGULAR_MOVS_164[1] = {
+instruction_t REGULAR_MOVS_164[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "movs",
@@ -2095,7 +2095,7 @@ Instruction REGULAR_MOVS_164[1] = {
   },
 };
 
-Instruction REGULAR_MOVS_165[2] = {
+instruction_t REGULAR_MOVS_165[2] = {
   {
    .extended_opcode = false,
    .mnemonic = "movs",
@@ -2116,7 +2116,7 @@ Instruction REGULAR_MOVS_165[2] = {
   },
 };
 
-Instruction REGULAR_CMPS_166[1] = {
+instruction_t REGULAR_CMPS_166[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "cmps",
@@ -2128,7 +2128,7 @@ Instruction REGULAR_CMPS_166[1] = {
   },
 };
 
-Instruction REGULAR_CMPS_167[2] = {
+instruction_t REGULAR_CMPS_167[2] = {
   {
    .extended_opcode = false,
    .mnemonic = "cmps",
@@ -2149,7 +2149,7 @@ Instruction REGULAR_CMPS_167[2] = {
   },
 };
 
-Instruction REGULAR_TEST_168[1] = {
+instruction_t REGULAR_TEST_168[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "test",
@@ -2161,7 +2161,7 @@ Instruction REGULAR_TEST_168[1] = {
   },
 };
 
-Instruction REGULAR_TEST_169[1] = {
+instruction_t REGULAR_TEST_169[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "test",
@@ -2173,7 +2173,7 @@ Instruction REGULAR_TEST_169[1] = {
   },
 };
 
-Instruction REGULAR_STOS_170[1] = {
+instruction_t REGULAR_STOS_170[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "stos",
@@ -2185,7 +2185,7 @@ Instruction REGULAR_STOS_170[1] = {
   },
 };
 
-Instruction REGULAR_STOS_171[2] = {
+instruction_t REGULAR_STOS_171[2] = {
   {
    .extended_opcode = false,
    .mnemonic = "stos",
@@ -2206,7 +2206,7 @@ Instruction REGULAR_STOS_171[2] = {
   },
 };
 
-Instruction REGULAR_LODS_172[1] = {
+instruction_t REGULAR_LODS_172[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "lods",
@@ -2218,7 +2218,7 @@ Instruction REGULAR_LODS_172[1] = {
   },
 };
 
-Instruction REGULAR_LODS_173[2] = {
+instruction_t REGULAR_LODS_173[2] = {
   {
    .extended_opcode = false,
    .mnemonic = "lods",
@@ -2239,7 +2239,7 @@ Instruction REGULAR_LODS_173[2] = {
   },
 };
 
-Instruction REGULAR_SCAS_174[1] = {
+instruction_t REGULAR_SCAS_174[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "scas",
@@ -2251,7 +2251,7 @@ Instruction REGULAR_SCAS_174[1] = {
   },
 };
 
-Instruction REGULAR_SCAS_175[2] = {
+instruction_t REGULAR_SCAS_175[2] = {
   {
    .extended_opcode = false,
    .mnemonic = "scas",
@@ -2272,7 +2272,7 @@ Instruction REGULAR_SCAS_175[2] = {
   },
 };
 
-Instruction REGULAR_MOV_176[1] = {
+instruction_t REGULAR_MOV_176[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "mov",
@@ -2284,7 +2284,7 @@ Instruction REGULAR_MOV_176[1] = {
   },
 };
 
-Instruction REGULAR_MOV_177[1] = {
+instruction_t REGULAR_MOV_177[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "mov",
@@ -2296,7 +2296,7 @@ Instruction REGULAR_MOV_177[1] = {
   },
 };
 
-Instruction REGULAR_MOV_178[1] = {
+instruction_t REGULAR_MOV_178[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "mov",
@@ -2308,7 +2308,7 @@ Instruction REGULAR_MOV_178[1] = {
   },
 };
 
-Instruction REGULAR_MOV_179[1] = {
+instruction_t REGULAR_MOV_179[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "mov",
@@ -2320,7 +2320,7 @@ Instruction REGULAR_MOV_179[1] = {
   },
 };
 
-Instruction REGULAR_MOV_180[1] = {
+instruction_t REGULAR_MOV_180[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "mov",
@@ -2332,7 +2332,7 @@ Instruction REGULAR_MOV_180[1] = {
   },
 };
 
-Instruction REGULAR_MOV_181[1] = {
+instruction_t REGULAR_MOV_181[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "mov",
@@ -2344,7 +2344,7 @@ Instruction REGULAR_MOV_181[1] = {
   },
 };
 
-Instruction REGULAR_MOV_182[1] = {
+instruction_t REGULAR_MOV_182[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "mov",
@@ -2356,7 +2356,7 @@ Instruction REGULAR_MOV_182[1] = {
   },
 };
 
-Instruction REGULAR_MOV_183[1] = {
+instruction_t REGULAR_MOV_183[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "mov",
@@ -2368,7 +2368,7 @@ Instruction REGULAR_MOV_183[1] = {
   },
 };
 
-Instruction REGULAR_MOV_184[1] = {
+instruction_t REGULAR_MOV_184[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "mov",
@@ -2380,7 +2380,7 @@ Instruction REGULAR_MOV_184[1] = {
   },
 };
 
-Instruction REGULAR_MOV_185[1] = {
+instruction_t REGULAR_MOV_185[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "mov",
@@ -2392,7 +2392,7 @@ Instruction REGULAR_MOV_185[1] = {
   },
 };
 
-Instruction REGULAR_MOV_186[1] = {
+instruction_t REGULAR_MOV_186[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "mov",
@@ -2404,7 +2404,7 @@ Instruction REGULAR_MOV_186[1] = {
   },
 };
 
-Instruction REGULAR_MOV_187[1] = {
+instruction_t REGULAR_MOV_187[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "mov",
@@ -2416,7 +2416,7 @@ Instruction REGULAR_MOV_187[1] = {
   },
 };
 
-Instruction REGULAR_MOV_188[1] = {
+instruction_t REGULAR_MOV_188[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "mov",
@@ -2428,7 +2428,7 @@ Instruction REGULAR_MOV_188[1] = {
   },
 };
 
-Instruction REGULAR_MOV_189[1] = {
+instruction_t REGULAR_MOV_189[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "mov",
@@ -2440,7 +2440,7 @@ Instruction REGULAR_MOV_189[1] = {
   },
 };
 
-Instruction REGULAR_MOV_190[1] = {
+instruction_t REGULAR_MOV_190[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "mov",
@@ -2452,7 +2452,7 @@ Instruction REGULAR_MOV_190[1] = {
   },
 };
 
-Instruction REGULAR_MOV_191[1] = {
+instruction_t REGULAR_MOV_191[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "mov",
@@ -2464,7 +2464,7 @@ Instruction REGULAR_MOV_191[1] = {
   },
 };
 
-Instruction REGULAR_ROL_192[8] = {
+instruction_t REGULAR_ROL_192[8] = {
   {
    .extended_opcode = false,
    .mnemonic = "rol",
@@ -2539,7 +2539,7 @@ Instruction REGULAR_ROL_192[8] = {
   },
 };
 
-Instruction REGULAR_ROL_193[8] = {
+instruction_t REGULAR_ROL_193[8] = {
   {
    .extended_opcode = false,
    .mnemonic = "rol",
@@ -2614,7 +2614,7 @@ Instruction REGULAR_ROL_193[8] = {
   },
 };
 
-Instruction REGULAR_RETN_194[1] = {
+instruction_t REGULAR_RETN_194[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "retn",
@@ -2626,7 +2626,7 @@ Instruction REGULAR_RETN_194[1] = {
   },
 };
 
-Instruction REGULAR_RETN_195[1] = {
+instruction_t REGULAR_RETN_195[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "retn",
@@ -2638,7 +2638,7 @@ Instruction REGULAR_RETN_195[1] = {
   },
 };
 
-Instruction REGULAR_LES_196[1] = {
+instruction_t REGULAR_LES_196[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "les",
@@ -2650,7 +2650,7 @@ Instruction REGULAR_LES_196[1] = {
   },
 };
 
-Instruction REGULAR_LDS_197[1] = {
+instruction_t REGULAR_LDS_197[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "lds",
@@ -2662,7 +2662,7 @@ Instruction REGULAR_LDS_197[1] = {
   },
 };
 
-Instruction REGULAR_MOV_198[1] = {
+instruction_t REGULAR_MOV_198[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "mov",
@@ -2674,7 +2674,7 @@ Instruction REGULAR_MOV_198[1] = {
   },
 };
 
-Instruction REGULAR_MOV_199[1] = {
+instruction_t REGULAR_MOV_199[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "mov",
@@ -2686,7 +2686,7 @@ Instruction REGULAR_MOV_199[1] = {
   },
 };
 
-Instruction REGULAR_ENTER_200[1] = {
+instruction_t REGULAR_ENTER_200[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "enter",
@@ -2698,7 +2698,7 @@ Instruction REGULAR_ENTER_200[1] = {
   },
 };
 
-Instruction REGULAR_LEAVE_201[1] = {
+instruction_t REGULAR_LEAVE_201[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "leave",
@@ -2710,7 +2710,7 @@ Instruction REGULAR_LEAVE_201[1] = {
   },
 };
 
-Instruction REGULAR_RETF_202[1] = {
+instruction_t REGULAR_RETF_202[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "retf",
@@ -2722,7 +2722,7 @@ Instruction REGULAR_RETF_202[1] = {
   },
 };
 
-Instruction REGULAR_RETF_203[1] = {
+instruction_t REGULAR_RETF_203[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "retf",
@@ -2734,7 +2734,7 @@ Instruction REGULAR_RETF_203[1] = {
   },
 };
 
-Instruction REGULAR_INT3_204[1] = {
+instruction_t REGULAR_INT3_204[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "int3",
@@ -2746,7 +2746,7 @@ Instruction REGULAR_INT3_204[1] = {
   },
 };
 
-Instruction REGULAR_INT_205[1] = {
+instruction_t REGULAR_INT_205[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "int",
@@ -2758,7 +2758,7 @@ Instruction REGULAR_INT_205[1] = {
   },
 };
 
-Instruction REGULAR_INTO_206[1] = {
+instruction_t REGULAR_INTO_206[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "into",
@@ -2770,7 +2770,7 @@ Instruction REGULAR_INTO_206[1] = {
   },
 };
 
-Instruction REGULAR_IRETD_207[1] = {
+instruction_t REGULAR_IRETD_207[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "iretd",
@@ -2782,7 +2782,7 @@ Instruction REGULAR_IRETD_207[1] = {
   },
 };
 
-Instruction REGULAR_ROL_208[8] = {
+instruction_t REGULAR_ROL_208[8] = {
   {
    .extended_opcode = false,
    .mnemonic = "rol",
@@ -2857,7 +2857,7 @@ Instruction REGULAR_ROL_208[8] = {
   },
 };
 
-Instruction REGULAR_ROL_209[8] = {
+instruction_t REGULAR_ROL_209[8] = {
   {
    .extended_opcode = false,
    .mnemonic = "rol",
@@ -2932,7 +2932,7 @@ Instruction REGULAR_ROL_209[8] = {
   },
 };
 
-Instruction REGULAR_ROL_210[8] = {
+instruction_t REGULAR_ROL_210[8] = {
   {
    .extended_opcode = false,
    .mnemonic = "rol",
@@ -3007,7 +3007,7 @@ Instruction REGULAR_ROL_210[8] = {
   },
 };
 
-Instruction REGULAR_ROL_211[8] = {
+instruction_t REGULAR_ROL_211[8] = {
   {
    .extended_opcode = false,
    .mnemonic = "rol",
@@ -3082,7 +3082,7 @@ Instruction REGULAR_ROL_211[8] = {
   },
 };
 
-Instruction REGULAR_AMX_212[1] = {
+instruction_t REGULAR_AMX_212[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "amx",
@@ -3094,7 +3094,7 @@ Instruction REGULAR_AMX_212[1] = {
   },
 };
 
-Instruction REGULAR_ADX_213[1] = {
+instruction_t REGULAR_ADX_213[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "adx",
@@ -3106,7 +3106,7 @@ Instruction REGULAR_ADX_213[1] = {
   },
 };
 
-Instruction REGULAR_SALC_214[1] = {
+instruction_t REGULAR_SALC_214[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "salc",
@@ -3118,7 +3118,7 @@ Instruction REGULAR_SALC_214[1] = {
   },
 };
 
-Instruction REGULAR_XLAT_215[1] = {
+instruction_t REGULAR_XLAT_215[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "xlat",
@@ -3130,7 +3130,7 @@ Instruction REGULAR_XLAT_215[1] = {
   },
 };
 
-Instruction REGULAR_FADD_216[8] = {
+instruction_t REGULAR_FADD_216[8] = {
   {
    .extended_opcode = false,
    .mnemonic = "fadd",
@@ -3205,7 +3205,7 @@ Instruction REGULAR_FADD_216[8] = {
   },
 };
 
-Instruction REGULAR_FLD_217[39] = {
+instruction_t REGULAR_FLD_217[39] = {
   {
    .extended_opcode = false,
    .mnemonic = "fld",
@@ -3559,7 +3559,7 @@ Instruction REGULAR_FLD_217[39] = {
   },
 };
 
-Instruction REGULAR_FIADD_218[13] = {
+instruction_t REGULAR_FIADD_218[13] = {
   {
    .extended_opcode = false,
    .mnemonic = "fiadd",
@@ -3679,7 +3679,7 @@ Instruction REGULAR_FIADD_218[13] = {
   },
 };
 
-Instruction REGULAR_FILD_219[19] = {
+instruction_t REGULAR_FILD_219[19] = {
   {
    .extended_opcode = false,
    .mnemonic = "fild",
@@ -3853,7 +3853,7 @@ Instruction REGULAR_FILD_219[19] = {
   },
 };
 
-Instruction REGULAR_FADD_220[16] = {
+instruction_t REGULAR_FADD_220[16] = {
   {
    .extended_opcode = false,
    .mnemonic = "fadd",
@@ -4000,7 +4000,7 @@ Instruction REGULAR_FADD_220[16] = {
   },
 };
 
-Instruction REGULAR_FLD_221[15] = {
+instruction_t REGULAR_FLD_221[15] = {
   {
    .extended_opcode = false,
    .mnemonic = "fld",
@@ -4138,7 +4138,7 @@ Instruction REGULAR_FLD_221[15] = {
   },
 };
 
-Instruction REGULAR_FIADD_222[16] = {
+instruction_t REGULAR_FIADD_222[16] = {
   {
    .extended_opcode = false,
    .mnemonic = "fiadd",
@@ -4285,7 +4285,7 @@ Instruction REGULAR_FIADD_222[16] = {
   },
 };
 
-Instruction REGULAR_FILD_223[16] = {
+instruction_t REGULAR_FILD_223[16] = {
   {
    .extended_opcode = false,
    .mnemonic = "fild",
@@ -4432,7 +4432,7 @@ Instruction REGULAR_FILD_223[16] = {
   },
 };
 
-Instruction REGULAR_LOOPNZ_224[1] = {
+instruction_t REGULAR_LOOPNZ_224[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "loopnz",
@@ -4444,7 +4444,7 @@ Instruction REGULAR_LOOPNZ_224[1] = {
   },
 };
 
-Instruction REGULAR_LOOPZ_225[1] = {
+instruction_t REGULAR_LOOPZ_225[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "loopz",
@@ -4456,7 +4456,7 @@ Instruction REGULAR_LOOPZ_225[1] = {
   },
 };
 
-Instruction REGULAR_LOOP_226[1] = {
+instruction_t REGULAR_LOOP_226[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "loop",
@@ -4468,7 +4468,7 @@ Instruction REGULAR_LOOP_226[1] = {
   },
 };
 
-Instruction REGULAR_JCXZ_227[1] = {
+instruction_t REGULAR_JCXZ_227[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "jcxz",
@@ -4480,7 +4480,7 @@ Instruction REGULAR_JCXZ_227[1] = {
   },
 };
 
-Instruction REGULAR_IN_228[1] = {
+instruction_t REGULAR_IN_228[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "in",
@@ -4492,7 +4492,7 @@ Instruction REGULAR_IN_228[1] = {
   },
 };
 
-Instruction REGULAR_IN_229[1] = {
+instruction_t REGULAR_IN_229[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "in",
@@ -4504,7 +4504,7 @@ Instruction REGULAR_IN_229[1] = {
   },
 };
 
-Instruction REGULAR_OUT_230[1] = {
+instruction_t REGULAR_OUT_230[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "out",
@@ -4516,7 +4516,7 @@ Instruction REGULAR_OUT_230[1] = {
   },
 };
 
-Instruction REGULAR_OUT_231[1] = {
+instruction_t REGULAR_OUT_231[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "out",
@@ -4528,7 +4528,7 @@ Instruction REGULAR_OUT_231[1] = {
   },
 };
 
-Instruction REGULAR_CALL_232[1] = {
+instruction_t REGULAR_CALL_232[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "call",
@@ -4540,7 +4540,7 @@ Instruction REGULAR_CALL_232[1] = {
   },
 };
 
-Instruction REGULAR_JMP_233[1] = {
+instruction_t REGULAR_JMP_233[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "jmp",
@@ -4552,7 +4552,7 @@ Instruction REGULAR_JMP_233[1] = {
   },
 };
 
-Instruction REGULAR_JMPF_234[1] = {
+instruction_t REGULAR_JMPF_234[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "jmpf",
@@ -4564,7 +4564,7 @@ Instruction REGULAR_JMPF_234[1] = {
   },
 };
 
-Instruction REGULAR_JMP_235[1] = {
+instruction_t REGULAR_JMP_235[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "jmp",
@@ -4576,7 +4576,7 @@ Instruction REGULAR_JMP_235[1] = {
   },
 };
 
-Instruction REGULAR_IN_236[1] = {
+instruction_t REGULAR_IN_236[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "in",
@@ -4588,7 +4588,7 @@ Instruction REGULAR_IN_236[1] = {
   },
 };
 
-Instruction REGULAR_IN_237[1] = {
+instruction_t REGULAR_IN_237[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "in",
@@ -4600,7 +4600,7 @@ Instruction REGULAR_IN_237[1] = {
   },
 };
 
-Instruction REGULAR_OUT_238[1] = {
+instruction_t REGULAR_OUT_238[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "out",
@@ -4612,7 +4612,7 @@ Instruction REGULAR_OUT_238[1] = {
   },
 };
 
-Instruction REGULAR_OUT_239[1] = {
+instruction_t REGULAR_OUT_239[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "out",
@@ -4624,7 +4624,7 @@ Instruction REGULAR_OUT_239[1] = {
   },
 };
 
-Instruction REGULAR_INT1_241[1] = {
+instruction_t REGULAR_INT1_241[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "int1",
@@ -4636,7 +4636,7 @@ Instruction REGULAR_INT1_241[1] = {
   },
 };
 
-Instruction REGULAR_HLT_244[1] = {
+instruction_t REGULAR_HLT_244[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "hlt",
@@ -4648,7 +4648,7 @@ Instruction REGULAR_HLT_244[1] = {
   },
 };
 
-Instruction REGULAR_CMC_245[1] = {
+instruction_t REGULAR_CMC_245[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "cmc",
@@ -4660,7 +4660,7 @@ Instruction REGULAR_CMC_245[1] = {
   },
 };
 
-Instruction REGULAR_TEST_246[8] = {
+instruction_t REGULAR_TEST_246[8] = {
   {
    .extended_opcode = false,
    .mnemonic = "test",
@@ -4735,7 +4735,7 @@ Instruction REGULAR_TEST_246[8] = {
   },
 };
 
-Instruction REGULAR_TEST_247[8] = {
+instruction_t REGULAR_TEST_247[8] = {
   {
    .extended_opcode = false,
    .mnemonic = "test",
@@ -4810,7 +4810,7 @@ Instruction REGULAR_TEST_247[8] = {
   },
 };
 
-Instruction REGULAR_CLC_248[1] = {
+instruction_t REGULAR_CLC_248[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "clc",
@@ -4822,7 +4822,7 @@ Instruction REGULAR_CLC_248[1] = {
   },
 };
 
-Instruction REGULAR_STC_249[1] = {
+instruction_t REGULAR_STC_249[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "stc",
@@ -4834,7 +4834,7 @@ Instruction REGULAR_STC_249[1] = {
   },
 };
 
-Instruction REGULAR_CLI_250[1] = {
+instruction_t REGULAR_CLI_250[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "cli",
@@ -4846,7 +4846,7 @@ Instruction REGULAR_CLI_250[1] = {
   },
 };
 
-Instruction REGULAR_STI_251[1] = {
+instruction_t REGULAR_STI_251[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "sti",
@@ -4858,7 +4858,7 @@ Instruction REGULAR_STI_251[1] = {
   },
 };
 
-Instruction REGULAR_CLD_252[1] = {
+instruction_t REGULAR_CLD_252[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "cld",
@@ -4870,7 +4870,7 @@ Instruction REGULAR_CLD_252[1] = {
   },
 };
 
-Instruction REGULAR_STD_253[1] = {
+instruction_t REGULAR_STD_253[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "std",
@@ -4882,7 +4882,7 @@ Instruction REGULAR_STD_253[1] = {
   },
 };
 
-Instruction REGULAR_INC_254[2] = {
+instruction_t REGULAR_INC_254[2] = {
   {
    .extended_opcode = false,
    .mnemonic = "inc",
@@ -4903,7 +4903,7 @@ Instruction REGULAR_INC_254[2] = {
   },
 };
 
-Instruction REGULAR_INC_255[7] = {
+instruction_t REGULAR_INC_255[7] = {
   {
    .extended_opcode = false,
    .mnemonic = "inc",
@@ -4970,7 +4970,7 @@ Instruction REGULAR_INC_255[7] = {
 };
 
 // regular end 
-Instruction EXTENDED_SLDT_0[6] = {
+instruction_t EXTENDED_SLDT_0[6] = {
   {
    .extended_opcode = true,
    .mnemonic = "sldt",
@@ -5027,7 +5027,7 @@ Instruction EXTENDED_SLDT_0[6] = {
   },
 };
 
-Instruction EXTENDED_SGDT_1[16] = {
+instruction_t EXTENDED_SGDT_1[16] = {
   {
    .extended_opcode = true,
    .mnemonic = "sgdt",
@@ -5174,7 +5174,7 @@ Instruction EXTENDED_SGDT_1[16] = {
   },
 };
 
-Instruction EXTENDED_LAR_2[1] = {
+instruction_t EXTENDED_LAR_2[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "lar",
@@ -5186,7 +5186,7 @@ Instruction EXTENDED_LAR_2[1] = {
   },
 };
 
-Instruction EXTENDED_LSL_3[1] = {
+instruction_t EXTENDED_LSL_3[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "lsl",
@@ -5198,7 +5198,7 @@ Instruction EXTENDED_LSL_3[1] = {
   },
 };
 
-Instruction EXTENDED_SYSCALL_5[1] = {
+instruction_t EXTENDED_SYSCALL_5[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "syscall",
@@ -5210,7 +5210,7 @@ Instruction EXTENDED_SYSCALL_5[1] = {
   },
 };
 
-Instruction EXTENDED_CLTS_6[1] = {
+instruction_t EXTENDED_CLTS_6[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "clts",
@@ -5222,7 +5222,7 @@ Instruction EXTENDED_CLTS_6[1] = {
   },
 };
 
-Instruction EXTENDED_INVD_8[1] = {
+instruction_t EXTENDED_INVD_8[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "invd",
@@ -5234,7 +5234,7 @@ Instruction EXTENDED_INVD_8[1] = {
   },
 };
 
-Instruction EXTENDED_WBINVD_9[1] = {
+instruction_t EXTENDED_WBINVD_9[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "wbinvd",
@@ -5246,7 +5246,7 @@ Instruction EXTENDED_WBINVD_9[1] = {
   },
 };
 
-Instruction EXTENDED_UD2_11[1] = {
+instruction_t EXTENDED_UD2_11[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "ud2",
@@ -5258,7 +5258,7 @@ Instruction EXTENDED_UD2_11[1] = {
   },
 };
 
-Instruction EXTENDED_NOP_13[1] = {
+instruction_t EXTENDED_NOP_13[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "nop",
@@ -5270,7 +5270,7 @@ Instruction EXTENDED_NOP_13[1] = {
   },
 };
 
-Instruction EXTENDED_MOVUPS_16[4] = {
+instruction_t EXTENDED_MOVUPS_16[4] = {
   {
    .extended_opcode = true,
    .mnemonic = "movups",
@@ -5309,7 +5309,7 @@ Instruction EXTENDED_MOVUPS_16[4] = {
   },
 };
 
-Instruction EXTENDED_MOVUPS_17[4] = {
+instruction_t EXTENDED_MOVUPS_17[4] = {
   {
    .extended_opcode = true,
    .mnemonic = "movups",
@@ -5348,7 +5348,7 @@ Instruction EXTENDED_MOVUPS_17[4] = {
   },
 };
 
-Instruction EXTENDED_MOVHLPS_18[5] = {
+instruction_t EXTENDED_MOVHLPS_18[5] = {
   {
    .extended_opcode = true,
    .mnemonic = "movhlps",
@@ -5396,7 +5396,7 @@ Instruction EXTENDED_MOVHLPS_18[5] = {
   },
 };
 
-Instruction EXTENDED_MOVLPS_19[2] = {
+instruction_t EXTENDED_MOVLPS_19[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "movlps",
@@ -5417,7 +5417,7 @@ Instruction EXTENDED_MOVLPS_19[2] = {
   },
 };
 
-Instruction EXTENDED_UNPCKLPS_20[2] = {
+instruction_t EXTENDED_UNPCKLPS_20[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "unpcklps",
@@ -5438,7 +5438,7 @@ Instruction EXTENDED_UNPCKLPS_20[2] = {
   },
 };
 
-Instruction EXTENDED_UNPCKHPS_21[2] = {
+instruction_t EXTENDED_UNPCKHPS_21[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "unpckhps",
@@ -5459,7 +5459,7 @@ Instruction EXTENDED_UNPCKHPS_21[2] = {
   },
 };
 
-Instruction EXTENDED_MOVLHPS_22[4] = {
+instruction_t EXTENDED_MOVLHPS_22[4] = {
   {
    .extended_opcode = true,
    .mnemonic = "movlhps",
@@ -5498,7 +5498,7 @@ Instruction EXTENDED_MOVLHPS_22[4] = {
   },
 };
 
-Instruction EXTENDED_MOVHPS_23[2] = {
+instruction_t EXTENDED_MOVHPS_23[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "movhps",
@@ -5519,7 +5519,7 @@ Instruction EXTENDED_MOVHPS_23[2] = {
   },
 };
 
-Instruction EXTENDED_PREFETCHNTA_24[8] = {
+instruction_t EXTENDED_PREFETCHNTA_24[8] = {
   {
    .extended_opcode = true,
    .mnemonic = "prefetchnta",
@@ -5594,7 +5594,7 @@ Instruction EXTENDED_PREFETCHNTA_24[8] = {
   },
 };
 
-Instruction EXTENDED_ENDBR32_30[2] = {
+instruction_t EXTENDED_ENDBR32_30[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "endbr32",
@@ -5615,7 +5615,7 @@ Instruction EXTENDED_ENDBR32_30[2] = {
   },
 };
 
-Instruction EXTENDED_HINT_NOP_25[1] = {
+instruction_t EXTENDED_HINT_NOP_25[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "hint_nop",
@@ -5627,7 +5627,7 @@ Instruction EXTENDED_HINT_NOP_25[1] = {
   },
 };
 
-Instruction EXTENDED_HINT_NOP_26[1] = {
+instruction_t EXTENDED_HINT_NOP_26[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "hint_nop",
@@ -5639,7 +5639,7 @@ Instruction EXTENDED_HINT_NOP_26[1] = {
   },
 };
 
-Instruction EXTENDED_HINT_NOP_27[1] = {
+instruction_t EXTENDED_HINT_NOP_27[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "hint_nop",
@@ -5651,7 +5651,7 @@ Instruction EXTENDED_HINT_NOP_27[1] = {
   },
 };
 
-Instruction EXTENDED_HINT_NOP_28[1] = {
+instruction_t EXTENDED_HINT_NOP_28[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "hint_nop",
@@ -5663,7 +5663,7 @@ Instruction EXTENDED_HINT_NOP_28[1] = {
   },
 };
 
-Instruction EXTENDED_HINT_NOP_29[1] = {
+instruction_t EXTENDED_HINT_NOP_29[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "hint_nop",
@@ -5675,7 +5675,7 @@ Instruction EXTENDED_HINT_NOP_29[1] = {
   },
 };
 
-Instruction EXTENDED_NOP_31[8] = {
+instruction_t EXTENDED_NOP_31[8] = {
   {
    .extended_opcode = true,
    .mnemonic = "nop",
@@ -5750,7 +5750,7 @@ Instruction EXTENDED_NOP_31[8] = {
   },
 };
 
-Instruction EXTENDED_MOV_32[2] = {
+instruction_t EXTENDED_MOV_32[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "mov",
@@ -5771,7 +5771,7 @@ Instruction EXTENDED_MOV_32[2] = {
   },
 };
 
-Instruction EXTENDED_MOV_33[2] = {
+instruction_t EXTENDED_MOV_33[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "mov",
@@ -5792,7 +5792,7 @@ Instruction EXTENDED_MOV_33[2] = {
   },
 };
 
-Instruction EXTENDED_MOV_34[2] = {
+instruction_t EXTENDED_MOV_34[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "mov",
@@ -5813,7 +5813,7 @@ Instruction EXTENDED_MOV_34[2] = {
   },
 };
 
-Instruction EXTENDED_MOV_35[2] = {
+instruction_t EXTENDED_MOV_35[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "mov",
@@ -5834,7 +5834,7 @@ Instruction EXTENDED_MOV_35[2] = {
   },
 };
 
-Instruction EXTENDED_MOVAPS_40[2] = {
+instruction_t EXTENDED_MOVAPS_40[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "movaps",
@@ -5855,7 +5855,7 @@ Instruction EXTENDED_MOVAPS_40[2] = {
   },
 };
 
-Instruction EXTENDED_MOVAPS_41[2] = {
+instruction_t EXTENDED_MOVAPS_41[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "movaps",
@@ -5876,7 +5876,7 @@ Instruction EXTENDED_MOVAPS_41[2] = {
   },
 };
 
-Instruction EXTENDED_CVTPI2PS_42[4] = {
+instruction_t EXTENDED_CVTPI2PS_42[4] = {
   {
    .extended_opcode = true,
    .mnemonic = "cvtpi2ps",
@@ -5915,7 +5915,7 @@ Instruction EXTENDED_CVTPI2PS_42[4] = {
   },
 };
 
-Instruction EXTENDED_MOVNTPS_43[2] = {
+instruction_t EXTENDED_MOVNTPS_43[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "movntps",
@@ -5936,7 +5936,7 @@ Instruction EXTENDED_MOVNTPS_43[2] = {
   },
 };
 
-Instruction EXTENDED_CVTTPS2PI_44[4] = {
+instruction_t EXTENDED_CVTTPS2PI_44[4] = {
   {
    .extended_opcode = true,
    .mnemonic = "cvttps2pi",
@@ -5975,7 +5975,7 @@ Instruction EXTENDED_CVTTPS2PI_44[4] = {
   },
 };
 
-Instruction EXTENDED_CVTPS2PI_45[4] = {
+instruction_t EXTENDED_CVTPS2PI_45[4] = {
   {
    .extended_opcode = true,
    .mnemonic = "cvtps2pi",
@@ -6014,7 +6014,7 @@ Instruction EXTENDED_CVTPS2PI_45[4] = {
   },
 };
 
-Instruction EXTENDED_UCOMISS_46[2] = {
+instruction_t EXTENDED_UCOMISS_46[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "ucomiss",
@@ -6035,7 +6035,7 @@ Instruction EXTENDED_UCOMISS_46[2] = {
   },
 };
 
-Instruction EXTENDED_COMISS_47[2] = {
+instruction_t EXTENDED_COMISS_47[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "comiss",
@@ -6056,7 +6056,7 @@ Instruction EXTENDED_COMISS_47[2] = {
   },
 };
 
-Instruction EXTENDED_WRMSR_48[1] = {
+instruction_t EXTENDED_WRMSR_48[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "wrmsr",
@@ -6068,7 +6068,7 @@ Instruction EXTENDED_WRMSR_48[1] = {
   },
 };
 
-Instruction EXTENDED_RDTSC_49[1] = {
+instruction_t EXTENDED_RDTSC_49[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "rdtsc",
@@ -6080,7 +6080,7 @@ Instruction EXTENDED_RDTSC_49[1] = {
   },
 };
 
-Instruction EXTENDED_RDMSR_50[1] = {
+instruction_t EXTENDED_RDMSR_50[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "rdmsr",
@@ -6092,7 +6092,7 @@ Instruction EXTENDED_RDMSR_50[1] = {
   },
 };
 
-Instruction EXTENDED_RDPMC_51[1] = {
+instruction_t EXTENDED_RDPMC_51[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "rdpmc",
@@ -6104,7 +6104,7 @@ Instruction EXTENDED_RDPMC_51[1] = {
   },
 };
 
-Instruction EXTENDED_SYSENTER_52[1] = {
+instruction_t EXTENDED_SYSENTER_52[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "sysenter",
@@ -6116,7 +6116,7 @@ Instruction EXTENDED_SYSENTER_52[1] = {
   },
 };
 
-Instruction EXTENDED_SYSEXIT_53[1] = {
+instruction_t EXTENDED_SYSEXIT_53[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "sysexit",
@@ -6128,7 +6128,7 @@ Instruction EXTENDED_SYSEXIT_53[1] = {
   },
 };
 
-Instruction EXTENDED_GETSEC_55[1] = {
+instruction_t EXTENDED_GETSEC_55[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "getsec",
@@ -6140,7 +6140,7 @@ Instruction EXTENDED_GETSEC_55[1] = {
   },
 };
 
-Instruction EXTENDED_PSHUFB_56[67] = {
+instruction_t EXTENDED_PSHUFB_56[67] = {
   {
    .extended_opcode = true,
    .mnemonic = "pshufb",
@@ -6746,7 +6746,7 @@ Instruction EXTENDED_PSHUFB_56[67] = {
   },
 };
 
-Instruction EXTENDED_ROUNDPS_58[23] = {
+instruction_t EXTENDED_ROUNDPS_58[23] = {
   {
    .extended_opcode = true,
    .mnemonic = "roundps",
@@ -6956,7 +6956,7 @@ Instruction EXTENDED_ROUNDPS_58[23] = {
   },
 };
 
-Instruction EXTENDED_CMOVO_64[1] = {
+instruction_t EXTENDED_CMOVO_64[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "cmovo",
@@ -6968,7 +6968,7 @@ Instruction EXTENDED_CMOVO_64[1] = {
   },
 };
 
-Instruction EXTENDED_CMOVNO_65[1] = {
+instruction_t EXTENDED_CMOVNO_65[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "cmovno",
@@ -6980,7 +6980,7 @@ Instruction EXTENDED_CMOVNO_65[1] = {
   },
 };
 
-Instruction EXTENDED_CMOVB_66[1] = {
+instruction_t EXTENDED_CMOVB_66[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "cmovb",
@@ -6992,7 +6992,7 @@ Instruction EXTENDED_CMOVB_66[1] = {
   },
 };
 
-Instruction EXTENDED_CMOVNB_67[1] = {
+instruction_t EXTENDED_CMOVNB_67[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "cmovnb",
@@ -7004,7 +7004,7 @@ Instruction EXTENDED_CMOVNB_67[1] = {
   },
 };
 
-Instruction EXTENDED_CMOVZ_68[1] = {
+instruction_t EXTENDED_CMOVZ_68[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "cmovz",
@@ -7016,7 +7016,7 @@ Instruction EXTENDED_CMOVZ_68[1] = {
   },
 };
 
-Instruction EXTENDED_CMOVNZ_69[1] = {
+instruction_t EXTENDED_CMOVNZ_69[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "cmovnz",
@@ -7028,7 +7028,7 @@ Instruction EXTENDED_CMOVNZ_69[1] = {
   },
 };
 
-Instruction EXTENDED_CMOVBE_70[1] = {
+instruction_t EXTENDED_CMOVBE_70[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "cmovbe",
@@ -7040,7 +7040,7 @@ Instruction EXTENDED_CMOVBE_70[1] = {
   },
 };
 
-Instruction EXTENDED_CMOVNBE_71[1] = {
+instruction_t EXTENDED_CMOVNBE_71[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "cmovnbe",
@@ -7052,7 +7052,7 @@ Instruction EXTENDED_CMOVNBE_71[1] = {
   },
 };
 
-Instruction EXTENDED_CMOVS_72[1] = {
+instruction_t EXTENDED_CMOVS_72[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "cmovs",
@@ -7064,7 +7064,7 @@ Instruction EXTENDED_CMOVS_72[1] = {
   },
 };
 
-Instruction EXTENDED_CMOVNS_73[1] = {
+instruction_t EXTENDED_CMOVNS_73[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "cmovns",
@@ -7076,7 +7076,7 @@ Instruction EXTENDED_CMOVNS_73[1] = {
   },
 };
 
-Instruction EXTENDED_CMOVP_74[1] = {
+instruction_t EXTENDED_CMOVP_74[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "cmovp",
@@ -7088,7 +7088,7 @@ Instruction EXTENDED_CMOVP_74[1] = {
   },
 };
 
-Instruction EXTENDED_CMOVNP_75[1] = {
+instruction_t EXTENDED_CMOVNP_75[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "cmovnp",
@@ -7100,7 +7100,7 @@ Instruction EXTENDED_CMOVNP_75[1] = {
   },
 };
 
-Instruction EXTENDED_CMOVL_76[1] = {
+instruction_t EXTENDED_CMOVL_76[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "cmovl",
@@ -7112,7 +7112,7 @@ Instruction EXTENDED_CMOVL_76[1] = {
   },
 };
 
-Instruction EXTENDED_CMOVNL_77[1] = {
+instruction_t EXTENDED_CMOVNL_77[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "cmovnl",
@@ -7124,7 +7124,7 @@ Instruction EXTENDED_CMOVNL_77[1] = {
   },
 };
 
-Instruction EXTENDED_CMOVLE_78[1] = {
+instruction_t EXTENDED_CMOVLE_78[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "cmovle",
@@ -7136,7 +7136,7 @@ Instruction EXTENDED_CMOVLE_78[1] = {
   },
 };
 
-Instruction EXTENDED_CMOVNLE_79[1] = {
+instruction_t EXTENDED_CMOVNLE_79[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "cmovnle",
@@ -7148,7 +7148,7 @@ Instruction EXTENDED_CMOVNLE_79[1] = {
   },
 };
 
-Instruction EXTENDED_MOVMSKPS_80[2] = {
+instruction_t EXTENDED_MOVMSKPS_80[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "movmskps",
@@ -7169,7 +7169,7 @@ Instruction EXTENDED_MOVMSKPS_80[2] = {
   },
 };
 
-Instruction EXTENDED_SQRTPS_81[4] = {
+instruction_t EXTENDED_SQRTPS_81[4] = {
   {
    .extended_opcode = true,
    .mnemonic = "sqrtps",
@@ -7208,7 +7208,7 @@ Instruction EXTENDED_SQRTPS_81[4] = {
   },
 };
 
-Instruction EXTENDED_RSQRTPS_82[2] = {
+instruction_t EXTENDED_RSQRTPS_82[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "rsqrtps",
@@ -7229,7 +7229,7 @@ Instruction EXTENDED_RSQRTPS_82[2] = {
   },
 };
 
-Instruction EXTENDED_RCPPS_83[2] = {
+instruction_t EXTENDED_RCPPS_83[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "rcpps",
@@ -7250,7 +7250,7 @@ Instruction EXTENDED_RCPPS_83[2] = {
   },
 };
 
-Instruction EXTENDED_ANDPS_84[2] = {
+instruction_t EXTENDED_ANDPS_84[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "andps",
@@ -7271,7 +7271,7 @@ Instruction EXTENDED_ANDPS_84[2] = {
   },
 };
 
-Instruction EXTENDED_ANDNPS_85[2] = {
+instruction_t EXTENDED_ANDNPS_85[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "andnps",
@@ -7292,7 +7292,7 @@ Instruction EXTENDED_ANDNPS_85[2] = {
   },
 };
 
-Instruction EXTENDED_ORPS_86[2] = {
+instruction_t EXTENDED_ORPS_86[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "orps",
@@ -7313,7 +7313,7 @@ Instruction EXTENDED_ORPS_86[2] = {
   },
 };
 
-Instruction EXTENDED_XORPS_87[2] = {
+instruction_t EXTENDED_XORPS_87[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "xorps",
@@ -7334,7 +7334,7 @@ Instruction EXTENDED_XORPS_87[2] = {
   },
 };
 
-Instruction EXTENDED_ADDPS_88[4] = {
+instruction_t EXTENDED_ADDPS_88[4] = {
   {
    .extended_opcode = true,
    .mnemonic = "addps",
@@ -7373,7 +7373,7 @@ Instruction EXTENDED_ADDPS_88[4] = {
   },
 };
 
-Instruction EXTENDED_MULPS_89[4] = {
+instruction_t EXTENDED_MULPS_89[4] = {
   {
    .extended_opcode = true,
    .mnemonic = "mulps",
@@ -7412,7 +7412,7 @@ Instruction EXTENDED_MULPS_89[4] = {
   },
 };
 
-Instruction EXTENDED_CVTPS2PD_90[4] = {
+instruction_t EXTENDED_CVTPS2PD_90[4] = {
   {
    .extended_opcode = true,
    .mnemonic = "cvtps2pd",
@@ -7451,7 +7451,7 @@ Instruction EXTENDED_CVTPS2PD_90[4] = {
   },
 };
 
-Instruction EXTENDED_CVTDQ2PS_91[3] = {
+instruction_t EXTENDED_CVTDQ2PS_91[3] = {
   {
    .extended_opcode = true,
    .mnemonic = "cvtdq2ps",
@@ -7481,7 +7481,7 @@ Instruction EXTENDED_CVTDQ2PS_91[3] = {
   },
 };
 
-Instruction EXTENDED_SUBPS_92[4] = {
+instruction_t EXTENDED_SUBPS_92[4] = {
   {
    .extended_opcode = true,
    .mnemonic = "subps",
@@ -7520,7 +7520,7 @@ Instruction EXTENDED_SUBPS_92[4] = {
   },
 };
 
-Instruction EXTENDED_MINPS_93[4] = {
+instruction_t EXTENDED_MINPS_93[4] = {
   {
    .extended_opcode = true,
    .mnemonic = "minps",
@@ -7559,7 +7559,7 @@ Instruction EXTENDED_MINPS_93[4] = {
   },
 };
 
-Instruction EXTENDED_DIVPS_94[4] = {
+instruction_t EXTENDED_DIVPS_94[4] = {
   {
    .extended_opcode = true,
    .mnemonic = "divps",
@@ -7598,7 +7598,7 @@ Instruction EXTENDED_DIVPS_94[4] = {
   },
 };
 
-Instruction EXTENDED_MAXPS_95[4] = {
+instruction_t EXTENDED_MAXPS_95[4] = {
   {
    .extended_opcode = true,
    .mnemonic = "maxps",
@@ -7637,7 +7637,7 @@ Instruction EXTENDED_MAXPS_95[4] = {
   },
 };
 
-Instruction EXTENDED_PUNPCKLBW_96[2] = {
+instruction_t EXTENDED_PUNPCKLBW_96[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "punpcklbw",
@@ -7658,7 +7658,7 @@ Instruction EXTENDED_PUNPCKLBW_96[2] = {
   },
 };
 
-Instruction EXTENDED_PUNPCKLWD_97[2] = {
+instruction_t EXTENDED_PUNPCKLWD_97[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "punpcklwd",
@@ -7679,7 +7679,7 @@ Instruction EXTENDED_PUNPCKLWD_97[2] = {
   },
 };
 
-Instruction EXTENDED_PUNPCKLDQ_98[2] = {
+instruction_t EXTENDED_PUNPCKLDQ_98[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "punpckldq",
@@ -7700,7 +7700,7 @@ Instruction EXTENDED_PUNPCKLDQ_98[2] = {
   },
 };
 
-Instruction EXTENDED_PACKSSWB_99[2] = {
+instruction_t EXTENDED_PACKSSWB_99[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "packsswb",
@@ -7721,7 +7721,7 @@ Instruction EXTENDED_PACKSSWB_99[2] = {
   },
 };
 
-Instruction EXTENDED_PCMPGTB_100[2] = {
+instruction_t EXTENDED_PCMPGTB_100[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "pcmpgtb",
@@ -7742,7 +7742,7 @@ Instruction EXTENDED_PCMPGTB_100[2] = {
   },
 };
 
-Instruction EXTENDED_PCMPGTW_101[2] = {
+instruction_t EXTENDED_PCMPGTW_101[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "pcmpgtw",
@@ -7763,7 +7763,7 @@ Instruction EXTENDED_PCMPGTW_101[2] = {
   },
 };
 
-Instruction EXTENDED_PCMPGTD_102[2] = {
+instruction_t EXTENDED_PCMPGTD_102[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "pcmpgtd",
@@ -7784,7 +7784,7 @@ Instruction EXTENDED_PCMPGTD_102[2] = {
   },
 };
 
-Instruction EXTENDED_PACKUSWB_103[2] = {
+instruction_t EXTENDED_PACKUSWB_103[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "packuswb",
@@ -7805,7 +7805,7 @@ Instruction EXTENDED_PACKUSWB_103[2] = {
   },
 };
 
-Instruction EXTENDED_PUNPCKHBW_104[2] = {
+instruction_t EXTENDED_PUNPCKHBW_104[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "punpckhbw",
@@ -7826,7 +7826,7 @@ Instruction EXTENDED_PUNPCKHBW_104[2] = {
   },
 };
 
-Instruction EXTENDED_PUNPCKHWD_105[2] = {
+instruction_t EXTENDED_PUNPCKHWD_105[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "punpckhwd",
@@ -7847,7 +7847,7 @@ Instruction EXTENDED_PUNPCKHWD_105[2] = {
   },
 };
 
-Instruction EXTENDED_PUNPCKHDQ_106[2] = {
+instruction_t EXTENDED_PUNPCKHDQ_106[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "punpckhdq",
@@ -7868,7 +7868,7 @@ Instruction EXTENDED_PUNPCKHDQ_106[2] = {
   },
 };
 
-Instruction EXTENDED_PACKSSDW_107[2] = {
+instruction_t EXTENDED_PACKSSDW_107[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "packssdw",
@@ -7889,7 +7889,7 @@ Instruction EXTENDED_PACKSSDW_107[2] = {
   },
 };
 
-Instruction EXTENDED_PUNPCKLQDQ_108[1] = {
+instruction_t EXTENDED_PUNPCKLQDQ_108[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "punpcklqdq",
@@ -7901,7 +7901,7 @@ Instruction EXTENDED_PUNPCKLQDQ_108[1] = {
   },
 };
 
-Instruction EXTENDED_PUNPCKHQDQ_109[1] = {
+instruction_t EXTENDED_PUNPCKHQDQ_109[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "punpckhqdq",
@@ -7913,7 +7913,7 @@ Instruction EXTENDED_PUNPCKHQDQ_109[1] = {
   },
 };
 
-Instruction EXTENDED_MOVD_110[2] = {
+instruction_t EXTENDED_MOVD_110[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "movd",
@@ -7934,7 +7934,7 @@ Instruction EXTENDED_MOVD_110[2] = {
   },
 };
 
-Instruction EXTENDED_MOVQ_111[3] = {
+instruction_t EXTENDED_MOVQ_111[3] = {
   {
    .extended_opcode = true,
    .mnemonic = "movq",
@@ -7964,7 +7964,7 @@ Instruction EXTENDED_MOVQ_111[3] = {
   },
 };
 
-Instruction EXTENDED_PSHUFW_112[4] = {
+instruction_t EXTENDED_PSHUFW_112[4] = {
   {
    .extended_opcode = true,
    .mnemonic = "pshufw",
@@ -8003,7 +8003,7 @@ Instruction EXTENDED_PSHUFW_112[4] = {
   },
 };
 
-Instruction EXTENDED_PSRLW_113[6] = {
+instruction_t EXTENDED_PSRLW_113[6] = {
   {
    .extended_opcode = true,
    .mnemonic = "psrlw",
@@ -8060,7 +8060,7 @@ Instruction EXTENDED_PSRLW_113[6] = {
   },
 };
 
-Instruction EXTENDED_PSRLD_114[6] = {
+instruction_t EXTENDED_PSRLD_114[6] = {
   {
    .extended_opcode = true,
    .mnemonic = "psrld",
@@ -8117,7 +8117,7 @@ Instruction EXTENDED_PSRLD_114[6] = {
   },
 };
 
-Instruction EXTENDED_PSRLQ_115[6] = {
+instruction_t EXTENDED_PSRLQ_115[6] = {
   {
    .extended_opcode = true,
    .mnemonic = "psrlq",
@@ -8174,7 +8174,7 @@ Instruction EXTENDED_PSRLQ_115[6] = {
   },
 };
 
-Instruction EXTENDED_PCMPEQB_116[2] = {
+instruction_t EXTENDED_PCMPEQB_116[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "pcmpeqb",
@@ -8195,7 +8195,7 @@ Instruction EXTENDED_PCMPEQB_116[2] = {
   },
 };
 
-Instruction EXTENDED_PCMPEQW_117[2] = {
+instruction_t EXTENDED_PCMPEQW_117[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "pcmpeqw",
@@ -8216,7 +8216,7 @@ Instruction EXTENDED_PCMPEQW_117[2] = {
   },
 };
 
-Instruction EXTENDED_PCMPEQD_118[2] = {
+instruction_t EXTENDED_PCMPEQD_118[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "pcmpeqd",
@@ -8237,7 +8237,7 @@ Instruction EXTENDED_PCMPEQD_118[2] = {
   },
 };
 
-Instruction EXTENDED_EMMS_119[1] = {
+instruction_t EXTENDED_EMMS_119[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "emms",
@@ -8249,7 +8249,7 @@ Instruction EXTENDED_EMMS_119[1] = {
   },
 };
 
-Instruction EXTENDED_VMREAD_120[1] = {
+instruction_t EXTENDED_VMREAD_120[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "vmread",
@@ -8261,7 +8261,7 @@ Instruction EXTENDED_VMREAD_120[1] = {
   },
 };
 
-Instruction EXTENDED_VMWRITE_121[1] = {
+instruction_t EXTENDED_VMWRITE_121[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "vmwrite",
@@ -8273,7 +8273,7 @@ Instruction EXTENDED_VMWRITE_121[1] = {
   },
 };
 
-Instruction EXTENDED_HADDPD_124[2] = {
+instruction_t EXTENDED_HADDPD_124[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "haddpd",
@@ -8294,7 +8294,7 @@ Instruction EXTENDED_HADDPD_124[2] = {
   },
 };
 
-Instruction EXTENDED_HSUBPD_125[2] = {
+instruction_t EXTENDED_HSUBPD_125[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "hsubpd",
@@ -8315,7 +8315,7 @@ Instruction EXTENDED_HSUBPD_125[2] = {
   },
 };
 
-Instruction EXTENDED_MOVD_126[3] = {
+instruction_t EXTENDED_MOVD_126[3] = {
   {
    .extended_opcode = true,
    .mnemonic = "movd",
@@ -8345,7 +8345,7 @@ Instruction EXTENDED_MOVD_126[3] = {
   },
 };
 
-Instruction EXTENDED_MOVQ_127[3] = {
+instruction_t EXTENDED_MOVQ_127[3] = {
   {
    .extended_opcode = true,
    .mnemonic = "movq",
@@ -8375,7 +8375,7 @@ Instruction EXTENDED_MOVQ_127[3] = {
   },
 };
 
-Instruction EXTENDED_JO_128[1] = {
+instruction_t EXTENDED_JO_128[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "jo",
@@ -8387,7 +8387,7 @@ Instruction EXTENDED_JO_128[1] = {
   },
 };
 
-Instruction EXTENDED_JNO_129[1] = {
+instruction_t EXTENDED_JNO_129[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "jno",
@@ -8399,7 +8399,7 @@ Instruction EXTENDED_JNO_129[1] = {
   },
 };
 
-Instruction EXTENDED_JB_130[1] = {
+instruction_t EXTENDED_JB_130[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "jb",
@@ -8411,7 +8411,7 @@ Instruction EXTENDED_JB_130[1] = {
   },
 };
 
-Instruction EXTENDED_JNB_131[1] = {
+instruction_t EXTENDED_JNB_131[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "jnb",
@@ -8423,7 +8423,7 @@ Instruction EXTENDED_JNB_131[1] = {
   },
 };
 
-Instruction EXTENDED_JZ_132[1] = {
+instruction_t EXTENDED_JZ_132[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "jz",
@@ -8435,7 +8435,7 @@ Instruction EXTENDED_JZ_132[1] = {
   },
 };
 
-Instruction EXTENDED_JNZ_133[1] = {
+instruction_t EXTENDED_JNZ_133[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "jnz",
@@ -8447,7 +8447,7 @@ Instruction EXTENDED_JNZ_133[1] = {
   },
 };
 
-Instruction EXTENDED_JBE_134[1] = {
+instruction_t EXTENDED_JBE_134[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "jbe",
@@ -8459,7 +8459,7 @@ Instruction EXTENDED_JBE_134[1] = {
   },
 };
 
-Instruction EXTENDED_JNBE_135[1] = {
+instruction_t EXTENDED_JNBE_135[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "jnbe",
@@ -8471,7 +8471,7 @@ Instruction EXTENDED_JNBE_135[1] = {
   },
 };
 
-Instruction EXTENDED_JS_136[1] = {
+instruction_t EXTENDED_JS_136[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "js",
@@ -8483,7 +8483,7 @@ Instruction EXTENDED_JS_136[1] = {
   },
 };
 
-Instruction EXTENDED_JNS_137[1] = {
+instruction_t EXTENDED_JNS_137[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "jns",
@@ -8495,7 +8495,7 @@ Instruction EXTENDED_JNS_137[1] = {
   },
 };
 
-Instruction EXTENDED_JP_138[1] = {
+instruction_t EXTENDED_JP_138[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "jp",
@@ -8507,7 +8507,7 @@ Instruction EXTENDED_JP_138[1] = {
   },
 };
 
-Instruction EXTENDED_JNP_139[1] = {
+instruction_t EXTENDED_JNP_139[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "jnp",
@@ -8519,7 +8519,7 @@ Instruction EXTENDED_JNP_139[1] = {
   },
 };
 
-Instruction EXTENDED_JL_140[1] = {
+instruction_t EXTENDED_JL_140[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "jl",
@@ -8531,7 +8531,7 @@ Instruction EXTENDED_JL_140[1] = {
   },
 };
 
-Instruction EXTENDED_JNL_141[1] = {
+instruction_t EXTENDED_JNL_141[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "jnl",
@@ -8543,7 +8543,7 @@ Instruction EXTENDED_JNL_141[1] = {
   },
 };
 
-Instruction EXTENDED_JLE_142[1] = {
+instruction_t EXTENDED_JLE_142[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "jle",
@@ -8555,7 +8555,7 @@ Instruction EXTENDED_JLE_142[1] = {
   },
 };
 
-Instruction EXTENDED_JNLE_143[1] = {
+instruction_t EXTENDED_JNLE_143[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "jnle",
@@ -8567,7 +8567,7 @@ Instruction EXTENDED_JNLE_143[1] = {
   },
 };
 
-Instruction EXTENDED_SETO_144[1] = {
+instruction_t EXTENDED_SETO_144[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "seto",
@@ -8579,7 +8579,7 @@ Instruction EXTENDED_SETO_144[1] = {
   },
 };
 
-Instruction EXTENDED_SETNO_145[1] = {
+instruction_t EXTENDED_SETNO_145[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "setno",
@@ -8591,7 +8591,7 @@ Instruction EXTENDED_SETNO_145[1] = {
   },
 };
 
-Instruction EXTENDED_SETB_146[1] = {
+instruction_t EXTENDED_SETB_146[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "setb",
@@ -8603,7 +8603,7 @@ Instruction EXTENDED_SETB_146[1] = {
   },
 };
 
-Instruction EXTENDED_SETNB_147[1] = {
+instruction_t EXTENDED_SETNB_147[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "setnb",
@@ -8615,7 +8615,7 @@ Instruction EXTENDED_SETNB_147[1] = {
   },
 };
 
-Instruction EXTENDED_SETZ_148[1] = {
+instruction_t EXTENDED_SETZ_148[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "setz",
@@ -8627,7 +8627,7 @@ Instruction EXTENDED_SETZ_148[1] = {
   },
 };
 
-Instruction EXTENDED_SETNZ_149[1] = {
+instruction_t EXTENDED_SETNZ_149[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "setnz",
@@ -8639,7 +8639,7 @@ Instruction EXTENDED_SETNZ_149[1] = {
   },
 };
 
-Instruction EXTENDED_SETBE_150[1] = {
+instruction_t EXTENDED_SETBE_150[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "setbe",
@@ -8651,7 +8651,7 @@ Instruction EXTENDED_SETBE_150[1] = {
   },
 };
 
-Instruction EXTENDED_SETNBE_151[1] = {
+instruction_t EXTENDED_SETNBE_151[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "setnbe",
@@ -8663,7 +8663,7 @@ Instruction EXTENDED_SETNBE_151[1] = {
   },
 };
 
-Instruction EXTENDED_SETS_152[1] = {
+instruction_t EXTENDED_SETS_152[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "sets",
@@ -8675,7 +8675,7 @@ Instruction EXTENDED_SETS_152[1] = {
   },
 };
 
-Instruction EXTENDED_SETNS_153[1] = {
+instruction_t EXTENDED_SETNS_153[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "setns",
@@ -8687,7 +8687,7 @@ Instruction EXTENDED_SETNS_153[1] = {
   },
 };
 
-Instruction EXTENDED_SETP_154[1] = {
+instruction_t EXTENDED_SETP_154[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "setp",
@@ -8699,7 +8699,7 @@ Instruction EXTENDED_SETP_154[1] = {
   },
 };
 
-Instruction EXTENDED_SETNP_155[1] = {
+instruction_t EXTENDED_SETNP_155[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "setnp",
@@ -8711,7 +8711,7 @@ Instruction EXTENDED_SETNP_155[1] = {
   },
 };
 
-Instruction EXTENDED_SETL_156[1] = {
+instruction_t EXTENDED_SETL_156[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "setl",
@@ -8723,7 +8723,7 @@ Instruction EXTENDED_SETL_156[1] = {
   },
 };
 
-Instruction EXTENDED_SETNL_157[1] = {
+instruction_t EXTENDED_SETNL_157[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "setnl",
@@ -8735,7 +8735,7 @@ Instruction EXTENDED_SETNL_157[1] = {
   },
 };
 
-Instruction EXTENDED_SETLE_158[1] = {
+instruction_t EXTENDED_SETLE_158[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "setle",
@@ -8747,7 +8747,7 @@ Instruction EXTENDED_SETLE_158[1] = {
   },
 };
 
-Instruction EXTENDED_SETNLE_159[1] = {
+instruction_t EXTENDED_SETNLE_159[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "setnle",
@@ -8759,7 +8759,7 @@ Instruction EXTENDED_SETNLE_159[1] = {
   },
 };
 
-Instruction EXTENDED_PUSH_160[1] = {
+instruction_t EXTENDED_PUSH_160[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "push",
@@ -8771,7 +8771,7 @@ Instruction EXTENDED_PUSH_160[1] = {
   },
 };
 
-Instruction EXTENDED_POP_161[1] = {
+instruction_t EXTENDED_POP_161[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "pop",
@@ -8783,7 +8783,7 @@ Instruction EXTENDED_POP_161[1] = {
   },
 };
 
-Instruction EXTENDED_CPUID_162[1] = {
+instruction_t EXTENDED_CPUID_162[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "cpuid",
@@ -8795,7 +8795,7 @@ Instruction EXTENDED_CPUID_162[1] = {
   },
 };
 
-Instruction EXTENDED_BT_163[1] = {
+instruction_t EXTENDED_BT_163[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "bt",
@@ -8807,7 +8807,7 @@ Instruction EXTENDED_BT_163[1] = {
   },
 };
 
-Instruction EXTENDED_SHLD_164[1] = {
+instruction_t EXTENDED_SHLD_164[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "shld",
@@ -8819,7 +8819,7 @@ Instruction EXTENDED_SHLD_164[1] = {
   },
 };
 
-Instruction EXTENDED_SHLD_165[1] = {
+instruction_t EXTENDED_SHLD_165[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "shld",
@@ -8831,7 +8831,7 @@ Instruction EXTENDED_SHLD_165[1] = {
   },
 };
 
-Instruction EXTENDED_PUSH_168[1] = {
+instruction_t EXTENDED_PUSH_168[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "push",
@@ -8843,7 +8843,7 @@ Instruction EXTENDED_PUSH_168[1] = {
   },
 };
 
-Instruction EXTENDED_POP_169[1] = {
+instruction_t EXTENDED_POP_169[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "pop",
@@ -8855,7 +8855,7 @@ Instruction EXTENDED_POP_169[1] = {
   },
 };
 
-Instruction EXTENDED_RSM_170[1] = {
+instruction_t EXTENDED_RSM_170[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "rsm",
@@ -8867,7 +8867,7 @@ Instruction EXTENDED_RSM_170[1] = {
   },
 };
 
-Instruction EXTENDED_BTS_171[1] = {
+instruction_t EXTENDED_BTS_171[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "bts",
@@ -8879,7 +8879,7 @@ Instruction EXTENDED_BTS_171[1] = {
   },
 };
 
-Instruction EXTENDED_SHRD_172[1] = {
+instruction_t EXTENDED_SHRD_172[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "shrd",
@@ -8891,7 +8891,7 @@ Instruction EXTENDED_SHRD_172[1] = {
   },
 };
 
-Instruction EXTENDED_SHRD_173[1] = {
+instruction_t EXTENDED_SHRD_173[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "shrd",
@@ -8903,7 +8903,7 @@ Instruction EXTENDED_SHRD_173[1] = {
   },
 };
 
-Instruction EXTENDED_FXSAVE_174[10] = {
+instruction_t EXTENDED_FXSAVE_174[10] = {
   {
    .extended_opcode = true,
    .mnemonic = "fxsave",
@@ -8996,7 +8996,7 @@ Instruction EXTENDED_FXSAVE_174[10] = {
   },
 };
 
-Instruction EXTENDED_IMUL_175[1] = {
+instruction_t EXTENDED_IMUL_175[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "imul",
@@ -9008,7 +9008,7 @@ Instruction EXTENDED_IMUL_175[1] = {
   },
 };
 
-Instruction EXTENDED_CMPXCHG_176[1] = {
+instruction_t EXTENDED_CMPXCHG_176[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "cmpxchg",
@@ -9020,7 +9020,7 @@ Instruction EXTENDED_CMPXCHG_176[1] = {
   },
 };
 
-Instruction EXTENDED_CMPXCHG_177[1] = {
+instruction_t EXTENDED_CMPXCHG_177[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "cmpxchg",
@@ -9032,7 +9032,7 @@ Instruction EXTENDED_CMPXCHG_177[1] = {
   },
 };
 
-Instruction EXTENDED_LSS_178[1] = {
+instruction_t EXTENDED_LSS_178[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "lss",
@@ -9044,7 +9044,7 @@ Instruction EXTENDED_LSS_178[1] = {
   },
 };
 
-Instruction EXTENDED_BTR_179[1] = {
+instruction_t EXTENDED_BTR_179[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "btr",
@@ -9056,7 +9056,7 @@ Instruction EXTENDED_BTR_179[1] = {
   },
 };
 
-Instruction EXTENDED_LFS_180[1] = {
+instruction_t EXTENDED_LFS_180[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "lfs",
@@ -9068,7 +9068,7 @@ Instruction EXTENDED_LFS_180[1] = {
   },
 };
 
-Instruction EXTENDED_LGS_181[1] = {
+instruction_t EXTENDED_LGS_181[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "lgs",
@@ -9080,7 +9080,7 @@ Instruction EXTENDED_LGS_181[1] = {
   },
 };
 
-Instruction EXTENDED_MOVZX_182[1] = {
+instruction_t EXTENDED_MOVZX_182[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "movzx",
@@ -9092,7 +9092,7 @@ Instruction EXTENDED_MOVZX_182[1] = {
   },
 };
 
-Instruction EXTENDED_MOVZX_183[1] = {
+instruction_t EXTENDED_MOVZX_183[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "movzx",
@@ -9104,7 +9104,7 @@ Instruction EXTENDED_MOVZX_183[1] = {
   },
 };
 
-Instruction EXTENDED_POPCNT_184[1] = {
+instruction_t EXTENDED_POPCNT_184[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "popcnt",
@@ -9116,7 +9116,7 @@ Instruction EXTENDED_POPCNT_184[1] = {
   },
 };
 
-Instruction EXTENDED_UD_185[1] = {
+instruction_t EXTENDED_UD_185[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "ud",
@@ -9128,7 +9128,7 @@ Instruction EXTENDED_UD_185[1] = {
   },
 };
 
-Instruction EXTENDED_BT_186[4] = {
+instruction_t EXTENDED_BT_186[4] = {
   {
    .extended_opcode = true,
    .mnemonic = "bt",
@@ -9167,7 +9167,7 @@ Instruction EXTENDED_BT_186[4] = {
   },
 };
 
-Instruction EXTENDED_BTC_187[1] = {
+instruction_t EXTENDED_BTC_187[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "btc",
@@ -9179,7 +9179,7 @@ Instruction EXTENDED_BTC_187[1] = {
   },
 };
 
-Instruction EXTENDED_BSF_188[1] = {
+instruction_t EXTENDED_BSF_188[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "bsf",
@@ -9191,7 +9191,7 @@ Instruction EXTENDED_BSF_188[1] = {
   },
 };
 
-Instruction EXTENDED_BSR_189[1] = {
+instruction_t EXTENDED_BSR_189[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "bsr",
@@ -9203,7 +9203,7 @@ Instruction EXTENDED_BSR_189[1] = {
   },
 };
 
-Instruction EXTENDED_MOVSX_190[1] = {
+instruction_t EXTENDED_MOVSX_190[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "movsx",
@@ -9215,7 +9215,7 @@ Instruction EXTENDED_MOVSX_190[1] = {
   },
 };
 
-Instruction EXTENDED_MOVSX_191[1] = {
+instruction_t EXTENDED_MOVSX_191[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "movsx",
@@ -9227,7 +9227,7 @@ Instruction EXTENDED_MOVSX_191[1] = {
   },
 };
 
-Instruction EXTENDED_XADD_192[1] = {
+instruction_t EXTENDED_XADD_192[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "xadd",
@@ -9239,7 +9239,7 @@ Instruction EXTENDED_XADD_192[1] = {
   },
 };
 
-Instruction EXTENDED_XADD_193[1] = {
+instruction_t EXTENDED_XADD_193[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "xadd",
@@ -9251,7 +9251,7 @@ Instruction EXTENDED_XADD_193[1] = {
   },
 };
 
-Instruction EXTENDED_CMPPS_194[4] = {
+instruction_t EXTENDED_CMPPS_194[4] = {
   {
    .extended_opcode = true,
    .mnemonic = "cmpps",
@@ -9290,7 +9290,7 @@ Instruction EXTENDED_CMPPS_194[4] = {
   },
 };
 
-Instruction EXTENDED_MOVNTI_195[1] = {
+instruction_t EXTENDED_MOVNTI_195[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "movnti",
@@ -9302,7 +9302,7 @@ Instruction EXTENDED_MOVNTI_195[1] = {
   },
 };
 
-Instruction EXTENDED_PINSRW_196[2] = {
+instruction_t EXTENDED_PINSRW_196[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "pinsrw",
@@ -9323,7 +9323,7 @@ Instruction EXTENDED_PINSRW_196[2] = {
   },
 };
 
-Instruction EXTENDED_PEXTRW_197[2] = {
+instruction_t EXTENDED_PEXTRW_197[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "pextrw",
@@ -9344,7 +9344,7 @@ Instruction EXTENDED_PEXTRW_197[2] = {
   },
 };
 
-Instruction EXTENDED_SHUFPS_198[2] = {
+instruction_t EXTENDED_SHUFPS_198[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "shufps",
@@ -9365,7 +9365,7 @@ Instruction EXTENDED_SHUFPS_198[2] = {
   },
 };
 
-Instruction EXTENDED_CMPXCHG8B_199[5] = {
+instruction_t EXTENDED_CMPXCHG8B_199[5] = {
   {
    .extended_opcode = true,
    .mnemonic = "cmpxchg8b",
@@ -9413,7 +9413,7 @@ Instruction EXTENDED_CMPXCHG8B_199[5] = {
   },
 };
 
-Instruction EXTENDED_BSWAP_200[1] = {
+instruction_t EXTENDED_BSWAP_200[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "bswap",
@@ -9425,7 +9425,7 @@ Instruction EXTENDED_BSWAP_200[1] = {
   },
 };
 
-Instruction EXTENDED_BSWAP_201[1] = {
+instruction_t EXTENDED_BSWAP_201[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "bswap",
@@ -9437,7 +9437,7 @@ Instruction EXTENDED_BSWAP_201[1] = {
   },
 };
 
-Instruction EXTENDED_BSWAP_202[1] = {
+instruction_t EXTENDED_BSWAP_202[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "bswap",
@@ -9449,7 +9449,7 @@ Instruction EXTENDED_BSWAP_202[1] = {
   },
 };
 
-Instruction EXTENDED_BSWAP_203[1] = {
+instruction_t EXTENDED_BSWAP_203[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "bswap",
@@ -9461,7 +9461,7 @@ Instruction EXTENDED_BSWAP_203[1] = {
   },
 };
 
-Instruction EXTENDED_BSWAP_204[1] = {
+instruction_t EXTENDED_BSWAP_204[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "bswap",
@@ -9473,7 +9473,7 @@ Instruction EXTENDED_BSWAP_204[1] = {
   },
 };
 
-Instruction EXTENDED_BSWAP_205[1] = {
+instruction_t EXTENDED_BSWAP_205[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "bswap",
@@ -9485,7 +9485,7 @@ Instruction EXTENDED_BSWAP_205[1] = {
   },
 };
 
-Instruction EXTENDED_BSWAP_206[1] = {
+instruction_t EXTENDED_BSWAP_206[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "bswap",
@@ -9497,7 +9497,7 @@ Instruction EXTENDED_BSWAP_206[1] = {
   },
 };
 
-Instruction EXTENDED_BSWAP_207[1] = {
+instruction_t EXTENDED_BSWAP_207[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "bswap",
@@ -9509,7 +9509,7 @@ Instruction EXTENDED_BSWAP_207[1] = {
   },
 };
 
-Instruction EXTENDED_ADDSUBPD_208[2] = {
+instruction_t EXTENDED_ADDSUBPD_208[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "addsubpd",
@@ -9530,7 +9530,7 @@ Instruction EXTENDED_ADDSUBPD_208[2] = {
   },
 };
 
-Instruction EXTENDED_PSRLW_209[2] = {
+instruction_t EXTENDED_PSRLW_209[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "psrlw",
@@ -9551,7 +9551,7 @@ Instruction EXTENDED_PSRLW_209[2] = {
   },
 };
 
-Instruction EXTENDED_PSRLD_210[2] = {
+instruction_t EXTENDED_PSRLD_210[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "psrld",
@@ -9572,7 +9572,7 @@ Instruction EXTENDED_PSRLD_210[2] = {
   },
 };
 
-Instruction EXTENDED_PSRLQ_211[2] = {
+instruction_t EXTENDED_PSRLQ_211[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "psrlq",
@@ -9593,7 +9593,7 @@ Instruction EXTENDED_PSRLQ_211[2] = {
   },
 };
 
-Instruction EXTENDED_PADDQ_212[2] = {
+instruction_t EXTENDED_PADDQ_212[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "paddq",
@@ -9614,7 +9614,7 @@ Instruction EXTENDED_PADDQ_212[2] = {
   },
 };
 
-Instruction EXTENDED_PMULLW_213[2] = {
+instruction_t EXTENDED_PMULLW_213[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "pmullw",
@@ -9635,7 +9635,7 @@ Instruction EXTENDED_PMULLW_213[2] = {
   },
 };
 
-Instruction EXTENDED_MOVQ_214[3] = {
+instruction_t EXTENDED_MOVQ_214[3] = {
   {
    .extended_opcode = true,
    .mnemonic = "movq",
@@ -9665,7 +9665,7 @@ Instruction EXTENDED_MOVQ_214[3] = {
   },
 };
 
-Instruction EXTENDED_PMOVMSKB_215[2] = {
+instruction_t EXTENDED_PMOVMSKB_215[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "pmovmskb",
@@ -9686,7 +9686,7 @@ Instruction EXTENDED_PMOVMSKB_215[2] = {
   },
 };
 
-Instruction EXTENDED_PSUBUSB_216[2] = {
+instruction_t EXTENDED_PSUBUSB_216[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "psubusb",
@@ -9707,7 +9707,7 @@ Instruction EXTENDED_PSUBUSB_216[2] = {
   },
 };
 
-Instruction EXTENDED_PSUBUSW_217[2] = {
+instruction_t EXTENDED_PSUBUSW_217[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "psubusw",
@@ -9728,7 +9728,7 @@ Instruction EXTENDED_PSUBUSW_217[2] = {
   },
 };
 
-Instruction EXTENDED_PMINUB_218[2] = {
+instruction_t EXTENDED_PMINUB_218[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "pminub",
@@ -9749,7 +9749,7 @@ Instruction EXTENDED_PMINUB_218[2] = {
   },
 };
 
-Instruction EXTENDED_PAND_219[2] = {
+instruction_t EXTENDED_PAND_219[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "pand",
@@ -9770,7 +9770,7 @@ Instruction EXTENDED_PAND_219[2] = {
   },
 };
 
-Instruction EXTENDED_PADDUSB_220[2] = {
+instruction_t EXTENDED_PADDUSB_220[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "paddusb",
@@ -9791,7 +9791,7 @@ Instruction EXTENDED_PADDUSB_220[2] = {
   },
 };
 
-Instruction EXTENDED_PADDUSW_221[2] = {
+instruction_t EXTENDED_PADDUSW_221[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "paddusw",
@@ -9812,7 +9812,7 @@ Instruction EXTENDED_PADDUSW_221[2] = {
   },
 };
 
-Instruction EXTENDED_PMAXUB_222[2] = {
+instruction_t EXTENDED_PMAXUB_222[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "pmaxub",
@@ -9833,7 +9833,7 @@ Instruction EXTENDED_PMAXUB_222[2] = {
   },
 };
 
-Instruction EXTENDED_PANDN_223[2] = {
+instruction_t EXTENDED_PANDN_223[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "pandn",
@@ -9854,7 +9854,7 @@ Instruction EXTENDED_PANDN_223[2] = {
   },
 };
 
-Instruction EXTENDED_PAVGB_224[2] = {
+instruction_t EXTENDED_PAVGB_224[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "pavgb",
@@ -9875,7 +9875,7 @@ Instruction EXTENDED_PAVGB_224[2] = {
   },
 };
 
-Instruction EXTENDED_PSRAW_225[2] = {
+instruction_t EXTENDED_PSRAW_225[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "psraw",
@@ -9896,7 +9896,7 @@ Instruction EXTENDED_PSRAW_225[2] = {
   },
 };
 
-Instruction EXTENDED_PSRAD_226[2] = {
+instruction_t EXTENDED_PSRAD_226[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "psrad",
@@ -9917,7 +9917,7 @@ Instruction EXTENDED_PSRAD_226[2] = {
   },
 };
 
-Instruction EXTENDED_PAVGW_227[2] = {
+instruction_t EXTENDED_PAVGW_227[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "pavgw",
@@ -9938,7 +9938,7 @@ Instruction EXTENDED_PAVGW_227[2] = {
   },
 };
 
-Instruction EXTENDED_PMULHUW_228[2] = {
+instruction_t EXTENDED_PMULHUW_228[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "pmulhuw",
@@ -9959,7 +9959,7 @@ Instruction EXTENDED_PMULHUW_228[2] = {
   },
 };
 
-Instruction EXTENDED_PMULHW_229[2] = {
+instruction_t EXTENDED_PMULHW_229[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "pmulhw",
@@ -9980,7 +9980,7 @@ Instruction EXTENDED_PMULHW_229[2] = {
   },
 };
 
-Instruction EXTENDED_CVTPD2DQ_230[3] = {
+instruction_t EXTENDED_CVTPD2DQ_230[3] = {
   {
    .extended_opcode = true,
    .mnemonic = "cvtpd2dq",
@@ -10010,7 +10010,7 @@ Instruction EXTENDED_CVTPD2DQ_230[3] = {
   },
 };
 
-Instruction EXTENDED_MOVNTQ_231[2] = {
+instruction_t EXTENDED_MOVNTQ_231[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "movntq",
@@ -10031,7 +10031,7 @@ Instruction EXTENDED_MOVNTQ_231[2] = {
   },
 };
 
-Instruction EXTENDED_PSUBSB_232[2] = {
+instruction_t EXTENDED_PSUBSB_232[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "psubsb",
@@ -10052,7 +10052,7 @@ Instruction EXTENDED_PSUBSB_232[2] = {
   },
 };
 
-Instruction EXTENDED_PSUBSW_233[2] = {
+instruction_t EXTENDED_PSUBSW_233[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "psubsw",
@@ -10073,7 +10073,7 @@ Instruction EXTENDED_PSUBSW_233[2] = {
   },
 };
 
-Instruction EXTENDED_PMINSW_234[2] = {
+instruction_t EXTENDED_PMINSW_234[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "pminsw",
@@ -10094,7 +10094,7 @@ Instruction EXTENDED_PMINSW_234[2] = {
   },
 };
 
-Instruction EXTENDED_POR_235[2] = {
+instruction_t EXTENDED_POR_235[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "por",
@@ -10115,7 +10115,7 @@ Instruction EXTENDED_POR_235[2] = {
   },
 };
 
-Instruction EXTENDED_PADDSB_236[2] = {
+instruction_t EXTENDED_PADDSB_236[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "paddsb",
@@ -10136,7 +10136,7 @@ Instruction EXTENDED_PADDSB_236[2] = {
   },
 };
 
-Instruction EXTENDED_PADDSW_237[2] = {
+instruction_t EXTENDED_PADDSW_237[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "paddsw",
@@ -10157,7 +10157,7 @@ Instruction EXTENDED_PADDSW_237[2] = {
   },
 };
 
-Instruction EXTENDED_PMAXSW_238[2] = {
+instruction_t EXTENDED_PMAXSW_238[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "pmaxsw",
@@ -10178,7 +10178,7 @@ Instruction EXTENDED_PMAXSW_238[2] = {
   },
 };
 
-Instruction EXTENDED_PXOR_239[2] = {
+instruction_t EXTENDED_PXOR_239[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "pxor",
@@ -10199,7 +10199,7 @@ Instruction EXTENDED_PXOR_239[2] = {
   },
 };
 
-Instruction EXTENDED_LDDQU_240[1] = {
+instruction_t EXTENDED_LDDQU_240[1] = {
   {
    .extended_opcode = true,
    .mnemonic = "lddqu",
@@ -10211,7 +10211,7 @@ Instruction EXTENDED_LDDQU_240[1] = {
   },
 };
 
-Instruction EXTENDED_PSLLW_241[2] = {
+instruction_t EXTENDED_PSLLW_241[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "psllw",
@@ -10232,7 +10232,7 @@ Instruction EXTENDED_PSLLW_241[2] = {
   },
 };
 
-Instruction EXTENDED_PSLLD_242[2] = {
+instruction_t EXTENDED_PSLLD_242[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "pslld",
@@ -10253,7 +10253,7 @@ Instruction EXTENDED_PSLLD_242[2] = {
   },
 };
 
-Instruction EXTENDED_PSLLQ_243[2] = {
+instruction_t EXTENDED_PSLLQ_243[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "psllq",
@@ -10274,7 +10274,7 @@ Instruction EXTENDED_PSLLQ_243[2] = {
   },
 };
 
-Instruction EXTENDED_PMULUDQ_244[2] = {
+instruction_t EXTENDED_PMULUDQ_244[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "pmuludq",
@@ -10295,7 +10295,7 @@ Instruction EXTENDED_PMULUDQ_244[2] = {
   },
 };
 
-Instruction EXTENDED_PMADDWD_245[2] = {
+instruction_t EXTENDED_PMADDWD_245[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "pmaddwd",
@@ -10316,7 +10316,7 @@ Instruction EXTENDED_PMADDWD_245[2] = {
   },
 };
 
-Instruction EXTENDED_PSADBW_246[2] = {
+instruction_t EXTENDED_PSADBW_246[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "psadbw",
@@ -10337,7 +10337,7 @@ Instruction EXTENDED_PSADBW_246[2] = {
   },
 };
 
-Instruction EXTENDED_MASKMOVQ_247[2] = {
+instruction_t EXTENDED_MASKMOVQ_247[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "maskmovq",
@@ -10358,7 +10358,7 @@ Instruction EXTENDED_MASKMOVQ_247[2] = {
   },
 };
 
-Instruction EXTENDED_PSUBB_248[2] = {
+instruction_t EXTENDED_PSUBB_248[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "psubb",
@@ -10379,7 +10379,7 @@ Instruction EXTENDED_PSUBB_248[2] = {
   },
 };
 
-Instruction EXTENDED_PSUBW_249[2] = {
+instruction_t EXTENDED_PSUBW_249[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "psubw",
@@ -10400,7 +10400,7 @@ Instruction EXTENDED_PSUBW_249[2] = {
   },
 };
 
-Instruction EXTENDED_PSUBD_250[2] = {
+instruction_t EXTENDED_PSUBD_250[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "psubd",
@@ -10421,7 +10421,7 @@ Instruction EXTENDED_PSUBD_250[2] = {
   },
 };
 
-Instruction EXTENDED_PSUBQ_251[2] = {
+instruction_t EXTENDED_PSUBQ_251[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "psubq",
@@ -10442,7 +10442,7 @@ Instruction EXTENDED_PSUBQ_251[2] = {
   },
 };
 
-Instruction EXTENDED_PADDB_252[2] = {
+instruction_t EXTENDED_PADDB_252[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "paddb",
@@ -10463,7 +10463,7 @@ Instruction EXTENDED_PADDB_252[2] = {
   },
 };
 
-Instruction EXTENDED_PADDW_253[2] = {
+instruction_t EXTENDED_PADDW_253[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "paddw",
@@ -10484,7 +10484,7 @@ Instruction EXTENDED_PADDW_253[2] = {
   },
 };
 
-Instruction EXTENDED_PADDD_254[2] = {
+instruction_t EXTENDED_PADDD_254[2] = {
   {
    .extended_opcode = true,
    .mnemonic = "paddd",

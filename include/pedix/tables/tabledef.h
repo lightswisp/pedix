@@ -11,12 +11,12 @@ typedef enum{
   FIELD_VOID               = 0,
   FIELD_MOD_RM             = 1,
   FIELD_MULTIPLEXED_MOD_RM = 2
-} FieldType;
+} field_type_t;
 
 typedef struct{
-  FieldType type;
+  field_type_t type;
   uint8_t value;
-} Field;
+} field_t;
 
 
 typedef enum{
@@ -132,12 +132,7 @@ typedef enum{
   OPERAND_MM_M_64           = 97,
   R_PLUS_16_32              = 98,
   R_PLUS_8                  = 99,
-} _Operand;
-
-typedef struct{
-  size_t size; 
-  _Operand operand[MAX_OPERANDS];
-} Operands;
+} __operand_t;
 
 typedef enum {
   PREFIX_VOID            = 0x00,
@@ -154,19 +149,24 @@ typedef enum {
   PREFIX_BT              = 0x3E,
   PREFIX_OPSIZE_OVERRIDE = 0x66,
   PREFIX_ASZ_OVERRIDE    = 0x67
-} _Prefix;
+} __prefix_t;
 
 typedef struct {
   bool extended_opcode; // false if not 0x0f
   const char mnemonic[MAX_MNEMONIC_LEN]; // text representation of the mnemonic
-  Field opcode_field; 
-  Operands operands;
-  _Prefix  prefix;
+  field_t opcode_field; 
+
+  struct {
+    size_t size; 
+    __operand_t operand[MAX_OPERANDS];
+  } operands;
+
+  __prefix_t prefix;
   uint8_t primary_opcode;
   short secondary_opcode; // -1 if there is no secondary opcode
-} Instruction;
+} instruction_t;
 
 typedef struct{
   size_t size;
-  Instruction* instructions;
-} InstructionContainer;
+  instruction_t* instructions;
+} instruction_container_t;

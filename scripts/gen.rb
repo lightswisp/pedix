@@ -387,13 +387,13 @@ instructions_file << "#include <stdbool.h>\n"
 instructions_file << "#include <stdint.h>\n"
 instructions_file << "#include \"tabledef.h\"\n\n"
 
-tables_file << "InstructionContainer regular_table_32[0x100] = {\n"
+tables_file << "instruction_container_t regular_table_32[0x100] = {\n"
 
 regular_grouped.each do |k,v|
   iname = "REGULAR_#{v[0].mnemonic.upcase}_#{k}"
-  instructions_file << "Instruction #{iname}[#{v.size}] = {\n"
+  instructions_file << "instruction_t #{iname}[#{v.size}] = {\n"
   
-  tables_file << "  [0x#{k.to_s(16)}] = { .size = #{v.size}, .instructions = (Instruction*)&#{iname} },\n"
+  tables_file << "  [0x#{k.to_s(16)}] = { .size = #{v.size}, .instructions = (instruction_t*)&#{iname} },\n"
 
   v.each do |instruction|
     instructions_file << instruction.generate_c_instruction_struct()
@@ -406,12 +406,12 @@ tables_file << "};\n // regular end\n"
 instructions_file << "// regular end \n"
 
 extended_grouped = extended_instructions.group_by{|n| n.primary_opcode}
-tables_file << "InstructionContainer extended_table_32[0x100] = {\n"
+tables_file << "instruction_container_t extended_table_32[0x100] = {\n"
 extended_grouped.each do |k,v|
   iname = "EXTENDED_#{v[0].mnemonic.upcase}_#{k}"
-  instructions_file << "Instruction #{iname}[#{v.size}] = {\n"
+  instructions_file << "instruction_t #{iname}[#{v.size}] = {\n"
 
-  tables_file << "  [0x#{k.to_s(16)}] = { .size = #{v.size}, .instructions = (Instruction*)&#{iname} },\n"
+  tables_file << "  [0x#{k.to_s(16)}] = { .size = #{v.size}, .instructions = (instruction_t*)&#{iname} },\n"
   
   v.each do |instruction|
     instructions_file << instruction.generate_c_instruction_struct()

@@ -117,7 +117,7 @@ const char *modrm_reg32[] = {"eax", "ecx", "edx", "ebx", "esp", "ebp", "esi", "e
  * this function sets dst according to modrm RM field and operand size
  * +4 in call trace
  */
-static void pedix_set_operand_m_by_size(Dinstruction *decoded, char* dst, uint8_t size){
+static void pedix_set_operand_m_by_size(decoded_instruction_t *decoded, char* dst, uint8_t size){
   switch(size){
     case 8: 
       SET_OPERAND_M_BY_SIZE(8);
@@ -137,7 +137,7 @@ static void pedix_set_operand_m_by_size(Dinstruction *decoded, char* dst, uint8_
  * this function sets dst according to modrm RM field and operand size
  * +4 in call trace
  */
-static void pedix_set_operand_rm_by_size(Dinstruction *decoded, char* dst, uint8_t size){
+static void pedix_set_operand_rm_by_size(decoded_instruction_t *decoded, char* dst, uint8_t size){
   switch(size){
     case 8: 
       SET_OPERAND_RM_BY_SIZE(8);
@@ -157,7 +157,7 @@ static void pedix_set_operand_rm_by_size(Dinstruction *decoded, char* dst, uint8
  * it sets dst according to id
  * +3 in call trace 
  */
-static void pedix_set_operand_by_id32(Dinstruction *decoded, _Operand id, char* dst){
+static void pedix_set_operand_by_id32(decoded_instruction_t *decoded, __operand_t id, char* dst){
   switch (id) {
   case OPERAND_IMM_8: 
     sprintf(dst, OPERAND_BYTE, (uchar8_t)decoded->imm);
@@ -243,7 +243,7 @@ static void pedix_set_operand_by_id32(Dinstruction *decoded, _Operand id, char* 
   }
 }
 
-static void pedix_set_operands32(Dinstruction *decoded) {
+static void pedix_set_operands32(decoded_instruction_t *decoded) {
   // operand1 is assumed to be present
   for(size_t i = 0; i < decoded->instruction->operands.size; i++){
     if(decoded->instruction->operands.operand[i] == OPERAND_VOID)
@@ -253,12 +253,12 @@ static void pedix_set_operands32(Dinstruction *decoded) {
   }
 }
 
-static void pedix_set_operands64(Dinstruction *decoded) {
+static void pedix_set_operands64(decoded_instruction_t *decoded) {
   // todo
   assert(!"pedix_set_operands64 is not implemented yet!");
 }
 
-void pedix_merge_operands(Dinstruction *decoded) {
+void pedix_merge_operands(decoded_instruction_t *decoded) {
   if (decoded->instruction->operands.operand[0] != OPERAND_VOID){
       // add space
       decoded->text[strlen(decoded->text)] = 0x20;
@@ -274,7 +274,7 @@ void pedix_merge_operands(Dinstruction *decoded) {
 /*
  * general-purpose function that cares only about bit depth
  */
-void pedix_set_operands(Dinstruction *decoded) {
+void pedix_set_operands(decoded_instruction_t *decoded) {
   switch (decoded->mode) {
   case MODE_32:
       pedix_set_operands32(decoded);

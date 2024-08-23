@@ -1,8 +1,8 @@
 #pragma once
 #include "decoder.h"
 
-void pedix_set_operands(Dinstruction *decoded);
-void pedix_merge_operands(Dinstruction *decoded);
+void pedix_set_operands(decoded_instruction_t *decoded);
+void pedix_merge_operands(decoded_instruction_t *decoded);
 
 extern const char *modrm_reg8[]; 
 extern const char *modrm_reg16[];

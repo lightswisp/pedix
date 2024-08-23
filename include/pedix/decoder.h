@@ -9,7 +9,7 @@
 typedef struct {
   size_t size;
   uint8_t prefix[MAX_PREFIXES];
-} Prefix;
+} prefix_t;
 
 typedef struct {
   size_t size;
@@ -17,7 +17,7 @@ typedef struct {
   uint8_t mod : 2;
   uint8_t reg : 3;
   uint8_t rm : 3;
-} Modrm;
+} modrm_t;
 
 typedef struct {
   uint8_t field;
@@ -25,7 +25,7 @@ typedef struct {
   uint8_t r : 1;
   uint8_t x : 1;
   uint8_t b : 1;
-} Rex;
+} rex_t;
 
 typedef struct {
   size_t size;
@@ -33,27 +33,27 @@ typedef struct {
   uint8_t scale : 2;
   uint8_t index : 3;
   uint8_t base : 3;
-} Sib;
+} sib_t;
 
 typedef struct{
   size_t size;
   uint64_t field; 
-} Displacement;
+} displacement_t;
 
 typedef struct {
   size_t size;
   uchar8_t bytes[MAX_INSTR_SIZE];
-} Buffer;
+} buffer_t;
 
 typedef struct {
-  Buffer buffer;           
+  buffer_t buffer;           
   char text[MAX_TEXT_LEN];       
   uint8_t mode;            
-  Prefix prefixes; 
-  Rex rex;         
-  Modrm modrm;    
-  Sib sib;      
-  Displacement displacement;   
+  prefix_t prefixes; 
+  rex_t rex;         
+  modrm_t modrm;    
+  sib_t sib;      
+  displacement_t displacement;   
 
   // should be either empty, or contain fs:, gs:, cs:, ss:, ds: you get it ;)
   char segment_text[MAX_SEGMENT_TEXT_LEN];
@@ -64,11 +64,11 @@ typedef struct {
     uint64_t rel;
     uint64_t dir;
   };
-  Instruction* instruction;
+  instruction_t* instruction;
   uint64_t base_address;
-} Dinstruction;
+} decoded_instruction_t;
 
-Dinstruction *pedix_init_instruction();
-void pedix_free_instrucion(Dinstruction *decoded);  
-void pedix_zero_instruction(Dinstruction *decoded); 
-void pedix_decode(Dinstruction *decoded, uchar8_t *instruction);
+decoded_instruction_t *pedix_init_instruction();
+void pedix_free_instrucion(decoded_instruction_t *decoded);  
+void pedix_zero_instruction(decoded_instruction_t *decoded); 
+void pedix_decode(decoded_instruction_t *decoded, uchar8_t *instruction);
