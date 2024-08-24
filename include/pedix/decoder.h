@@ -68,7 +68,7 @@ typedef struct {
   uint64_t base_address;
 } decoded_instruction_t;
 
-decoded_instruction_t *pedix_init_instruction();
+decoded_instruction_t *pedix_init_instruction(void);
 void pedix_free_instrucion(decoded_instruction_t *decoded);  
 void pedix_zero_instruction(decoded_instruction_t *decoded); 
 void pedix_decode(decoded_instruction_t *decoded, uchar8_t *instruction);
