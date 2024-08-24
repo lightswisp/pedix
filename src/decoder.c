@@ -24,7 +24,7 @@
   (prefix == PREFIX_CS || prefix == PREFIX_SS || prefix == PREFIX_DS ||        \
    prefix == PREFIX_ES || prefix == PREFIX_FS || prefix == PREFIX_GS)
 
-decoded_instruction_t *pedix_init_instruction() {
+decoded_instruction_t *pedix_init_instruction(void) {
   decoded_instruction_t *decoded = (decoded_instruction_t *)calloc(1, sizeof(decoded_instruction_t));
   assert("calloc failed" && decoded != NULL);
   return decoded;
