@@ -14,6 +14,8 @@ const char *modrm_reg32[] = {"eax", "ecx", "edx", "ebx", "esp", "ebp", "esi", "e
 #define MOD_ONE_BYTE_DISPLACEMENT 1
 #define MOD_SIB_OR_REGISTER_INDIRECT_ADDRESSING 0
 
+// M only
+
 #define SET_OPERAND_M_BY_SIZE(SZ)                                              \
   switch (decoded->modrm.mod) {                                                \
   case MOD_SIB_OR_REGISTER_INDIRECT_ADDRESSING:                                \
@@ -24,9 +26,14 @@ const char *modrm_reg32[] = {"eax", "ecx", "edx", "ebx", "esp", "ebp", "esi", "e
                 1 << decoded->sib.scale,                                       \
                 (uint32_t)decoded->displacement.field);                        \
       } else {                                                                 \
-        sprintf(dst, SIB_FOUR_BYTE_NO_DISP_ADDRESSING_OP##SZ,                  \
-                decoded->segment_text, modrm_reg32[decoded->sib.base],         \
-                modrm_reg32[decoded->sib.index], 1 << decoded->sib.scale);     \
+        if (decoded->sib.index == 4) {                                         \
+          sprintf(dst, SIB_FOUR_BYTE_NO_DISP_NO_SCALE_ADDRESSING_OP##SZ,       \
+                  decoded->segment_text, modrm_reg32[decoded->sib.base]);      \
+        } else {                                                               \
+          sprintf(dst, SIB_FOUR_BYTE_NO_DISP_ADDRESSING_OP##SZ,                \
+                  decoded->segment_text, modrm_reg32[decoded->sib.base],       \
+                  modrm_reg32[decoded->sib.index], 1 << decoded->sib.scale);   \
+        }                                                                      \
       }                                                                        \
     } else {                                                                   \
       if (decoded->modrm.rm == 5)                                              \
@@ -39,9 +46,16 @@ const char *modrm_reg32[] = {"eax", "ecx", "edx", "ebx", "esp", "ebp", "esi", "e
     break;                                                                     \
   case MOD_ONE_BYTE_DISPLACEMENT:                                              \
     if (decoded->sib.size) {                                                   \
-      sprintf(dst, SIB_ONE_BYTE_DISP_ADDRESSING_OP##SZ, decoded->segment_text, \
-              modrm_reg32[decoded->sib.base], modrm_reg32[decoded->sib.index], \
-              1 << decoded->sib.scale, (uchar8_t)decoded->displacement.field); \
+      if (decoded->sib.index == 4) {                                           \
+        sprintf(dst, SIB_ONE_BYTE_DISP_NO_SCALE_ADDRESSING_OP##SZ,             \
+                decoded->segment_text, modrm_reg32[decoded->sib.base],         \
+                (uchar8_t)decoded->displacement.field);                        \
+      } else {                                                                 \
+        sprintf(dst, SIB_ONE_BYTE_DISP_ADDRESSING_OP##SZ,                      \
+                decoded->segment_text, modrm_reg32[decoded->sib.base],         \
+                modrm_reg32[decoded->sib.index], 1 << decoded->sib.scale,      \
+                (uchar8_t)decoded->displacement.field);                        \
+      }                                                                        \
     } else {                                                                   \
       sprintf(dst, ONE_BYTE_DISP_ADDRESSING_OP##SZ, decoded->segment_text,     \
               modrm_reg32[decoded->modrm.rm],                                  \
@@ -50,10 +64,16 @@ const char *modrm_reg32[] = {"eax", "ecx", "edx", "ebx", "esp", "ebp", "esi", "e
     break;                                                                     \
   case MOD_FOUR_BYTE_DISPLACEMENT:                                             \
     if (decoded->sib.size) {                                                   \
-      sprintf(dst, SIB_FOUR_BYTE_DISP_ADDRESSING_OP##SZ,                       \
-              decoded->segment_text, modrm_reg32[decoded->sib.base],           \
-              modrm_reg32[decoded->sib.index], 1 << decoded->sib.scale,        \
-              (uint32_t)decoded->displacement.field);                          \
+      if (decoded->sib.index == 4) {                                           \
+        sprintf(dst, SIB_FOUR_BYTE_DISP_NO_SCALE_ADDRESSING_OP##SZ,            \
+                decoded->segment_text, modrm_reg32[decoded->sib.base],         \
+                (uint32_t)decoded->displacement.field);                        \
+      } else {                                                                 \
+        sprintf(dst, SIB_FOUR_BYTE_DISP_ADDRESSING_OP##SZ,                     \
+                decoded->segment_text, modrm_reg32[decoded->sib.base],         \
+                modrm_reg32[decoded->sib.index], 1 << decoded->sib.scale,      \
+                (uint32_t)decoded->displacement.field);                        \
+      }                                                                        \
     } else {                                                                   \
       sprintf(dst, FOUR_BYTE_DISP_ADDRESSING_OP##SZ, decoded->segment_text,    \
               modrm_reg32[decoded->modrm.rm],                                  \
@@ -61,6 +81,8 @@ const char *modrm_reg32[] = {"eax", "ecx", "edx", "ebx", "esp", "ebp", "esi", "e
     }                                                                          \
     break;                                                                     \
   }
+
+// RM only
 
 #define SET_OPERAND_RM_BY_SIZE(SZ)                                             \
   switch (decoded->modrm.mod) {                                                \
@@ -72,9 +94,14 @@ const char *modrm_reg32[] = {"eax", "ecx", "edx", "ebx", "esp", "ebp", "esi", "e
                 1 << decoded->sib.scale,                                       \
                 (uint32_t)decoded->displacement.field);                        \
       } else {                                                                 \
-        sprintf(dst, SIB_FOUR_BYTE_NO_DISP_ADDRESSING_OP##SZ,                  \
-                decoded->segment_text, modrm_reg32[decoded->sib.base],         \
-                modrm_reg32[decoded->sib.index], 1 << decoded->sib.scale);     \
+        if (decoded->sib.index == 4) {                                         \
+          sprintf(dst, SIB_FOUR_BYTE_NO_DISP_NO_SCALE_ADDRESSING_OP##SZ,       \
+                  decoded->segment_text, modrm_reg32[decoded->sib.base]);      \
+        } else {                                                               \
+          sprintf(dst, SIB_FOUR_BYTE_NO_DISP_ADDRESSING_OP##SZ,                \
+                  decoded->segment_text, modrm_reg32[decoded->sib.base],       \
+                  modrm_reg32[decoded->sib.index], 1 << decoded->sib.scale);   \
+        }                                                                      \
       }                                                                        \
     } else {                                                                   \
       if (decoded->modrm.rm == 5)                                              \
@@ -87,9 +114,16 @@ const char *modrm_reg32[] = {"eax", "ecx", "edx", "ebx", "esp", "ebp", "esi", "e
     break;                                                                     \
   case MOD_ONE_BYTE_DISPLACEMENT:                                              \
     if (decoded->sib.size) {                                                   \
-      sprintf(dst, SIB_ONE_BYTE_DISP_ADDRESSING_OP##SZ, decoded->segment_text, \
-              modrm_reg32[decoded->sib.base], modrm_reg32[decoded->sib.index], \
-              1 << decoded->sib.scale, (uchar8_t)decoded->displacement.field); \
+      if (decoded->sib.index == 4) {                                           \
+        sprintf(dst, SIB_ONE_BYTE_DISP_NO_SCALE_ADDRESSING_OP##SZ,             \
+                decoded->segment_text, modrm_reg32[decoded->sib.base],         \
+                (uchar8_t)decoded->displacement.field);                        \
+      } else {                                                                 \
+        sprintf(dst, SIB_ONE_BYTE_DISP_ADDRESSING_OP##SZ,                      \
+                decoded->segment_text, modrm_reg32[decoded->sib.base],         \
+                modrm_reg32[decoded->sib.index], 1 << decoded->sib.scale,      \
+                (uchar8_t)decoded->displacement.field);                        \
+      }                                                                        \
     } else {                                                                   \
       sprintf(dst, ONE_BYTE_DISP_ADDRESSING_OP##SZ, decoded->segment_text,     \
               modrm_reg32[decoded->modrm.rm],                                  \
@@ -98,10 +132,16 @@ const char *modrm_reg32[] = {"eax", "ecx", "edx", "ebx", "esp", "ebp", "esi", "e
     break;                                                                     \
   case MOD_FOUR_BYTE_DISPLACEMENT:                                             \
     if (decoded->sib.size) {                                                   \
-      sprintf(dst, SIB_FOUR_BYTE_DISP_ADDRESSING_OP##SZ,                       \
-              decoded->segment_text, modrm_reg32[decoded->sib.base],           \
-              modrm_reg32[decoded->sib.index], 1 << decoded->sib.scale,        \
-              (uint32_t)decoded->displacement.field);                          \
+      if (decoded->sib.index == 4) {                                           \
+        sprintf(dst, SIB_FOUR_BYTE_DISP_NO_SCALE_ADDRESSING_OP##SZ,            \
+                decoded->segment_text, modrm_reg32[decoded->sib.base],         \
+                (uint32_t)decoded->displacement.field);                        \
+      } else {                                                                 \
+        sprintf(dst, SIB_FOUR_BYTE_DISP_ADDRESSING_OP##SZ,                     \
+                decoded->segment_text, modrm_reg32[decoded->sib.base],         \
+                modrm_reg32[decoded->sib.index], 1 << decoded->sib.scale,      \
+                (uint32_t)decoded->displacement.field);                        \
+      }                                                                        \
     } else {                                                                   \
       sprintf(dst, FOUR_BYTE_DISP_ADDRESSING_OP##SZ, decoded->segment_text,    \
               modrm_reg32[decoded->modrm.rm],                                  \

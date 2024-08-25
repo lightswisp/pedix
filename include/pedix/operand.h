@@ -59,6 +59,27 @@ extern const char *modrm_reg32[];
 #define SIB_ONE_BYTE_DISP_ADDRESSING_OP32                                     \
   "DWORD PTR " SEGMENT "[" REGISTER "+" REGISTER "*" SCALE "+" OPERAND_BYTE "]"
 
+#define SIB_ONE_BYTE_DISP_NO_SCALE_ADDRESSING_OP8                              \
+  "BYTE PTR " SEGMENT "[" REGISTER "+" OPERAND_BYTE "]"
+#define SIB_ONE_BYTE_DISP_NO_SCALE_ADDRESSING_OP16                             \
+  "WORD PTR " SEGMENT "[" REGISTER "+" OPERAND_BYTE "]"
+#define SIB_ONE_BYTE_DISP_NO_SCALE_ADDRESSING_OP32                             \
+  "DWORD PTR " SEGMENT "[" REGISTER "+" OPERAND_BYTE "]"
+
+#define SIB_FOUR_BYTE_DISP_NO_SCALE_ADDRESSING_OP8                             \
+  "BYTE PTR " SEGMENT "[" REGISTER "+" OPERAND_DWORD "]"
+#define SIB_FOUR_BYTE_DISP_NO_SCALE_ADDRESSING_OP16                            \
+  "WORD PTR " SEGMENT "[" REGISTER "+" OPERAND_DWORD "]"
+#define SIB_FOUR_BYTE_DISP_NO_SCALE_ADDRESSING_OP32                            \
+  "DWORD PTR " SEGMENT "[" REGISTER "+" OPERAND_DWORD "]"
+
+#define SIB_FOUR_BYTE_NO_DISP_NO_SCALE_ADDRESSING_OP8                          \
+  "BYTE PTR " SEGMENT "[" REGISTER "]"
+#define SIB_FOUR_BYTE_NO_DISP_NO_SCALE_ADDRESSING_OP16                         \
+  "WORD PTR " SEGMENT "[" REGISTER "]"
+#define SIB_FOUR_BYTE_NO_DISP_NO_SCALE_ADDRESSING_OP32                         \
+  "DWORD PTR " SEGMENT "[" REGISTER "]"
+
 #define FOUR_BYTE_DISP_ADDRESSING_OP8                                         \
   "BYTE PTR " SEGMENT "[" REGISTER "+" OPERAND_DWORD "]"
 #define FOUR_BYTE_DISP_ADDRESSING_OP16                                        \

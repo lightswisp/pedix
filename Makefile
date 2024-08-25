@@ -3,7 +3,8 @@ SRC_DIR=src
 OBJ_DIR=build
 
 OUT=main.exe
-CFLAGS=-I$(INCLUDE_DIR) -ggdb -Wall -Werror -pedantic -DDEBUG
+DEBUG_FLAGS=-ggdb
+CFLAGS=-I$(INCLUDE_DIR) $(DEBUG_FLAGS) -Wall -Werror -pedantic 
 CC=gcc
 
 SRCS := $(shell find $(SRC_DIR) -name "*.c")
