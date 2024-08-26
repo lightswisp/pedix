@@ -9,6 +9,9 @@ const char *modrm_reg8[]  = {"al", "cl", "dl", "bl", "ah", "ch", "dh", "bh"};
 const char *modrm_reg16[] = {"ax", "cx", "dx", "bx", "sp", "bp", "si", "di"};
 const char *modrm_reg32[] = {"eax", "ecx", "edx", "ebx", "esp", "ebp", "esi", "edi"};
 
+#define GET_SIGN(value, size) ( (value & (0x80 << (size - 8))) >> (size - 1) == 1 ? 0x2d : 0x2b )
+#define GET_VALUE_BY_SIGN(value, sign) ( sign == 0x2d ? ~value + 1 : value )
+
 #define MOD_REGISTER_ADDRESSING 3
 #define MOD_FOUR_BYTE_DISPLACEMENT 2
 #define MOD_ONE_BYTE_DISPLACEMENT 1
@@ -21,10 +24,13 @@ const char *modrm_reg32[] = {"eax", "ecx", "edx", "ebx", "esp", "ebp", "esi", "e
   case MOD_SIB_OR_REGISTER_INDIRECT_ADDRESSING:                                \
     if (decoded->sib.size) {                                                   \
       if (decoded->sib.base == 5) {                                            \
+        char sign = GET_SIGN((uint32_t)decoded->displacement.field, 32);       \
+        uint32_t value =                                                       \
+            GET_VALUE_BY_SIGN((uint32_t)decoded->displacement.field, sign);    \
+                                                                               \
         sprintf(dst, SIB_FOUR_BYTE_DISP_NO_REG_ADDRESSING_OP##SZ,              \
                 decoded->segment_text, modrm_reg32[decoded->sib.index],        \
-                1 << decoded->sib.scale,                                       \
-                (uint32_t)decoded->displacement.field);                        \
+                1 << decoded->sib.scale, sign, value);                         \
       } else {                                                                 \
         if (decoded->sib.index == 4) {                                         \
           sprintf(dst, SIB_FOUR_BYTE_NO_DISP_NO_SCALE_ADDRESSING_OP##SZ,       \
@@ -47,37 +53,59 @@ const char *modrm_reg32[] = {"eax", "ecx", "edx", "ebx", "esp", "ebp", "esi", "e
   case MOD_ONE_BYTE_DISPLACEMENT:                                              \
     if (decoded->sib.size) {                                                   \
       if (decoded->sib.index == 4) {                                           \
+        char sign = GET_SIGN((uchar8_t)decoded->displacement.field, 8);        \
+        uchar8_t value =                                                       \
+            GET_VALUE_BY_SIGN((uchar8_t)decoded->displacement.field, sign);    \
+                                                                               \
         sprintf(dst, SIB_ONE_BYTE_DISP_NO_SCALE_ADDRESSING_OP##SZ,             \
-                decoded->segment_text, modrm_reg32[decoded->sib.base],         \
-                (uchar8_t)decoded->displacement.field);                        \
+                decoded->segment_text, modrm_reg32[decoded->sib.base], sign,   \
+                value);                                                        \
       } else {                                                                 \
+        char sign = GET_SIGN((uchar8_t)decoded->displacement.field, 8);        \
+        uchar8_t value =                                                       \
+            GET_VALUE_BY_SIGN((uchar8_t)decoded->displacement.field, sign);    \
+                                                                               \
         sprintf(dst, SIB_ONE_BYTE_DISP_ADDRESSING_OP##SZ,                      \
                 decoded->segment_text, modrm_reg32[decoded->sib.base],         \
                 modrm_reg32[decoded->sib.index], 1 << decoded->sib.scale,      \
-                (uchar8_t)decoded->displacement.field);                        \
+                sign, value);                                                  \
       }                                                                        \
     } else {                                                                   \
+      char sign = GET_SIGN((uint8_t)decoded->displacement.field, 8);           \
+      uint8_t value =                                                          \
+          GET_VALUE_BY_SIGN((uint8_t)decoded->displacement.field, sign);       \
+                                                                               \
       sprintf(dst, ONE_BYTE_DISP_ADDRESSING_OP##SZ, decoded->segment_text,     \
-              modrm_reg32[decoded->modrm.rm],                                  \
-              (uchar8_t)decoded->displacement.field);                          \
+              modrm_reg32[decoded->modrm.rm], sign, value);                    \
     }                                                                          \
     break;                                                                     \
   case MOD_FOUR_BYTE_DISPLACEMENT:                                             \
     if (decoded->sib.size) {                                                   \
       if (decoded->sib.index == 4) {                                           \
+        char sign = GET_SIGN((uint32_t)decoded->displacement.field, 32);       \
+        uint32_t value =                                                       \
+            GET_VALUE_BY_SIGN((uint32_t)decoded->displacement.field, sign);    \
+                                                                               \
         sprintf(dst, SIB_FOUR_BYTE_DISP_NO_SCALE_ADDRESSING_OP##SZ,            \
-                decoded->segment_text, modrm_reg32[decoded->sib.base],         \
-                (uint32_t)decoded->displacement.field);                        \
+                decoded->segment_text, modrm_reg32[decoded->sib.base], sign,   \
+                value);                                                        \
       } else {                                                                 \
+        char sign = GET_SIGN((uint32_t)decoded->displacement.field, 32);       \
+        uint32_t value =                                                       \
+            GET_VALUE_BY_SIGN((uint32_t)decoded->displacement.field, sign);    \
+                                                                               \
         sprintf(dst, SIB_FOUR_BYTE_DISP_ADDRESSING_OP##SZ,                     \
                 decoded->segment_text, modrm_reg32[decoded->sib.base],         \
                 modrm_reg32[decoded->sib.index], 1 << decoded->sib.scale,      \
-                (uint32_t)decoded->displacement.field);                        \
+                sign, value);                                                  \
       }                                                                        \
     } else {                                                                   \
+      char sign = GET_SIGN((uint32_t)decoded->displacement.field, 32);         \
+      uint32_t value =                                                         \
+          GET_VALUE_BY_SIGN((uint32_t)decoded->displacement.field, sign);      \
+                                                                               \
       sprintf(dst, FOUR_BYTE_DISP_ADDRESSING_OP##SZ, decoded->segment_text,    \
-              modrm_reg32[decoded->modrm.rm],                                  \
-              (uint32_t)decoded->displacement.field);                          \
+              modrm_reg32[decoded->modrm.rm], sign, value);                    \
     }                                                                          \
     break;                                                                     \
   }
@@ -89,10 +117,13 @@ const char *modrm_reg32[] = {"eax", "ecx", "edx", "ebx", "esp", "ebp", "esi", "e
   case MOD_SIB_OR_REGISTER_INDIRECT_ADDRESSING:                                \
     if (decoded->sib.size) {                                                   \
       if (decoded->sib.base == 5) {                                            \
+        char sign = GET_SIGN((uint32_t)decoded->displacement.field, 32);       \
+        uint32_t value =                                                       \
+            GET_VALUE_BY_SIGN((uint32_t)decoded->displacement.field, sign);    \
+                                                                               \
         sprintf(dst, SIB_FOUR_BYTE_DISP_NO_REG_ADDRESSING_OP##SZ,              \
                 decoded->segment_text, modrm_reg32[decoded->sib.index],        \
-                1 << decoded->sib.scale,                                       \
-                (uint32_t)decoded->displacement.field);                        \
+                1 << decoded->sib.scale, sign, value);                         \
       } else {                                                                 \
         if (decoded->sib.index == 4) {                                         \
           sprintf(dst, SIB_FOUR_BYTE_NO_DISP_NO_SCALE_ADDRESSING_OP##SZ,       \
@@ -115,37 +146,59 @@ const char *modrm_reg32[] = {"eax", "ecx", "edx", "ebx", "esp", "ebp", "esi", "e
   case MOD_ONE_BYTE_DISPLACEMENT:                                              \
     if (decoded->sib.size) {                                                   \
       if (decoded->sib.index == 4) {                                           \
+        char sign = GET_SIGN((uchar8_t)decoded->displacement.field, 8);        \
+        uchar8_t value =                                                       \
+            GET_VALUE_BY_SIGN((uchar8_t)decoded->displacement.field, sign);    \
+                                                                               \
         sprintf(dst, SIB_ONE_BYTE_DISP_NO_SCALE_ADDRESSING_OP##SZ,             \
-                decoded->segment_text, modrm_reg32[decoded->sib.base],         \
-                (uchar8_t)decoded->displacement.field);                        \
+                decoded->segment_text, modrm_reg32[decoded->sib.base], sign,   \
+                value);                                                        \
       } else {                                                                 \
+        char sign = GET_SIGN((uchar8_t)decoded->displacement.field, 8);        \
+        uchar8_t value =                                                       \
+            GET_VALUE_BY_SIGN((uchar8_t)decoded->displacement.field, sign);    \
+                                                                               \
         sprintf(dst, SIB_ONE_BYTE_DISP_ADDRESSING_OP##SZ,                      \
                 decoded->segment_text, modrm_reg32[decoded->sib.base],         \
                 modrm_reg32[decoded->sib.index], 1 << decoded->sib.scale,      \
-                (uchar8_t)decoded->displacement.field);                        \
+                sign, value);                                                  \
       }                                                                        \
     } else {                                                                   \
+      char sign = GET_SIGN((uchar8_t)decoded->displacement.field, 8);          \
+      uchar8_t value =                                                         \
+          GET_VALUE_BY_SIGN((uchar8_t)decoded->displacement.field, sign);      \
+                                                                               \
       sprintf(dst, ONE_BYTE_DISP_ADDRESSING_OP##SZ, decoded->segment_text,     \
-              modrm_reg32[decoded->modrm.rm],                                  \
-              (uchar8_t)decoded->displacement.field);                          \
+              modrm_reg32[decoded->modrm.rm], sign, value);                    \
     }                                                                          \
     break;                                                                     \
   case MOD_FOUR_BYTE_DISPLACEMENT:                                             \
     if (decoded->sib.size) {                                                   \
       if (decoded->sib.index == 4) {                                           \
+        char sign = GET_SIGN((uint32_t)decoded->displacement.field, 32);       \
+        uint32_t value =                                                       \
+            GET_VALUE_BY_SIGN((uint32_t)decoded->displacement.field, sign);    \
+                                                                               \
         sprintf(dst, SIB_FOUR_BYTE_DISP_NO_SCALE_ADDRESSING_OP##SZ,            \
-                decoded->segment_text, modrm_reg32[decoded->sib.base],         \
-                (uint32_t)decoded->displacement.field);                        \
+                decoded->segment_text, modrm_reg32[decoded->sib.base], sign,   \
+                value);                                                        \
       } else {                                                                 \
+        char sign = GET_SIGN((uint32_t)decoded->displacement.field, 32);       \
+        uint32_t value =                                                       \
+            GET_VALUE_BY_SIGN((uint32_t)decoded->displacement.field, sign);    \
+                                                                               \
         sprintf(dst, SIB_FOUR_BYTE_DISP_ADDRESSING_OP##SZ,                     \
                 decoded->segment_text, modrm_reg32[decoded->sib.base],         \
                 modrm_reg32[decoded->sib.index], 1 << decoded->sib.scale,      \
-                (uint32_t)decoded->displacement.field);                        \
+                sign, value);                                                  \
       }                                                                        \
     } else {                                                                   \
+      char sign = GET_SIGN((uint32_t)decoded->displacement.field, 32);         \
+      uint32_t value =                                                         \
+          GET_VALUE_BY_SIGN((uint32_t)decoded->displacement.field, sign);      \
+                                                                               \
       sprintf(dst, FOUR_BYTE_DISP_ADDRESSING_OP##SZ, decoded->segment_text,    \
-              modrm_reg32[decoded->modrm.rm],                                  \
-              (uint32_t)decoded->displacement.field);                          \
+              modrm_reg32[decoded->modrm.rm], sign, value);                    \
     }                                                                          \
     break;                                                                     \
   case MOD_REGISTER_ADDRESSING:                                                \
