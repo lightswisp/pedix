@@ -1,6 +1,5 @@
 #pragma once
 
-typedef unsigned char uchar8_t;
 #define MODE_32 32 
 #define MODE_64 64
 

@@ -17,7 +17,7 @@
 /*
  * check if instruction has any prefixes
  */
-bool pedix_instr_has_prefix(uchar8_t opcode) {
+bool pedix_instr_has_prefix(uint8_t opcode) {
   switch (opcode) {
   case PREFIX_LOCK:
   case PREFIX_REPNE_Z:
@@ -42,13 +42,13 @@ bool pedix_instr_has_prefix(uchar8_t opcode) {
  * check if instruction has extended opcode
  * if returns true, then the instruction size is at least 2 bytes long
  */
-bool pedix_instr_has_extended_opcode(uchar8_t opcode) {
+bool pedix_instr_has_extended_opcode(uint8_t opcode) {
   if (opcode == 0x0F)
     return true;
   return false;
 }
 
-size_t pedix_get_vex_size(uchar8_t vex_byte) {
+size_t pedix_get_vex_size(uint8_t vex_byte) {
   switch (vex_byte) {
   case 0xC5:
     return WORD_LEN;
@@ -65,7 +65,7 @@ size_t pedix_get_vex_size(uchar8_t vex_byte) {
  * if it succeeds, immediate byte length is returned
  * zero is returned otherwise
  */
-uint64_t pedix_set_immediate_operand_if_present(decoded_instruction_t *decoded, uchar8_t* instruction){
+uint64_t pedix_set_immediate_operand_if_present(decoded_instruction_t *decoded, uint8_t* instruction){
   for(size_t i = 0; i < decoded->instruction->operands.size; i++){
     if(HAS_IMMEDIATE(decoded->instruction->operands.operand[i])){
       switch (decoded->instruction->operands.operand[i]) {
@@ -99,7 +99,7 @@ uint64_t pedix_set_immediate_operand_if_present(decoded_instruction_t *decoded, 
  * if it succeeds, relative offset byte length is returned
  * zero is returned otherwise
  */
-uint64_t pedix_set_relative_offset_operand_if_present(decoded_instruction_t *decoded, uchar8_t* instruction){
+uint64_t pedix_set_relative_offset_operand_if_present(decoded_instruction_t *decoded, uint8_t* instruction){
   for(size_t i = 0; i < decoded->instruction->operands.size; i++){
     if(HAS_RELATIVE(decoded->instruction->operands.operand[i])){
       switch (decoded->instruction->operands.operand[i]) {
@@ -138,7 +138,7 @@ uint64_t pedix_set_relative_offset_operand_if_present(decoded_instruction_t *dec
  * if it succeeds, direct address byte length is returned
  * zero is returned otherwise
  */
-uint64_t pedix_set_direct_address_operand_if_present(decoded_instruction_t *decoded, uchar8_t* instruction){
+uint64_t pedix_set_direct_address_operand_if_present(decoded_instruction_t *decoded, uint8_t* instruction){
   // todo
   return 0;
 }
@@ -188,7 +188,7 @@ bool pedix_instr_has_displacement(decoded_instruction_t *decoded){
  * if there is a match, we increase the temp_score by one
  * if there is an exact hit, we return the instruction pointer immediately.
  */ 
-instruction_t *pedix_find_best_match(instruction_container_t container, decoded_instruction_t *decoded, uchar8_t *instruction){
+instruction_t *pedix_find_best_match(instruction_container_t container, decoded_instruction_t *decoded, uint8_t *instruction){
   uint8_t max_score, max_i;
 
   for (size_t i = 0; i < container.size; i++) {
@@ -292,7 +292,7 @@ instruction_t *pedix_find_best_match(instruction_container_t container, decoded_
   return &container.instructions[max_i];
 }
 
-void pedix_set_modrm(decoded_instruction_t *decoded, uchar8_t *instruction) {
+void pedix_set_modrm(decoded_instruction_t *decoded, uint8_t *instruction) {
   decoded->modrm.size = BYTE_LEN;
   decoded->modrm.field = *instruction;
   decoded->modrm.mod = MODRM_MOD(decoded->modrm.field); 
@@ -300,7 +300,7 @@ void pedix_set_modrm(decoded_instruction_t *decoded, uchar8_t *instruction) {
   decoded->modrm.rm  = MODRM_RM(decoded->modrm.field); 
 }
 
-void pedix_set_sib(decoded_instruction_t *decoded, uchar8_t *instruction){
+void pedix_set_sib(decoded_instruction_t *decoded, uint8_t *instruction){
   decoded->sib.size  = BYTE_LEN;
   decoded->sib.field = *instruction;
   decoded->sib.scale = SIB_SCALE(decoded->sib.field); 

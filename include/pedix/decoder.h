@@ -42,7 +42,7 @@ typedef struct{
 
 typedef struct {
   size_t size;
-  uchar8_t bytes[MAX_INSTR_SIZE];
+  uint8_t bytes[MAX_INSTR_SIZE];
 } buffer_t;
 
 typedef struct {
@@ -71,4 +71,4 @@ typedef struct {
 decoded_instruction_t *pedix_init_instruction(void);
 void pedix_free_instrucion(decoded_instruction_t *decoded);  
 void pedix_zero_instruction(decoded_instruction_t *decoded); 
-void pedix_decode(decoded_instruction_t *decoded, uchar8_t *instruction);
+void pedix_decode(decoded_instruction_t *decoded, uint8_t *instruction);

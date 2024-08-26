@@ -41,7 +41,7 @@ void pedix_free_instrucion(decoded_instruction_t *decoded) {
   free(decoded); 
 }
 
-static void pedix_decode32(decoded_instruction_t *decoded, uchar8_t *instruction) {
+static void pedix_decode32(decoded_instruction_t *decoded, uint8_t *instruction) {
   while (pedix_instr_has_prefix(*instruction)) {
     decoded->prefixes.prefix[decoded->prefixes.size] = *instruction;
     if(SEGMENT_PREFIX_CHECK(*instruction)){
@@ -155,12 +155,12 @@ static void pedix_decode32(decoded_instruction_t *decoded, uchar8_t *instruction
   }
 }
 
-static void pedix_decode64(decoded_instruction_t *decoded, uchar8_t *instruction) {
+static void pedix_decode64(decoded_instruction_t *decoded, uint8_t *instruction) {
   assert(!"64-bit mode is not yet implemented");
   //     in 64-bit mode, instruction formats do not change. bits needed to
   //     define fields in the 64-bit context are provided by the
   // addition of rex prefixes.
-  //  uchar8_t *i_ptr = instruction;
+  //  uint8_t *i_ptr = instruction;
   //
   //  while (instr_has_prefix(*i_ptr)) {
   //    decoded->status |= STATUS_PREFIX;
@@ -407,7 +407,7 @@ static void pedix_decode64(decoded_instruction_t *decoded, uchar8_t *instruction
   //  return false;
 }
 
-void pedix_decode(decoded_instruction_t *decoded, uchar8_t *instruction) {
+void pedix_decode(decoded_instruction_t *decoded, uint8_t *instruction) {
   switch (decoded->mode) {
   case MODE_32:
     pedix_decode32(decoded, instruction);

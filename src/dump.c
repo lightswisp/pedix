@@ -18,7 +18,7 @@ void pedix_dump_instruction(instruction_t *instruction) {
 
 static char *pedix_get_bytes(decoded_instruction_t *decoded){
   char *temp = calloc(MAX_INSTR_SIZE*3+1, 1);
-  for(uchar8_t i = 0; i < decoded->buffer.size; i++)
+  for(uint8_t i = 0; i < decoded->buffer.size; i++)
     sprintf(temp+3*i, "%.2x ", decoded->buffer.bytes[i]);
   return temp;
 }

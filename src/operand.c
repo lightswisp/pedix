@@ -53,17 +53,17 @@ const char *modrm_reg32[] = {"eax", "ecx", "edx", "ebx", "esp", "ebp", "esi", "e
   case MOD_ONE_BYTE_DISPLACEMENT:                                              \
     if (decoded->sib.size) {                                                   \
       if (decoded->sib.index == 4) {                                           \
-        char sign = GET_SIGN((uchar8_t)decoded->displacement.field, 8);        \
-        uchar8_t value =                                                       \
-            GET_VALUE_BY_SIGN((uchar8_t)decoded->displacement.field, sign);    \
+        char sign = GET_SIGN((uint8_t)decoded->displacement.field, 8);        \
+        uint8_t value =                                                       \
+            GET_VALUE_BY_SIGN((uint8_t)decoded->displacement.field, sign);    \
                                                                                \
         sprintf(dst, SIB_ONE_BYTE_DISP_NO_SCALE_ADDRESSING_OP##SZ,             \
                 decoded->segment_text, modrm_reg32[decoded->sib.base], sign,   \
                 value);                                                        \
       } else {                                                                 \
-        char sign = GET_SIGN((uchar8_t)decoded->displacement.field, 8);        \
-        uchar8_t value =                                                       \
-            GET_VALUE_BY_SIGN((uchar8_t)decoded->displacement.field, sign);    \
+        char sign = GET_SIGN((uint8_t)decoded->displacement.field, 8);        \
+        uint8_t value =                                                       \
+            GET_VALUE_BY_SIGN((uint8_t)decoded->displacement.field, sign);    \
                                                                                \
         sprintf(dst, SIB_ONE_BYTE_DISP_ADDRESSING_OP##SZ,                      \
                 decoded->segment_text, modrm_reg32[decoded->sib.base],         \
@@ -146,17 +146,17 @@ const char *modrm_reg32[] = {"eax", "ecx", "edx", "ebx", "esp", "ebp", "esi", "e
   case MOD_ONE_BYTE_DISPLACEMENT:                                              \
     if (decoded->sib.size) {                                                   \
       if (decoded->sib.index == 4) {                                           \
-        char sign = GET_SIGN((uchar8_t)decoded->displacement.field, 8);        \
-        uchar8_t value =                                                       \
-            GET_VALUE_BY_SIGN((uchar8_t)decoded->displacement.field, sign);    \
+        char sign = GET_SIGN((uint8_t)decoded->displacement.field, 8);        \
+        uint8_t value =                                                       \
+            GET_VALUE_BY_SIGN((uint8_t)decoded->displacement.field, sign);    \
                                                                                \
         sprintf(dst, SIB_ONE_BYTE_DISP_NO_SCALE_ADDRESSING_OP##SZ,             \
                 decoded->segment_text, modrm_reg32[decoded->sib.base], sign,   \
                 value);                                                        \
       } else {                                                                 \
-        char sign = GET_SIGN((uchar8_t)decoded->displacement.field, 8);        \
-        uchar8_t value =                                                       \
-            GET_VALUE_BY_SIGN((uchar8_t)decoded->displacement.field, sign);    \
+        char sign = GET_SIGN((uint8_t)decoded->displacement.field, 8);        \
+        uint8_t value =                                                       \
+            GET_VALUE_BY_SIGN((uint8_t)decoded->displacement.field, sign);    \
                                                                                \
         sprintf(dst, SIB_ONE_BYTE_DISP_ADDRESSING_OP##SZ,                      \
                 decoded->segment_text, modrm_reg32[decoded->sib.base],         \
@@ -164,9 +164,9 @@ const char *modrm_reg32[] = {"eax", "ecx", "edx", "ebx", "esp", "ebp", "esi", "e
                 sign, value);                                                  \
       }                                                                        \
     } else {                                                                   \
-      char sign = GET_SIGN((uchar8_t)decoded->displacement.field, 8);          \
-      uchar8_t value =                                                         \
-          GET_VALUE_BY_SIGN((uchar8_t)decoded->displacement.field, sign);      \
+      char sign = GET_SIGN((uint8_t)decoded->displacement.field, 8);          \
+      uint8_t value =                                                         \
+          GET_VALUE_BY_SIGN((uint8_t)decoded->displacement.field, sign);      \
                                                                                \
       sprintf(dst, ONE_BYTE_DISP_ADDRESSING_OP##SZ, decoded->segment_text,     \
               modrm_reg32[decoded->modrm.rm], sign, value);                    \
@@ -253,7 +253,7 @@ static void pedix_set_operand_rm_by_size(decoded_instruction_t *decoded, char* d
 static void pedix_set_operand_by_id32(decoded_instruction_t *decoded, __operand_t id, char* dst){
   switch (id) {
   case OPERAND_IMM_8: 
-    sprintf(dst, OPERAND_BYTE, (uchar8_t)decoded->imm);
+    sprintf(dst, OPERAND_BYTE, (uint8_t)decoded->imm);
     break;
   case OPERAND_IMM_16: 
     sprintf(dst, OPERAND_WORD, (uint16_t)decoded->imm);
@@ -312,7 +312,7 @@ static void pedix_set_operand_by_id32(decoded_instruction_t *decoded, __operand_
     pedix_set_operand_m_by_size(decoded, dst, 32);
     break;
   case OPERAND_REL_8:
-    sprintf(dst, OPERAND_BYTE, (uchar8_t)decoded->rel);
+    sprintf(dst, OPERAND_BYTE, (uint8_t)decoded->rel);
     break;
   case OPERAND_REL_16_32: 
     if (pedix_instr_has_specific_prefix(decoded, PREFIX_OPSIZE_OVERRIDE))

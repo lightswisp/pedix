@@ -26,18 +26,18 @@
   zero_instruction(decoded);
 
 /*add WORD PTR[ecx+esi*1],cx */
-uchar8_t instruction1[] = {0x66, 0x01, 0x0C, 0x31}; 
+uint8_t instruction1[] = {0x66, 0x01, 0x0C, 0x31}; 
 
 /* add DWORD PTR[edx], eax */
-uchar8_t instruction2[] = {0x01, 0x02};       
+uint8_t instruction2[] = {0x01, 0x02};       
 
 /* mov DWORD PTR [eax+0x50],0x11111111 */
-uchar8_t instruction3[] = {
+uint8_t instruction3[] = {
     0xC7, 0x40, 0x50, 0x11,
     0x11, 0x11, 0x11}; 
 
 /* mov DWORD PTR [ecx+edx*2+0x50],0x11111111 */
-uchar8_t instruction4[] = {0xC7, 0x44, 0x51, 0x50, 0x11, 0x11, 0x11, 0x11};       
+uint8_t instruction4[] = {0xC7, 0x44, 0x51, 0x50, 0x11, 0x11, 0x11, 0x11};       
 
 void print_bytes(Dinstruction *decoded){
   for (size_t i = 0; i < decoded->buffer.size; i++) {
