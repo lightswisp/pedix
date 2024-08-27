@@ -92,7 +92,7 @@ PREPARE_INSTRUCTION(59, "\x5d"); //pop ebp
 PREPARE_INSTRUCTION(60, "\x8d\x61\xfc"); //lea esp,DWORD PTR [ecx-0x04]
 PREPARE_INSTRUCTION(61, "\xc3"); //retn
 
-int main(){
+int main(void){
   decoded_instruction_t *decoded = pedix_init_instruction();
   decoded->mode = MODE_32;
 
