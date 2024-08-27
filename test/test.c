@@ -4,7 +4,7 @@
 #include <string.h>
 #include <assert.h>
 
-/* some colors for output */
+/* some colors for the output */
 #define GREEN "\033[0;32m"
 #define NC "\033[0m"
 #define TEXT_IDENTICAL(d, s)((strcmp(d,s) == 0))
@@ -12,26 +12,87 @@
 /* test template */
 #define PREPARE_TEST(n, itext)                                                 \
   pedix_decode(decoded, instruction##n);                                       \
+  printf("[*] testing for: %s\n", itext);                                    \
   assert(                                                                      \
       ("instruction text test " #n && TEXT_IDENTICAL(decoded->text, itext)));  \
   pedix_zero_instruction(decoded);
 
+#define PREPARE_INSTRUCTION(n, ibytes) \
+  uint8_t instruction##n[] = ibytes 
+
 /*add WORD PTR[ecx+esi*1],cx */
-uint8_t instruction1[] = {0x66, 0x01, 0x0C, 0x31}; 
+PREPARE_INSTRUCTION(1, "\x66\x01\x0C\x31");
 
 /* add DWORD PTR[edx], eax */
-uint8_t instruction2[] = {0x01, 0x02};       
+PREPARE_INSTRUCTION(2, "\x01\x02");
 
 /* mov DWORD PTR [eax+0x50],0x11111111 */
-uint8_t instruction3[] = {
-    0xC7, 0x40, 0x50, 0x11,
-    0x11, 0x11, 0x11}; 
+PREPARE_INSTRUCTION(3, "\xC7\x40\x50\x11\x11\x11\x11");
 
 /* mov DWORD PTR [ecx+edx*2+0x50],0x11111111 */
-uint8_t instruction4[] = {0xC7, 0x44, 0x51, 0x50, 0x11, 0x11, 0x11, 0x11};       
+PREPARE_INSTRUCTION(4, "\xC7\x44\x51\x50\x11\x11\x11\x11");
+
+/* mov WORD PTR ss:[ecx-0xAFBC01], ax  */
+PREPARE_INSTRUCTION(5, "\x36\x66\x89\x84\x61\xFF\x43\x50\xFF");
+
+PREPARE_INSTRUCTION(6, "\x8d\x4c\x24\x04"); //lea ecx,DWORD PTR [esp+0x04]
+PREPARE_INSTRUCTION(7, "\x83\xe4\xf0"); //and esp,0xf0
+PREPARE_INSTRUCTION(8, "\xff\x71\xfc"); //push DWORD PTR [ecx-0x04]
+PREPARE_INSTRUCTION(9, "\x55"); //push ebp
+PREPARE_INSTRUCTION(10, "\x89\xe5"); //mov ebp,esp
+PREPARE_INSTRUCTION(11, "\x53"); //push ebx
+PREPARE_INSTRUCTION(12, "\x51"); //push ecx
+PREPARE_INSTRUCTION(13, "\x83\xec\x10"); //sub esp,0x10
+PREPARE_INSTRUCTION(14, "\xe8\xec\xfe\xff\xff"); //call 0xfffffef1
+PREPARE_INSTRUCTION(15, "\x81\xc3\x50\x2e\x00\x00"); //add ebx,0x00002e50
+PREPARE_INSTRUCTION(16, "\xc7\x45\xf4\xbf\x7f\xff\xff"); //mov DWORD PTR [ebp-0x0c],0xffff7fbf
+PREPARE_INSTRUCTION(17, "\x8b\x45\xf4"); //mov eax,DWORD PTR [ebp-0x0c]
+PREPARE_INSTRUCTION(18, "\xc1\xe8\x1f"); //shr eax,0x1f
+PREPARE_INSTRUCTION(19, "\x83\xf8\x01"); //cmp eax,0x01
+PREPARE_INSTRUCTION(20, "\x75\x07"); //jnz 0x09
+PREPARE_INSTRUCTION(21, "\xb8\x2d\x00\x00\x00"); //mov eax,0x0000002d
+PREPARE_INSTRUCTION(22, "\xeb\x05"); //jmp 0x07
+PREPARE_INSTRUCTION(23, "\xb8\x2b\x00\x00\x00"); //mov eax,0x0000002b
+PREPARE_INSTRUCTION(24, "\x88\x45\xf3"); //mov BYTE PTR [ebp-0x0d],al
+PREPARE_INSTRUCTION(25, "\x0f\xbe\x45\xf3"); //movsx eax,BYTE PTR [ebp-0x0d]
+PREPARE_INSTRUCTION(26, "\x83\xec\x08"); //sub esp,0x08
+PREPARE_INSTRUCTION(27, "\x50"); //push eax
+PREPARE_INSTRUCTION(28, "\x8d\x83\x14\xe0\xff\xff"); //lea eax,DWORD PTR [ebx-0x00001fec]
+PREPARE_INSTRUCTION(29, "\x50"); //push eax
+PREPARE_INSTRUCTION(30, "\xe8\x61\xfe\xff\xff"); //call 0xfffffe66
+PREPARE_INSTRUCTION(31, "\x83\xc4\x10"); //add esp,0x10
+PREPARE_INSTRUCTION(32, "\xb8\x00\x00\x00\x80"); //mov eax,0x80000000
+PREPARE_INSTRUCTION(33, "\x2b\x45\xf4"); //sub eax,DWORD PTR [ebp-0x0c]
+PREPARE_INSTRUCTION(34, "\x89\x45\xec"); //mov DWORD PTR [ebp-0x14],eax
+PREPARE_INSTRUCTION(35, "\x83\xec\x08"); //sub esp,0x08
+PREPARE_INSTRUCTION(36, "\xff\x75\xec"); //push DWORD PTR [ebp-0x14]
+PREPARE_INSTRUCTION(37, "\x8d\x83\x18\xe0\xff\xff"); //lea eax,DWORD PTR [ebx-0x00001fe8]
+PREPARE_INSTRUCTION(38, "\x50"); //push eax
+PREPARE_INSTRUCTION(39, "\xe8\x41\xfe\xff\xff"); //call 0xfffffe46
+PREPARE_INSTRUCTION(40, "\x83\xc4\x10"); //add esp,0x10
+PREPARE_INSTRUCTION(41, "\x8b\x45\xf4"); //mov eax,DWORD PTR [ebp-0x0c]
+PREPARE_INSTRUCTION(42, "\xf7\xd8"); //neg eax
+PREPARE_INSTRUCTION(43, "\x83\xec\x08"); //sub esp,0x08
+PREPARE_INSTRUCTION(44, "\x50"); //push eax
+PREPARE_INSTRUCTION(45, "\x8d\x83\x1c\xe0\xff\xff"); //lea eax,DWORD PTR [ebx-0x00001fe4]
+PREPARE_INSTRUCTION(46, "\x50"); //push eax
+PREPARE_INSTRUCTION(47, "\xe8\x29\xfe\xff\xff"); //call 0xfffffe2e
+PREPARE_INSTRUCTION(48, "\x83\xc4\x10"); //add esp,0x10
+PREPARE_INSTRUCTION(49, "\x83\xec\x08"); //sub esp,0x08
+PREPARE_INSTRUCTION(50, "\x6a\x04"); //push 0x04
+PREPARE_INSTRUCTION(51, "\x8d\x83\x18\xe0\xff\xff"); //lea eax,DWORD PTR [ebx-0x00001fe8]
+PREPARE_INSTRUCTION(52, "\x50"); //push eax
+PREPARE_INSTRUCTION(53, "\xe8\x15\xfe\xff\xff"); //call 0xfffffe1a
+PREPARE_INSTRUCTION(54, "\x83\xc4\x10"); //add esp,0x10
+PREPARE_INSTRUCTION(55, "\xb8\x00\x00\x00\x00"); //mov eax,0x00000000
+PREPARE_INSTRUCTION(56, "\x8d\x65\xf8"); //lea esp,DWORD PTR [ebp-0x08]
+PREPARE_INSTRUCTION(57, "\x59"); //pop ecx
+PREPARE_INSTRUCTION(58, "\x5b"); //pop ebx
+PREPARE_INSTRUCTION(59, "\x5d"); //pop ebp
+PREPARE_INSTRUCTION(60, "\x8d\x61\xfc"); //lea esp,DWORD PTR [ecx-0x04]
+PREPARE_INSTRUCTION(61, "\xc3"); //retn
 
 int main(){
-  /* init */
   decoded_instruction_t *decoded = pedix_init_instruction();
   decoded->mode = MODE_32;
 
@@ -40,7 +101,64 @@ int main(){
   PREPARE_TEST(2, "add DWORD PTR [edx],eax");
   PREPARE_TEST(3, "mov DWORD PTR [eax+0x50],0x11111111");
   PREPARE_TEST(4, "mov DWORD PTR [ecx+edx*2+0x50],0x11111111");
-  
+  PREPARE_TEST(5, "mov WORD PTR ss:[ecx-0x00afbc01],ax");
+  PREPARE_TEST(6, "lea ecx,DWORD PTR [esp+0x04]");
+  PREPARE_TEST(7, "and esp,0xf0");
+  PREPARE_TEST(8, "push DWORD PTR [ecx-0x04]");
+  PREPARE_TEST(9, "push ebp");
+  PREPARE_TEST(10, "mov ebp,esp");
+  PREPARE_TEST(11, "push ebx");
+  PREPARE_TEST(12, "push ecx");
+  PREPARE_TEST(13, "sub esp,0x10");
+  PREPARE_TEST(14, "call 0xfffffef1");
+  PREPARE_TEST(15, "add ebx,0x00002e50");
+  PREPARE_TEST(16, "mov DWORD PTR [ebp-0x0c],0xffff7fbf");
+  PREPARE_TEST(17, "mov eax,DWORD PTR [ebp-0x0c]");
+  PREPARE_TEST(18, "shr eax,0x1f");
+  PREPARE_TEST(19, "cmp eax,0x01");
+  PREPARE_TEST(20, "jnz 0x09");
+  PREPARE_TEST(21, "mov eax,0x0000002d");
+  PREPARE_TEST(22, "jmp 0x07");
+  PREPARE_TEST(23, "mov eax,0x0000002b");
+  PREPARE_TEST(24, "mov BYTE PTR [ebp-0x0d],al");
+  PREPARE_TEST(25, "movsx eax,BYTE PTR [ebp-0x0d]");
+  PREPARE_TEST(26, "sub esp,0x08");
+  PREPARE_TEST(27, "push eax");
+  PREPARE_TEST(28, "lea eax,DWORD PTR [ebx-0x00001fec]");
+  PREPARE_TEST(29, "push eax");
+  PREPARE_TEST(30, "call 0xfffffe66");
+  PREPARE_TEST(31, "add esp,0x10");
+  PREPARE_TEST(32, "mov eax,0x80000000");
+  PREPARE_TEST(33, "sub eax,DWORD PTR [ebp-0x0c]");
+  PREPARE_TEST(34, "mov DWORD PTR [ebp-0x14],eax");
+  PREPARE_TEST(35, "sub esp,0x08");
+  PREPARE_TEST(36, "push DWORD PTR [ebp-0x14]");
+  PREPARE_TEST(37, "lea eax,DWORD PTR [ebx-0x00001fe8]");
+  PREPARE_TEST(38, "push eax");
+  PREPARE_TEST(39, "call 0xfffffe46");
+  PREPARE_TEST(40, "add esp,0x10");
+  PREPARE_TEST(41, "mov eax,DWORD PTR [ebp-0x0c]");
+  PREPARE_TEST(42, "neg eax");
+  PREPARE_TEST(43, "sub esp,0x08");
+  PREPARE_TEST(44, "push eax");
+  PREPARE_TEST(45, "lea eax,DWORD PTR [ebx-0x00001fe4]");
+  PREPARE_TEST(46, "push eax");
+  PREPARE_TEST(47, "call 0xfffffe2e");
+  PREPARE_TEST(48, "add esp,0x10");
+  PREPARE_TEST(49, "sub esp,0x08");
+  PREPARE_TEST(50, "push 0x04");
+  PREPARE_TEST(51, "lea eax,DWORD PTR [ebx-0x00001fe8]");
+  PREPARE_TEST(52, "push eax");
+  PREPARE_TEST(53, "call 0xfffffe1a");
+  PREPARE_TEST(54, "add esp,0x10");
+  PREPARE_TEST(55, "mov eax,0x00000000");
+  PREPARE_TEST(56, "lea esp,DWORD PTR [ebp-0x08]");
+  PREPARE_TEST(57, "pop ecx");
+  PREPARE_TEST(58, "pop ebx");
+  PREPARE_TEST(59, "pop ebp");
+  PREPARE_TEST(60, "lea esp,DWORD PTR [ecx-0x04]");
+  PREPARE_TEST(61, "retn");
+
   puts(GREEN"All tests are passed!"NC);
   return 0;
 }
