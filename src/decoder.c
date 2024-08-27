@@ -20,9 +20,6 @@
     assert("mandatory prefix is missing" &&                                    \
            pedix_instr_has_specific_prefix(decoded,                            \
                                            decoded->instruction->prefix));
-#define SEGMENT_PREFIX_CHECK(prefix)                                           \
-  (prefix == PREFIX_CS || prefix == PREFIX_SS || prefix == PREFIX_DS ||        \
-   prefix == PREFIX_ES || prefix == PREFIX_FS || prefix == PREFIX_GS)
 
 decoded_instruction_t *pedix_init_instruction(void) {
   decoded_instruction_t *decoded = (decoded_instruction_t *)calloc(1, sizeof(decoded_instruction_t));
@@ -44,16 +41,16 @@ void pedix_free_instrucion(decoded_instruction_t *decoded) {
 static void pedix_decode32(decoded_instruction_t *decoded, uint8_t *instruction) {
   while (pedix_instr_has_prefix(*instruction)) {
     decoded->prefixes.prefix[decoded->prefixes.size] = *instruction;
-    if(SEGMENT_PREFIX_CHECK(*instruction)){
-      switch(*instruction){
-        case PREFIX_CS: strcpy(decoded->segment_text, "cs:"); break;
-        case PREFIX_SS: strcpy(decoded->segment_text, "ss:"); break;
-        case PREFIX_DS: strcpy(decoded->segment_text, "ds:"); break;
-        case PREFIX_ES: strcpy(decoded->segment_text, "es:"); break;
-        case PREFIX_FS: strcpy(decoded->segment_text, "fs:"); break;
-        case PREFIX_GS: strcpy(decoded->segment_text, "gs:"); break;
-      }
+    switch(*instruction){
+      case PREFIX_LOCK   : strcat(decoded->text, "lock ");       break;       
+      case PREFIX_CS:      strcpy(decoded->segment_text, "cs:"); break;
+      case PREFIX_SS:      strcpy(decoded->segment_text, "ss:"); break;
+      case PREFIX_DS:      strcpy(decoded->segment_text, "ds:"); break;
+      case PREFIX_ES:      strcpy(decoded->segment_text, "es:"); break;
+      case PREFIX_FS:      strcpy(decoded->segment_text, "fs:"); break;
+      case PREFIX_GS:      strcpy(decoded->segment_text, "gs:"); break;
     }
+
     SET_BUFFER(decoded, instruction, BYTE_LEN);
     decoded->prefixes.size = decoded->buffer.size;
     NEXT_BYTE(instruction);
