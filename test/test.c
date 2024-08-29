@@ -12,9 +12,10 @@
 /* test template */
 #define PREPARE_TEST(n, itext)                                                 \
   pedix_decode(decoded, instruction##n);                                       \
-  printf("[*] testing for: %s\n", itext);                                    \
+  printf("[*] testing for: %s\n", itext);                                      \
   assert(                                                                      \
       ("instruction text test " #n && TEXT_IDENTICAL(decoded->text, itext)));  \
+  printf(GREEN "test ok\n" NC);                                                \
   pedix_zero_instruction(decoded);
 
 #define PREPARE_INSTRUCTION(n, ibytes) \

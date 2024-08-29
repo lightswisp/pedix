@@ -25,6 +25,11 @@ static char *pedix_get_bytes(decoded_instruction_t *decoded){
 
 void pedix_print_instruction(decoded_instruction_t *decoded, uint64_t offset) {
   char *bytes = pedix_get_bytes(decoded); 
+#if defined(__x86_64__) 
   printf("%08lx: %25s\t%s\n", offset, bytes, decoded->text);
+#endif
+#if defined(__i386__)
+  printf("%08llx: %25s\t%s\n", offset, bytes, decoded->text);
+#endif
   free(bytes);
 }
