@@ -65,8 +65,11 @@ size_t pedix_get_vex_size(uint8_t vex_byte) {
 uint32_t pedix_set_moffs_operand_if_present(decoded_instruction_t *decoded, uint8_t* instruction){
   for(size_t i = 0; i < decoded->instruction->operands.size; i++){
     if(HAS_MOFFS(decoded->instruction->operands.operand[i])){
-      memcpy(&decoded->moffs, instruction, DOUBLEWORD_LEN);
-      return DOUBLEWORD_LEN;
+      if (pedix_instr_has_specific_prefix(decoded, PREFIX_ASZ_OVERRIDE)) {
+        memcpy(&decoded->moffs, instruction, WORD_LEN); return WORD_LEN;
+      } else {
+        memcpy(&decoded->moffs, instruction, DOUBLEWORD_LEN); return DOUBLEWORD_LEN;
+      }
     }
   }
   return 0;
@@ -327,18 +330,21 @@ void pedix_set_displacement(decoded_instruction_t *decoded){
     if (decoded->modrm.rm == 4) {
       uint8_t base = decoded->sib.base & 0x07;
       if (base == 5) {
-        size = DOUBLEWORD_LEN;
+        size = DOUBLEWORD_LEN; // asz todo
         break;
       }
     } else if (decoded->modrm.rm == 5) {
-      size = DOUBLEWORD_LEN;
+      size = DOUBLEWORD_LEN; // asz todo
       break;
     }
   case 1:
     size = BYTE_LEN;
     break;
   case 2:
-    size = DOUBLEWORD_LEN;
+    if(pedix_instr_has_specific_prefix(decoded, PREFIX_ASZ_OVERRIDE)) 
+      size = WORD_LEN; 
+    else 
+      size = DOUBLEWORD_LEN;
     break;
   }
 

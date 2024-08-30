@@ -42,7 +42,7 @@ static void pedix_decode32(decoded_instruction_t *decoded, uint8_t *instruction)
   while (pedix_instr_has_prefix(*instruction)) {
     decoded->prefixes.prefix[decoded->prefixes.size] = *instruction;
     switch(*instruction){
-      case PREFIX_LOCK   : strcat(decoded->text, "lock ");       break;       
+      case PREFIX_LOCK:    strcat(decoded->text, "lock ");       break;       
       case PREFIX_CS:      strcpy(decoded->segment_text, "cs:"); break;
       case PREFIX_SS:      strcpy(decoded->segment_text, "ss:"); break;
       case PREFIX_DS:      strcpy(decoded->segment_text, "ds:"); break;
@@ -150,7 +150,7 @@ static void pedix_decode32(decoded_instruction_t *decoded, uint8_t *instruction)
   pedix_set_mnemonic(decoded);
   // set operands if we have at least first set
   if (decoded->instruction->operands.operand[0] != OPERAND_VOID) {
-    pedix_set_operands(decoded);
+    pedix_set_operands(decoded); // asz todo
     pedix_merge_operands(decoded);
   }
 }

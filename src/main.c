@@ -2,15 +2,13 @@
 #include <pedix/dump.h>
 #include <stdio.h>
 
-#define INSTRUCTION_LIMIT 4 
+#define INSTRUCTION_LIMIT 1 
 
 int main(void) {
   // todo: add valid prefix check
   // ex: 66 0f 74 04 00 -> is a valid instruction, while f3 0f 74 04 00 is not
   uint64_t offset, instructions;
-  uint8_t instruction[] = {0xA0, 0x11, 0x22, 0x33, 0x44, 0xA1, 0x11,
-                           0x22, 0x33, 0x44, 0xA2, 0x11, 0x22, 0x33,
-                           0x44, 0xA3, 0x11, 0x22, 0x33, 0x44};
+  uint8_t instruction[] = {0x66, 0xb9, 0x40, 0x30, 0x20, 0x10 };
   decoded_instruction_t *decoded = pedix_init_instruction();
   decoded->mode = MODE_32;
 
