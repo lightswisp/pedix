@@ -37,7 +37,7 @@ typedef struct {
 
 typedef struct{
   size_t size;
-  uint64_t field; 
+  uint32_t field; 
 } displacement_t;
 
 typedef struct {
@@ -60,12 +60,12 @@ typedef struct {
   char operands[MAX_OPERANDS][MAX_OPERAND_STR_LEN];
 
   union {
-    uint64_t imm;
-    uint64_t rel;
-    uint64_t dir;
+    uint32_t imm;
+    uint32_t rel;
+    uint32_t dir;
+    uint32_t moffs;
   };
   instruction_t* instruction;
-  uint64_t base_address;
 } decoded_instruction_t;
 
 decoded_instruction_t *pedix_init_instruction(void);

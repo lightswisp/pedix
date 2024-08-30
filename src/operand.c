@@ -329,6 +329,9 @@ static void pedix_set_operand_by_id32(decoded_instruction_t *decoded, __operand_
     else
       strcpy(dst, modrm_reg32[decoded->buffer.bytes[0] & 0x07]);
     break;
+  case OPERAND_MOFFS_32:
+    sprintf(dst, FMT_MOFFS, decoded->segment_text, decoded->moffs);
+    break;
 
   default:
     printf("id not implemented: %d\n", id);

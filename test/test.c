@@ -92,6 +92,10 @@ PREPARE_INSTRUCTION(58, "\x5b"); //pop ebx
 PREPARE_INSTRUCTION(59, "\x5d"); //pop ebp
 PREPARE_INSTRUCTION(60, "\x8d\x61\xfc"); //lea esp,DWORD PTR [ecx-0x04]
 PREPARE_INSTRUCTION(61, "\xc3"); //retn
+PREPARE_INSTRUCTION(62, "\x2E\xA0\x11\x22\x33\x44"); //mov al, cs:[0x44332211]
+PREPARE_INSTRUCTION(63, "\x65\xA1\x11\x22\x33\x44"); //mov eax, gs:[0x44332211]
+PREPARE_INSTRUCTION(64, "\x64\xA2\x11\x22\x33\x44"); //mov fs:[0x44332211], al
+PREPARE_INSTRUCTION(65, "\x26\xA3\x11\x22\x33\x44"); //mov es:[0x44332211], eax
 
 int main(void){
   decoded_instruction_t *decoded = pedix_init_instruction();
@@ -159,6 +163,10 @@ int main(void){
   PREPARE_TEST(59, "pop ebp");
   PREPARE_TEST(60, "lea esp,DWORD PTR [ecx-0x04]");
   PREPARE_TEST(61, "retn");
+  PREPARE_TEST(62, "mov al,cs:[0x44332211]");
+  PREPARE_TEST(63, "mov eax,gs:[0x44332211]");
+  PREPARE_TEST(64, "mov fs:[0x44332211],al");
+  PREPARE_TEST(65, "mov es:[0x44332211],eax");
 
   puts(GREEN"All tests are passed!"NC);
   return 0;

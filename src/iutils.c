@@ -14,6 +14,8 @@
   (operand == OPERAND_REL_8 || operand == OPERAND_REL_16 ||                    \
    operand == OPERAND_REL_32 || operand == OPERAND_REL_16_32)
 
+#define HAS_MOFFS(operand) (operand == OPERAND_MOFFS_32)
+
 /*
  * check if instruction has any prefixes
  */
@@ -60,12 +62,22 @@ size_t pedix_get_vex_size(uint8_t vex_byte) {
   return 0;
 }
 
+uint32_t pedix_set_moffs_operand_if_present(decoded_instruction_t *decoded, uint8_t* instruction){
+  for(size_t i = 0; i < decoded->instruction->operands.size; i++){
+    if(HAS_MOFFS(decoded->instruction->operands.operand[i])){
+      memcpy(&decoded->moffs, instruction, DOUBLEWORD_LEN);
+      return DOUBLEWORD_LEN;
+    }
+  }
+  return 0;
+}
+
 /*
  * sets the immediate operand field if present
  * if it succeeds, immediate byte length is returned
  * zero is returned otherwise
  */
-uint64_t pedix_set_immediate_operand_if_present(decoded_instruction_t *decoded, uint8_t* instruction){
+uint32_t pedix_set_immediate_operand_if_present(decoded_instruction_t *decoded, uint8_t* instruction){
   for(size_t i = 0; i < decoded->instruction->operands.size; i++){
     if(HAS_IMMEDIATE(decoded->instruction->operands.operand[i])){
       switch (decoded->instruction->operands.operand[i]) {
@@ -99,7 +111,7 @@ uint64_t pedix_set_immediate_operand_if_present(decoded_instruction_t *decoded, 
  * if it succeeds, relative offset byte length is returned
  * zero is returned otherwise
  */
-uint64_t pedix_set_relative_offset_operand_if_present(decoded_instruction_t *decoded, uint8_t* instruction){
+uint32_t pedix_set_relative_offset_operand_if_present(decoded_instruction_t *decoded, uint8_t* instruction){
   for(size_t i = 0; i < decoded->instruction->operands.size; i++){
     if(HAS_RELATIVE(decoded->instruction->operands.operand[i])){
       switch (decoded->instruction->operands.operand[i]) {
@@ -138,7 +150,7 @@ uint64_t pedix_set_relative_offset_operand_if_present(decoded_instruction_t *dec
  * if it succeeds, direct address byte length is returned
  * zero is returned otherwise
  */
-uint64_t pedix_set_direct_address_operand_if_present(decoded_instruction_t *decoded, uint8_t* instruction){
+uint32_t pedix_set_direct_address_operand_if_present(decoded_instruction_t *decoded, uint8_t* instruction){
   // todo
   return 0;
 }

@@ -4472,7 +4472,7 @@
 <TD></TD>
 <TD>MOV</TD>
 <td><b>AL</b></td>
-<td>moffs8</td>
+<td>moffs32</td>
 <td></td>
 <td></td>
 <td rowspan="1"></td>
@@ -4496,7 +4496,7 @@
 <TD></TD>
 <TD>MOV</TD>
 <td><b>eAX</b></td>
-<td>moffs16/32</td>
+<td>moffs32</td>
 <td></td>
 <td></td>
 <td rowspan="1"></td>
@@ -4519,7 +4519,7 @@
 <TD></TD>
 <TD></TD>
 <TD>MOV</TD>
-<td><b>moffs8</b></td>
+<td><b>moffs32</b></td>
 <td>AL</td>
 <td></td>
 <td></td>
@@ -4543,7 +4543,7 @@
 <TD></TD>
 <TD></TD>
 <TD>MOV</TD>
-<td><b>moffs16/32</b></td>
+<td><b>moffs32</b></td>
 <td>eAX</td>
 <td></td>
 <td></td>

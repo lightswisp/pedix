@@ -1,5 +1,5 @@
 /* (instructions.h) auto generated using gen.rb 
- * time: 2024-08-23 00:49:07 -0400
+ * time: 2024-08-29 22:06:46 -0400
  */
 
 #pragma once
@@ -2040,7 +2040,7 @@ instruction_t REGULAR_MOV_160[1] = {
    .extended_opcode = false,
    .mnemonic = "mov",
    .opcode_field = {.type = 0, .value = 0 },
-   .operands = {.size = 2, .operand = {15,67,0,0}},
+   .operands = {.size = 2, .operand = {15,69,0,0}},
    .prefix = 0,
    .primary_opcode = 160,
    .secondary_opcode = -1,
@@ -2052,7 +2052,7 @@ instruction_t REGULAR_MOV_161[1] = {
    .extended_opcode = false,
    .mnemonic = "mov",
    .opcode_field = {.type = 0, .value = 0 },
-   .operands = {.size = 2, .operand = {31,71,0,0}},
+   .operands = {.size = 2, .operand = {31,69,0,0}},
    .prefix = 0,
    .primary_opcode = 161,
    .secondary_opcode = -1,
@@ -2064,7 +2064,7 @@ instruction_t REGULAR_MOV_162[1] = {
    .extended_opcode = false,
    .mnemonic = "mov",
    .opcode_field = {.type = 0, .value = 0 },
-   .operands = {.size = 2, .operand = {67,15,0,0}},
+   .operands = {.size = 2, .operand = {69,15,0,0}},
    .prefix = 0,
    .primary_opcode = 162,
    .secondary_opcode = -1,
@@ -2076,7 +2076,7 @@ instruction_t REGULAR_MOV_163[1] = {
    .extended_opcode = false,
    .mnemonic = "mov",
    .opcode_field = {.type = 0, .value = 0 },
-   .operands = {.size = 2, .operand = {71,31,0,0}},
+   .operands = {.size = 2, .operand = {69,31,0,0}},
    .prefix = 0,
    .primary_opcode = 163,
    .secondary_opcode = -1,

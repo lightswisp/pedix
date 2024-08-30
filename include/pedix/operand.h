@@ -26,6 +26,8 @@ extern const char *modrm_reg32[];
 #define SCALE "%d"
 #define SEGMENT "%s"
 
+#define FMT_MOFFS SEGMENT"["OPERAND_DWORD"]" 
+
 #define INDIRECT_ADDRESSING_OP8 "BYTE PTR " SEGMENT "[" REGISTER "]"
 #define INDIRECT_ADDRESSING_OP16 "WORD PTR " SEGMENT "[" REGISTER "]"
 #define INDIRECT_ADDRESSING_OP32 "DWORD PTR " SEGMENT "[" REGISTER "]"
