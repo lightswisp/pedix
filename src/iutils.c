@@ -170,6 +170,10 @@ bool pedix_instr_has_sib(decoded_instruction_t *decoded) {
   *  01 100 sib  +  disp8  mode
   *  10 100 sib  +  disp32 mode
   */
+  if(pedix_instr_has_specific_prefix(decoded, PREFIX_ASZ_OVERRIDE))
+    /* there is no sib in real mode */
+    return false;
+ 
   if  (decoded->modrm.rm  == 4 &&
       (decoded->modrm.mod == 0 || decoded->modrm.mod == 1 ||
        decoded->modrm.mod == 2))
