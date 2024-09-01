@@ -182,21 +182,35 @@ bool pedix_instr_has_sib(decoded_instruction_t *decoded) {
 }
 
 bool pedix_instr_has_displacement(decoded_instruction_t *decoded){
-  switch (decoded->modrm.mod) {
-  case 0:
-    if (decoded->modrm.rm == 4) {
-      uint8_t base = decoded->sib.base & 0x07;
-      if (base == 5)
+  if (pedix_instr_has_specific_prefix(decoded, PREFIX_ASZ_OVERRIDE)) {
+    // 16-bit mode
+    switch (decoded->modrm.mod) {
+    case 0:
+      if (decoded->modrm.rm == 6)
         return true;
-    }
-    else if (decoded->modrm.rm == 5)
+      break;
+    case 1:
+    case 2:
       return true;
-    break;
-  case 1:
-  case 2:
-    return true;
+    }
+    return false;
+  } else {
+    // 32/64-bit modes
+    switch (decoded->modrm.mod) {
+    case 0:
+      if (decoded->modrm.rm == 4) {
+        uint8_t base = decoded->sib.base & 0x07;
+        if (base == 5)
+          return true;
+      } else if (decoded->modrm.rm == 5)
+        return true;
+      break;
+    case 1:
+    case 2:
+      return true;
+    }
+    return false;
   }
-  return false;
 }
 
 /*
@@ -328,28 +342,44 @@ void pedix_set_sib(decoded_instruction_t *decoded, uint8_t *instruction){
 }
 
 void pedix_set_displacement(decoded_instruction_t *decoded){
-  size_t size;
-  switch (decoded->modrm.mod) {
-  case 0:
-    if (decoded->modrm.rm == 4) {
-      uint8_t base = decoded->sib.base & 0x07;
-      if (base == 5) {
+  size_t size = 0;
+  if (pedix_instr_has_specific_prefix(decoded, PREFIX_ASZ_OVERRIDE)) {
+    // 16-bit mode
+    switch(decoded->modrm.mod){
+      case 0: 
+        size = WORD_LEN;
+        break;
+      case 1: 
+        size = BYTE_LEN;
+        break;
+      case 2:
+        size = WORD_LEN;
+        break;
+    }
+  } else {
+    // 32/64-bit modes
+    switch (decoded->modrm.mod) {
+    case 0:
+      if (decoded->modrm.rm == 4) {
+        uint8_t base = decoded->sib.base & 0x07;
+        if (base == 5) {
+          size = DOUBLEWORD_LEN; // asz todo
+          break;
+        }
+      } else if (decoded->modrm.rm == 5) {
         size = DOUBLEWORD_LEN; // asz todo
         break;
       }
-    } else if (decoded->modrm.rm == 5) {
-      size = DOUBLEWORD_LEN; // asz todo
+    case 1:
+      size = BYTE_LEN;
+      break;
+    case 2:
+      if (pedix_instr_has_specific_prefix(decoded, PREFIX_ASZ_OVERRIDE))
+        size = WORD_LEN;
+      else
+        size = DOUBLEWORD_LEN;
       break;
     }
-  case 1:
-    size = BYTE_LEN;
-    break;
-  case 2:
-    if(pedix_instr_has_specific_prefix(decoded, PREFIX_ASZ_OVERRIDE)) 
-      size = WORD_LEN; 
-    else 
-      size = DOUBLEWORD_LEN;
-    break;
   }
 
   decoded->displacement.size = size;
