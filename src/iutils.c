@@ -363,11 +363,11 @@ void pedix_set_displacement(decoded_instruction_t *decoded){
       if (decoded->modrm.rm == 4) {
         uint8_t base = decoded->sib.base & 0x07;
         if (base == 5) {
-          size = DOUBLEWORD_LEN; // asz todo
+          size = DOUBLEWORD_LEN; 
           break;
         }
       } else if (decoded->modrm.rm == 5) {
-        size = DOUBLEWORD_LEN; // asz todo
+        size = DOUBLEWORD_LEN; 
         break;
       }
     case 1:

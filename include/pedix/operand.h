@@ -28,72 +28,72 @@ extern const char *modrm_reg32[];
 
 #define FMT_MOFFS SEGMENT"["OPERAND_DWORD"]" 
 
-#define INDIRECT_ADDRESSING_OP8 "BYTE PTR " SEGMENT "[" REGISTER "]"
-#define INDIRECT_ADDRESSING_OP16 "WORD PTR " SEGMENT "[" REGISTER "]"
-#define INDIRECT_ADDRESSING_OP32 "DWORD PTR " SEGMENT "[" REGISTER "]"
+#define FMT_INDIRECT_ADDRESSING_OP8 "BYTE PTR " SEGMENT "[" REGISTER "]"
+#define FMT_INDIRECT_ADDRESSING_OP16 "WORD PTR " SEGMENT "[" REGISTER "]"
+#define FMT_INDIRECT_ADDRESSING_OP32 "DWORD PTR " SEGMENT "[" REGISTER "]"
 
-#define DISPLACEMENT_ONLY_MODE "DWORD PTR " SEGMENT "[" OPERAND_DWORD "]"
+#define FMT_DISPLACEMENT_ONLY_MODE "DWORD PTR " SEGMENT "[" OPERAND_DWORD "]"
 
-#define SIB_FOUR_BYTE_NO_DISP_ADDRESSING_OP8                                  \
+#define FMT_SIB_FOUR_BYTE_NO_DISP_ADDRESSING_OP8                               \
   "BYTE PTR " SEGMENT "[" REGISTER "+" REGISTER "*" SCALE "]"
-#define SIB_FOUR_BYTE_NO_DISP_ADDRESSING_OP16                                 \
+#define FMT_SIB_FOUR_BYTE_NO_DISP_ADDRESSING_OP16                              \
   "WORD PTR " SEGMENT "[" REGISTER "+" REGISTER "*" SCALE "]"
-#define SIB_FOUR_BYTE_NO_DISP_ADDRESSING_OP32                                 \
+#define FMT_SIB_FOUR_BYTE_NO_DISP_ADDRESSING_OP32                              \
   "DWORD PTR " SEGMENT "[" REGISTER "+" REGISTER "*" SCALE "]"
 
-#define SIB_FOUR_BYTE_DISP_NO_REG_ADDRESSING_OP8                              \
+#define FMT_SIB_FOUR_BYTE_DISP_NO_REG_ADDRESSING_OP8                           \
   "BYTE PTR " SEGMENT "[" REGISTER "*" SCALE SIGN OPERAND_DWORD "]"
-#define SIB_FOUR_BYTE_DISP_NO_REG_ADDRESSING_OP16                             \
+#define FMT_SIB_FOUR_BYTE_DISP_NO_REG_ADDRESSING_OP16                          \
   "WORD PTR " SEGMENT "[" REGISTER "*" SCALE SIGN OPERAND_DWORD "]"
-#define SIB_FOUR_BYTE_DISP_NO_REG_ADDRESSING_OP32                             \
+#define FMT_SIB_FOUR_BYTE_DISP_NO_REG_ADDRESSING_OP32                          \
   "DWORD PTR " SEGMENT "[" REGISTER "*" SCALE SIGN OPERAND_DWORD "]"
 
-#define ONE_BYTE_DISP_ADDRESSING_OP8                                           \
+#define FMT_ONE_BYTE_DISP_ADDRESSING_OP8                                       \
   "BYTE PTR " SEGMENT "[" REGISTER SIGN OPERAND_BYTE "]"
-#define ONE_BYTE_DISP_ADDRESSING_OP16                                          \
+#define FMT_ONE_BYTE_DISP_ADDRESSING_OP16                                      \
   "WORD PTR " SEGMENT "[" REGISTER SIGN OPERAND_BYTE "]"
-#define ONE_BYTE_DISP_ADDRESSING_OP32                                          \
+#define FMT_ONE_BYTE_DISP_ADDRESSING_OP32                                      \
   "DWORD PTR " SEGMENT "[" REGISTER SIGN OPERAND_BYTE "]"
 
-#define SIB_ONE_BYTE_DISP_ADDRESSING_OP8                                      \
+#define FMT_SIB_ONE_BYTE_DISP_ADDRESSING_OP8                                   \
   "BYTE PTR " SEGMENT "[" REGISTER "+" REGISTER "*" SCALE SIGN OPERAND_BYTE "]"
-#define SIB_ONE_BYTE_DISP_ADDRESSING_OP16                                     \
+#define FMT_SIB_ONE_BYTE_DISP_ADDRESSING_OP16                                  \
   "WORD PTR " SEGMENT "[" REGISTER "+" REGISTER "*" SCALE SIGN OPERAND_BYTE "]"
-#define SIB_ONE_BYTE_DISP_ADDRESSING_OP32                                     \
+#define FMT_SIB_ONE_BYTE_DISP_ADDRESSING_OP32                                  \
   "DWORD PTR " SEGMENT "[" REGISTER "+" REGISTER "*" SCALE SIGN OPERAND_BYTE "]"
 
-#define SIB_ONE_BYTE_DISP_NO_SCALE_ADDRESSING_OP8                              \
+#define FMT_SIB_ONE_BYTE_DISP_NO_SCALE_ADDRESSING_OP8                          \
   "BYTE PTR " SEGMENT "[" REGISTER SIGN OPERAND_BYTE "]"
-#define SIB_ONE_BYTE_DISP_NO_SCALE_ADDRESSING_OP16                             \
+#define FMT_SIB_ONE_BYTE_DISP_NO_SCALE_ADDRESSING_OP16                         \
   "WORD PTR " SEGMENT "[" REGISTER SIGN OPERAND_BYTE "]"
-#define SIB_ONE_BYTE_DISP_NO_SCALE_ADDRESSING_OP32                             \
+#define FMT_SIB_ONE_BYTE_DISP_NO_SCALE_ADDRESSING_OP32                         \
   "DWORD PTR " SEGMENT "[" REGISTER SIGN OPERAND_BYTE "]"
 
-#define SIB_FOUR_BYTE_DISP_NO_SCALE_ADDRESSING_OP8                             \
+#define FMT_SIB_FOUR_BYTE_DISP_NO_SCALE_ADDRESSING_OP8                         \
   "BYTE PTR " SEGMENT "[" REGISTER SIGN OPERAND_DWORD "]"
-#define SIB_FOUR_BYTE_DISP_NO_SCALE_ADDRESSING_OP16                            \
+#define FMT_SIB_FOUR_BYTE_DISP_NO_SCALE_ADDRESSING_OP16                        \
   "WORD PTR " SEGMENT "[" REGISTER SIGN OPERAND_DWORD "]"
-#define SIB_FOUR_BYTE_DISP_NO_SCALE_ADDRESSING_OP32                            \
+#define FMT_SIB_FOUR_BYTE_DISP_NO_SCALE_ADDRESSING_OP32                        \
   "DWORD PTR " SEGMENT "[" REGISTER SIGN OPERAND_DWORD "]"
 
-#define SIB_FOUR_BYTE_NO_DISP_NO_SCALE_ADDRESSING_OP8                          \
+#define FMT_SIB_FOUR_BYTE_NO_DISP_NO_SCALE_ADDRESSING_OP8                      \
   "BYTE PTR " SEGMENT "[" REGISTER "]"
-#define SIB_FOUR_BYTE_NO_DISP_NO_SCALE_ADDRESSING_OP16                         \
+#define FMT_SIB_FOUR_BYTE_NO_DISP_NO_SCALE_ADDRESSING_OP16                     \
   "WORD PTR " SEGMENT "[" REGISTER "]"
-#define SIB_FOUR_BYTE_NO_DISP_NO_SCALE_ADDRESSING_OP32                         \
+#define FMT_SIB_FOUR_BYTE_NO_DISP_NO_SCALE_ADDRESSING_OP32                     \
   "DWORD PTR " SEGMENT "[" REGISTER "]"
 
-#define FOUR_BYTE_DISP_ADDRESSING_OP8                                         \
+#define FMT_FOUR_BYTE_DISP_ADDRESSING_OP8                                      \
   "BYTE PTR " SEGMENT "[" REGISTER SIGN OPERAND_DWORD "]"
-#define FOUR_BYTE_DISP_ADDRESSING_OP16                                        \
+#define FMT_FOUR_BYTE_DISP_ADDRESSING_OP16                                     \
   "WORD PTR " SEGMENT "[" REGISTER SIGN OPERAND_DWORD "]"
-#define FOUR_BYTE_DISP_ADDRESSING_OP32                                        \
+#define FMT_FOUR_BYTE_DISP_ADDRESSING_OP32                                     \
   "DWORD PTR " SEGMENT "[" REGISTER SIGN OPERAND_DWORD "]"
 
-#define SIB_FOUR_BYTE_DISP_ADDRESSING_OP8                                     \
+#define FMT_SIB_FOUR_BYTE_DISP_ADDRESSING_OP8                                  \
   "BYTE PTR " SEGMENT "[" REGISTER "+" REGISTER "*" SCALE SIGN OPERAND_DWORD "]"
-#define SIB_FOUR_BYTE_DISP_ADDRESSING_OP16                                    \
+#define FMT_SIB_FOUR_BYTE_DISP_ADDRESSING_OP16                                 \
   "WORD PTR " SEGMENT "[" REGISTER "+" REGISTER "*" SCALE SIGN OPERAND_DWORD "]"
-#define SIB_FOUR_BYTE_DISP_ADDRESSING_OP32                                    \
-  "DWORD PTR " SEGMENT "[" REGISTER "+" REGISTER "*" SCALE SIGN OPERAND_DWORD "]"
-
+#define FMT_SIB_FOUR_BYTE_DISP_ADDRESSING_OP32                                 \
+  "DWORD PTR " SEGMENT "[" REGISTER "+" REGISTER "*" SCALE SIGN OPERAND_DWORD  \
+  "]"

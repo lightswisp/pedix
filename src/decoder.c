@@ -135,6 +135,7 @@ static void pedix_decode32(decoded_instruction_t *decoded, uint8_t *instruction)
     }
   }
 
+  // this part look a bit ugly.
   uint32_t len;
   if((len = pedix_set_immediate_operand_if_present(decoded, instruction))){
     SET_BUFFER(decoded, instruction, len);
@@ -148,9 +149,9 @@ static void pedix_decode32(decoded_instruction_t *decoded, uint8_t *instruction)
 
   // set mnemonic
   pedix_set_mnemonic(decoded);
-  // set operands if we have at least first set
-  if (decoded->instruction->operands.operand[0] != OPERAND_VOID) {
-    pedix_set_operands(decoded); // asz todo
+  // set operands if we have at least one operand 
+  if (decoded->instruction->operands.size > 0) {
+    pedix_set_operands(decoded); 
     pedix_merge_operands(decoded);
   }
 }
