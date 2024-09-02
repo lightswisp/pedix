@@ -31,7 +31,23 @@ void pedix_zero_instruction(decoded_instruction_t *decoded) {
   // save the mode in order to restore it after zeroing the struct
   uint8_t mode = decoded->mode;
   memset(decoded, 0, sizeof(decoded_instruction_t));
-  decoded->mode = mode;
+  pedix_set_mode(decoded, mode);
+}
+
+void pedix_set_mode(decoded_instruction_t *decoded, uint8_t mode){
+  switch(mode){
+    case 32: 
+      decoded->mode = mode; 
+      decoded->address_size = DOUBLEWORD_LEN; 
+      decoded->operand_size = DOUBLEWORD_LEN;
+      break;
+    case 64: 
+      assert(!"64-bit mode is not yet implemented!");
+      break;
+    default: 
+      assert(!"illegal mode selected");
+      break;
+  }
 }
 
 void pedix_free_instrucion(decoded_instruction_t *decoded) { 
@@ -42,13 +58,15 @@ static void pedix_decode32(decoded_instruction_t *decoded, uint8_t *instruction)
   while (pedix_instr_has_prefix(*instruction)) {
     decoded->prefixes.prefix[decoded->prefixes.size] = *instruction;
     switch(*instruction){
-      case PREFIX_LOCK:    strcat(decoded->text, "lock ");       break;       
-      case PREFIX_CS:      strcpy(decoded->segment_text, "cs:"); break;
-      case PREFIX_SS:      strcpy(decoded->segment_text, "ss:"); break;
-      case PREFIX_DS:      strcpy(decoded->segment_text, "ds:"); break;
-      case PREFIX_ES:      strcpy(decoded->segment_text, "es:"); break;
-      case PREFIX_FS:      strcpy(decoded->segment_text, "fs:"); break;
-      case PREFIX_GS:      strcpy(decoded->segment_text, "gs:"); break;
+      case PREFIX_LOCK:            strcat(decoded->text, "lock ");       break;
+      case PREFIX_CS:              strcpy(decoded->segment_text, "cs:"); break;
+      case PREFIX_SS:              strcpy(decoded->segment_text, "ss:"); break;
+      case PREFIX_DS:              strcpy(decoded->segment_text, "ds:"); break;
+      case PREFIX_ES:              strcpy(decoded->segment_text, "es:"); break;
+      case PREFIX_FS:              strcpy(decoded->segment_text, "fs:"); break;
+      case PREFIX_GS:              strcpy(decoded->segment_text, "gs:"); break;
+      case PREFIX_OPSIZE_OVERRIDE: decoded->operand_size = WORD_LEN;     break;
+      case PREFIX_ASZ_OVERRIDE:    decoded->address_size = WORD_LEN;     break;
     }
 
     SET_BUFFER(decoded, instruction, BYTE_LEN);

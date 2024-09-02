@@ -264,13 +264,13 @@ static void pedix_set_operand_by_id32(decoded_instruction_t *decoded, __operand_
     sprintf(dst, OPERAND_DWORD, (uint32_t)decoded->imm);
     break;
   case OPERAND_IMM_16_32:
-    if (pedix_instr_has_specific_prefix(decoded, PREFIX_OPSIZE_OVERRIDE))
+    if (decoded->operand_size == WORD_LEN)
       sprintf(dst, OPERAND_WORD, (uint16_t)decoded->imm);
     else 
       sprintf(dst, OPERAND_DWORD, (uint32_t)decoded->imm);
     break;
   case OPERAND_REG_EAX: 
-    if (pedix_instr_has_specific_prefix(decoded, PREFIX_OPSIZE_OVERRIDE))
+    if (decoded->operand_size == WORD_LEN)
       strcpy(dst, "ax");
     else 
       strcpy(dst, "eax");
@@ -294,15 +294,14 @@ static void pedix_set_operand_by_id32(decoded_instruction_t *decoded, __operand_
     strcpy(dst, modrm_reg32[decoded->modrm.reg]);
     break;
   case OPERAND_RM_16_32:
-    if (pedix_instr_has_specific_prefix(decoded, PREFIX_OPSIZE_OVERRIDE)){
+    if (decoded->operand_size == WORD_LEN) {
       pedix_set_operand_rm_by_size(decoded, dst, 16);
-    }
-    else{
+    } else {
       pedix_set_operand_rm_by_size(decoded, dst, 32);
     }
     break;
   case OPERAND_R_16_32:
-    if (pedix_instr_has_specific_prefix(decoded, PREFIX_OPSIZE_OVERRIDE))
+    if (decoded->operand_size == WORD_LEN)
       strcpy(dst, modrm_reg16[decoded->modrm.reg]);
     else
       strcpy(dst, modrm_reg32[decoded->modrm.reg]);
@@ -316,8 +315,8 @@ static void pedix_set_operand_by_id32(decoded_instruction_t *decoded, __operand_
   case OPERAND_REL_8:
     sprintf(dst, OPERAND_BYTE, (uint8_t)decoded->rel);
     break;
-  case OPERAND_REL_16_32: 
-    if (pedix_instr_has_specific_prefix(decoded, PREFIX_OPSIZE_OVERRIDE))
+  case OPERAND_REL_16_32:
+    if (decoded->operand_size == WORD_LEN)
       sprintf(dst, OPERAND_WORD, (uint16_t)decoded->rel);
     else
       sprintf(dst, OPERAND_DWORD, (uint32_t)decoded->rel);
@@ -326,7 +325,7 @@ static void pedix_set_operand_by_id32(decoded_instruction_t *decoded, __operand_
     strcpy(dst, modrm_reg8[decoded->instruction->primary_opcode & 0x07]);
     break;
   case R_PLUS_16_32:
-    if (pedix_instr_has_specific_prefix(decoded, PREFIX_OPSIZE_OVERRIDE))
+    if (decoded->operand_size == WORD_LEN)
       strcpy(dst, modrm_reg16[decoded->instruction->primary_opcode & 0x07]);
     else
       strcpy(dst, modrm_reg32[decoded->instruction->primary_opcode & 0x07]);

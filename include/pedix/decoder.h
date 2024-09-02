@@ -49,6 +49,8 @@ typedef struct {
   buffer_t buffer;           
   char text[MAX_TEXT_LEN];       
   uint8_t mode;            
+  uint8_t operand_size;
+  uint8_t address_size;
   prefix_t prefixes; 
   rex_t rex;         
   modrm_t modrm;    
@@ -72,3 +74,4 @@ decoded_instruction_t *pedix_init_instruction(void);
 void pedix_free_instrucion(decoded_instruction_t *decoded);  
 void pedix_zero_instruction(decoded_instruction_t *decoded); 
 void pedix_decode(decoded_instruction_t *decoded, uint8_t *instruction);
+void pedix_set_mode(decoded_instruction_t *decoded, uint8_t mode);

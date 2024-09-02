@@ -10,7 +10,7 @@ int main(void) {
   uint64_t offset, instructions;
   uint8_t instruction[] = {0x66, 0xb9, 0x40, 0x30, 0x20, 0x10 };
   decoded_instruction_t *decoded = pedix_init_instruction();
-  decoded->mode = MODE_32;
+  pedix_set_mode(decoded, MODE_32);
 
   /* curr offset */
   offset = 0;

@@ -65,7 +65,7 @@ size_t pedix_get_vex_size(uint8_t vex_byte) {
 uint32_t pedix_set_moffs_operand_if_present(decoded_instruction_t *decoded, uint8_t* instruction){
   for(size_t i = 0; i < decoded->instruction->operands.size; i++){
     if(HAS_MOFFS(decoded->instruction->operands.operand[i])){
-      if (pedix_instr_has_specific_prefix(decoded, PREFIX_ASZ_OVERRIDE)) {
+      if (decoded->address_size == WORD_LEN) {
         memcpy(&decoded->moffs, instruction, WORD_LEN); return WORD_LEN;
       } else {
         memcpy(&decoded->moffs, instruction, DOUBLEWORD_LEN); return DOUBLEWORD_LEN;
@@ -94,7 +94,7 @@ uint32_t pedix_set_immediate_operand_if_present(decoded_instruction_t *decoded, 
         memcpy(&decoded->imm, instruction, DOUBLEWORD_LEN);
         return DOUBLEWORD_LEN;
       case OPERAND_IMM_16_32:
-        if (pedix_instr_has_specific_prefix(decoded, PREFIX_OPSIZE_OVERRIDE)) {
+        if (decoded->operand_size == WORD_LEN) {
           memcpy(&decoded->imm, instruction, WORD_LEN);
           return WORD_LEN;
         } else {
@@ -131,7 +131,7 @@ uint32_t pedix_set_relative_offset_operand_if_present(decoded_instruction_t *dec
         decoded->rel += decoded->buffer.size + DOUBLEWORD_LEN;
         return DOUBLEWORD_LEN;
       case OPERAND_REL_16_32:
-        if (pedix_instr_has_specific_prefix(decoded, PREFIX_OPSIZE_OVERRIDE)) {
+        if (decoded->operand_size == WORD_LEN) {
           memcpy(&decoded->rel, instruction, WORD_LEN);
           decoded->rel += decoded->buffer.size + WORD_LEN;
           return WORD_LEN;
@@ -170,7 +170,7 @@ bool pedix_instr_has_sib(decoded_instruction_t *decoded) {
   *  01 100 sib  +  disp8  mode
   *  10 100 sib  +  disp32 mode
   */
-  if(pedix_instr_has_specific_prefix(decoded, PREFIX_ASZ_OVERRIDE))
+  if(decoded->address_size == WORD_LEN)
     /* there is no sib in real mode */
     return false;
  
@@ -182,7 +182,7 @@ bool pedix_instr_has_sib(decoded_instruction_t *decoded) {
 }
 
 bool pedix_instr_has_displacement(decoded_instruction_t *decoded){
-  if (pedix_instr_has_specific_prefix(decoded, PREFIX_ASZ_OVERRIDE)) {
+  if (decoded->address_size == WORD_LEN) {
     // 16-bit mode
     switch (decoded->modrm.mod) {
     case 0:
@@ -343,7 +343,7 @@ void pedix_set_sib(decoded_instruction_t *decoded, uint8_t *instruction){
 
 void pedix_set_displacement(decoded_instruction_t *decoded){
   size_t size = 0;
-  if (pedix_instr_has_specific_prefix(decoded, PREFIX_ASZ_OVERRIDE)) {
+  if (decoded->address_size == WORD_LEN) {
     // 16-bit mode
     switch(decoded->modrm.mod){
       case 0: 
@@ -374,7 +374,7 @@ void pedix_set_displacement(decoded_instruction_t *decoded){
       size = BYTE_LEN;
       break;
     case 2:
-      if (pedix_instr_has_specific_prefix(decoded, PREFIX_ASZ_OVERRIDE))
+      if (decoded->address_size == WORD_LEN)
         size = WORD_LEN;
       else
         size = DOUBLEWORD_LEN;
