@@ -48,6 +48,9 @@ typedef struct {
 typedef struct {
   buffer_t buffer;           
   char text[MAX_TEXT_LEN];       
+  char ptr_text[MAX_PTR_TEXT_LEN];
+  // should be either empty, or contain fs:, gs:, cs:, ss:, ds: you get it ;)
+  char segment_text[MAX_SEGMENT_TEXT_LEN];
   uint8_t mode;            
   uint8_t operand_size;
   uint8_t address_size;
@@ -57,8 +60,6 @@ typedef struct {
   sib_t sib;      
   displacement_t displacement;   
 
-  // should be either empty, or contain fs:, gs:, cs:, ss:, ds: you get it ;)
-  char segment_text[MAX_SEGMENT_TEXT_LEN];
   char operands[MAX_OPERANDS][MAX_OPERAND_STR_LEN];
 
   union {

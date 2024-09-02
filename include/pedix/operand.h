@@ -25,75 +25,34 @@ extern const char *modrm_reg32[];
 #define REGISTER "%s"
 #define SCALE "%d"
 #define SEGMENT "%s"
+#define ADDR_PTR "%s"
 
 #define FMT_MOFFS SEGMENT"["OPERAND_DWORD"]" 
 
-#define FMT_INDIRECT_ADDRESSING_OP8 "BYTE PTR " SEGMENT "[" REGISTER "]"
-#define FMT_INDIRECT_ADDRESSING_OP16 "WORD PTR " SEGMENT "[" REGISTER "]"
-#define FMT_INDIRECT_ADDRESSING_OP32 "DWORD PTR " SEGMENT "[" REGISTER "]"
+// put the BYTE PTR, WORD PTR or DWORD PTR inside the decoded->ptr_text before set_operand_by_??_size 
+// it will be just easier to put everything together
+// also, inside set_operand_by??_size, we should add the second argument (address_size)
+// like this -> set_operand_by??_size(uint8_t operand_size, uint8_t address_size)
+// then choose the right FMT according to this info
 
 #define FMT_DISPLACEMENT_ONLY_MODE "DWORD PTR " SEGMENT "[" OPERAND_DWORD "]"
 
-#define FMT_SIB_FOUR_BYTE_NO_DISP_ADDRESSING_OP8                               \
-  "BYTE PTR " SEGMENT "[" REGISTER "+" REGISTER "*" SCALE "]"
-#define FMT_SIB_FOUR_BYTE_NO_DISP_ADDRESSING_OP16                              \
-  "WORD PTR " SEGMENT "[" REGISTER "+" REGISTER "*" SCALE "]"
-#define FMT_SIB_FOUR_BYTE_NO_DISP_ADDRESSING_OP32                              \
-  "DWORD PTR " SEGMENT "[" REGISTER "+" REGISTER "*" SCALE "]"
-
-#define FMT_SIB_FOUR_BYTE_DISP_NO_REG_ADDRESSING_OP8                           \
-  "BYTE PTR " SEGMENT "[" REGISTER "*" SCALE SIGN OPERAND_DWORD "]"
-#define FMT_SIB_FOUR_BYTE_DISP_NO_REG_ADDRESSING_OP16                          \
-  "WORD PTR " SEGMENT "[" REGISTER "*" SCALE SIGN OPERAND_DWORD "]"
-#define FMT_SIB_FOUR_BYTE_DISP_NO_REG_ADDRESSING_OP32                          \
-  "DWORD PTR " SEGMENT "[" REGISTER "*" SCALE SIGN OPERAND_DWORD "]"
-
-#define FMT_ONE_BYTE_DISP_ADDRESSING_OP8                                       \
-  "BYTE PTR " SEGMENT "[" REGISTER SIGN OPERAND_BYTE "]"
-#define FMT_ONE_BYTE_DISP_ADDRESSING_OP16                                      \
-  "WORD PTR " SEGMENT "[" REGISTER SIGN OPERAND_BYTE "]"
-#define FMT_ONE_BYTE_DISP_ADDRESSING_OP32                                      \
-  "DWORD PTR " SEGMENT "[" REGISTER SIGN OPERAND_BYTE "]"
-
-#define FMT_SIB_ONE_BYTE_DISP_ADDRESSING_OP8                                   \
-  "BYTE PTR " SEGMENT "[" REGISTER "+" REGISTER "*" SCALE SIGN OPERAND_BYTE "]"
-#define FMT_SIB_ONE_BYTE_DISP_ADDRESSING_OP16                                  \
-  "WORD PTR " SEGMENT "[" REGISTER "+" REGISTER "*" SCALE SIGN OPERAND_BYTE "]"
-#define FMT_SIB_ONE_BYTE_DISP_ADDRESSING_OP32                                  \
-  "DWORD PTR " SEGMENT "[" REGISTER "+" REGISTER "*" SCALE SIGN OPERAND_BYTE "]"
-
-#define FMT_SIB_ONE_BYTE_DISP_NO_SCALE_ADDRESSING_OP8                          \
-  "BYTE PTR " SEGMENT "[" REGISTER SIGN OPERAND_BYTE "]"
-#define FMT_SIB_ONE_BYTE_DISP_NO_SCALE_ADDRESSING_OP16                         \
-  "WORD PTR " SEGMENT "[" REGISTER SIGN OPERAND_BYTE "]"
-#define FMT_SIB_ONE_BYTE_DISP_NO_SCALE_ADDRESSING_OP32                         \
-  "DWORD PTR " SEGMENT "[" REGISTER SIGN OPERAND_BYTE "]"
-
-#define FMT_SIB_FOUR_BYTE_DISP_NO_SCALE_ADDRESSING_OP8                         \
-  "BYTE PTR " SEGMENT "[" REGISTER SIGN OPERAND_DWORD "]"
-#define FMT_SIB_FOUR_BYTE_DISP_NO_SCALE_ADDRESSING_OP16                        \
-  "WORD PTR " SEGMENT "[" REGISTER SIGN OPERAND_DWORD "]"
-#define FMT_SIB_FOUR_BYTE_DISP_NO_SCALE_ADDRESSING_OP32                        \
-  "DWORD PTR " SEGMENT "[" REGISTER SIGN OPERAND_DWORD "]"
-
-#define FMT_SIB_FOUR_BYTE_NO_DISP_NO_SCALE_ADDRESSING_OP8                      \
-  "BYTE PTR " SEGMENT "[" REGISTER "]"
-#define FMT_SIB_FOUR_BYTE_NO_DISP_NO_SCALE_ADDRESSING_OP16                     \
-  "WORD PTR " SEGMENT "[" REGISTER "]"
-#define FMT_SIB_FOUR_BYTE_NO_DISP_NO_SCALE_ADDRESSING_OP32                     \
-  "DWORD PTR " SEGMENT "[" REGISTER "]"
-
-#define FMT_FOUR_BYTE_DISP_ADDRESSING_OP8                                      \
-  "BYTE PTR " SEGMENT "[" REGISTER SIGN OPERAND_DWORD "]"
-#define FMT_FOUR_BYTE_DISP_ADDRESSING_OP16                                     \
-  "WORD PTR " SEGMENT "[" REGISTER SIGN OPERAND_DWORD "]"
-#define FMT_FOUR_BYTE_DISP_ADDRESSING_OP32                                     \
-  "DWORD PTR " SEGMENT "[" REGISTER SIGN OPERAND_DWORD "]"
-
-#define FMT_SIB_FOUR_BYTE_DISP_ADDRESSING_OP8                                  \
-  "BYTE PTR " SEGMENT "[" REGISTER "+" REGISTER "*" SCALE SIGN OPERAND_DWORD "]"
-#define FMT_SIB_FOUR_BYTE_DISP_ADDRESSING_OP16                                 \
-  "WORD PTR " SEGMENT "[" REGISTER "+" REGISTER "*" SCALE SIGN OPERAND_DWORD "]"
-#define FMT_SIB_FOUR_BYTE_DISP_ADDRESSING_OP32                                 \
-  "DWORD PTR " SEGMENT "[" REGISTER "+" REGISTER "*" SCALE SIGN OPERAND_DWORD  \
-  "]"
+#define FMT_INDIRECT_ADDRESSING_OP ADDR_PTR " " SEGMENT "[" REGISTER "]"
+#define FMT_SIB_FOUR_BYTE_NO_DISP_ADDRESSING_OP                               \
+  ADDR_PTR " " SEGMENT "[" REGISTER "+" REGISTER "*" SCALE "]"
+#define FMT_SIB_FOUR_BYTE_DISP_NO_REG_ADDRESSING_OP                           \
+  ADDR_PTR " " SEGMENT "[" REGISTER "*" SCALE SIGN OPERAND_DWORD "]"
+#define FMT_ONE_BYTE_DISP_ADDRESSING_OP                                       \
+  ADDR_PTR " " SEGMENT "[" REGISTER SIGN OPERAND_BYTE "]"
+#define FMT_SIB_ONE_BYTE_DISP_ADDRESSING_OP                                   \
+  ADDR_PTR " " SEGMENT "[" REGISTER "+" REGISTER "*" SCALE SIGN OPERAND_BYTE "]"
+#define FMT_SIB_ONE_BYTE_DISP_NO_SCALE_ADDRESSING_OP                          \
+  ADDR_PTR " " SEGMENT "[" REGISTER SIGN OPERAND_BYTE "]"
+#define FMT_SIB_FOUR_BYTE_DISP_NO_SCALE_ADDRESSING_OP                         \
+  ADDR_PTR " " SEGMENT "[" REGISTER SIGN OPERAND_DWORD "]"
+#define FMT_SIB_FOUR_BYTE_NO_DISP_NO_SCALE_ADDRESSING_OP                      \
+  ADDR_PTR " " SEGMENT "[" REGISTER "]"
+#define FMT_FOUR_BYTE_DISP_ADDRESSING_OP                                      \
+  ADDR_PTR " " SEGMENT "[" REGISTER SIGN OPERAND_DWORD "]"
+#define FMT_SIB_FOUR_BYTE_DISP_ADDRESSING_OP                                  \
+  ADDR_PTR " " SEGMENT "[" REGISTER "+" REGISTER "*" SCALE SIGN OPERAND_DWORD "]"
