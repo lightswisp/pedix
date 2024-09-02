@@ -96,6 +96,7 @@ PREPARE_INSTRUCTION(62, "\x2E\xA0\x11\x22\x33\x44"); //mov al, cs:[0x44332211]
 PREPARE_INSTRUCTION(63, "\x65\xA1\x11\x22\x33\x44"); //mov eax, gs:[0x44332211]
 PREPARE_INSTRUCTION(64, "\x64\xA2\x11\x22\x33\x44"); //mov fs:[0x44332211], al
 PREPARE_INSTRUCTION(65, "\x26\xA3\x11\x22\x33\x44"); //mov es:[0x44332211], eax
+PREPARE_INSTRUCTION(66, "\x64\x67\x23\x89\xFE\xFF"); //and ecx,DWORD PTR fs:[bx+di-0x0002] 
 
 int main(void){
   decoded_instruction_t *decoded = pedix_init_instruction();
@@ -167,6 +168,7 @@ int main(void){
   PREPARE_TEST(63, "mov eax,gs:[0x44332211]");
   PREPARE_TEST(64, "mov fs:[0x44332211],al");
   PREPARE_TEST(65, "mov es:[0x44332211],eax");
+  PREPARE_TEST(66, "and ecx,DWORD PTR fs:[bx+di-0x0002]"); 
 
   puts(GREEN"All tests are passed!"NC);
   return 0;

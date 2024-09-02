@@ -8,6 +8,7 @@
 const char *modrm_reg8[]  = {"al", "cl", "dl", "bl", "ah", "ch", "dh", "bh"};
 const char *modrm_reg16[] = {"ax", "cx", "dx", "bx", "sp", "bp", "si", "di"};
 const char *modrm_reg32[] = {"eax", "ecx", "edx", "ebx", "esp", "ebp", "esi", "edi"};
+const char *modrm_reg16_override[] = {"bx+si", "bx+di", "bp+si", "bp+di", "si", "di", "bp", "bx"};
 
 #define GET_SIGN(value, size) ( (value & (0x80 << (size - 8))) >> (size - 1) == 1 ? 0x2d : 0x2b )
 #define GET_VALUE_BY_SIGN(value, sign) ( sign == 0x2d ? ~value + 1 : value )
@@ -17,16 +18,34 @@ const char *modrm_reg32[] = {"eax", "ecx", "edx", "ebx", "esp", "ebp", "esi", "e
 #define MOD_ONE_BYTE_DISPLACEMENT 1
 #define MOD_SIB_OR_REGISTER_INDIRECT_ADDRESSING 0
 
+#define MOD_NO_DISPLACEMENT_EXCEPT_110 0
+#define MOD_TWO_BYTE_DISPLACEMENT 2
 
 static void pedix_set_operand_m(decoded_instruction_t *decoded, char* dst){
+  char sign;
   if (decoded->address_size == WORD_LEN) {
-    
+    switch(decoded->modrm.mod){
+      case MOD_NO_DISPLACEMENT_EXCEPT_110: 
+       assert(!"not yet implemented!");
+       break; 
+      case MOD_ONE_BYTE_DISPLACEMENT: 
+       assert(!"not yet implemented!");
+       break;
+      case MOD_TWO_BYTE_DISPLACEMENT:
+       sign = GET_SIGN((uint16_t)decoded->displacement.field, 16);
+       uint16_t value =
+           GET_VALUE_BY_SIGN((uint16_t)decoded->displacement.field, sign);
+       sprintf(dst, FMT_TWO_BYTE_DISPLACEMENT_ASZ_OVERRIDE, decoded->ptr_text,
+               decoded->segment_text, modrm_reg16_override[decoded->modrm.rm],
+               sign, value);
+       break;
+    } 
   } else {
     switch (decoded->modrm.mod) {
     case MOD_SIB_OR_REGISTER_INDIRECT_ADDRESSING:
       if (decoded->sib.size) {
         if (decoded->sib.base == 5) {
-          char sign = GET_SIGN((uint32_t)decoded->displacement.field, 32);
+          sign = GET_SIGN((uint32_t)decoded->displacement.field, 32);
           uint32_t value =
               GET_VALUE_BY_SIGN((uint32_t)decoded->displacement.field, sign);
 
@@ -58,7 +77,7 @@ static void pedix_set_operand_m(decoded_instruction_t *decoded, char* dst){
     case MOD_ONE_BYTE_DISPLACEMENT:
       if (decoded->sib.size) {
         if (decoded->sib.index == 4) {
-          char sign = GET_SIGN((uint8_t)decoded->displacement.field, 8);
+          sign = GET_SIGN((uint8_t)decoded->displacement.field, 8);
           uint8_t value =
               GET_VALUE_BY_SIGN((uint8_t)decoded->displacement.field, sign);
 
@@ -66,7 +85,7 @@ static void pedix_set_operand_m(decoded_instruction_t *decoded, char* dst){
                   decoded->ptr_text, decoded->segment_text,
                   modrm_reg32[decoded->sib.base], sign, value);
         } else {
-          char sign = GET_SIGN((uint8_t)decoded->displacement.field, 8);
+          sign = GET_SIGN((uint8_t)decoded->displacement.field, 8);
           uint8_t value =
               GET_VALUE_BY_SIGN((uint8_t)decoded->displacement.field, sign);
 
@@ -76,7 +95,7 @@ static void pedix_set_operand_m(decoded_instruction_t *decoded, char* dst){
                   sign, value);
         }
       } else {
-        char sign = GET_SIGN((uint8_t)decoded->displacement.field, 8);
+        sign = GET_SIGN((uint8_t)decoded->displacement.field, 8);
         uint8_t value =
             GET_VALUE_BY_SIGN((uint8_t)decoded->displacement.field, sign);
 
@@ -88,7 +107,7 @@ static void pedix_set_operand_m(decoded_instruction_t *decoded, char* dst){
     case MOD_FOUR_BYTE_DISPLACEMENT:
       if (decoded->sib.size) {
         if (decoded->sib.index == 4) {
-          char sign = GET_SIGN((uint32_t)decoded->displacement.field, 32);
+          sign = GET_SIGN((uint32_t)decoded->displacement.field, 32);
           uint32_t value =
               GET_VALUE_BY_SIGN((uint32_t)decoded->displacement.field, sign);
 
@@ -96,7 +115,7 @@ static void pedix_set_operand_m(decoded_instruction_t *decoded, char* dst){
                   decoded->ptr_text, decoded->segment_text,
                   modrm_reg32[decoded->sib.base], sign, value);
         } else {
-          char sign = GET_SIGN((uint32_t)decoded->displacement.field, 32);
+          sign = GET_SIGN((uint32_t)decoded->displacement.field, 32);
           uint32_t value =
               GET_VALUE_BY_SIGN((uint32_t)decoded->displacement.field, sign);
 
@@ -106,7 +125,7 @@ static void pedix_set_operand_m(decoded_instruction_t *decoded, char* dst){
                   sign, value);
         }
       } else {
-        char sign = GET_SIGN((uint32_t)decoded->displacement.field, 32);
+        sign = GET_SIGN((uint32_t)decoded->displacement.field, 32);
         uint32_t value =
             GET_VALUE_BY_SIGN((uint32_t)decoded->displacement.field, sign);
 
@@ -120,14 +139,33 @@ static void pedix_set_operand_m(decoded_instruction_t *decoded, char* dst){
 }
 
 static void pedix_set_operand_rm(decoded_instruction_t *decoded, char* dst){
+  char sign;
   if (decoded->address_size == WORD_LEN) {
-
+    switch(decoded->modrm.mod){
+      case MOD_NO_DISPLACEMENT_EXCEPT_110: 
+       assert(!"not yet implemented!");
+       break; 
+      case MOD_ONE_BYTE_DISPLACEMENT: 
+       assert(!"not yet implemented!");
+       break;
+      case MOD_TWO_BYTE_DISPLACEMENT:
+       sign = GET_SIGN((uint16_t)decoded->displacement.field, 16);
+       uint16_t value =
+           GET_VALUE_BY_SIGN((uint16_t)decoded->displacement.field, sign);
+       sprintf(dst, FMT_TWO_BYTE_DISPLACEMENT_ASZ_OVERRIDE, decoded->ptr_text,
+               decoded->segment_text, modrm_reg16_override[decoded->modrm.rm],
+               sign, value);
+       break;
+      case MOD_REGISTER_ADDRESSING: 
+       assert(!"not yet implemented!");
+       break;
+    } 
   } else {
     switch (decoded->modrm.mod) {
     case MOD_SIB_OR_REGISTER_INDIRECT_ADDRESSING:
       if (decoded->sib.size) {
         if (decoded->sib.base == 5) {
-          char sign = GET_SIGN((uint32_t)decoded->displacement.field, 32);
+          sign = GET_SIGN((uint32_t)decoded->displacement.field, 32);
           uint32_t value =
               GET_VALUE_BY_SIGN((uint32_t)decoded->displacement.field, sign);
 
@@ -159,7 +197,7 @@ static void pedix_set_operand_rm(decoded_instruction_t *decoded, char* dst){
     case MOD_ONE_BYTE_DISPLACEMENT:
       if (decoded->sib.size) {
         if (decoded->sib.index == 4) {
-          char sign = GET_SIGN((uint8_t)decoded->displacement.field, 8);
+          sign = GET_SIGN((uint8_t)decoded->displacement.field, 8);
           uint8_t value =
               GET_VALUE_BY_SIGN((uint8_t)decoded->displacement.field, sign);
 
@@ -167,7 +205,7 @@ static void pedix_set_operand_rm(decoded_instruction_t *decoded, char* dst){
                   decoded->ptr_text, decoded->segment_text,
                   modrm_reg32[decoded->sib.base], sign, value);
         } else {
-          char sign = GET_SIGN((uint8_t)decoded->displacement.field, 8);
+          sign = GET_SIGN((uint8_t)decoded->displacement.field, 8);
           uint8_t value =
               GET_VALUE_BY_SIGN((uint8_t)decoded->displacement.field, sign);
 
@@ -177,7 +215,7 @@ static void pedix_set_operand_rm(decoded_instruction_t *decoded, char* dst){
                   sign, value);
         }
       } else {
-        char sign = GET_SIGN((uint8_t)decoded->displacement.field, 8);
+        sign = GET_SIGN((uint8_t)decoded->displacement.field, 8);
         uint8_t value =
             GET_VALUE_BY_SIGN((uint8_t)decoded->displacement.field, sign);
 
@@ -189,7 +227,7 @@ static void pedix_set_operand_rm(decoded_instruction_t *decoded, char* dst){
     case MOD_FOUR_BYTE_DISPLACEMENT:
       if (decoded->sib.size) {
         if (decoded->sib.index == 4) {
-          char sign = GET_SIGN((uint32_t)decoded->displacement.field, 32);
+          sign = GET_SIGN((uint32_t)decoded->displacement.field, 32);
           uint32_t value =
               GET_VALUE_BY_SIGN((uint32_t)decoded->displacement.field, sign);
 
@@ -197,7 +235,7 @@ static void pedix_set_operand_rm(decoded_instruction_t *decoded, char* dst){
                   decoded->ptr_text, decoded->segment_text,
                   modrm_reg32[decoded->sib.base], sign, value);
         } else {
-          char sign = GET_SIGN((uint32_t)decoded->displacement.field, 32);
+          sign = GET_SIGN((uint32_t)decoded->displacement.field, 32);
           uint32_t value =
               GET_VALUE_BY_SIGN((uint32_t)decoded->displacement.field, sign);
 
@@ -207,7 +245,7 @@ static void pedix_set_operand_rm(decoded_instruction_t *decoded, char* dst){
                   sign, value);
         }
       } else {
-        char sign = GET_SIGN((uint32_t)decoded->displacement.field, 32);
+        sign = GET_SIGN((uint32_t)decoded->displacement.field, 32);
         uint32_t value =
             GET_VALUE_BY_SIGN((uint32_t)decoded->displacement.field, sign);
 

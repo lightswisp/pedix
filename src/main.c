@@ -8,7 +8,7 @@ int main(void) {
   // todo: add valid prefix check
   // ex: 66 0f 74 04 00 -> is a valid instruction, while f3 0f 74 04 00 is not
   uint64_t offset, instructions;
-  uint8_t instruction[] = {0x66, 0xb9, 0x40, 0x30, 0x20, 0x10 };
+  uint8_t instruction[] = {0x64, 0x67, 0x23, 0x89, 0xFE, 0xFF};
   decoded_instruction_t *decoded = pedix_init_instruction();
   pedix_set_mode(decoded, MODE_32);
 
