@@ -97,6 +97,11 @@ PREPARE_INSTRUCTION(63, "\x65\xA1\x11\x22\x33\x44"); //mov eax, gs:[0x44332211]
 PREPARE_INSTRUCTION(64, "\x64\xA2\x11\x22\x33\x44"); //mov fs:[0x44332211], al
 PREPARE_INSTRUCTION(65, "\x26\xA3\x11\x22\x33\x44"); //mov es:[0x44332211], eax
 PREPARE_INSTRUCTION(66, "\x64\x67\x23\x89\xFE\xFF"); //and ecx,DWORD PTR fs:[bx+di-0x0002] 
+PREPARE_INSTRUCTION(67, "\x67\x00\x0E\xAA\xBB"); //add BYTE PTR [0xbbaa],cl
+PREPARE_INSTRUCTION(68, "\x67\x39\x11"); // cmp DWORD PTR [bx+di],edx
+PREPARE_INSTRUCTION(69,"\x66\x67\x19\x55\xEE");
+PREPARE_INSTRUCTION(70,"\x67\xF2\x0F\x38\xF0\xB8\x11\x22");
+PREPARE_INSTRUCTION(71, "\x66\x67\x0F\xA4\xF2\x11");
 
 int main(void){
   decoded_instruction_t *decoded = pedix_init_instruction();
@@ -169,6 +174,12 @@ int main(void){
   PREPARE_TEST(64, "mov fs:[0x44332211],al");
   PREPARE_TEST(65, "mov es:[0x44332211],eax");
   PREPARE_TEST(66, "and ecx,DWORD PTR fs:[bx+di-0x0002]"); 
+  PREPARE_TEST(67, "add BYTE PTR [0xbbaa],cl");
+  PREPARE_TEST(68, "cmp DWORD PTR [bx+di],edx");
+  PREPARE_TEST(69, "sbb WORD PTR [di-0x12],dx");
+  PREPARE_TEST(70, "crc32 edi,BYTE PTR [bx+si+0x2211]");
+  PREPARE_TEST(71, "shld dx,si,0x11");
+  
 
   puts(GREEN"All tests are passed!"NC);
   return 0;

@@ -23,22 +23,47 @@ const char *modrm_reg16_override[] = {"bx+si", "bx+di", "bp+si", "bp+di", "si", 
 
 static void pedix_set_operand_m(decoded_instruction_t *decoded, char* dst){
   char sign;
+  uint32_t value;
   if (decoded->address_size == WORD_LEN) {
     switch(decoded->modrm.mod){
       case MOD_NO_DISPLACEMENT_EXCEPT_110: 
-       assert(!"not yet implemented!");
+       if(decoded->modrm.rm == 6)
+         sprintf(dst, 
+                 FMT_DISPLACEMENT_ONLY_MODE_ASZ_OVERRIDE,
+                 decoded->ptr_text,
+                 decoded->segment_text,
+                 (uint16_t)decoded->displacement.field);
+       else 
+         sprintf(dst, 
+                 FMT_INDIRECT_ADDRESSING_OP,
+                 decoded->ptr_text,
+                 decoded->segment_text,
+                 modrm_reg16_override[decoded->modrm.rm]);
        break; 
       case MOD_ONE_BYTE_DISPLACEMENT: 
-       assert(!"not yet implemented!");
+       sign = GET_SIGN((uint8_t)decoded->displacement.field, 8);
+       value = GET_VALUE_BY_SIGN((uint8_t)decoded->displacement.field, sign);
+       sprintf(dst, 
+               FMT_ONE_BYTE_DISPLACEMENT_ASZ_OVERRIDE, 
+               decoded->ptr_text,
+               decoded->segment_text, 
+               modrm_reg16_override[decoded->modrm.rm],
+               sign, 
+               (uint8_t)value);
        break;
       case MOD_TWO_BYTE_DISPLACEMENT:
        sign = GET_SIGN((uint16_t)decoded->displacement.field, 16);
-       uint16_t value =
-           GET_VALUE_BY_SIGN((uint16_t)decoded->displacement.field, sign);
-       sprintf(dst, FMT_TWO_BYTE_DISPLACEMENT_ASZ_OVERRIDE, decoded->ptr_text,
-               decoded->segment_text, modrm_reg16_override[decoded->modrm.rm],
-               sign, value);
+       value = GET_VALUE_BY_SIGN((uint16_t)decoded->displacement.field, sign);
+       sprintf(dst, 
+               FMT_TWO_BYTE_DISPLACEMENT_ASZ_OVERRIDE, 
+               decoded->ptr_text,
+               decoded->segment_text, 
+               modrm_reg16_override[decoded->modrm.rm],
+               sign, 
+               (uint16_t)value);
        break;
+      default:
+       assert(!"fatal error, memory operand can't have register addressing");
     } 
   } else {
     switch (decoded->modrm.mod) {
@@ -46,118 +71,189 @@ static void pedix_set_operand_m(decoded_instruction_t *decoded, char* dst){
       if (decoded->sib.size) {
         if (decoded->sib.base == 5) {
           sign = GET_SIGN((uint32_t)decoded->displacement.field, 32);
-          uint32_t value =
-              GET_VALUE_BY_SIGN((uint32_t)decoded->displacement.field, sign);
+          value = GET_VALUE_BY_SIGN((uint32_t)decoded->displacement.field, sign);
 
-          sprintf(dst, FMT_SIB_FOUR_BYTE_DISP_NO_REG_ADDRESSING_OP,
-                  decoded->ptr_text, decoded->segment_text,
-                  modrm_reg32[decoded->sib.index], 1 << decoded->sib.scale,
-                  sign, value);
+          sprintf(dst, 
+                  FMT_SIB_FOUR_BYTE_DISP_NO_REG_ADDRESSING_OP,
+                  decoded->ptr_text, 
+                  decoded->segment_text,
+                  modrm_reg32[decoded->sib.index], 
+                  1 << decoded->sib.scale,
+                  sign, 
+                  value);
         } else {
           if (decoded->sib.index == 4) {
-            sprintf(dst, FMT_SIB_FOUR_BYTE_NO_DISP_NO_SCALE_ADDRESSING_OP,
-                    decoded->ptr_text, decoded->segment_text,
+            sprintf(dst, 
+                    FMT_SIB_FOUR_BYTE_NO_DISP_NO_SCALE_ADDRESSING_OP,
+                    decoded->ptr_text, 
+                    decoded->segment_text,
                     modrm_reg32[decoded->sib.base]);
           } else {
-            sprintf(dst, FMT_SIB_FOUR_BYTE_NO_DISP_ADDRESSING_OP,
-                    decoded->ptr_text, decoded->segment_text,
+            sprintf(dst, 
+                    FMT_SIB_FOUR_BYTE_NO_DISP_ADDRESSING_OP,
+                    decoded->ptr_text, 
+                    decoded->segment_text,
                     modrm_reg32[decoded->sib.base],
-                    modrm_reg32[decoded->sib.index], 1 << decoded->sib.scale);
+                    modrm_reg32[decoded->sib.index], 
+                    1 << decoded->sib.scale);
           }
         }
       } else {
         if (decoded->modrm.rm == 5)
-          sprintf(dst, FMT_DISPLACEMENT_ONLY_MODE, decoded->segment_text,
+          sprintf(dst, 
+                  FMT_DISPLACEMENT_ONLY_MODE, 
+                  decoded->ptr_text,
+                  decoded->segment_text,
                   (uint32_t)decoded->displacement.field);
         else
-          sprintf(dst, FMT_INDIRECT_ADDRESSING_OP, decoded->ptr_text,
-                  decoded->segment_text, modrm_reg32[decoded->modrm.rm]);
+          sprintf(dst, 
+                  FMT_INDIRECT_ADDRESSING_OP, 
+                  decoded->ptr_text,
+                  decoded->segment_text, 
+                  modrm_reg32[decoded->modrm.rm]);
       }
       break;
     case MOD_ONE_BYTE_DISPLACEMENT:
       if (decoded->sib.size) {
         if (decoded->sib.index == 4) {
           sign = GET_SIGN((uint8_t)decoded->displacement.field, 8);
-          uint8_t value =
-              GET_VALUE_BY_SIGN((uint8_t)decoded->displacement.field, sign);
+          value = GET_VALUE_BY_SIGN((uint8_t)decoded->displacement.field, sign);
 
-          sprintf(dst, FMT_SIB_ONE_BYTE_DISP_NO_SCALE_ADDRESSING_OP,
-                  decoded->ptr_text, decoded->segment_text,
-                  modrm_reg32[decoded->sib.base], sign, value);
+          sprintf(dst, 
+                  FMT_SIB_ONE_BYTE_DISP_NO_SCALE_ADDRESSING_OP,
+                  decoded->ptr_text, 
+                  decoded->segment_text,
+                  modrm_reg32[decoded->sib.base], 
+                  sign, 
+                  (uint8_t)value);
         } else {
           sign = GET_SIGN((uint8_t)decoded->displacement.field, 8);
-          uint8_t value =
-              GET_VALUE_BY_SIGN((uint8_t)decoded->displacement.field, sign);
+          value = GET_VALUE_BY_SIGN((uint8_t)decoded->displacement.field, sign);
 
-          sprintf(dst, FMT_SIB_ONE_BYTE_DISP_ADDRESSING_OP, decoded->ptr_text,
-                  decoded->segment_text, modrm_reg32[decoded->sib.base],
-                  modrm_reg32[decoded->sib.index], 1 << decoded->sib.scale,
-                  sign, value);
+          sprintf(dst, 
+                  FMT_SIB_ONE_BYTE_DISP_ADDRESSING_OP, 
+                  decoded->ptr_text,
+                  decoded->segment_text, 
+                  modrm_reg32[decoded->sib.base],
+                  modrm_reg32[decoded->sib.index], 
+                  1 << decoded->sib.scale,
+                  sign, 
+                  (uint8_t)value);
         }
       } else {
         sign = GET_SIGN((uint8_t)decoded->displacement.field, 8);
-        uint8_t value =
-            GET_VALUE_BY_SIGN((uint8_t)decoded->displacement.field, sign);
+        value = GET_VALUE_BY_SIGN((uint8_t)decoded->displacement.field, sign);
 
-        sprintf(dst, FMT_ONE_BYTE_DISP_ADDRESSING_OP, decoded->ptr_text,
-                decoded->segment_text, modrm_reg32[decoded->modrm.rm], sign,
-                value);
+        sprintf(dst, 
+                FMT_ONE_BYTE_DISP_ADDRESSING_OP, 
+                decoded->ptr_text,
+                decoded->segment_text, 
+                modrm_reg32[decoded->modrm.rm], 
+                sign,
+                (uint8_t)value);
       }
       break;
     case MOD_FOUR_BYTE_DISPLACEMENT:
       if (decoded->sib.size) {
         if (decoded->sib.index == 4) {
           sign = GET_SIGN((uint32_t)decoded->displacement.field, 32);
-          uint32_t value =
-              GET_VALUE_BY_SIGN((uint32_t)decoded->displacement.field, sign);
+          value = GET_VALUE_BY_SIGN((uint32_t)decoded->displacement.field, sign);
 
-          sprintf(dst, FMT_SIB_FOUR_BYTE_DISP_NO_SCALE_ADDRESSING_OP,
-                  decoded->ptr_text, decoded->segment_text,
-                  modrm_reg32[decoded->sib.base], sign, value);
+          sprintf(dst, 
+                  FMT_SIB_FOUR_BYTE_DISP_NO_SCALE_ADDRESSING_OP,
+                  decoded->ptr_text, 
+                  decoded->segment_text,
+                  modrm_reg32[decoded->sib.base], 
+                  sign, 
+                  value);
         } else {
           sign = GET_SIGN((uint32_t)decoded->displacement.field, 32);
-          uint32_t value =
-              GET_VALUE_BY_SIGN((uint32_t)decoded->displacement.field, sign);
+          value = GET_VALUE_BY_SIGN((uint32_t)decoded->displacement.field, sign);
 
-          sprintf(dst, FMT_SIB_FOUR_BYTE_DISP_ADDRESSING_OP, decoded->ptr_text,
-                  decoded->segment_text, modrm_reg32[decoded->sib.base],
-                  modrm_reg32[decoded->sib.index], 1 << decoded->sib.scale,
-                  sign, value);
+          sprintf(dst, 
+                  FMT_SIB_FOUR_BYTE_DISP_ADDRESSING_OP, 
+                  decoded->ptr_text,
+                  decoded->segment_text, 
+                  modrm_reg32[decoded->sib.base],
+                  modrm_reg32[decoded->sib.index], 
+                  1 << decoded->sib.scale,
+                  sign, 
+                  value);
         }
       } else {
         sign = GET_SIGN((uint32_t)decoded->displacement.field, 32);
-        uint32_t value =
-            GET_VALUE_BY_SIGN((uint32_t)decoded->displacement.field, sign);
+        value = GET_VALUE_BY_SIGN((uint32_t)decoded->displacement.field, sign);
 
-        sprintf(dst, FMT_FOUR_BYTE_DISP_ADDRESSING_OP, decoded->ptr_text,
-                decoded->segment_text, modrm_reg32[decoded->modrm.rm], sign,
+        sprintf(dst, 
+                FMT_FOUR_BYTE_DISP_ADDRESSING_OP,
+                decoded->ptr_text,
+                decoded->segment_text, 
+                modrm_reg32[decoded->modrm.rm], 
+                sign,
                 value);
       }
       break;
+    default:
+      assert(!"fatal error, memory operand can't have register addressing");
     }
   }
 }
 
 static void pedix_set_operand_rm(decoded_instruction_t *decoded, char* dst){
   char sign;
+  uint32_t value;
   if (decoded->address_size == WORD_LEN) {
     switch(decoded->modrm.mod){
       case MOD_NO_DISPLACEMENT_EXCEPT_110: 
-       assert(!"not yet implemented!");
+       if(decoded->modrm.rm == 6)
+         sprintf(dst, 
+                 FMT_DISPLACEMENT_ONLY_MODE_ASZ_OVERRIDE,
+                 decoded->ptr_text,
+                 decoded->segment_text,
+                 (uint16_t)decoded->displacement.field);
+       else 
+         sprintf(dst, 
+                 FMT_INDIRECT_ADDRESSING_OP,
+                 decoded->ptr_text,
+                 decoded->segment_text,
+                 modrm_reg16_override[decoded->modrm.rm]);
        break; 
       case MOD_ONE_BYTE_DISPLACEMENT: 
-       assert(!"not yet implemented!");
+       sign = GET_SIGN((uint8_t)decoded->displacement.field, 8);
+       value = GET_VALUE_BY_SIGN((uint8_t)decoded->displacement.field, sign);
+       sprintf(dst, 
+               FMT_ONE_BYTE_DISPLACEMENT_ASZ_OVERRIDE, 
+               decoded->ptr_text,
+               decoded->segment_text, 
+               modrm_reg16_override[decoded->modrm.rm],
+               sign, 
+               (uint8_t)value);
        break;
       case MOD_TWO_BYTE_DISPLACEMENT:
        sign = GET_SIGN((uint16_t)decoded->displacement.field, 16);
-       uint16_t value =
-           GET_VALUE_BY_SIGN((uint16_t)decoded->displacement.field, sign);
-       sprintf(dst, FMT_TWO_BYTE_DISPLACEMENT_ASZ_OVERRIDE, decoded->ptr_text,
-               decoded->segment_text, modrm_reg16_override[decoded->modrm.rm],
-               sign, value);
+       value = GET_VALUE_BY_SIGN((uint16_t)decoded->displacement.field, sign);
+       sprintf(dst, 
+               FMT_TWO_BYTE_DISPLACEMENT_ASZ_OVERRIDE, 
+               decoded->ptr_text,
+               decoded->segment_text, 
+               modrm_reg16_override[decoded->modrm.rm],
+               sign, 
+               (uint16_t)value);
        break;
-      case MOD_REGISTER_ADDRESSING: 
-       assert(!"not yet implemented!");
+      case MOD_REGISTER_ADDRESSING:
+       switch (decoded->operand_size) {
+       case BYTE_LEN:
+         strcpy(dst, modrm_reg8[decoded->modrm.rm]);
+         break;
+       case WORD_LEN:
+         strcpy(dst, modrm_reg16[decoded->modrm.rm]);
+         break;
+       case DOUBLEWORD_LEN:
+         strcpy(dst, modrm_reg32[decoded->modrm.rm]);
+         break;
+       default:
+         assert(!"unsupported operand size!");
+       }
        break;
     } 
   } else {
@@ -166,91 +262,125 @@ static void pedix_set_operand_rm(decoded_instruction_t *decoded, char* dst){
       if (decoded->sib.size) {
         if (decoded->sib.base == 5) {
           sign = GET_SIGN((uint32_t)decoded->displacement.field, 32);
-          uint32_t value =
-              GET_VALUE_BY_SIGN((uint32_t)decoded->displacement.field, sign);
+          value = GET_VALUE_BY_SIGN((uint32_t)decoded->displacement.field, sign);
 
-          sprintf(dst, FMT_SIB_FOUR_BYTE_DISP_NO_REG_ADDRESSING_OP,
-                  decoded->ptr_text, decoded->segment_text,
-                  modrm_reg32[decoded->sib.index], 1 << decoded->sib.scale,
-                  sign, value);
+          sprintf(dst, 
+                  FMT_SIB_FOUR_BYTE_DISP_NO_REG_ADDRESSING_OP,
+                  decoded->ptr_text, 
+                  decoded->segment_text,
+                  modrm_reg32[decoded->sib.index], 
+                  1 << decoded->sib.scale,
+                  sign, 
+                  value);
         } else {
           if (decoded->sib.index == 4) {
-            sprintf(dst, FMT_SIB_FOUR_BYTE_NO_DISP_NO_SCALE_ADDRESSING_OP,
-                    decoded->ptr_text, decoded->segment_text,
+            sprintf(dst, 
+                    FMT_SIB_FOUR_BYTE_NO_DISP_NO_SCALE_ADDRESSING_OP,
+                    decoded->ptr_text, 
+                    decoded->segment_text,
                     modrm_reg32[decoded->sib.base]);
           } else {
-            sprintf(dst, FMT_SIB_FOUR_BYTE_NO_DISP_ADDRESSING_OP,
-                    decoded->ptr_text, decoded->segment_text,
+            sprintf(dst, 
+                    FMT_SIB_FOUR_BYTE_NO_DISP_ADDRESSING_OP,
+                    decoded->ptr_text, 
+                    decoded->segment_text,
                     modrm_reg32[decoded->sib.base],
-                    modrm_reg32[decoded->sib.index], 1 << decoded->sib.scale);
+                    modrm_reg32[decoded->sib.index], 
+                    1 << decoded->sib.scale);
           }
         }
       } else {
         if (decoded->modrm.rm == 5)
-          sprintf(dst, FMT_DISPLACEMENT_ONLY_MODE, decoded->segment_text,
+          sprintf(dst, 
+                  FMT_DISPLACEMENT_ONLY_MODE, 
+                  decoded->ptr_text,
+                  decoded->segment_text,
                   (uint32_t)decoded->displacement.field);
         else
-          sprintf(dst, FMT_INDIRECT_ADDRESSING_OP, decoded->ptr_text,
-                  decoded->segment_text, modrm_reg32[decoded->modrm.rm]);
+          sprintf(dst, 
+                  FMT_INDIRECT_ADDRESSING_OP, 
+                  decoded->ptr_text,
+                  decoded->segment_text, 
+                  modrm_reg32[decoded->modrm.rm]);
       }
       break;
     case MOD_ONE_BYTE_DISPLACEMENT:
       if (decoded->sib.size) {
         if (decoded->sib.index == 4) {
           sign = GET_SIGN((uint8_t)decoded->displacement.field, 8);
-          uint8_t value =
-              GET_VALUE_BY_SIGN((uint8_t)decoded->displacement.field, sign);
+          value = GET_VALUE_BY_SIGN((uint8_t)decoded->displacement.field, sign);
 
-          sprintf(dst, FMT_SIB_ONE_BYTE_DISP_NO_SCALE_ADDRESSING_OP,
-                  decoded->ptr_text, decoded->segment_text,
-                  modrm_reg32[decoded->sib.base], sign, value);
+          sprintf(dst, 
+                  FMT_SIB_ONE_BYTE_DISP_NO_SCALE_ADDRESSING_OP,
+                  decoded->ptr_text, 
+                  decoded->segment_text,
+                  modrm_reg32[decoded->sib.base], 
+                  sign, 
+                  (uint8_t)value);
         } else {
           sign = GET_SIGN((uint8_t)decoded->displacement.field, 8);
-          uint8_t value =
-              GET_VALUE_BY_SIGN((uint8_t)decoded->displacement.field, sign);
+          value = GET_VALUE_BY_SIGN((uint8_t)decoded->displacement.field, sign);
 
-          sprintf(dst, FMT_SIB_ONE_BYTE_DISP_ADDRESSING_OP, decoded->ptr_text,
-                  decoded->segment_text, modrm_reg32[decoded->sib.base],
-                  modrm_reg32[decoded->sib.index], 1 << decoded->sib.scale,
-                  sign, value);
+          sprintf(dst, 
+                  FMT_SIB_ONE_BYTE_DISP_ADDRESSING_OP, 
+                  decoded->ptr_text,
+                  decoded->segment_text, 
+                  modrm_reg32[decoded->sib.base],
+                  modrm_reg32[decoded->sib.index], 
+                  1 << decoded->sib.scale,
+                  sign, 
+                  (uint8_t)value);
         }
       } else {
         sign = GET_SIGN((uint8_t)decoded->displacement.field, 8);
-        uint8_t value =
-            GET_VALUE_BY_SIGN((uint8_t)decoded->displacement.field, sign);
+        value = GET_VALUE_BY_SIGN((uint8_t)decoded->displacement.field, sign);
 
-        sprintf(dst, FMT_ONE_BYTE_DISP_ADDRESSING_OP, decoded->ptr_text,
-                decoded->segment_text, modrm_reg32[decoded->modrm.rm], sign,
-                value);
+        sprintf(dst, 
+                FMT_ONE_BYTE_DISP_ADDRESSING_OP, 
+                decoded->ptr_text,
+                decoded->segment_text, 
+                modrm_reg32[decoded->modrm.rm], 
+                sign,
+                (uint8_t)value);
       }
       break;
     case MOD_FOUR_BYTE_DISPLACEMENT:
       if (decoded->sib.size) {
         if (decoded->sib.index == 4) {
           sign = GET_SIGN((uint32_t)decoded->displacement.field, 32);
-          uint32_t value =
-              GET_VALUE_BY_SIGN((uint32_t)decoded->displacement.field, sign);
+          value = GET_VALUE_BY_SIGN((uint32_t)decoded->displacement.field, sign);
 
-          sprintf(dst, FMT_SIB_FOUR_BYTE_DISP_NO_SCALE_ADDRESSING_OP,
-                  decoded->ptr_text, decoded->segment_text,
-                  modrm_reg32[decoded->sib.base], sign, value);
+          sprintf(dst, 
+                  FMT_SIB_FOUR_BYTE_DISP_NO_SCALE_ADDRESSING_OP,
+                  decoded->ptr_text, 
+                  decoded->segment_text,
+                  modrm_reg32[decoded->sib.base], 
+                  sign, 
+                  value);
         } else {
           sign = GET_SIGN((uint32_t)decoded->displacement.field, 32);
-          uint32_t value =
-              GET_VALUE_BY_SIGN((uint32_t)decoded->displacement.field, sign);
+          value = GET_VALUE_BY_SIGN((uint32_t)decoded->displacement.field, sign);
 
-          sprintf(dst, FMT_SIB_FOUR_BYTE_DISP_ADDRESSING_OP, decoded->ptr_text,
-                  decoded->segment_text, modrm_reg32[decoded->sib.base],
-                  modrm_reg32[decoded->sib.index], 1 << decoded->sib.scale,
-                  sign, value);
+          sprintf(dst, 
+                  FMT_SIB_FOUR_BYTE_DISP_ADDRESSING_OP, 
+                  decoded->ptr_text,
+                  decoded->segment_text, 
+                  modrm_reg32[decoded->sib.base],
+                  modrm_reg32[decoded->sib.index], 
+                  1 << decoded->sib.scale,
+                  sign, 
+                  value);
         }
       } else {
         sign = GET_SIGN((uint32_t)decoded->displacement.field, 32);
-        uint32_t value =
-            GET_VALUE_BY_SIGN((uint32_t)decoded->displacement.field, sign);
+        value = GET_VALUE_BY_SIGN((uint32_t)decoded->displacement.field, sign);
 
-        sprintf(dst, FMT_FOUR_BYTE_DISP_ADDRESSING_OP, decoded->ptr_text,
-                decoded->segment_text, modrm_reg32[decoded->modrm.rm], sign,
+        sprintf(dst, 
+                FMT_FOUR_BYTE_DISP_ADDRESSING_OP,
+                decoded->ptr_text,
+                decoded->segment_text, 
+                modrm_reg32[decoded->modrm.rm], 
+                sign,
                 value);
       }
       break;

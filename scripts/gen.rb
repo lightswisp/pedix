@@ -421,7 +421,7 @@ extended_grouped.each do |k,v|
 end
 
 tables_file << "};\n // extended end\n"
-instructions_file << "// extended end"
+instructions_file << "// extended end\n"
 
 File.write("../include/pedix/tables/instructions.h", instructions_file)
 File.write("../include/pedix/tables/tables.h", tables_file)

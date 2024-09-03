@@ -28,17 +28,14 @@ extern const char *modrm_reg32[];
 #define ADDR_PTR "%s"
 
 #define FMT_MOFFS SEGMENT"["OPERAND_DWORD"]" 
-
-// put the BYTE PTR, WORD PTR or DWORD PTR inside the decoded->ptr_text before set_operand_by_??_size 
-// it will be just easier to put everything together
-// also, inside set_operand_by??_size, we should add the second argument (address_size)
-// like this -> set_operand_by??_size(uint8_t operand_size, uint8_t address_size)
-// then choose the right FMT according to this info
 #define FMT_TWO_BYTE_DISPLACEMENT_ASZ_OVERRIDE                                 \
   ADDR_PTR " " SEGMENT "[" REGISTER SIGN OPERAND_WORD "]"
+#define FMT_ONE_BYTE_DISPLACEMENT_ASZ_OVERRIDE                                 \
+  ADDR_PTR " " SEGMENT "[" REGISTER SIGN OPERAND_BYTE "]"
+#define FMT_DISPLACEMENT_ONLY_MODE_ASZ_OVERRIDE                                \
+  ADDR_PTR " " SEGMENT "[" OPERAND_WORD "]"
 
-#define FMT_DISPLACEMENT_ONLY_MODE "DWORD PTR " SEGMENT "[" OPERAND_DWORD "]"
-
+#define FMT_DISPLACEMENT_ONLY_MODE ADDR_PTR " " SEGMENT "[" OPERAND_DWORD "]"
 #define FMT_INDIRECT_ADDRESSING_OP ADDR_PTR " " SEGMENT "[" REGISTER "]"
 #define FMT_SIB_FOUR_BYTE_NO_DISP_ADDRESSING_OP                               \
   ADDR_PTR " " SEGMENT "[" REGISTER "+" REGISTER "*" SCALE "]"
