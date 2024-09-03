@@ -153,7 +153,7 @@ static void pedix_decode32(decoded_instruction_t *decoded, uint8_t *instruction)
     }
   }
 
-  // this part look a bit ugly.
+  // this part looks a bit ugly.
   uint32_t len;
   if((len = pedix_set_immediate_operand_if_present(decoded, instruction))){
     SET_BUFFER(decoded, instruction, len);
