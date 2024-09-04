@@ -1,5 +1,5 @@
 /* (instructions.h) auto generated using gen.rb 
- * time: 2024-09-03 03:33:28 -0400
+ * time: 2024-09-04 05:08:41 -0400
  */
 
 #pragma once
@@ -3130,15 +3130,24 @@ instruction_t REGULAR_XLAT_215[1] = {
   },
 };
 
-instruction_t REGULAR_FADD_216[8] = {
+instruction_t REGULAR_FADD_216[9] = {
   {
    .extended_opcode = false,
    .mnemonic = "fadd",
    .opcode_field = {.type = 2, .value = 0 },
-   .operands = {.size = 2, .operand = {84,57,0,0}},
+   .operands = {.size = 1, .operand = {57,0,0,0}},
    .prefix = 0,
    .primary_opcode = 216,
    .secondary_opcode = -1,
+  },
+  {
+   .extended_opcode = false,
+   .mnemonic = "fadd",
+   .opcode_field = {.type = 0, .value = 0 },
+   .operands = {.size = 2, .operand = {84,85,0,0}},
+   .prefix = 0,
+   .primary_opcode = 216,
+   .secondary_opcode = 192,
   },
   {
    .extended_opcode = false,
