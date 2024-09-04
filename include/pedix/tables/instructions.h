@@ -1,5 +1,5 @@
 /* (instructions.h) auto generated using gen.rb 
- * time: 2024-09-04 05:23:00 -0400
+ * time: 2024-09-04 06:05:19 -0400
  */
 
 #pragma once
@@ -3130,7 +3130,7 @@ instruction_t REGULAR_XLAT_215[1] = {
   },
 };
 
-instruction_t REGULAR_FADD_216[16] = {
+instruction_t REGULAR_FADD_216[24] = {
   {
    .extended_opcode = false,
    .mnemonic = "fadd",
@@ -3216,10 +3216,82 @@ instruction_t REGULAR_FADD_216[16] = {
    .extended_opcode = false,
    .mnemonic = "fmul",
    .opcode_field = {.type = 2, .value = 1 },
-   .operands = {.size = 2, .operand = {84,57,0,0}},
+   .operands = {.size = 1, .operand = {57,0,0,0}},
    .prefix = 0,
    .primary_opcode = 216,
    .secondary_opcode = -1,
+  },
+  {
+   .extended_opcode = false,
+   .mnemonic = "fmul",
+   .opcode_field = {.type = 0, .value = 0 },
+   .operands = {.size = 2, .operand = {84,85,0,0}},
+   .prefix = 0,
+   .primary_opcode = 216,
+   .secondary_opcode = 200,
+  },
+  {
+   .extended_opcode = false,
+   .mnemonic = "fmul",
+   .opcode_field = {.type = 0, .value = 0 },
+   .operands = {.size = 2, .operand = {84,85,0,0}},
+   .prefix = 0,
+   .primary_opcode = 216,
+   .secondary_opcode = 201,
+  },
+  {
+   .extended_opcode = false,
+   .mnemonic = "fmul",
+   .opcode_field = {.type = 0, .value = 0 },
+   .operands = {.size = 2, .operand = {84,85,0,0}},
+   .prefix = 0,
+   .primary_opcode = 216,
+   .secondary_opcode = 202,
+  },
+  {
+   .extended_opcode = false,
+   .mnemonic = "fmul",
+   .opcode_field = {.type = 0, .value = 0 },
+   .operands = {.size = 2, .operand = {84,85,0,0}},
+   .prefix = 0,
+   .primary_opcode = 216,
+   .secondary_opcode = 203,
+  },
+  {
+   .extended_opcode = false,
+   .mnemonic = "fmul",
+   .opcode_field = {.type = 0, .value = 0 },
+   .operands = {.size = 2, .operand = {84,85,0,0}},
+   .prefix = 0,
+   .primary_opcode = 216,
+   .secondary_opcode = 204,
+  },
+  {
+   .extended_opcode = false,
+   .mnemonic = "fmul",
+   .opcode_field = {.type = 0, .value = 0 },
+   .operands = {.size = 2, .operand = {84,85,0,0}},
+   .prefix = 0,
+   .primary_opcode = 216,
+   .secondary_opcode = 205,
+  },
+  {
+   .extended_opcode = false,
+   .mnemonic = "fmul",
+   .opcode_field = {.type = 0, .value = 0 },
+   .operands = {.size = 2, .operand = {84,85,0,0}},
+   .prefix = 0,
+   .primary_opcode = 216,
+   .secondary_opcode = 206,
+  },
+  {
+   .extended_opcode = false,
+   .mnemonic = "fmul",
+   .opcode_field = {.type = 0, .value = 0 },
+   .operands = {.size = 2, .operand = {84,85,0,0}},
+   .prefix = 0,
+   .primary_opcode = 216,
+   .secondary_opcode = 207,
   },
   {
    .extended_opcode = false,

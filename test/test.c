@@ -102,6 +102,7 @@ PREPARE_INSTRUCTION(68, "\x67\x39\x11"); // cmp DWORD PTR [bx+di],edx
 PREPARE_INSTRUCTION(69,"\x66\x67\x19\x55\xEE");
 PREPARE_INSTRUCTION(70,"\x67\xF2\x0F\x38\xF0\xB8\x11\x22");
 PREPARE_INSTRUCTION(71, "\x66\x67\x0F\xA4\xF2\x11");
+PREPARE_INSTRUCTION(72, "\xd8\xc1");
 
 int main(void){
   decoded_instruction_t *decoded = pedix_init_instruction();
@@ -179,6 +180,7 @@ int main(void){
   PREPARE_TEST(69, "sbb WORD PTR [di-0x12],dx");
   PREPARE_TEST(70, "crc32 edi,BYTE PTR [bx+si+0x2211]");
   PREPARE_TEST(71, "shld dx,si,0x11");
+  PREPARE_TEST(72, "fadd st0,st1");
   
 
   puts(GREEN"All tests are passed!"NC);
