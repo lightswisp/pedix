@@ -7680,8 +7680,8 @@
 <TD></TD>
 <TD></TD>
 <TD>FCOM</TD>
-<td><i>ST</i></td>
 <td>m32real</td>
+<td></td>
 <td></td>
 <td></td>
 <td rowspan="1"></td>
@@ -7692,6 +7692,203 @@
 <TD></TD>
 <td>Compare Real</td>
 </TR></TBODY>
+
+
+<TBODY><TR id="xD8">
+<TD></TD>
+<TD></TD>
+<TD>D8</TD>
+<td>D0</td>
+<TD CLASS="highlight"></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FCOM</TD>
+<td><b>STi</b></td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>
+<TD></TD>
+<td>Exchange Register Contents</td>
+</TR></TBODY>
+
+<TBODY><TR id="xD8">
+<TD></TD>
+<TD></TD>
+<TD>D8</TD>
+<td>D1</td>
+<TD CLASS="highlight"></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FCOM</TD>
+<td><b>STi</b></td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>
+<TD></TD>
+<td>Exchange Register Contents</td>
+</TR></TBODY>
+<TBODY><TR id="xD8">
+<TD></TD>
+<TD></TD>
+<TD>D8</TD>
+<td>D2</td>
+<TD CLASS="highlight"></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FCOM</TD>
+<td><b>STi</b></td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>
+<TD></TD>
+<td>Exchange Register Contents</td>
+</TR></TBODY>
+<TBODY><TR id="xD8">
+<TD></TD>
+<TD></TD>
+<TD>D8</TD>
+<td>D3</td>
+<TD CLASS="highlight"></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FCOM</TD>
+<td><b>STi</b></td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>
+<TD></TD>
+<td>Exchange Register Contents</td>
+</TR></TBODY>
+<TBODY><TR id="xD8">
+<TD></TD>
+<TD></TD>
+<TD>D8</TD>
+<td>D4</td>
+<TD CLASS="highlight"></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FCOM</TD>
+<td><b>STi</b></td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>
+<TD></TD>
+<td>Exchange Register Contents</td>
+</TR></TBODY>
+<TBODY><TR id="xD8">
+<TD></TD>
+<TD></TD>
+<TD>D8</TD>
+<td>D5</td>
+<TD CLASS="highlight"></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FCOM</TD>
+<td><b>STi</b></td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>
+<TD></TD>
+<td>Exchange Register Contents</td>
+</TR></TBODY>
+<TBODY><TR id="xD8">
+<TD></TD>
+<TD></TD>
+<TD>D8</TD>
+<td>D6</td>
+<TD CLASS="highlight"></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FCOM</TD>
+<td><b>STi</b></td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>
+<TD></TD>
+<td>Exchange Register Contents</td>
+</TR></TBODY>
+<TBODY><TR id="xD8">
+<TD></TD>
+<TD></TD>
+<TD>D8</TD>
+<td>D7</td>
+<TD CLASS="highlight"></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FCOM</TD>
+<td><b>STi</b></td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>
+<TD></TD>
+<td>Exchange Register Contents</td>
+</TR></TBODY>
+
+
 <TBODY><TR id="xD8_3">
 <TD></TD>
 <TD></TD>

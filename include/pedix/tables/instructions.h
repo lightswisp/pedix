@@ -1,5 +1,5 @@
 /* (instructions.h) auto generated using gen.rb 
- * time: 2024-09-04 06:05:19 -0400
+ * time: 2024-09-04 06:25:39 -0400
  */
 
 #pragma once
@@ -3130,7 +3130,7 @@ instruction_t REGULAR_XLAT_215[1] = {
   },
 };
 
-instruction_t REGULAR_FADD_216[24] = {
+instruction_t REGULAR_FADD_216[32] = {
   {
    .extended_opcode = false,
    .mnemonic = "fadd",
@@ -3297,10 +3297,82 @@ instruction_t REGULAR_FADD_216[24] = {
    .extended_opcode = false,
    .mnemonic = "fcom",
    .opcode_field = {.type = 2, .value = 2 },
-   .operands = {.size = 2, .operand = {84,57,0,0}},
+   .operands = {.size = 1, .operand = {57,0,0,0}},
    .prefix = 0,
    .primary_opcode = 216,
    .secondary_opcode = -1,
+  },
+  {
+   .extended_opcode = false,
+   .mnemonic = "fcom",
+   .opcode_field = {.type = 0, .value = 0 },
+   .operands = {.size = 1, .operand = {85,0,0,0}},
+   .prefix = 0,
+   .primary_opcode = 216,
+   .secondary_opcode = 208,
+  },
+  {
+   .extended_opcode = false,
+   .mnemonic = "fcom",
+   .opcode_field = {.type = 0, .value = 0 },
+   .operands = {.size = 1, .operand = {85,0,0,0}},
+   .prefix = 0,
+   .primary_opcode = 216,
+   .secondary_opcode = 209,
+  },
+  {
+   .extended_opcode = false,
+   .mnemonic = "fcom",
+   .opcode_field = {.type = 0, .value = 0 },
+   .operands = {.size = 1, .operand = {85,0,0,0}},
+   .prefix = 0,
+   .primary_opcode = 216,
+   .secondary_opcode = 210,
+  },
+  {
+   .extended_opcode = false,
+   .mnemonic = "fcom",
+   .opcode_field = {.type = 0, .value = 0 },
+   .operands = {.size = 1, .operand = {85,0,0,0}},
+   .prefix = 0,
+   .primary_opcode = 216,
+   .secondary_opcode = 211,
+  },
+  {
+   .extended_opcode = false,
+   .mnemonic = "fcom",
+   .opcode_field = {.type = 0, .value = 0 },
+   .operands = {.size = 1, .operand = {85,0,0,0}},
+   .prefix = 0,
+   .primary_opcode = 216,
+   .secondary_opcode = 212,
+  },
+  {
+   .extended_opcode = false,
+   .mnemonic = "fcom",
+   .opcode_field = {.type = 0, .value = 0 },
+   .operands = {.size = 1, .operand = {85,0,0,0}},
+   .prefix = 0,
+   .primary_opcode = 216,
+   .secondary_opcode = 213,
+  },
+  {
+   .extended_opcode = false,
+   .mnemonic = "fcom",
+   .opcode_field = {.type = 0, .value = 0 },
+   .operands = {.size = 1, .operand = {85,0,0,0}},
+   .prefix = 0,
+   .primary_opcode = 216,
+   .secondary_opcode = 214,
+  },
+  {
+   .extended_opcode = false,
+   .mnemonic = "fcom",
+   .opcode_field = {.type = 0, .value = 0 },
+   .operands = {.size = 1, .operand = {85,0,0,0}},
+   .prefix = 0,
+   .primary_opcode = 216,
+   .secondary_opcode = 215,
   },
   {
    .extended_opcode = false,
