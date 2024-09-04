@@ -1,5 +1,5 @@
 /* (instructions.h) auto generated using gen.rb 
- * time: 2024-09-04 05:08:41 -0400
+ * time: 2024-09-04 05:23:00 -0400
  */
 
 #pragma once
@@ -3130,7 +3130,7 @@ instruction_t REGULAR_XLAT_215[1] = {
   },
 };
 
-instruction_t REGULAR_FADD_216[9] = {
+instruction_t REGULAR_FADD_216[16] = {
   {
    .extended_opcode = false,
    .mnemonic = "fadd",
@@ -3148,6 +3148,69 @@ instruction_t REGULAR_FADD_216[9] = {
    .prefix = 0,
    .primary_opcode = 216,
    .secondary_opcode = 192,
+  },
+  {
+   .extended_opcode = false,
+   .mnemonic = "fadd",
+   .opcode_field = {.type = 0, .value = 0 },
+   .operands = {.size = 2, .operand = {84,85,0,0}},
+   .prefix = 0,
+   .primary_opcode = 216,
+   .secondary_opcode = 193,
+  },
+  {
+   .extended_opcode = false,
+   .mnemonic = "fadd",
+   .opcode_field = {.type = 0, .value = 0 },
+   .operands = {.size = 2, .operand = {84,85,0,0}},
+   .prefix = 0,
+   .primary_opcode = 216,
+   .secondary_opcode = 194,
+  },
+  {
+   .extended_opcode = false,
+   .mnemonic = "fadd",
+   .opcode_field = {.type = 0, .value = 0 },
+   .operands = {.size = 2, .operand = {84,85,0,0}},
+   .prefix = 0,
+   .primary_opcode = 216,
+   .secondary_opcode = 195,
+  },
+  {
+   .extended_opcode = false,
+   .mnemonic = "fadd",
+   .opcode_field = {.type = 0, .value = 0 },
+   .operands = {.size = 2, .operand = {84,85,0,0}},
+   .prefix = 0,
+   .primary_opcode = 216,
+   .secondary_opcode = 196,
+  },
+  {
+   .extended_opcode = false,
+   .mnemonic = "fadd",
+   .opcode_field = {.type = 0, .value = 0 },
+   .operands = {.size = 2, .operand = {84,85,0,0}},
+   .prefix = 0,
+   .primary_opcode = 216,
+   .secondary_opcode = 197,
+  },
+  {
+   .extended_opcode = false,
+   .mnemonic = "fadd",
+   .opcode_field = {.type = 0, .value = 0 },
+   .operands = {.size = 2, .operand = {84,85,0,0}},
+   .prefix = 0,
+   .primary_opcode = 216,
+   .secondary_opcode = 198,
+  },
+  {
+   .extended_opcode = false,
+   .mnemonic = "fadd",
+   .opcode_field = {.type = 0, .value = 0 },
+   .operands = {.size = 2, .operand = {84,85,0,0}},
+   .prefix = 0,
+   .primary_opcode = 216,
+   .secondary_opcode = 199,
   },
   {
    .extended_opcode = false,
