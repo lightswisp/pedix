@@ -495,7 +495,7 @@ static void pedix_set_operand_by_id32(decoded_instruction_t *decoded, __operand_
     pedix_set_operand_m(decoded, dst);
     break;
   case OPERAND_REG_ST: 
-    strcpy(dst, "st0");
+    strcpy(dst, "st");
     break;
   case OPERAND_REG_STI: 
     strcpy(dst, st_reg[decoded->instruction->secondary_opcode & 0x07]);
