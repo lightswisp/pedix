@@ -5,10 +5,11 @@
 #include <string.h>
 #include <assert.h>
 
-const char *modrm_reg8[]  = {"al", "cl", "dl", "bl", "ah", "ch", "dh", "bh"};
-const char *modrm_reg16[] = {"ax", "cx", "dx", "bx", "sp", "bp", "si", "di"};
-const char *modrm_reg32[] = {"eax", "ecx", "edx", "ebx", "esp", "ebp", "esi", "edi"};
+const char *modrm_reg8[]           = {"al", "cl", "dl", "bl", "ah", "ch", "dh", "bh"};
+const char *modrm_reg16[]          = {"ax", "cx", "dx", "bx", "sp", "bp", "si", "di"};
+const char *modrm_reg32[]          = {"eax", "ecx", "edx", "ebx", "esp", "ebp", "esi", "edi"};
 const char *modrm_reg16_override[] = {"bx+si", "bx+di", "bp+si", "bp+di", "si", "di", "bp", "bx"};
+const char *st_reg[]               = {"st0", "st1", "st2", "st3", "st4", "st5", "st6", "st7"};
 
 #define GET_SIGN(value, size) ( (value & (0x80 << (size - 8))) >> (size - 1) == 1 ? 0x2d : 0x2b )
 #define GET_VALUE_BY_SIGN(value, sign) ( sign == 0x2d ? ~value + 1 : value )

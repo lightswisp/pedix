@@ -7,6 +7,8 @@ void pedix_merge_operands(decoded_instruction_t *decoded);
 extern const char *modrm_reg8[]; 
 extern const char *modrm_reg16[];
 extern const char *modrm_reg32[];
+extern const char *modrm_reg16_override[];
+extern const char *st_reg[]; 
 
 /* ib or imm8 */
 #define OPERAND_BYTE "0x%02x"
