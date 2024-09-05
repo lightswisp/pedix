@@ -1,5 +1,5 @@
 /* (instructions.h) auto generated using gen.rb 
- * time: 2024-09-04 08:29:32 -0400
+ * time: 2024-09-05 02:55:05 -0400
  */
 
 #pragma once
@@ -3130,7 +3130,7 @@ instruction_t REGULAR_XLAT_215[1] = {
   },
 };
 
-instruction_t REGULAR_FADD_216[48] = {
+instruction_t REGULAR_FADD_216[56] = {
   {
    .extended_opcode = false,
    .mnemonic = "fadd",
@@ -3540,10 +3540,82 @@ instruction_t REGULAR_FADD_216[48] = {
    .extended_opcode = false,
    .mnemonic = "fsubr",
    .opcode_field = {.type = 2, .value = 5 },
-   .operands = {.size = 2, .operand = {84,57,0,0}},
+   .operands = {.size = 1, .operand = {57,0,0,0}},
    .prefix = 0,
    .primary_opcode = 216,
    .secondary_opcode = -1,
+  },
+  {
+   .extended_opcode = false,
+   .mnemonic = "fsubr",
+   .opcode_field = {.type = 0, .value = 0 },
+   .operands = {.size = 2, .operand = {84,85,0,0}},
+   .prefix = 0,
+   .primary_opcode = 216,
+   .secondary_opcode = 232,
+  },
+  {
+   .extended_opcode = false,
+   .mnemonic = "fsubr",
+   .opcode_field = {.type = 0, .value = 0 },
+   .operands = {.size = 2, .operand = {84,85,0,0}},
+   .prefix = 0,
+   .primary_opcode = 216,
+   .secondary_opcode = 233,
+  },
+  {
+   .extended_opcode = false,
+   .mnemonic = "fsubr",
+   .opcode_field = {.type = 0, .value = 0 },
+   .operands = {.size = 2, .operand = {84,85,0,0}},
+   .prefix = 0,
+   .primary_opcode = 216,
+   .secondary_opcode = 234,
+  },
+  {
+   .extended_opcode = false,
+   .mnemonic = "fsubr",
+   .opcode_field = {.type = 0, .value = 0 },
+   .operands = {.size = 2, .operand = {84,85,0,0}},
+   .prefix = 0,
+   .primary_opcode = 216,
+   .secondary_opcode = 235,
+  },
+  {
+   .extended_opcode = false,
+   .mnemonic = "fsubr",
+   .opcode_field = {.type = 0, .value = 0 },
+   .operands = {.size = 2, .operand = {84,85,0,0}},
+   .prefix = 0,
+   .primary_opcode = 216,
+   .secondary_opcode = 236,
+  },
+  {
+   .extended_opcode = false,
+   .mnemonic = "fsubr",
+   .opcode_field = {.type = 0, .value = 0 },
+   .operands = {.size = 2, .operand = {84,85,0,0}},
+   .prefix = 0,
+   .primary_opcode = 216,
+   .secondary_opcode = 237,
+  },
+  {
+   .extended_opcode = false,
+   .mnemonic = "fsubr",
+   .opcode_field = {.type = 0, .value = 0 },
+   .operands = {.size = 2, .operand = {84,85,0,0}},
+   .prefix = 0,
+   .primary_opcode = 216,
+   .secondary_opcode = 238,
+  },
+  {
+   .extended_opcode = false,
+   .mnemonic = "fsubr",
+   .opcode_field = {.type = 0, .value = 0 },
+   .operands = {.size = 2, .operand = {84,85,0,0}},
+   .prefix = 0,
+   .primary_opcode = 216,
+   .secondary_opcode = 239,
   },
   {
    .extended_opcode = false,

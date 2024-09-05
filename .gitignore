@@ -5,3 +5,4 @@
 *.out
 *.o
 test.csv
+temp.rb
