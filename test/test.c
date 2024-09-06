@@ -13,6 +13,7 @@
 #define PREPARE_TEST(n, itext)                                                 \
   pedix_decode(decoded, instruction##n);                                       \
   printf("[*] testing for: %s\n", itext);                                      \
+  printf("[*] decoded->text = %s\n", decoded->text);                           \
   assert(                                                                      \
       ("instruction text test " #n && TEXT_IDENTICAL(decoded->text, itext)));  \
   printf(GREEN "test ok\n" NC);                                                \
@@ -115,6 +116,7 @@ PREPARE_INSTRUCTION(81, "\xD9\xD0");
 PREPARE_INSTRUCTION(82, "\xD9\xDF");
 PREPARE_INSTRUCTION(83, "\xD9\xA2\x11\x22\x33\x44");
 PREPARE_INSTRUCTION(84, "\xD9\xE0");
+PREPARE_INSTRUCTION(85, "\xD9\xE1");
 
 int main(void){
   decoded_instruction_t *decoded = pedix_init_instruction();
@@ -205,6 +207,7 @@ int main(void){
   PREPARE_TEST(82, "fstp1 st7");
   PREPARE_TEST(83, "fldenv DWORD PTR [edx+0x44332211]");
   PREPARE_TEST(84, "fchs");
+  PREPARE_TEST(85, "fabs");
 
   puts(GREEN"All tests are passed!"NC);
   return 0;
