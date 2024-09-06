@@ -9915,7 +9915,7 @@
 <TD></TD>
 <TD>s</TD>
 <TD>FLD1</TD>
-<td><b><i>ST</i></b></td>
+<td></td>
 <td></td>
 <td></td>
 <td></td>
@@ -9939,7 +9939,7 @@
 <TD></TD>
 <TD>s</TD>
 <TD>FLDL2T</TD>
-<td><b><i>ST</i></b></td>
+<td></td>
 <td></td>
 <td></td>
 <td></td>
@@ -9963,7 +9963,7 @@
 <TD></TD>
 <TD>s</TD>
 <TD>FLDL2E</TD>
-<td><b><i>ST</i></b></td>
+<td></td>
 <td></td>
 <td></td>
 <td></td>
@@ -9987,7 +9987,7 @@
 <TD></TD>
 <TD>s</TD>
 <TD>FLDPI</TD>
-<td><b><i>ST</i></b></td>
+<td></td>
 <td></td>
 <td></td>
 <td></td>
@@ -10011,7 +10011,7 @@
 <TD></TD>
 <TD>s</TD>
 <TD>FLDLG2</TD>
-<td><b><i>ST</i></b></td>
+<td></td>
 <td></td>
 <td></td>
 <td></td>
@@ -10035,7 +10035,7 @@
 <TD></TD>
 <TD>s</TD>
 <TD>FLDLN2</TD>
-<td><b><i>ST</i></b></td>
+<td></td>
 <td></td>
 <td></td>
 <td></td>
@@ -10059,7 +10059,7 @@
 <TD></TD>
 <TD>s</TD>
 <TD>FLDZ</TD>
-<td><b><i></i></b></td>
+<td></td>
 <td></td>
 <td></td>
 <td></td>
