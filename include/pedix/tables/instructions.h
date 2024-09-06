@@ -1,5 +1,5 @@
 /* (instructions.h) auto generated using gen.rb 
- * time: 2024-09-06 03:53:45 -0400
+ * time: 2024-09-06 04:07:54 -0400
  */
 
 #pragma once
@@ -3781,7 +3781,7 @@ instruction_t REGULAR_FADD_216[72] = {
   },
 };
 
-instruction_t REGULAR_FLD_217[47] = {
+instruction_t REGULAR_FLD_217[54] = {
   {
    .extended_opcode = false,
    .mnemonic = "fld",
@@ -3866,11 +3866,74 @@ instruction_t REGULAR_FLD_217[47] = {
   {
    .extended_opcode = false,
    .mnemonic = "fxch",
-   .opcode_field = {.type = 2, .value = 1 },
-   .operands = {.size = 2, .operand = {84,85,0,0}},
+   .opcode_field = {.type = 0, .value = 0 },
+   .operands = {.size = 1, .operand = {85,0,0,0}},
    .prefix = 0,
    .primary_opcode = 217,
-   .secondary_opcode = -1,
+   .secondary_opcode = 200,
+  },
+  {
+   .extended_opcode = false,
+   .mnemonic = "fxch",
+   .opcode_field = {.type = 0, .value = 0 },
+   .operands = {.size = 1, .operand = {85,0,0,0}},
+   .prefix = 0,
+   .primary_opcode = 217,
+   .secondary_opcode = 201,
+  },
+  {
+   .extended_opcode = false,
+   .mnemonic = "fxch",
+   .opcode_field = {.type = 0, .value = 0 },
+   .operands = {.size = 1, .operand = {85,0,0,0}},
+   .prefix = 0,
+   .primary_opcode = 217,
+   .secondary_opcode = 202,
+  },
+  {
+   .extended_opcode = false,
+   .mnemonic = "fxch",
+   .opcode_field = {.type = 0, .value = 0 },
+   .operands = {.size = 1, .operand = {85,0,0,0}},
+   .prefix = 0,
+   .primary_opcode = 217,
+   .secondary_opcode = 203,
+  },
+  {
+   .extended_opcode = false,
+   .mnemonic = "fxch",
+   .opcode_field = {.type = 0, .value = 0 },
+   .operands = {.size = 1, .operand = {85,0,0,0}},
+   .prefix = 0,
+   .primary_opcode = 217,
+   .secondary_opcode = 204,
+  },
+  {
+   .extended_opcode = false,
+   .mnemonic = "fxch",
+   .opcode_field = {.type = 0, .value = 0 },
+   .operands = {.size = 1, .operand = {85,0,0,0}},
+   .prefix = 0,
+   .primary_opcode = 217,
+   .secondary_opcode = 205,
+  },
+  {
+   .extended_opcode = false,
+   .mnemonic = "fxch",
+   .opcode_field = {.type = 0, .value = 0 },
+   .operands = {.size = 1, .operand = {85,0,0,0}},
+   .prefix = 0,
+   .primary_opcode = 217,
+   .secondary_opcode = 206,
+  },
+  {
+   .extended_opcode = false,
+   .mnemonic = "fxch",
+   .opcode_field = {.type = 0, .value = 0 },
+   .operands = {.size = 1, .operand = {85,0,0,0}},
+   .prefix = 0,
+   .primary_opcode = 217,
+   .secondary_opcode = 207,
   },
   {
    .extended_opcode = false,

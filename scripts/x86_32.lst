@@ -9275,21 +9275,20 @@
 </TR></TBODY>
 
 
-
 <TBODY><TR id="xD9_1">
 <TD></TD>
 <TD></TD>
 <TD>D9</TD>
-<td></td>
-<TD CLASS="highlight">1</TD>
+<td>C8</td>
+<TD CLASS="highlight"></TD>
 <TD></TD>
 <TD></TD>
 <TD></TD>
 <TD></TD>
 <TD></TD>
 <TD>FXCH</TD>
-<td><b><i>ST</i></b></td>
 <td><b>STi</b></td>
+<td></td>
 <td></td>
 <td></td>
 <td rowspan="1"></td>
@@ -9300,6 +9299,183 @@
 <TD></TD>
 <td>Exchange Register Contents</td>
 </TR></TBODY>
+
+<TBODY><TR id="xD9_1">
+<TD></TD>
+<TD></TD>
+<TD>D9</TD>
+<TD>C9</TD>
+<TD CLASS="highlight"></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FXCH</TD>
+<td><b>STi</b></td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>
+<TD></TD>
+<td>Exchange Register Contents</td>
+</TR></TBODY>
+
+<TBODY><TR id="xD9_1">
+<TD></TD>
+<TD></TD>
+<TD>D9</TD>
+<TD>CA</TD>
+<TD CLASS="highlight"></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FXCH</TD>
+<td><b>STi</b></td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>
+<TD></TD>
+<td>Exchange Register Contents</td>
+</TR></TBODY>
+
+<TBODY><TR id="xD9_1">
+<TD></TD>
+<TD></TD>
+<TD>D9</TD>
+<TD>CB</TD>
+<TD CLASS="highlight"></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FXCH</TD>
+<td><b>STi</b></td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>
+<TD></TD>
+<td>Exchange Register Contents</td>
+</TR></TBODY>
+
+<TBODY><TR id="xD9_1">
+<TD></TD>
+<TD></TD>
+<TD>D9</TD>
+<TD>CC</TD>
+<TD CLASS="highlight"></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FXCH</TD>
+<td><b>STi</b></td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>
+<TD></TD>
+<td>Exchange Register Contents</td>
+</TR></TBODY>
+
+<TBODY><TR id="xD9_1">
+<TD></TD>
+<TD></TD>
+<TD>D9</TD>
+<TD>CD</TD>
+<TD CLASS="highlight"></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FXCH</TD>
+<td><b>STi</b></td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>
+<TD></TD>
+<td>Exchange Register Contents</td>
+</TR></TBODY>
+
+<TBODY><TR id="xD9_1">
+<TD></TD>
+<TD></TD>
+<TD>D9</TD>
+<TD>CE</TD>
+<TD CLASS="highlight"></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FXCH</TD>
+<td><b>STi</b></td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>
+<TD></TD>
+<td>Exchange Register Contents</td>
+</TR></TBODY>
+
+<TBODY><TR id="xD9_1">
+<TD></TD>
+<TD></TD>
+<TD>D9</TD>
+<TD>CF</TD>
+<TD CLASS="highlight"></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FXCH</TD>
+<td><b>STi</b></td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>
+<TD></TD>
+<td>Exchange Register Contents</td>
+</TR></TBODY>
+
+
 <TBODY><TR id="xD9_2">
 <TD></TD>
 <TD></TD>
