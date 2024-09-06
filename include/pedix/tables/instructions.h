@@ -1,5 +1,5 @@
 /* (instructions.h) auto generated using gen.rb 
- * time: 2024-09-06 04:07:54 -0400
+ * time: 2024-09-06 04:10:57 -0400
  */
 
 #pragma once
@@ -3939,7 +3939,7 @@ instruction_t REGULAR_FLD_217[54] = {
    .extended_opcode = false,
    .mnemonic = "fst",
    .opcode_field = {.type = 2, .value = 2 },
-   .operands = {.size = 2, .operand = {57,84,0,0}},
+   .operands = {.size = 1, .operand = {57,0,0,0}},
    .prefix = 0,
    .primary_opcode = 217,
    .secondary_opcode = -1,
