@@ -119,6 +119,7 @@ PREPARE_INSTRUCTION(84, "\xD9\xE0");
 PREPARE_INSTRUCTION(85, "\xD9\xE1");
 PREPARE_INSTRUCTION(86, "\xD9\xE4");
 PREPARE_INSTRUCTION(87, "\xD9\xE5");
+PREPARE_INSTRUCTION(88, "\xD9\x28");
 
 int main(void){
   decoded_instruction_t *decoded = pedix_init_instruction();
@@ -212,6 +213,7 @@ int main(void){
   PREPARE_TEST(85, "fabs");
   PREPARE_TEST(86, "ftst");
   PREPARE_TEST(87, "fxam");
+  PREPARE_TEST(88, "fldcw WORD PTR [eax]");
 
   puts(GREEN"All tests are passed!"NC);
   return 0;

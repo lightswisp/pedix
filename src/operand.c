@@ -465,6 +465,10 @@ static void pedix_set_operand_by_id32(decoded_instruction_t *decoded, __operand_
     strcpy(decoded->ptr_text, "BYTE PTR");
     pedix_set_operand_m(decoded, dst);
     break;
+  case OPERAND_M_16: 
+    strcpy(decoded->ptr_text, "WORD PTR");
+    pedix_set_operand_m(decoded, dst);
+    break;
   case OPERAND_M_ALL:
     strcpy(decoded->ptr_text, "DWORD PTR");
     pedix_set_operand_m(decoded, dst);
