@@ -9537,7 +9537,7 @@
 <TD>p</TD>
 <TD>FSTP</TD>
 <td><b>m32real</b></td>
-<td><i>ST</i></td>
+<td></td>
 <td></td>
 <td></td>
 <td rowspan="1"></td>
@@ -9548,12 +9548,13 @@
 <TD></TD>
 <td>Store Floating Point Value and Pop</td>
 </TR></TBODY>
+
 <TBODY><TR>
 <TD></TD>
 <TD></TD>
 <TD>D9</TD>
-<td></td>
-<TD CLASS="highlight">3</TD>
+<TD>D8</TD>
+<TD CLASS="highlight"></TD>
 <TD>03+</TD>
 <TD>U<A HREF="#gen_note_x87_fpu_undoc_aliases"><SUP>9</SUP></A>
 </TD>
@@ -9562,7 +9563,7 @@
 <TD>p</TD>
 <TD><i>FSTP1</i></TD>
 <td><b>STi</b></td>
-<td><i>ST</i></td>
+<td></td>
 <td></td>
 <td></td>
 <td rowspan="1"></td>
@@ -9573,6 +9574,191 @@
 <TD></TD>
 <td>Store Floating Point Value and Pop</td>
 </TR></TBODY>
+
+
+<TBODY><TR>
+<TD></TD>
+<TD></TD>
+<TD>D9</TD>
+<TD>D9</TD>
+<TD CLASS="highlight"></TD>
+<TD>03+</TD>
+<TD>U<A HREF="#gen_note_x87_fpu_undoc_aliases"><SUP>9</SUP></A>
+</TD>
+<TD></TD>
+<TD></TD>
+<TD>p</TD>
+<TD><i>FSTP1</i></TD>
+<td><b>STi</b></td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>
+<TD></TD>
+<td>Store Floating Point Value and Pop</td>
+</TR></TBODY>
+
+<TBODY><TR>
+<TD></TD>
+<TD></TD>
+<TD>D9</TD>
+<TD>DA</TD>
+<TD CLASS="highlight"></TD>
+<TD>03+</TD>
+<TD>U<A HREF="#gen_note_x87_fpu_undoc_aliases"><SUP>9</SUP></A>
+</TD>
+<TD></TD>
+<TD></TD>
+<TD>p</TD>
+<TD><i>FSTP1</i></TD>
+<td><b>STi</b></td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>
+<TD></TD>
+<td>Store Floating Point Value and Pop</td>
+</TR></TBODY>
+
+<TBODY><TR>
+<TD></TD>
+<TD></TD>
+<TD>D9</TD>
+<TD>DB</TD>
+<TD CLASS="highlight"></TD>
+<TD>03+</TD>
+<TD>U<A HREF="#gen_note_x87_fpu_undoc_aliases"><SUP>9</SUP></A>
+</TD>
+<TD></TD>
+<TD></TD>
+<TD>p</TD>
+<TD><i>FSTP1</i></TD>
+<td><b>STi</b></td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>
+<TD></TD>
+<td>Store Floating Point Value and Pop</td>
+</TR></TBODY>
+
+<TBODY><TR>
+<TD></TD>
+<TD></TD>
+<TD>D9</TD>
+<TD>DC</TD>
+<TD CLASS="highlight"></TD>
+<TD>03+</TD>
+<TD>U<A HREF="#gen_note_x87_fpu_undoc_aliases"><SUP>9</SUP></A>
+</TD>
+<TD></TD>
+<TD></TD>
+<TD>p</TD>
+<TD><i>FSTP1</i></TD>
+<td><b>STi</b></td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>
+<TD></TD>
+<td>Store Floating Point Value and Pop</td>
+</TR></TBODY>
+
+<TBODY><TR>
+<TD></TD>
+<TD></TD>
+<TD>D9</TD>
+<TD>DD</TD>
+<TD CLASS="highlight"></TD>
+<TD>03+</TD>
+<TD>U<A HREF="#gen_note_x87_fpu_undoc_aliases"><SUP>9</SUP></A>
+</TD>
+<TD></TD>
+<TD></TD>
+<TD>p</TD>
+<TD><i>FSTP1</i></TD>
+<td><b>STi</b></td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>
+<TD></TD>
+<td>Store Floating Point Value and Pop</td>
+</TR></TBODY>
+
+<TBODY><TR>
+<TD></TD>
+<TD></TD>
+<TD>D9</TD>
+<TD>DE</TD>
+<TD CLASS="highlight"></TD>
+<TD>03+</TD>
+<TD>U<A HREF="#gen_note_x87_fpu_undoc_aliases"><SUP>9</SUP></A>
+</TD>
+<TD></TD>
+<TD></TD>
+<TD>p</TD>
+<TD><i>FSTP1</i></TD>
+<td><b>STi</b></td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>
+<TD></TD>
+<td>Store Floating Point Value and Pop</td>
+</TR></TBODY>
+
+<TBODY><TR>
+<TD></TD>
+<TD></TD>
+<TD>D9</TD>
+<TD>DF</TD>
+<TD CLASS="highlight"></TD>
+<TD>03+</TD>
+<TD>U<A HREF="#gen_note_x87_fpu_undoc_aliases"><SUP>9</SUP></A>
+</TD>
+<TD></TD>
+<TD></TD>
+<TD>p</TD>
+<TD><i>FSTP1</i></TD>
+<td><b>STi</b></td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>
+<TD></TD>
+<td>Store Floating Point Value and Pop</td>
+</TR></TBODY>
+
+
 <TBODY><TR id="xD9_4">
 <TD></TD>
 <TD></TD>
