@@ -9050,7 +9050,6 @@
 </TR></TBODY>
 
 
-
 <TBODY id="xD9"><TR id="xD9_0">
 <TD></TD>
 <TD></TD>
@@ -9063,8 +9062,8 @@
 <TD></TD>
 <TD>s</TD>
 <TD>FLD</TD>
-<td><b><i>ST</i></b></td>
-<td>STi/m32real</td>
+<td>m32real</td>
+<td></td>
 <td></td>
 <td></td>
 <td rowspan="1"></td>
@@ -9075,6 +9074,208 @@
 <TD></TD>
 <td>Load Floating Point Value</td>
 </TR></TBODY>
+
+<TBODY><TR id="xD8">
+<TD></TD>                                                                                                                                                                                  
+<TD></TD>                                                                                                                                                                       
+<TD>D9</TD>
+<TD>C0</TD>
+<TD CLASS="highlight"></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FLD</TD>
+<td><b>STi</b></td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>                                                                                                                                                                                  
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>              
+<TD></TD>
+<td>Exchange Register Contents</td>
+</TR></TBODY>
+<TBODY><TR id="xD8">
+<TD></TD>                                                                                                                                                                                  
+<TD></TD>                                                                                                                                                                       
+<TD>D9</TD>
+<TD>C1</TD>
+<TD CLASS="highlight"></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FLD</TD>
+<td><b>STi</b></td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>                                                                                                                                                                                  
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>              
+<TD></TD>
+<td>Exchange Register Contents</td>
+</TR></TBODY>
+
+<TBODY><TR id="xD8">
+<TD></TD>                                                                                                                                                                                  
+<TD></TD>                                                                                                                                                                       
+<TD>D9</TD>
+<TD>C2</TD>
+<TD CLASS="highlight"></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FLD</TD>
+<td><b>STi</b></td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>                                                                                                                                                                                  
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>              
+<TD></TD>
+<td>Exchange Register Contents</td>
+</TR></TBODY>
+
+<TBODY><TR id="xD8">
+<TD></TD>                                                                                                                                                                                  
+<TD></TD>                                                                                                                                                                       
+<TD>D9</TD>
+<TD>C3</TD>
+<TD CLASS="highlight"></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FLD</TD>
+<td><b>STi</b></td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>                                                                                                                                                                                  
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>              
+<TD></TD>
+<td>Exchange Register Contents</td>
+</TR></TBODY>
+
+<TBODY><TR id="xD8">
+<TD></TD>                                                                                                                                                                                  
+<TD></TD>                                                                                                                                                                       
+<TD>D9</TD>
+<TD>C4</TD>
+<TD CLASS="highlight"></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FLD</TD>
+<td><b>STi</b></td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>                                                                                                                                                                                  
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>              
+<TD></TD>
+<td>Exchange Register Contents</td>
+</TR></TBODY>
+
+<TBODY><TR id="xD8">
+<TD></TD>                                                                                                                                                                                  
+<TD></TD>                                                                                                                                                                       
+<TD>D9</TD>
+<TD>C5</TD>
+<TD CLASS="highlight"></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FLD</TD>
+<td><b>STi</b></td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>                                                                                                                                                                                  
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>              
+<TD></TD>
+<td>Exchange Register Contents</td>
+</TR></TBODY>
+
+<TBODY><TR id="xD8">
+<TD></TD>                                                                                                                                                                                  
+<TD></TD>                                                                                                                                                                       
+<TD>D9</TD>
+<TD>C6</TD>
+<TD CLASS="highlight"></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FLD</TD>
+<td><b>STi</b></td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>                                                                                                                                                                                  
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>              
+<TD></TD>
+<td>Exchange Register Contents</td>
+</TR></TBODY>
+
+<TBODY><TR id="xD8">
+<TD></TD>                                                                                                                                                                                  
+<TD></TD>                                                                                                                                                                       
+<TD>D9</TD>
+<TD>C7</TD>
+<TD CLASS="highlight"></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FLD</TD>
+<td><b>STi</b></td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>                                                                                                                                                                                  
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>              
+<TD></TD>
+<td>Exchange Register Contents</td>
+</TR></TBODY>
+
+
+
 <TBODY><TR id="xD9_1">
 <TD></TD>
 <TD></TD>
