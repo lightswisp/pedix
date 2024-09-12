@@ -12,7 +12,7 @@ void pedix_dump_instruction(instruction_t *instruction) {
                                            instruction->operands.operand[2],
                                            instruction->operands.operand[3]);
   printf("  prefix=%d\n", instruction->prefix);
-  printf("  primary_opcode=%d\n", instruction->primary_opcode);
+  printf("  primary_opcode=%x\n", instruction->primary_opcode);
   printf("  secondary_opcode=%d>\n", instruction->secondary_opcode);
 }
 

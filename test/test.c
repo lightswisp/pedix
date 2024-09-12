@@ -228,7 +228,9 @@ int main(void){
   PREPARE_TEST(93, "fldlg2");
   PREPARE_TEST(94, "fldln2");
   PREPARE_TEST(95, "fldz");
+  
 
   puts(GREEN"All tests are passed!"NC);
   return 0;
 }
+
