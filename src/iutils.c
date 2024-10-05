@@ -297,11 +297,30 @@ instruction_t *pedix_find_best_match(instruction_container_t container, decoded_
         if (!found_prefix)
           temp_score--;
       }
-      if (secondary_opcode != -1 && secondary_opcode == instruction[1]) {
-        // return immediately if it is an exact hit!
-        return &container.instructions[i];
-      }
+
+
+
+      if (secondary_opcode != -1) {
+        // if secondary opcode is matching, we increase the offset
+        // in order to check modrm after
+        // and we increase score as well
+        if(secondary_opcode == instruction[offset]){
 #ifdef DEBUG
+          printf("%s hit!\n", container.instructions[i].mnemonic);
+#endif
+          offset++;
+          temp_score++;
+        }
+        else 
+          temp_score--;
+      }
+
+//      if (secondary_opcode != -1 && secondary_opcode == instruction[1]) {
+        // return immediately if it is an exact hit!
+//        return &container.instructions[i];
+//      }
+
+/*#ifdef DEBUG
       if (secondary_opcode != -1) {
         // remove the opcode field from the table please!
 #if defined(__x86_64__) || defined(__i386__)
@@ -309,6 +328,7 @@ instruction_t *pedix_find_best_match(instruction_container_t container, decoded_
 #endif
       }
 #endif
+*/
       if (MODRM_REG(instruction[offset]) == value)
         // if reg field matches
         temp_score++; 
