@@ -1,5 +1,5 @@
 /* (instructions.h) auto generated using gen.rb 
- * time: 2024-09-06 07:19:15 -0400
+ * time: 2024-10-05 04:16:52 -0400
  */
 
 #pragma once
@@ -1975,7 +1975,7 @@ instruction_t REGULAR_CALLF_154[1] = {
   },
 };
 
-instruction_t REGULAR_FWAIT_155[1] = {
+instruction_t REGULAR_FWAIT_155[2] = {
   {
    .extended_opcode = false,
    .mnemonic = "fwait",
@@ -1984,6 +1984,15 @@ instruction_t REGULAR_FWAIT_155[1] = {
    .prefix = 0,
    .primary_opcode = 155,
    .secondary_opcode = -1,
+  },
+  {
+   .extended_opcode = false,
+   .mnemonic = "fstenv",
+   .opcode_field = {.type = 2, .value = 6 },
+   .operands = {.size = 1, .operand = {57,0,0,0}},
+   .prefix = 0,
+   .primary_opcode = 155,
+   .secondary_opcode = 217,
   },
 };
 
@@ -3781,7 +3790,7 @@ instruction_t REGULAR_FADD_216[72] = {
   },
 };
 
-instruction_t REGULAR_FLD_217[61] = {
+instruction_t REGULAR_FLD_217[60] = {
   {
    .extended_opcode = false,
    .mnemonic = "fld",
@@ -4157,15 +4166,6 @@ instruction_t REGULAR_FLD_217[61] = {
    .opcode_field = {.type = 2, .value = 6 },
    .operands = {.size = 1, .operand = {57,0,0,0}},
    .prefix = 0,
-   .primary_opcode = 217,
-   .secondary_opcode = -1,
-  },
-  {
-   .extended_opcode = false,
-   .mnemonic = "fstenv",
-   .opcode_field = {.type = 2, .value = 6 },
-   .operands = {.size = 1, .operand = {57,0,0,0}},
-   .prefix = 155,
    .primary_opcode = 217,
    .secondary_opcode = -1,
   },

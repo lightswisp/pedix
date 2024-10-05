@@ -10096,10 +10096,10 @@
 <td>Store x87 FPU Environment</td>
 </TR></TBODY>
 <TBODY><TR>
-<TD>9B</TD>
 <TD></TD>
-<TD>D9</TD>
-<td></td>
+<TD></TD>
+<TD>9B</TD>
+<td>D9</td>
 <TD CLASS="highlight">6</TD>
 <TD></TD>
 <TD></TD>
