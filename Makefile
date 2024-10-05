@@ -5,7 +5,7 @@ TEST_DIR=test
 TEST_OBJ_DIR=build_$(TEST_DIR)
 
 OUT=main.exe
-DEBUG_FLAGS=-ggdb -DDEBUG
+DEBUG_FLAGS=-ggdb 
 WARNING_FLAGS=-Wall -Werror -pedantic
 CFLAGS=-I$(INCLUDE_DIR) $(DEBUG_FLAGS) $(WARNING_FLAGS) 
 CC=gcc
