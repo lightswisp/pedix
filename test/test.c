@@ -136,6 +136,7 @@ PREPARE_INSTRUCTION(101, "\xD9\xF3");
 PREPARE_INSTRUCTION(102, "\xD9\xF4");
 PREPARE_INSTRUCTION(103, "\xD9\xF5");
 PREPARE_INSTRUCTION(104, "\xD9\xF6");
+PREPARE_INSTRUCTION(105, "\xD9\xF7");
 
 int main(void){
   decoded_instruction_t *decoded = pedix_init_instruction();
@@ -246,6 +247,7 @@ int main(void){
   PREPARE_TEST(102, "fxtract");
   PREPARE_TEST(103, "fprem1");
   PREPARE_TEST(104, "fdecstp");
+  PREPARE_TEST(105, "fincstp");
   
 
   puts(GREEN"All tests are passed!"NC);
