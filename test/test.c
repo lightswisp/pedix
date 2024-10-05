@@ -130,6 +130,7 @@ PREPARE_INSTRUCTION(95, "\xD9\xEE");
 PREPARE_INSTRUCTION(96, "\xD9\x30");
 PREPARE_INSTRUCTION(97, "\x9B\xD9\x30");
 PREPARE_INSTRUCTION(98, "\xD9\xF0");
+PREPARE_INSTRUCTION(99, "\xD9\xF1");
 
 int main(void){
   decoded_instruction_t *decoded = pedix_init_instruction();
@@ -234,6 +235,7 @@ int main(void){
   PREPARE_TEST(96, "fnstenv DWORD PTR [eax]");
   PREPARE_TEST(97, "fstenv DWORD PTR [eax]");
   PREPARE_TEST(98, "f2xm1");
+  PREPARE_TEST(99, "fyl2x");
   
 
   puts(GREEN"All tests are passed!"NC);
