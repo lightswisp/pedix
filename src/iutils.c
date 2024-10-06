@@ -298,8 +298,6 @@ instruction_t *pedix_find_best_match(instruction_container_t container, decoded_
           temp_score--;
       }
 
-
-
       if (secondary_opcode != -1) {
         // if secondary opcode is matching, we increase the offset
         // in order to check modrm after
