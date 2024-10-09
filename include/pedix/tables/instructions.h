@@ -1,5 +1,5 @@
 /* (instructions.h) auto generated using gen.rb 
- * time: 2024-10-06 01:09:30 -0400
+ * time: 2024-10-09 07:32:35 -0400
  */
 
 #pragma once
@@ -4272,7 +4272,7 @@ instruction_t REGULAR_FLD_217[59] = {
    .extended_opcode = false,
    .mnemonic = "fyl2xp1",
    .opcode_field = {.type = 0, .value = 0 },
-   .operands = {.size = 2, .operand = {86,84,0,0}},
+   .operands = {.size = 0, .operand = {0,0,0,0}},
    .prefix = 0,
    .primary_opcode = 217,
    .secondary_opcode = 249,
@@ -4281,7 +4281,7 @@ instruction_t REGULAR_FLD_217[59] = {
    .extended_opcode = false,
    .mnemonic = "fsqrt",
    .opcode_field = {.type = 0, .value = 0 },
-   .operands = {.size = 1, .operand = {84,0,0,0}},
+   .operands = {.size = 0, .operand = {0,0,0,0}},
    .prefix = 0,
    .primary_opcode = 217,
    .secondary_opcode = 250,
@@ -4290,7 +4290,7 @@ instruction_t REGULAR_FLD_217[59] = {
    .extended_opcode = false,
    .mnemonic = "fsincos",
    .opcode_field = {.type = 0, .value = 0 },
-   .operands = {.size = 1, .operand = {84,0,0,0}},
+   .operands = {.size = 0, .operand = {0,0,0,0}},
    .prefix = 0,
    .primary_opcode = 217,
    .secondary_opcode = 251,
@@ -4299,7 +4299,7 @@ instruction_t REGULAR_FLD_217[59] = {
    .extended_opcode = false,
    .mnemonic = "frndint",
    .opcode_field = {.type = 0, .value = 0 },
-   .operands = {.size = 1, .operand = {84,0,0,0}},
+   .operands = {.size = 0, .operand = {0,0,0,0}},
    .prefix = 0,
    .primary_opcode = 217,
    .secondary_opcode = 252,
@@ -4308,7 +4308,7 @@ instruction_t REGULAR_FLD_217[59] = {
    .extended_opcode = false,
    .mnemonic = "fscale",
    .opcode_field = {.type = 0, .value = 0 },
-   .operands = {.size = 2, .operand = {84,86,0,0}},
+   .operands = {.size = 0, .operand = {0,0,0,0}},
    .prefix = 0,
    .primary_opcode = 217,
    .secondary_opcode = 253,
@@ -4317,7 +4317,7 @@ instruction_t REGULAR_FLD_217[59] = {
    .extended_opcode = false,
    .mnemonic = "fsin",
    .opcode_field = {.type = 0, .value = 0 },
-   .operands = {.size = 1, .operand = {84,0,0,0}},
+   .operands = {.size = 0, .operand = {0,0,0,0}},
    .prefix = 0,
    .primary_opcode = 217,
    .secondary_opcode = 254,
@@ -4326,7 +4326,7 @@ instruction_t REGULAR_FLD_217[59] = {
    .extended_opcode = false,
    .mnemonic = "fcos",
    .opcode_field = {.type = 0, .value = 0 },
-   .operands = {.size = 1, .operand = {84,0,0,0}},
+   .operands = {.size = 0, .operand = {0,0,0,0}},
    .prefix = 0,
    .primary_opcode = 217,
    .secondary_opcode = 255,

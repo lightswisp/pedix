@@ -10395,8 +10395,8 @@
 <TD></TD>
 <TD>p</TD>
 <TD>FYL2XP1</TD>
-<td><b><i>ST1</i></b></td>
-<td><i>ST</i></td>
+<td></td>
+<td></td>
 <td></td>
 <td></td>
 <td rowspan="1"></td>
@@ -10419,7 +10419,7 @@
 <TD></TD>
 <TD></TD>
 <TD>FSQRT</TD>
-<td><b><i>ST</i></b></td>
+<td></td>
 <td></td>
 <td></td>
 <td></td>
@@ -10443,7 +10443,7 @@
 <TD></TD>
 <TD>s</TD>
 <TD>FSINCOS</TD>
-<td><b><i>ST</i></b></td>
+<td></td>
 <td></td>
 <td></td>
 <td></td>
@@ -10467,7 +10467,7 @@
 <TD></TD>
 <TD></TD>
 <TD>FRNDINT</TD>
-<td><b><i>ST</i></b></td>
+<td></td>
 <td></td>
 <td></td>
 <td></td>
@@ -10491,8 +10491,8 @@
 <TD></TD>
 <TD></TD>
 <TD>FSCALE</TD>
-<td><b><i>ST</i></b></td>
-<td><i>ST1</i></td>
+<td></td>
+<td></td>
 <td></td>
 <td></td>
 <td rowspan="1"></td>
@@ -10515,7 +10515,7 @@
 <TD></TD>
 <TD></TD>
 <TD>FSIN</TD>
-<td><b><i>ST</i></b></td>
+<td></td>
 <td></td>
 <td></td>
 <td></td>
@@ -10539,7 +10539,7 @@
 <TD></TD>
 <TD></TD>
 <TD>FCOS</TD>
-<td><b><i>ST</i></b></td>
+<td></td>
 <td></td>
 <td></td>
 <td></td>

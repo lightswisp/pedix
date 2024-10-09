@@ -141,6 +141,13 @@ PREPARE_INSTRUCTION(106, "\xD9\x38");
 PREPARE_INSTRUCTION(107, "\x9B");
 PREPARE_INSTRUCTION(108, "\x9B\xD9\x38");
 PREPARE_INSTRUCTION(109, "\xD9\xF8");
+PREPARE_INSTRUCTION(110, "\xD9\xF9");
+PREPARE_INSTRUCTION(111, "\xD9\xFA");
+PREPARE_INSTRUCTION(112, "\xD9\xFB");
+PREPARE_INSTRUCTION(113, "\xD9\xFC");
+PREPARE_INSTRUCTION(114, "\xD9\xFD");
+PREPARE_INSTRUCTION(115, "\xD9\xFE");
+PREPARE_INSTRUCTION(116, "\xD9\xFF");
 
 int main(void){
   decoded_instruction_t *decoded = pedix_init_instruction();
@@ -256,6 +263,13 @@ int main(void){
   PREPARE_TEST(107, "fwait");  
   PREPARE_TEST(108, "fstcw WORD PTR [eax]");  
   PREPARE_TEST(109, "fprem");  
+  PREPARE_TEST(110, "fyl2xp1");  
+  PREPARE_TEST(111, "fsqrt");  
+  PREPARE_TEST(112, "fsincos");  
+  PREPARE_TEST(113, "frndint");  
+  PREPARE_TEST(114, "fscale");  
+  PREPARE_TEST(115, "fsin");  
+  PREPARE_TEST(116, "fcos");  
 
   puts(GREEN"All tests are passed!"NC);
   return 0;
