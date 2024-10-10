@@ -16,6 +16,8 @@
 
 #define HAS_MOFFS(operand) (operand == OPERAND_MOFFS_32)
 
+#define HAS_STI(operand) (operand == OPERAND_REG_STI)
+
 /*
  * check if instruction has any prefixes
  */
@@ -278,12 +280,9 @@ instruction_t *pedix_find_best_match(instruction_container_t container, decoded_
         else 
           temp_score--;
       }
+
       break;
     case FIELD_MULTIPLEXED_MOD_RM:
-//      if (strcmp(container.instructions[i].mnemonic, "fst") == 0 ||
-//          strcmp(container.instructions[i].mnemonic, "fnop") == 0) {
-//        SET_BREAKPOINT;
-//      }
       if (prefix != PREFIX_VOID) {
         // if it has prefix
         bool found_prefix = false;
@@ -311,6 +310,12 @@ instruction_t *pedix_find_best_match(instruction_container_t container, decoded_
         }
         else 
           temp_score--;
+      }
+      for(size_t j = 0; j < container.instructions[i].operands.size; j++){
+        if(HAS_STI(container.instructions[i].operands.operand[j])){
+          if( ((*(instruction + j) & 0xc0) >> 6) == 3)
+            temp_score++;
+        }
       }
 
 //      if (secondary_opcode != -1 && secondary_opcode == instruction[1]) {
