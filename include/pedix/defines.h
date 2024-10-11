@@ -6,6 +6,7 @@
 #if defined(__x86_64__) || defined(__i386__)
   #define SET_BREAKPOINT asm volatile("int3");
 #endif
+#define NOT_FOUND -1
 #define MAX_OPERAND_STR_LEN 50 
 #define MAX_PREFIXES 4
 #define MAX_TEXT_LEN 100

@@ -248,7 +248,7 @@ instruction_t *pedix_find_best_match(instruction_container_t container, decoded_
         if(!found_prefix)
           temp_score--;
       } 
-      if (secondary_opcode != -1 && secondary_opcode == instruction[1]) {
+      if (secondary_opcode != NOT_FOUND && secondary_opcode == instruction[1]) {
         // return immediately if it is an exact hit!
         return &container.instructions[i];
       }
@@ -266,7 +266,7 @@ instruction_t *pedix_find_best_match(instruction_container_t container, decoded_
         if(!found_prefix)
           temp_score--;
       }
-      if (secondary_opcode != -1) {
+      if (secondary_opcode != NOT_FOUND) {
         // if secondary opcode is matching, we increase the offset
         // in order to check modrm after
         // and we increase score as well
@@ -297,7 +297,7 @@ instruction_t *pedix_find_best_match(instruction_container_t container, decoded_
           temp_score--;
       }
 
-      if (secondary_opcode != -1) {
+      if (secondary_opcode != NOT_FOUND) {
         // if secondary opcode is matching, we increase the offset
         // in order to check modrm after
         // and we increase score as well
@@ -315,16 +315,18 @@ instruction_t *pedix_find_best_match(instruction_container_t container, decoded_
         if(HAS_STI(container.instructions[i].operands.operand[j])){
           if( ((*(instruction + j) & 0xc0) >> 6) == 3)
             temp_score++;
+          else 
+            temp_score--;
         }
       }
 
-//      if (secondary_opcode != -1 && secondary_opcode == instruction[1]) {
+//      if (secondary_opcode != NOT_FOUND && secondary_opcode == instruction[1]) {
         // return immediately if it is an exact hit!
 //        return &container.instructions[i];
 //      }
 
 /*#ifdef DEBUG
-      if (secondary_opcode != -1) {
+      if (secondary_opcode != NOT_FOUND) {
         // remove the opcode field from the table please!
 #if defined(__x86_64__) || defined(__i386__)
         SET_BREAKPOINT;

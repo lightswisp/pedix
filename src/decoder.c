@@ -86,7 +86,7 @@ static void pedix_decode32(decoded_instruction_t *decoded, uint8_t *instruction)
       NEXT_BYTE(instruction);
       decoded->instruction = &container.instructions[0];
       MANDATORY_PREFIX_CHECK(decoded);
-      if(decoded->instruction->secondary_opcode != -1){
+      if(decoded->instruction->secondary_opcode != NOT_FOUND){
         SET_BUFFER(decoded, instruction, BYTE_LEN); 
         NEXT_BYTE(instruction);
       }
@@ -96,7 +96,7 @@ static void pedix_decode32(decoded_instruction_t *decoded, uint8_t *instruction)
       assert("can't find instruction" && best_match_instruction != NULL);
       NEXT_BYTE(instruction);
       decoded->instruction = best_match_instruction;
-      if(decoded->instruction->secondary_opcode != -1){
+      if(decoded->instruction->secondary_opcode != NOT_FOUND){
         SET_BUFFER(decoded, instruction, BYTE_LEN); 
         NEXT_BYTE(instruction);
       }
@@ -113,7 +113,7 @@ static void pedix_decode32(decoded_instruction_t *decoded, uint8_t *instruction)
       NEXT_BYTE(instruction);
       decoded->instruction = &container.instructions[0];
       MANDATORY_PREFIX_CHECK(decoded);
-      if(decoded->instruction->secondary_opcode != -1){
+      if(decoded->instruction->secondary_opcode != NOT_FOUND){
         SET_BUFFER(decoded, instruction, BYTE_LEN); 
         NEXT_BYTE(instruction);
       }
@@ -125,7 +125,7 @@ static void pedix_decode32(decoded_instruction_t *decoded, uint8_t *instruction)
       NEXT_BYTE(instruction);
 
       decoded->instruction = best_match_instruction;
-      if(decoded->instruction->secondary_opcode != -1){
+      if(decoded->instruction->secondary_opcode != NOT_FOUND){
         SET_BUFFER(decoded, instruction, BYTE_LEN); 
         NEXT_BYTE(instruction);
       }
