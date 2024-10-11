@@ -150,6 +150,7 @@ PREPARE_INSTRUCTION(115, "\xD9\xFE");
 PREPARE_INSTRUCTION(116, "\xD9\xFF");
 PREPARE_INSTRUCTION(117, "\xDA\xC5");
 PREPARE_INSTRUCTION(118, "\xDA\x08");
+PREPARE_INSTRUCTION(119, "\xDA\xCF");
 
 int main(void){
   decoded_instruction_t *decoded = pedix_init_instruction();
@@ -272,8 +273,9 @@ int main(void){
   PREPARE_TEST(114, "fscale");  
   PREPARE_TEST(115, "fsin");  
   PREPARE_TEST(116, "fcos");  
-  PREPARE_TEST(117, "fcmovb st,st7");  
+  PREPARE_TEST(117, "fcmovb st,st5");  
   PREPARE_TEST(118, "fimul DWORD PTR [eax]");  
+  PREPARE_TEST(119, "fcmove st,st7");  
 
   puts(GREEN"All tests are passed!"NC);
   return 0;

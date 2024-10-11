@@ -308,15 +308,9 @@ instruction_t *pedix_find_best_match(instruction_container_t container, decoded_
           offset++;
           temp_score++;
         }
-        else 
+        else{ 
+          printf("%s--\n", container.instructions[i].mnemonic);
           temp_score--;
-      }
-      for(size_t j = 0; j < container.instructions[i].operands.size; j++){
-        if(HAS_STI(container.instructions[i].operands.operand[j])){
-          if( ((*(instruction + j) & 0xc0) >> 6) == 3)
-            temp_score++;
-          else 
-            temp_score--;
         }
       }
 
