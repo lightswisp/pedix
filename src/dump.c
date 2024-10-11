@@ -16,6 +16,16 @@ void pedix_dump_instruction(instruction_t *instruction) {
   printf("  secondary_opcode=%d>\n", instruction->secondary_opcode);
 }
 
+void pedix_dump_memory(uint8_t* addr, size_t size){
+  printf("=================== memory dump ===================\n");
+  for(size_t i = 0; i < size; i++){
+    if(i % 4 == 0)
+      putchar('\n');
+    printf("0x%02X ", *(addr++));
+  }
+  printf("\n\n===================================================\n\n");
+}
+
 static char *pedix_get_bytes(decoded_instruction_t *decoded){
   char *temp = calloc(MAX_INSTR_SIZE*3+1, 1);
   for(uint8_t i = 0; i < decoded->buffer.size; i++)
