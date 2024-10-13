@@ -1,5 +1,5 @@
 /* (instructions.h) auto generated using gen.rb 
- * time: 2024-10-11 09:07:04 -0400
+ * time: 2024-10-13 04:08:12 -0400
  */
 
 #pragma once
@@ -4500,7 +4500,7 @@ instruction_t REGULAR_FIADD_218[27] = {
    .extended_opcode = false,
    .mnemonic = "ficom",
    .opcode_field = {.type = 2, .value = 2 },
-   .operands = {.size = 2, .operand = {84,57,0,0}},
+   .operands = {.size = 1, .operand = {57,0,0,0}},
    .prefix = 0,
    .primary_opcode = 218,
    .secondary_opcode = -1,

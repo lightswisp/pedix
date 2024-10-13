@@ -314,11 +314,6 @@ instruction_t *pedix_find_best_match(instruction_container_t container, decoded_
         }
       }
 
-//      if (secondary_opcode != NOT_FOUND && secondary_opcode == instruction[1]) {
-        // return immediately if it is an exact hit!
-//        return &container.instructions[i];
-//      }
-
 /*#ifdef DEBUG
       if (secondary_opcode != NOT_FOUND) {
         // remove the opcode field from the table please!
