@@ -1,5 +1,5 @@
 /* (instructions.h) auto generated using gen.rb 
- * time: 2024-10-13 14:16:01 -0400
+ * time: 2024-10-13 14:19:53 -0400
  */
 
 #pragma once
@@ -4791,7 +4791,7 @@ instruction_t REGULAR_FILD_219[26] = {
    .extended_opcode = false,
    .mnemonic = "fisttp",
    .opcode_field = {.type = 2, .value = 1 },
-   .operands = {.size = 2, .operand = {57,84,0,0}},
+   .operands = {.size = 1, .operand = {57,0,0,0}},
    .prefix = 0,
    .primary_opcode = 219,
    .secondary_opcode = -1,
