@@ -156,11 +156,11 @@ PREPARE_INSTRUCTION(121, "\xDA\xD4");
 PREPARE_INSTRUCTION(122, "\xDA\x1A");
 PREPARE_INSTRUCTION(123, "\xDA\xD8");
 PREPARE_INSTRUCTION(124, "\xDA\x20");
-//PREPARE_INSTRUCTION(125, "\xDA\x1A");
-//PREPARE_INSTRUCTION(126, "\xDA\x1A");
-//PREPARE_INSTRUCTION(127, "\xDA\x1A");
-//PREPARE_INSTRUCTION(128, "\xDA\x1A");
-//PREPARE_INSTRUCTION(129, "\xDA\x1A");
+PREPARE_INSTRUCTION(125, "\xDA\x28");
+PREPARE_INSTRUCTION(126, "\xDA\xE9");
+PREPARE_INSTRUCTION(127, "\xDA\x30");
+PREPARE_INSTRUCTION(128, "\xDA\x38");
+PREPARE_INSTRUCTION(129, "\xDB\x00");
 
 int main(void){
   decoded_instruction_t *decoded = pedix_init_instruction();
@@ -291,6 +291,11 @@ int main(void){
   PREPARE_TEST(122, "ficomp DWORD PTR [edx]");  
   PREPARE_TEST(123, "fcmovu st,st0");  
   PREPARE_TEST(124, "fisub DWORD PTR [eax]");  
+  PREPARE_TEST(125, "fisubr DWORD PTR [eax]");  
+  PREPARE_TEST(126, "fucompp");  
+  PREPARE_TEST(127, "fidiv DWORD PTR [eax]");  
+  PREPARE_TEST(128, "fidivr DWORD PTR [eax]");  
+  PREPARE_TEST(129, "fild DWORD PTR [eax]");  
 
   puts(GREEN"All tests are passed!"NC);
   return 0;
