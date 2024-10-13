@@ -165,6 +165,7 @@ PREPARE_INSTRUCTION(130, "\xDB\xC2");
 PREPARE_INSTRUCTION(131, "\xDB\x08");
 PREPARE_INSTRUCTION(132, "\xDB\xC8");
 PREPARE_INSTRUCTION(133, "\xDB\x10");
+PREPARE_INSTRUCTION(134, "\xDB\xD0");
 
 int main(void){
   decoded_instruction_t *decoded = pedix_init_instruction();
@@ -304,6 +305,7 @@ int main(void){
   PREPARE_TEST(131, "fisttp DWORD PTR [eax]");  
   PREPARE_TEST(132, "fcmovne st,st0");  
   PREPARE_TEST(133, "fist DWORD PTR [eax]");  
+  PREPARE_TEST(134, "fcmovnbe st,st0");  
 
   puts(GREEN"All tests are passed!"NC);
   return 0;

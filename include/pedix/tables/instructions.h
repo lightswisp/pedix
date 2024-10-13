@@ -1,5 +1,5 @@
 /* (instructions.h) auto generated using gen.rb 
- * time: 2024-10-13 15:24:35 -0400
+ * time: 2024-10-13 15:27:38 -0400
  */
 
 #pragma once
@@ -4705,7 +4705,7 @@ instruction_t REGULAR_FIADD_218[41] = {
   },
 };
 
-instruction_t REGULAR_FILD_219[33] = {
+instruction_t REGULAR_FILD_219[40] = {
   {
    .extended_opcode = false,
    .mnemonic = "fild",
@@ -4880,11 +4880,74 @@ instruction_t REGULAR_FILD_219[33] = {
   {
    .extended_opcode = false,
    .mnemonic = "fcmovnbe",
-   .opcode_field = {.type = 2, .value = 2 },
+   .opcode_field = {.type = 0, .value = 0 },
    .operands = {.size = 2, .operand = {84,85,0,0}},
    .prefix = 0,
    .primary_opcode = 219,
-   .secondary_opcode = -1,
+   .secondary_opcode = 208,
+  },
+  {
+   .extended_opcode = false,
+   .mnemonic = "fcmovnbe",
+   .opcode_field = {.type = 0, .value = 0 },
+   .operands = {.size = 2, .operand = {84,85,0,0}},
+   .prefix = 0,
+   .primary_opcode = 219,
+   .secondary_opcode = 209,
+  },
+  {
+   .extended_opcode = false,
+   .mnemonic = "fcmovnbe",
+   .opcode_field = {.type = 0, .value = 0 },
+   .operands = {.size = 2, .operand = {84,85,0,0}},
+   .prefix = 0,
+   .primary_opcode = 219,
+   .secondary_opcode = 210,
+  },
+  {
+   .extended_opcode = false,
+   .mnemonic = "fcmovnbe",
+   .opcode_field = {.type = 0, .value = 0 },
+   .operands = {.size = 2, .operand = {84,85,0,0}},
+   .prefix = 0,
+   .primary_opcode = 219,
+   .secondary_opcode = 211,
+  },
+  {
+   .extended_opcode = false,
+   .mnemonic = "fcmovnbe",
+   .opcode_field = {.type = 0, .value = 0 },
+   .operands = {.size = 2, .operand = {84,85,0,0}},
+   .prefix = 0,
+   .primary_opcode = 219,
+   .secondary_opcode = 212,
+  },
+  {
+   .extended_opcode = false,
+   .mnemonic = "fcmovnbe",
+   .opcode_field = {.type = 0, .value = 0 },
+   .operands = {.size = 2, .operand = {84,85,0,0}},
+   .prefix = 0,
+   .primary_opcode = 219,
+   .secondary_opcode = 213,
+  },
+  {
+   .extended_opcode = false,
+   .mnemonic = "fcmovnbe",
+   .opcode_field = {.type = 0, .value = 0 },
+   .operands = {.size = 2, .operand = {84,85,0,0}},
+   .prefix = 0,
+   .primary_opcode = 219,
+   .secondary_opcode = 214,
+  },
+  {
+   .extended_opcode = false,
+   .mnemonic = "fcmovnbe",
+   .opcode_field = {.type = 0, .value = 0 },
+   .operands = {.size = 2, .operand = {84,85,0,0}},
+   .prefix = 0,
+   .primary_opcode = 219,
+   .secondary_opcode = 215,
   },
   {
    .extended_opcode = false,

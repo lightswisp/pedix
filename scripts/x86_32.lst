@@ -12007,12 +12007,13 @@
 <TD></TD>
 <td>Store Integer</td>
 </TR></TBODY>
+
 <TBODY><TR>
 <TD></TD>
 <TD></TD>
 <TD>DB</TD>
-<td></td>
-<TD CLASS="highlight">2</TD>
+<td>D0</td>
+<TD CLASS="highlight"></TD>
 <TD>PP+</TD>
 <TD></TD>
 <TD></TD>
@@ -12031,6 +12032,175 @@
 <TD></TD>
 <td>FP Conditional Move - below or equal (CF=0 and ZF=0)</td>
 </TR></TBODY>
+<TBODY><TR>
+<TD></TD>
+<TD></TD>
+<TD>DB</TD>
+<td>D1</td>
+<TD CLASS="highlight"></TD>
+<TD>PP+</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FCMOVNBE</TD>
+<td><b>ST</b></td>
+<td>STi</td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD>....z...</TD>
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>
+<TD></TD>
+<td>FP Conditional Move - below or equal (CF=0 and ZF=0)</td>
+</TR></TBODY>
+<TBODY><TR>
+<TD></TD>
+<TD></TD>
+<TD>DB</TD>
+<td>D2</td>
+<TD CLASS="highlight"></TD>
+<TD>PP+</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FCMOVNBE</TD>
+<td><b>ST</b></td>
+<td>STi</td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD>....z...</TD>
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>
+<TD></TD>
+<td>FP Conditional Move - below or equal (CF=0 and ZF=0)</td>
+</TR></TBODY>
+<TBODY><TR>
+<TD></TD>
+<TD></TD>
+<TD>DB</TD>
+<td>D3</td>
+<TD CLASS="highlight"></TD>
+<TD>PP+</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FCMOVNBE</TD>
+<td><b>ST</b></td>
+<td>STi</td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD>....z...</TD>
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>
+<TD></TD>
+<td>FP Conditional Move - below or equal (CF=0 and ZF=0)</td>
+</TR></TBODY>
+<TBODY><TR>
+<TD></TD>
+<TD></TD>
+<TD>DB</TD>
+<td>D4</td>
+<TD CLASS="highlight"></TD>
+<TD>PP+</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FCMOVNBE</TD>
+<td><b>ST</b></td>
+<td>STi</td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD>....z...</TD>
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>
+<TD></TD>
+<td>FP Conditional Move - below or equal (CF=0 and ZF=0)</td>
+</TR></TBODY>
+<TBODY><TR>
+<TD></TD>
+<TD></TD>
+<TD>DB</TD>
+<td>D5</td>
+<TD CLASS="highlight"></TD>
+<TD>PP+</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FCMOVNBE</TD>
+<td><b>ST</b></td>
+<td>STi</td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD>....z...</TD>
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>
+<TD></TD>
+<td>FP Conditional Move - below or equal (CF=0 and ZF=0)</td>
+</TR></TBODY>
+<TBODY><TR>
+<TD></TD>
+<TD></TD>
+<TD>DB</TD>
+<td>D6</td>
+<TD CLASS="highlight"></TD>
+<TD>PP+</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FCMOVNBE</TD>
+<td><b>ST</b></td>
+<td>STi</td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD>....z...</TD>
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>
+<TD></TD>
+<td>FP Conditional Move - below or equal (CF=0 and ZF=0)</td>
+</TR></TBODY>
+<TBODY><TR>
+<TD></TD>
+<TD></TD>
+<TD>DB</TD>
+<td>D7</td>
+<TD CLASS="highlight"></TD>
+<TD>PP+</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FCMOVNBE</TD>
+<td><b>ST</b></td>
+<td>STi</td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD>....z...</TD>
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>
+<TD></TD>
+<td>FP Conditional Move - below or equal (CF=0 and ZF=0)</td>
+</TR></TBODY>
+
 <TBODY><TR id="xDB_3">
 <TD></TD>
 <TD></TD>
