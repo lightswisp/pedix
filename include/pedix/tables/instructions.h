@@ -1,5 +1,5 @@
 /* (instructions.h) auto generated using gen.rb 
- * time: 2024-10-13 14:19:53 -0400
+ * time: 2024-10-13 14:59:21 -0400
  */
 
 #pragma once
@@ -4705,7 +4705,7 @@ instruction_t REGULAR_FIADD_218[41] = {
   },
 };
 
-instruction_t REGULAR_FILD_219[26] = {
+instruction_t REGULAR_FILD_219[33] = {
   {
    .extended_opcode = false,
    .mnemonic = "fild",
@@ -4799,11 +4799,74 @@ instruction_t REGULAR_FILD_219[26] = {
   {
    .extended_opcode = false,
    .mnemonic = "fcmovne",
-   .opcode_field = {.type = 2, .value = 1 },
+   .opcode_field = {.type = 0, .value = 0 },
    .operands = {.size = 2, .operand = {84,85,0,0}},
    .prefix = 0,
    .primary_opcode = 219,
-   .secondary_opcode = -1,
+   .secondary_opcode = 200,
+  },
+  {
+   .extended_opcode = false,
+   .mnemonic = "fcmovne",
+   .opcode_field = {.type = 0, .value = 0 },
+   .operands = {.size = 2, .operand = {84,85,0,0}},
+   .prefix = 0,
+   .primary_opcode = 219,
+   .secondary_opcode = 201,
+  },
+  {
+   .extended_opcode = false,
+   .mnemonic = "fcmovne",
+   .opcode_field = {.type = 0, .value = 0 },
+   .operands = {.size = 2, .operand = {84,85,0,0}},
+   .prefix = 0,
+   .primary_opcode = 219,
+   .secondary_opcode = 202,
+  },
+  {
+   .extended_opcode = false,
+   .mnemonic = "fcmovne",
+   .opcode_field = {.type = 0, .value = 0 },
+   .operands = {.size = 2, .operand = {84,85,0,0}},
+   .prefix = 0,
+   .primary_opcode = 219,
+   .secondary_opcode = 203,
+  },
+  {
+   .extended_opcode = false,
+   .mnemonic = "fcmovne",
+   .opcode_field = {.type = 0, .value = 0 },
+   .operands = {.size = 2, .operand = {84,85,0,0}},
+   .prefix = 0,
+   .primary_opcode = 219,
+   .secondary_opcode = 204,
+  },
+  {
+   .extended_opcode = false,
+   .mnemonic = "fcmovne",
+   .opcode_field = {.type = 0, .value = 0 },
+   .operands = {.size = 2, .operand = {84,85,0,0}},
+   .prefix = 0,
+   .primary_opcode = 219,
+   .secondary_opcode = 205,
+  },
+  {
+   .extended_opcode = false,
+   .mnemonic = "fcmovne",
+   .opcode_field = {.type = 0, .value = 0 },
+   .operands = {.size = 2, .operand = {84,85,0,0}},
+   .prefix = 0,
+   .primary_opcode = 219,
+   .secondary_opcode = 206,
+  },
+  {
+   .extended_opcode = false,
+   .mnemonic = "fcmovne",
+   .opcode_field = {.type = 0, .value = 0 },
+   .operands = {.size = 2, .operand = {84,85,0,0}},
+   .prefix = 0,
+   .primary_opcode = 219,
+   .secondary_opcode = 207,
   },
   {
    .extended_opcode = false,
