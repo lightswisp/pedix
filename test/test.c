@@ -154,6 +154,13 @@ PREPARE_INSTRUCTION(119, "\xDA\xCF");
 PREPARE_INSTRUCTION(120, "\xDA\x12");
 PREPARE_INSTRUCTION(121, "\xDA\xD4");
 PREPARE_INSTRUCTION(122, "\xDA\x1A");
+PREPARE_INSTRUCTION(123, "\xDA\xD8");
+PREPARE_INSTRUCTION(124, "\xDA\x20");
+//PREPARE_INSTRUCTION(125, "\xDA\x1A");
+//PREPARE_INSTRUCTION(126, "\xDA\x1A");
+//PREPARE_INSTRUCTION(127, "\xDA\x1A");
+//PREPARE_INSTRUCTION(128, "\xDA\x1A");
+//PREPARE_INSTRUCTION(129, "\xDA\x1A");
 
 int main(void){
   decoded_instruction_t *decoded = pedix_init_instruction();
@@ -282,6 +289,8 @@ int main(void){
   PREPARE_TEST(120, "ficom DWORD PTR [edx]");  
   PREPARE_TEST(121, "fcmovbe st,st4");  
   PREPARE_TEST(122, "ficomp DWORD PTR [edx]");  
+  PREPARE_TEST(123, "fcmovu st,st0");  
+  PREPARE_TEST(124, "fisub DWORD PTR [eax]");  
 
   puts(GREEN"All tests are passed!"NC);
   return 0;

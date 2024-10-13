@@ -1,5 +1,5 @@
 /* (instructions.h) auto generated using gen.rb 
- * time: 2024-10-13 04:31:59 -0400
+ * time: 2024-10-13 14:05:22 -0400
  */
 
 #pragma once
@@ -4333,7 +4333,7 @@ instruction_t REGULAR_FLD_217[59] = {
   },
 };
 
-instruction_t REGULAR_FIADD_218[34] = {
+instruction_t REGULAR_FIADD_218[41] = {
   {
    .extended_opcode = false,
    .mnemonic = "fiadd",
@@ -4589,17 +4589,80 @@ instruction_t REGULAR_FIADD_218[34] = {
   {
    .extended_opcode = false,
    .mnemonic = "fcmovu",
-   .opcode_field = {.type = 2, .value = 3 },
+   .opcode_field = {.type = 0, .value = 0 },
    .operands = {.size = 2, .operand = {84,85,0,0}},
    .prefix = 0,
    .primary_opcode = 218,
-   .secondary_opcode = -1,
+   .secondary_opcode = 216,
+  },
+  {
+   .extended_opcode = false,
+   .mnemonic = "fcmovu",
+   .opcode_field = {.type = 0, .value = 0 },
+   .operands = {.size = 2, .operand = {84,85,0,0}},
+   .prefix = 0,
+   .primary_opcode = 218,
+   .secondary_opcode = 217,
+  },
+  {
+   .extended_opcode = false,
+   .mnemonic = "fcmovu",
+   .opcode_field = {.type = 0, .value = 0 },
+   .operands = {.size = 2, .operand = {84,85,0,0}},
+   .prefix = 0,
+   .primary_opcode = 218,
+   .secondary_opcode = 218,
+  },
+  {
+   .extended_opcode = false,
+   .mnemonic = "fcmovu",
+   .opcode_field = {.type = 0, .value = 0 },
+   .operands = {.size = 2, .operand = {84,85,0,0}},
+   .prefix = 0,
+   .primary_opcode = 218,
+   .secondary_opcode = 219,
+  },
+  {
+   .extended_opcode = false,
+   .mnemonic = "fcmovu",
+   .opcode_field = {.type = 0, .value = 0 },
+   .operands = {.size = 2, .operand = {84,85,0,0}},
+   .prefix = 0,
+   .primary_opcode = 218,
+   .secondary_opcode = 220,
+  },
+  {
+   .extended_opcode = false,
+   .mnemonic = "fcmovu",
+   .opcode_field = {.type = 0, .value = 0 },
+   .operands = {.size = 2, .operand = {84,85,0,0}},
+   .prefix = 0,
+   .primary_opcode = 218,
+   .secondary_opcode = 221,
+  },
+  {
+   .extended_opcode = false,
+   .mnemonic = "fcmovu",
+   .opcode_field = {.type = 0, .value = 0 },
+   .operands = {.size = 2, .operand = {84,85,0,0}},
+   .prefix = 0,
+   .primary_opcode = 218,
+   .secondary_opcode = 222,
+  },
+  {
+   .extended_opcode = false,
+   .mnemonic = "fcmovu",
+   .opcode_field = {.type = 0, .value = 0 },
+   .operands = {.size = 2, .operand = {84,85,0,0}},
+   .prefix = 0,
+   .primary_opcode = 218,
+   .secondary_opcode = 223,
   },
   {
    .extended_opcode = false,
    .mnemonic = "fisub",
    .opcode_field = {.type = 2, .value = 4 },
-   .operands = {.size = 2, .operand = {84,57,0,0}},
+   .operands = {.size = 1, .operand = {57,0,0,0}},
    .prefix = 0,
    .primary_opcode = 218,
    .secondary_opcode = -1,
@@ -4608,7 +4671,7 @@ instruction_t REGULAR_FIADD_218[34] = {
    .extended_opcode = false,
    .mnemonic = "fisubr",
    .opcode_field = {.type = 2, .value = 5 },
-   .operands = {.size = 2, .operand = {84,57,0,0}},
+   .operands = {.size = 1, .operand = {57,0,0,0}},
    .prefix = 0,
    .primary_opcode = 218,
    .secondary_opcode = -1,
@@ -4626,7 +4689,7 @@ instruction_t REGULAR_FIADD_218[34] = {
    .extended_opcode = false,
    .mnemonic = "fidiv",
    .opcode_field = {.type = 2, .value = 6 },
-   .operands = {.size = 2, .operand = {84,57,0,0}},
+   .operands = {.size = 1, .operand = {57,0,0,0}},
    .prefix = 0,
    .primary_opcode = 218,
    .secondary_opcode = -1,
@@ -4635,7 +4698,7 @@ instruction_t REGULAR_FIADD_218[34] = {
    .extended_opcode = false,
    .mnemonic = "fidivr",
    .opcode_field = {.type = 2, .value = 7 },
-   .operands = {.size = 2, .operand = {84,57,0,0}},
+   .operands = {.size = 1, .operand = {57,0,0,0}},
    .prefix = 0,
    .primary_opcode = 218,
    .secondary_opcode = -1,

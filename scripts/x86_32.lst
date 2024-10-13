@@ -11230,12 +11230,13 @@
 <TD></TD>
 <td>Compare Integer and Pop</td>
 </TR></TBODY>
+
 <TBODY><TR>
 <TD></TD>
 <TD></TD>
 <TD>DA</TD>
-<td></td>
-<TD CLASS="highlight">3</TD>
+<td>D8</td>
+<TD CLASS="highlight"></TD>
 <TD>PP+</TD>
 <TD></TD>
 <TD></TD>
@@ -11254,6 +11255,176 @@
 <TD></TD>
 <td>FP Conditional Move - unordered (PF=1)</td>
 </TR></TBODY>
+<TBODY><TR>
+<TD></TD>
+<TD></TD>
+<TD>DA</TD>
+<td>D9</td>
+<TD CLASS="highlight"></TD>
+<TD>PP+</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FCMOVU</TD>
+<td><b>ST</b></td>
+<td>STi</td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD>......p.</TD>
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>
+<TD></TD>
+<td>FP Conditional Move - unordered (PF=1)</td>
+</TR></TBODY>
+<TBODY><TR>
+<TD></TD>
+<TD></TD>
+<TD>DA</TD>
+<td>DA</td>
+<TD CLASS="highlight"></TD>
+<TD>PP+</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FCMOVU</TD>
+<td><b>ST</b></td>
+<td>STi</td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD>......p.</TD>
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>
+<TD></TD>
+<td>FP Conditional Move - unordered (PF=1)</td>
+</TR></TBODY>
+<TBODY><TR>
+<TD></TD>
+<TD></TD>
+<TD>DA</TD>
+<td>DB</td>
+<TD CLASS="highlight"></TD>
+<TD>PP+</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FCMOVU</TD>
+<td><b>ST</b></td>
+<td>STi</td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD>......p.</TD>
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>
+<TD></TD>
+<td>FP Conditional Move - unordered (PF=1)</td>
+</TR></TBODY>
+<TBODY><TR>
+<TD></TD>
+<TD></TD>
+<TD>DA</TD>
+<td>DC</td>
+<TD CLASS="highlight"></TD>
+<TD>PP+</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FCMOVU</TD>
+<td><b>ST</b></td>
+<td>STi</td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD>......p.</TD>
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>
+<TD></TD>
+<td>FP Conditional Move - unordered (PF=1)</td>
+</TR></TBODY>
+<TBODY><TR>
+<TD></TD>
+<TD></TD>
+<TD>DA</TD>
+<td>DD</td>
+<TD CLASS="highlight"></TD>
+<TD>PP+</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FCMOVU</TD>
+<td><b>ST</b></td>
+<td>STi</td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD>......p.</TD>
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>
+<TD></TD>
+<td>FP Conditional Move - unordered (PF=1)</td>
+</TR></TBODY>
+<TBODY><TR>
+<TD></TD>
+<TD></TD>
+<TD>DA</TD>
+<td>DE</td>
+<TD CLASS="highlight"></TD>
+<TD>PP+</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FCMOVU</TD>
+<td><b>ST</b></td>
+<td>STi</td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD>......p.</TD>
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>
+<TD></TD>
+<td>FP Conditional Move - unordered (PF=1)</td>
+</TR></TBODY>
+<TBODY><TR>
+<TD></TD>
+<TD></TD>
+<TD>DA</TD>
+<td>DF</td>
+<TD CLASS="highlight"></TD>
+<TD>PP+</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FCMOVU</TD>
+<td><b>ST</b></td>
+<td>STi</td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD>......p.</TD>
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>
+<TD></TD>
+<td>FP Conditional Move - unordered (PF=1)</td>
+</TR></TBODY>
+
+
 <TBODY><TR id="xDA_4">
 <TD></TD>
 <TD></TD>
@@ -11266,8 +11437,8 @@
 <TD></TD>
 <TD></TD>
 <TD>FISUB</TD>
-<td><b><i>ST</i></b></td>
 <td>m32int</td>
+<td></td>
 <td></td>
 <td></td>
 <td rowspan="1"></td>
@@ -11290,8 +11461,8 @@
 <TD></TD>
 <TD></TD>
 <TD>FISUBR</TD>
-<td><b><i>ST</i></b></td>
 <td>m32int</td>
+<td></td>
 <td></td>
 <td></td>
 <td rowspan="1"></td>
@@ -11302,6 +11473,7 @@
 <TD></TD>
 <td>Reverse Subtract</td>
 </TR></TBODY>
+
 <TBODY><TR>
 <TD></TD>
 <TD></TD>
@@ -11326,6 +11498,7 @@
 <TD></TD>
 <td>Unordered Compare Floating Point Values and Pop Twice</td>
 </TR></TBODY>
+
 <TBODY><TR id="xDA_6">
 <TD></TD>
 <TD></TD>
@@ -11338,8 +11511,8 @@
 <TD></TD>
 <TD></TD>
 <TD>FIDIV</TD>
-<td><b><i>ST</i></b></td>
 <td>m32int</td>
+<td></td>
 <td></td>
 <td></td>
 <td rowspan="1"></td>
@@ -11362,8 +11535,8 @@
 <TD></TD>
 <TD></TD>
 <TD>FIDIVR</TD>
-<td><b><i>ST</i></b></td>
 <td>m32int</td>
+<td></td>
 <td></td>
 <td></td>
 <td rowspan="1"></td>
@@ -11398,6 +11571,7 @@
 <TD></TD>
 <td>Load Integer</td>
 </TR></TBODY>
+
 <TBODY><TR>
 <TD></TD>
 <TD></TD>
