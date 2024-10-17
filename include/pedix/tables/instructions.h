@@ -1,5 +1,5 @@
 /* (instructions.h) auto generated using gen.rb 
- * time: 2024-10-13 15:32:16 -0400
+ * time: 2024-10-16 23:38:20 -0400
  */
 
 #pragma once
@@ -1975,7 +1975,7 @@ instruction_t REGULAR_CALLF_154[1] = {
   },
 };
 
-instruction_t REGULAR_FWAIT_155[3] = {
+instruction_t REGULAR_FWAIT_155[1] = {
   {
    .extended_opcode = false,
    .mnemonic = "fwait",
@@ -1984,24 +1984,6 @@ instruction_t REGULAR_FWAIT_155[3] = {
    .prefix = 0,
    .primary_opcode = 155,
    .secondary_opcode = -1,
-  },
-  {
-   .extended_opcode = false,
-   .mnemonic = "fstenv",
-   .opcode_field = {.type = 2, .value = 6 },
-   .operands = {.size = 1, .operand = {57,0,0,0}},
-   .prefix = 0,
-   .primary_opcode = 155,
-   .secondary_opcode = 217,
-  },
-  {
-   .extended_opcode = false,
-   .mnemonic = "fstcw",
-   .opcode_field = {.type = 2, .value = 7 },
-   .operands = {.size = 1, .operand = {56,0,0,0}},
-   .prefix = 0,
-   .primary_opcode = 155,
-   .secondary_opcode = 217,
   },
 };
 
@@ -4705,7 +4687,7 @@ instruction_t REGULAR_FIADD_218[41] = {
   },
 };
 
-instruction_t REGULAR_FILD_219[47] = {
+instruction_t REGULAR_FILD_219[45] = {
   {
    .extended_opcode = false,
    .mnemonic = "fild",
@@ -5059,28 +5041,10 @@ instruction_t REGULAR_FILD_219[47] = {
   },
   {
    .extended_opcode = false,
-   .mnemonic = "fclex",
-   .opcode_field = {.type = 0, .value = 0 },
-   .operands = {.size = 0, .operand = {0,0,0,0}},
-   .prefix = 155,
-   .primary_opcode = 219,
-   .secondary_opcode = 226,
-  },
-  {
-   .extended_opcode = false,
    .mnemonic = "fninit",
    .opcode_field = {.type = 0, .value = 0 },
    .operands = {.size = 0, .operand = {0,0,0,0}},
    .prefix = 0,
-   .primary_opcode = 219,
-   .secondary_opcode = 227,
-  },
-  {
-   .extended_opcode = false,
-   .mnemonic = "finit",
-   .opcode_field = {.type = 0, .value = 0 },
-   .operands = {.size = 0, .operand = {0,0,0,0}},
-   .prefix = 155,
    .primary_opcode = 219,
    .secondary_opcode = 227,
   },
@@ -5278,7 +5242,7 @@ instruction_t REGULAR_FADD_220[16] = {
   },
 };
 
-instruction_t REGULAR_FLD_221[15] = {
+instruction_t REGULAR_FLD_221[13] = {
   {
    .extended_opcode = false,
    .mnemonic = "fld",
@@ -5389,28 +5353,10 @@ instruction_t REGULAR_FLD_221[15] = {
   },
   {
    .extended_opcode = false,
-   .mnemonic = "fsave",
-   .opcode_field = {.type = 2, .value = 6 },
-   .operands = {.size = 3, .operand = {57,84,86,0}},
-   .prefix = 155,
-   .primary_opcode = 221,
-   .secondary_opcode = -1,
-  },
-  {
-   .extended_opcode = false,
    .mnemonic = "fnstsw",
    .opcode_field = {.type = 2, .value = 7 },
    .operands = {.size = 1, .operand = {56,0,0,0}},
    .prefix = 0,
-   .primary_opcode = 221,
-   .secondary_opcode = -1,
-  },
-  {
-   .extended_opcode = false,
-   .mnemonic = "fstsw",
-   .opcode_field = {.type = 2, .value = 7 },
-   .operands = {.size = 1, .operand = {56,0,0,0}},
-   .prefix = 155,
    .primary_opcode = 221,
    .secondary_opcode = -1,
   },
@@ -5563,7 +5509,7 @@ instruction_t REGULAR_FIADD_222[16] = {
   },
 };
 
-instruction_t REGULAR_FILD_223[16] = {
+instruction_t REGULAR_FILD_223[15] = {
   {
    .extended_opcode = false,
    .mnemonic = "fild",
@@ -5651,15 +5597,6 @@ instruction_t REGULAR_FILD_223[16] = {
    .opcode_field = {.type = 0, .value = 0 },
    .operands = {.size = 1, .operand = {23,0,0,0}},
    .prefix = 0,
-   .primary_opcode = 223,
-   .secondary_opcode = 224,
-  },
-  {
-   .extended_opcode = false,
-   .mnemonic = "fstsw",
-   .opcode_field = {.type = 2, .value = 4 },
-   .operands = {.size = 1, .operand = {23,0,0,0}},
-   .prefix = 155,
    .primary_opcode = 223,
    .secondary_opcode = 224,
   },

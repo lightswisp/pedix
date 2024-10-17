@@ -10098,30 +10098,6 @@
 <TBODY><TR>
 <TD></TD>
 <TD></TD>
-<TD>9B</TD>
-<td>D9</td>
-<TD CLASS="highlight">6</TD>
-<TD></TD>
-<TD></TD>
-<TD></TD>
-<TD></TD>
-<TD></TD>
-<TD>FSTENV</TD>
-<td><b>m14/28</b></td>
-<td></td>
-<td></td>
-<td></td>
-<td rowspan="1"></td>
-<TD></TD>
-<TD>0123</TD>
-<TD></TD>
-<TD>0123</TD>
-<TD></TD>
-<td>Store x87 FPU Environment</td>
-</TR></TBODY>
-<TBODY><TR>
-<TD></TD>
-<TD></TD>
 <TD>D9</TD>
 <td>F0</td>
 <TD CLASS="highlight"></TD>
@@ -10323,30 +10299,6 @@
 <TD></TD>
 <TD></TD>
 <TD>FNSTCW</TD>
-<td><b>m16</b></td>
-<td></td>
-<td></td>
-<td></td>
-<td rowspan="1"></td>
-<TD></TD>
-<TD>0123</TD>
-<TD></TD>
-<TD>0123</TD>
-<TD></TD>
-<td>Store x87 FPU Control Word</td>
-</TR></TBODY>
-<TBODY><TR>
-<TD></TD>
-<TD></TD>
-<TD>9B</TD>
-<td>D9</td>
-<TD CLASS="highlight">7</TD>
-<TD></TD>
-<TD></TD>
-<TD></TD>
-<TD></TD>
-<TD></TD>
-<TD>FSTCW</TD>
 <td><b>m16</b></td>
 <td></td>
 <td></td>
@@ -12496,30 +12448,6 @@
 <td>Clear Exceptions</td>
 </TR></TBODY>
 <TBODY><TR>
-<TD>9B</TD>
-<TD></TD>
-<TD>DB</TD>
-<td>E2</td>
-<TD CLASS="highlight"></TD>
-<TD></TD>
-<TD></TD>
-<TD></TD>
-<TD></TD>
-<TD></TD>
-<TD>FCLEX</TD>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td rowspan="1"></td>
-<TD></TD>
-<TD>0123</TD>
-<TD></TD>
-<TD>0123</TD>
-<TD></TD>
-<td>Clear Exceptions</td>
-</TR></TBODY>
-<TBODY><TR>
 <TD></TD>
 <TD></TD>
 <TD>DB</TD>
@@ -12531,30 +12459,6 @@
 <TD></TD>
 <TD></TD>
 <TD>FNINIT</TD>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td rowspan="1"></td>
-<TD></TD>
-<TD>0123</TD>
-<TD></TD>
-<TD></TD>
-<TD>0000</TD>
-<td>Initialize Floating-Point Unit</td>
-</TR></TBODY>
-<TBODY><TR>
-<TD>9B</TD>
-<TD></TD>
-<TD>DB</TD>
-<td>E3</td>
-<TD CLASS="highlight"></TD>
-<TD></TD>
-<TD></TD>
-<TD></TD>
-<TD></TD>
-<TD></TD>
-<TD>FINIT</TD>
 <td></td>
 <td></td>
 <td></td>
@@ -13364,30 +13268,6 @@
 <TD>0000</TD>
 <td>Store x87 FPU State</td>
 </TR></TBODY>
-<TBODY><TR>
-<TD>9B</TD>
-<TD></TD>
-<TD>DD</TD>
-<td></td>
-<TD CLASS="highlight">6</TD>
-<TD></TD>
-<TD></TD>
-<TD></TD>
-<TD></TD>
-<TD></TD>
-<TD>FSAVE</TD>
-<td><b>m94/108</b></td>
-<td><i>ST</i></td>
-<td><i>ST1</i></td>
-<td><span title="dst: Mst src: ST src: ST1 src: ST2 src: ST3 src: ST4 src: ST5 src: ST6 src: ST7 "></span></td>
-<td rowspan="1"></td>
-<TD></TD>
-<TD>0123</TD>
-<TD>0123</TD>
-<TD></TD>
-<TD>0000</TD>
-<td>Store x87 FPU State</td>
-</TR></TBODY>
 <TBODY><TR id="xDD_7">
 <TD></TD>
 <TD></TD>
@@ -13400,30 +13280,6 @@
 <TD></TD>
 <TD></TD>
 <TD>FNSTSW</TD>
-<td><b>m16</b></td>
-<td></td>
-<td></td>
-<td></td>
-<td rowspan="1"></td>
-<TD></TD>
-<TD>0123</TD>
-<TD></TD>
-<TD>0123</TD>
-<TD></TD>
-<td>Store x87 FPU Status Word</td>
-</TR></TBODY>
-<TBODY><TR>
-<TD>9B</TD>
-<TD></TD>
-<TD>DD</TD>
-<td></td>
-<TD CLASS="highlight">7</TD>
-<TD></TD>
-<TD></TD>
-<TD></TD>
-<TD></TD>
-<TD></TD>
-<TD>FSTSW</TD>
 <td><b>m16</b></td>
 <td></td>
 <td></td>
@@ -14053,30 +13909,6 @@
 <TD></TD>
 <TD></TD>
 <TD>FNSTSW</TD>
-<td><b>AX</b></td>
-<td></td>
-<td></td>
-<td></td>
-<td rowspan="1"></td>
-<TD></TD>
-<TD>0123</TD>
-<TD></TD>
-<TD>0123</TD>
-<TD></TD>
-<td>Store x87 FPU Status Word</td>
-</TR></TBODY>
-<TBODY><TR>
-<TD>9B</TD>
-<TD></TD>
-<TD>DF</TD>
-<td>E0</td>
-<TD CLASS="highlight">4</TD>
-<TD>02+</TD>
-<TD></TD>
-<TD></TD>
-<TD></TD>
-<TD></TD>
-<TD>FSTSW</TD>
 <td><b>AX</b></td>
 <td></td>
 <td></td>

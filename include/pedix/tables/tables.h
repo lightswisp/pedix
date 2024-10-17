@@ -1,5 +1,5 @@
 /* (tables.h) auto generated using gen.rb 
- * time: 2024-10-13 15:32:16 -0400
+ * time: 2024-10-16 23:38:20 -0400
  */
 
 #pragma once
@@ -148,7 +148,7 @@ instruction_container_t regular_table_32[0x100] = {
   [0x98] = { .size = 2, .instructions = (instruction_t*)&REGULAR_CBW_152 },
   [0x99] = { .size = 1, .instructions = (instruction_t*)&REGULAR_CDQ_153 },
   [0x9a] = { .size = 1, .instructions = (instruction_t*)&REGULAR_CALLF_154 },
-  [0x9b] = { .size = 3, .instructions = (instruction_t*)&REGULAR_FWAIT_155 },
+  [0x9b] = { .size = 1, .instructions = (instruction_t*)&REGULAR_FWAIT_155 },
   [0x9c] = { .size = 1, .instructions = (instruction_t*)&REGULAR_PUSHFD_156 },
   [0x9d] = { .size = 1, .instructions = (instruction_t*)&REGULAR_POPFD_157 },
   [0x9e] = { .size = 1, .instructions = (instruction_t*)&REGULAR_SAHF_158 },
@@ -212,11 +212,11 @@ instruction_container_t regular_table_32[0x100] = {
   [0xd8] = { .size = 72, .instructions = (instruction_t*)&REGULAR_FADD_216 },
   [0xd9] = { .size = 59, .instructions = (instruction_t*)&REGULAR_FLD_217 },
   [0xda] = { .size = 41, .instructions = (instruction_t*)&REGULAR_FIADD_218 },
-  [0xdb] = { .size = 47, .instructions = (instruction_t*)&REGULAR_FILD_219 },
+  [0xdb] = { .size = 45, .instructions = (instruction_t*)&REGULAR_FILD_219 },
   [0xdc] = { .size = 16, .instructions = (instruction_t*)&REGULAR_FADD_220 },
-  [0xdd] = { .size = 15, .instructions = (instruction_t*)&REGULAR_FLD_221 },
+  [0xdd] = { .size = 13, .instructions = (instruction_t*)&REGULAR_FLD_221 },
   [0xde] = { .size = 16, .instructions = (instruction_t*)&REGULAR_FIADD_222 },
-  [0xdf] = { .size = 16, .instructions = (instruction_t*)&REGULAR_FILD_223 },
+  [0xdf] = { .size = 15, .instructions = (instruction_t*)&REGULAR_FILD_223 },
   [0xe0] = { .size = 1, .instructions = (instruction_t*)&REGULAR_LOOPNZ_224 },
   [0xe1] = { .size = 1, .instructions = (instruction_t*)&REGULAR_LOOPZ_225 },
   [0xe2] = { .size = 1, .instructions = (instruction_t*)&REGULAR_LOOP_226 },
