@@ -170,6 +170,7 @@ PREPARE_INSTRUCTION(135, "\xDB\x18");
 PREPARE_INSTRUCTION(136, "\xDB\xD8");
 PREPARE_INSTRUCTION(137, "\xDB\xE0");
 PREPARE_INSTRUCTION(138, "\xDB\xE1");
+PREPARE_INSTRUCTION(139, "\xDB\xE2");
 
 int main(void){
   decoded_instruction_t *decoded = pedix_init_instruction();
@@ -314,6 +315,7 @@ int main(void){
   PREPARE_TEST(136, "fcmovnu st,st0");  
   PREPARE_TEST(137, "fneni nop");  
   PREPARE_TEST(138, "fndisi nop");  
+  PREPARE_TEST(139, "fnclex");  
 
   puts(GREEN"All tests are passed!"NC);
   return 0;
