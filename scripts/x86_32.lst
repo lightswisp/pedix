@@ -12525,8 +12525,8 @@
 <TD></TD>
 <TD></TD>
 <TD>DB</TD>
-<td></td>
-<TD CLASS="highlight">5</TD>
+<td>E8</td>
+<TD CLASS="highlight"></TD>
 <TD>PP+</TD>
 <TD></TD>
 <TD></TD>
@@ -12545,12 +12545,350 @@
 <TD>o.......</TD>
 <td>Unordered Compare Floating Point Values and Set EFLAGS</td>
 </TR></TBODY>
+
+<TBODY><TR>
+<TD></TD>
+<TD></TD>
+<TD>DB</TD>
+<td>E9</td>
+<TD CLASS="highlight"></TD>
+<TD>PP+</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FUCOMI</TD>
+<td>ST</td>
+<td>STi</td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>o...z.pc .1..</TD>
+<TD>o...z.pc .1..</TD>
+<TD></TD>
+<TD>o.......</TD>
+<td>Unordered Compare Floating Point Values and Set EFLAGS</td>
+</TR></TBODY>
+<TBODY><TR>
+<TD></TD>
+<TD></TD>
+<TD>DB</TD>
+<td>EA</td>
+<TD CLASS="highlight"></TD>
+<TD>PP+</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FUCOMI</TD>
+<td>ST</td>
+<td>STi</td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>o...z.pc .1..</TD>
+<TD>o...z.pc .1..</TD>
+<TD></TD>
+<TD>o.......</TD>
+<td>Unordered Compare Floating Point Values and Set EFLAGS</td>
+</TR></TBODY>
+<TBODY><TR>
+<TD></TD>
+<TD></TD>
+<TD>DB</TD>
+<td>EB</td>
+<TD CLASS="highlight"></TD>
+<TD>PP+</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FUCOMI</TD>
+<td>ST</td>
+<td>STi</td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>o...z.pc .1..</TD>
+<TD>o...z.pc .1..</TD>
+<TD></TD>
+<TD>o.......</TD>
+<td>Unordered Compare Floating Point Values and Set EFLAGS</td>
+</TR></TBODY>
+<TBODY><TR>
+<TD></TD>
+<TD></TD>
+<TD>DB</TD>
+<td>EC</td>
+<TD CLASS="highlight"></TD>
+<TD>PP+</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FUCOMI</TD>
+<td>ST</td>
+<td>STi</td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>o...z.pc .1..</TD>
+<TD>o...z.pc .1..</TD>
+<TD></TD>
+<TD>o.......</TD>
+<td>Unordered Compare Floating Point Values and Set EFLAGS</td>
+</TR></TBODY>
+<TBODY><TR>
+<TD></TD>
+<TD></TD>
+<TD>DB</TD>
+<td>ED</td>
+<TD CLASS="highlight"></TD>
+<TD>PP+</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FUCOMI</TD>
+<td>ST</td>
+<td>STi</td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>o...z.pc .1..</TD>
+<TD>o...z.pc .1..</TD>
+<TD></TD>
+<TD>o.......</TD>
+<td>Unordered Compare Floating Point Values and Set EFLAGS</td>
+</TR></TBODY>
+<TBODY><TR>
+<TD></TD>
+<TD></TD>
+<TD>DB</TD>
+<td>EE</td>
+<TD CLASS="highlight"></TD>
+<TD>PP+</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FUCOMI</TD>
+<td>ST</td>
+<td>STi</td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>o...z.pc .1..</TD>
+<TD>o...z.pc .1..</TD>
+<TD></TD>
+<TD>o.......</TD>
+<td>Unordered Compare Floating Point Values and Set EFLAGS</td>
+</TR></TBODY>
+<TBODY><TR>
+<TD></TD>
+<TD></TD>
+<TD>DB</TD>
+<td>EF</td>
+<TD CLASS="highlight"></TD>
+<TD>PP+</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FUCOMI</TD>
+<td>ST</td>
+<td>STi</td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>o...z.pc .1..</TD>
+<TD>o...z.pc .1..</TD>
+<TD></TD>
+<TD>o.......</TD>
+<td>Unordered Compare Floating Point Values and Set EFLAGS</td>
+</TR></TBODY>
+
 <TBODY><TR id="xDB_6">
 <TD></TD>
 <TD></TD>
 <TD>DB</TD>
+<td>F0</td>
+<TD CLASS="highlight"></TD>
+<TD>PP+</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FCOMI</TD>
+<td>ST</td>
+<td>STi</td>
 <td></td>
-<TD CLASS="highlight">6</TD>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>o...z.pc .1..</TD>
+<TD>o...z.pc .1..</TD>
+<TD></TD>
+<TD>o.......</TD>
+<td>Compare Floating Point Values and Set EFLAGS</td>
+</TR></TBODY>
+<TBODY><TR id="xDB_6">
+<TD></TD>
+<TD></TD>
+<TD>DB</TD>
+<td>F1</td>
+<TD CLASS="highlight"></TD>
+<TD>PP+</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FCOMI</TD>
+<td>ST</td>
+<td>STi</td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>o...z.pc .1..</TD>
+<TD>o...z.pc .1..</TD>
+<TD></TD>
+<TD>o.......</TD>
+<td>Compare Floating Point Values and Set EFLAGS</td>
+</TR></TBODY>
+<TBODY><TR id="xDB_6">
+<TD></TD>
+<TD></TD>
+<TD>DB</TD>
+<td>F2</td>
+<TD CLASS="highlight"></TD>
+<TD>PP+</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FCOMI</TD>
+<td>ST</td>
+<td>STi</td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>o...z.pc .1..</TD>
+<TD>o...z.pc .1..</TD>
+<TD></TD>
+<TD>o.......</TD>
+<td>Compare Floating Point Values and Set EFLAGS</td>
+</TR></TBODY>
+<TBODY><TR id="xDB_6">
+<TD></TD>
+<TD></TD>
+<TD>DB</TD>
+<td>F3</td>
+<TD CLASS="highlight"></TD>
+<TD>PP+</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FCOMI</TD>
+<td>ST</td>
+<td>STi</td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>o...z.pc .1..</TD>
+<TD>o...z.pc .1..</TD>
+<TD></TD>
+<TD>o.......</TD>
+<td>Compare Floating Point Values and Set EFLAGS</td>
+</TR></TBODY>
+<TBODY><TR id="xDB_6">
+<TD></TD>
+<TD></TD>
+<TD>DB</TD>
+<td>F4</td>
+<TD CLASS="highlight"></TD>
+<TD>PP+</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FCOMI</TD>
+<td>ST</td>
+<td>STi</td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>o...z.pc .1..</TD>
+<TD>o...z.pc .1..</TD>
+<TD></TD>
+<TD>o.......</TD>
+<td>Compare Floating Point Values and Set EFLAGS</td>
+</TR></TBODY>
+<TBODY><TR id="xDB_6">
+<TD></TD>
+<TD></TD>
+<TD>DB</TD>
+<td>F5</td>
+<TD CLASS="highlight"></TD>
+<TD>PP+</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FCOMI</TD>
+<td>ST</td>
+<td>STi</td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>o...z.pc .1..</TD>
+<TD>o...z.pc .1..</TD>
+<TD></TD>
+<TD>o.......</TD>
+<td>Compare Floating Point Values and Set EFLAGS</td>
+</TR></TBODY>
+<TBODY><TR id="xDB_6">
+<TD></TD>
+<TD></TD>
+<TD>DB</TD>
+<td>F6</td>
+<TD CLASS="highlight"></TD>
+<TD>PP+</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FCOMI</TD>
+<td>ST</td>
+<td>STi</td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>o...z.pc .1..</TD>
+<TD>o...z.pc .1..</TD>
+<TD></TD>
+<TD>o.......</TD>
+<td>Compare Floating Point Values and Set EFLAGS</td>
+</TR></TBODY>
+<TBODY><TR id="xDB_6">
+<TD></TD>
+<TD></TD>
+<TD>DB</TD>
+<td>F7</td>
+<TD CLASS="highlight"></TD>
 <TD>PP+</TD>
 <TD></TD>
 <TD></TD>
@@ -12581,8 +12919,8 @@
 <TD></TD>
 <TD>p</TD>
 <TD>FSTP</TD>
-<td><b>m80real</b></td>
-<td><i>ST</i></td>
+<td>m80real</td>
+<td></td>
 <td></td>
 <td></td>
 <td rowspan="1"></td>
