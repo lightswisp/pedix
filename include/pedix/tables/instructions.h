@@ -1,5 +1,5 @@
 /* (instructions.h) auto generated using gen.rb 
- * time: 2024-10-17 02:48:39 -0400
+ * time: 2024-10-17 02:51:47 -0400
  */
 
 #pragma once
@@ -5226,7 +5226,7 @@ instruction_t REGULAR_FADD_220[16] = {
    .extended_opcode = false,
    .mnemonic = "fadd",
    .opcode_field = {.type = 2, .value = 0 },
-   .operands = {.size = 2, .operand = {84,57,0,0}},
+   .operands = {.size = 1, .operand = {57,0,0,0}},
    .prefix = 0,
    .primary_opcode = 220,
    .secondary_opcode = -1,

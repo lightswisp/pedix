@@ -177,6 +177,7 @@ PREPARE_INSTRUCTION(142, "\xDB\x28");
 PREPARE_INSTRUCTION(143, "\xDB\xE8");
 PREPARE_INSTRUCTION(144, "\xDB\xF0");
 PREPARE_INSTRUCTION(145, "\xDB\x38");
+PREPARE_INSTRUCTION(146, "\xDC\x00");
 
 int main(void){
   decoded_instruction_t *decoded = pedix_init_instruction();
@@ -328,6 +329,7 @@ int main(void){
   PREPARE_TEST(143, "fucomi st,st0");  
   PREPARE_TEST(144, "fcomi st,st0");  
   PREPARE_TEST(145, "fstp DWORD PTR [eax]");  
+  PREPARE_TEST(146, "fadd DWORD PTR [eax]");  
 
   puts(GREEN"All tests are passed!"NC);
   return 0;
