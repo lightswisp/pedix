@@ -13176,15 +13176,184 @@
 <TD></TD>
 <TD></TD>
 <TD>DC</TD>
-<td></td>
-<TD CLASS="highlight">1</TD>
+<td>C8</td>
+<TD CLASS="highlight"></TD>
 <TD></TD>
 <TD></TD>
 <TD></TD>
 <TD></TD>
 <TD></TD>
 <TD>FMUL</TD>
-<td><b>STi</b></td>
+<td>STi</td>
+<td>ST</td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>
+<TD></TD>
+<td>Multiply</td>
+</TR></TBODY>
+
+<TBODY><TR>
+<TD></TD>
+<TD></TD>
+<TD>DC</TD>
+<td>C9</td>
+<TD CLASS="highlight"></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FMUL</TD>
+<td>STi</td>
+<td>ST</td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>
+<TD></TD>
+<td>Multiply</td>
+</TR></TBODY>
+<TBODY><TR>
+<TD></TD>
+<TD></TD>
+<TD>DC</TD>
+<td>CA</td>
+<TD CLASS="highlight"></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FMUL</TD>
+<td>STi</td>
+<td>ST</td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>
+<TD></TD>
+<td>Multiply</td>
+</TR></TBODY>
+<TBODY><TR>
+<TD></TD>
+<TD></TD>
+<TD>DC</TD>
+<td>CB</td>
+<TD CLASS="highlight"></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FMUL</TD>
+<td>STi</td>
+<td>ST</td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>
+<TD></TD>
+<td>Multiply</td>
+</TR></TBODY>
+<TBODY><TR>
+<TD></TD>
+<TD></TD>
+<TD>DC</TD>
+<td>CC</td>
+<TD CLASS="highlight"></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FMUL</TD>
+<td>STi</td>
+<td>ST</td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>
+<TD></TD>
+<td>Multiply</td>
+</TR></TBODY>
+<TBODY><TR>
+<TD></TD>
+<TD></TD>
+<TD>DC</TD>
+<td>CD</td>
+<TD CLASS="highlight"></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FMUL</TD>
+<td>STi</td>
+<td>ST</td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>
+<TD></TD>
+<td>Multiply</td>
+</TR></TBODY>
+<TBODY><TR>
+<TD></TD>
+<TD></TD>
+<TD>DC</TD>
+<td>CE</td>
+<TD CLASS="highlight"></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FMUL</TD>
+<td>STi</td>
+<td>ST</td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>
+<TD></TD>
+<td>Multiply</td>
+</TR></TBODY>
+<TBODY><TR>
+<TD></TD>
+<TD></TD>
+<TD>DC</TD>
+<td>CF</td>
+<TD CLASS="highlight"></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FMUL</TD>
+<td>STi</td>
 <td>ST</td>
 <td></td>
 <td></td>
@@ -13208,8 +13377,8 @@
 <TD></TD>
 <TD></TD>
 <TD>FCOM</TD>
-<td><i>ST</i></td>
 <td>m64real</td>
+<td></td>
 <td></td>
 <td></td>
 <td rowspan="1"></td>
