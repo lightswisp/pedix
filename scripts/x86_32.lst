@@ -14767,16 +14767,16 @@
 <TD></TD>
 <TD></TD>
 <TD>DD</TD>
-<td></td>
-<TD CLASS="highlight">3</TD>
+<td>D8</td>
+<TD CLASS="highlight"></TD>
 <TD></TD>
 <TD></TD>
 <TD></TD>
 <TD></TD>
 <TD>p</TD>
 <TD>FSTP</TD>
-<td><b><i>ST</i></b></td>
 <td>STi</td>
+<td></td>
 <td></td>
 <td></td>
 <td rowspan="1"></td>
@@ -14787,44 +14787,358 @@
 <TD></TD>
 <td>Store Floating Point Value and Pop</td>
 </TR></TBODY>
-<TBODY><TR id="xDD_4">
+
+<TBODY><TR>
 <TD></TD>
 <TD></TD>
 <TD>DD</TD>
+<td>D9</td>
+<TD CLASS="highlight"></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>p</TD>
+<TD>FSTP</TD>
+<td>STi</td>
 <td></td>
-<TD CLASS="highlight">4</TD>
-<TD></TD>
-<TD></TD>
-<TD></TD>
-<TD></TD>
-<TD></TD>
-<TD>FRSTOR</TD>
-<td><b><i>ST</i></b></td>
-<td><b><i>ST1</i></b></td>
-<td><b><i>ST2</i></b></td>
-<td><span title="dst: ST dst: ST1 dst: ST2 dst: ST3 dst: ST4 dst: ST5 dst: ST6 dst: ST7 src: Mst "></span></td>
+<td></td>
+<td></td>
 <td rowspan="1"></td>
 <TD></TD>
 <TD>0123</TD>
-<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>
 <TD></TD>
-<TD></TD>
-<td>Restore x87 FPU State</td>
+<td>Store Floating Point Value and Pop</td>
 </TR></TBODY>
 <TBODY><TR>
 <TD></TD>
 <TD></TD>
 <TD>DD</TD>
+<td>DA</td>
+<TD CLASS="highlight"></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>p</TD>
+<TD>FSTP</TD>
+<td>STi</td>
 <td></td>
-<TD CLASS="highlight">4</TD>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>
+<TD></TD>
+<td>Store Floating Point Value and Pop</td>
+</TR></TBODY>
+<TBODY><TR>
+<TD></TD>
+<TD></TD>
+<TD>DD</TD>
+<td>DB</td>
+<TD CLASS="highlight"></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>p</TD>
+<TD>FSTP</TD>
+<td>STi</td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>
+<TD></TD>
+<td>Store Floating Point Value and Pop</td>
+</TR></TBODY>
+<TBODY><TR>
+<TD></TD>
+<TD></TD>
+<TD>DD</TD>
+<td>DC</td>
+<TD CLASS="highlight"></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>p</TD>
+<TD>FSTP</TD>
+<td>STi</td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>
+<TD></TD>
+<td>Store Floating Point Value and Pop</td>
+</TR></TBODY>
+<TBODY><TR>
+<TD></TD>
+<TD></TD>
+<TD>DD</TD>
+<td>DD</td>
+<TD CLASS="highlight"></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>p</TD>
+<TD>FSTP</TD>
+<td>STi</td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>
+<TD></TD>
+<td>Store Floating Point Value and Pop</td>
+</TR></TBODY>
+<TBODY><TR>
+<TD></TD>
+<TD></TD>
+<TD>DD</TD>
+<td>DE</td>
+<TD CLASS="highlight"></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>p</TD>
+<TD>FSTP</TD>
+<td>STi</td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>
+<TD></TD>
+<td>Store Floating Point Value and Pop</td>
+</TR></TBODY>
+<TBODY><TR>
+<TD></TD>
+<TD></TD>
+<TD>DD</TD>
+<td>DF</td>
+<TD CLASS="highlight"></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>p</TD>
+<TD>FSTP</TD>
+<td>STi</td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>
+<TD></TD>
+<td>Store Floating Point Value and Pop</td>
+</TR></TBODY>
+<TBODY><TR>
+<TD></TD>
+<TD></TD>
+<TD>DD</TD>
+<td>E0</td>
+<TD CLASS="highlight"></TD>
 <TD>03+</TD>
 <TD></TD>
 <TD></TD>
 <TD></TD>
 <TD></TD>
 <TD>FUCOM</TD>
-<td><i>ST</i></td>
 <td>STi</td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>0123</TD>
+<TD>0123</TD>
+<TD></TD>
+<TD></TD>
+<td>Unordered Compare Floating Point Values</td>
+</TR></TBODY>
+
+<TBODY><TR>
+<TD></TD>
+<TD></TD>
+<TD>DD</TD>
+<td>E1</td>
+<TD CLASS="highlight"></TD>
+<TD>03+</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FUCOM</TD>
+<td>STi</td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>0123</TD>
+<TD>0123</TD>
+<TD></TD>
+<TD></TD>
+<td>Unordered Compare Floating Point Values</td>
+</TR></TBODY>
+<TBODY><TR>
+<TD></TD>
+<TD></TD>
+<TD>DD</TD>
+<td>E2</td>
+<TD CLASS="highlight"></TD>
+<TD>03+</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FUCOM</TD>
+<td>STi</td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>0123</TD>
+<TD>0123</TD>
+<TD></TD>
+<TD></TD>
+<td>Unordered Compare Floating Point Values</td>
+</TR></TBODY>
+<TBODY><TR>
+<TD></TD>
+<TD></TD>
+<TD>DD</TD>
+<td>E3</td>
+<TD CLASS="highlight"></TD>
+<TD>03+</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FUCOM</TD>
+<td>STi</td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>0123</TD>
+<TD>0123</TD>
+<TD></TD>
+<TD></TD>
+<td>Unordered Compare Floating Point Values</td>
+</TR></TBODY>
+<TBODY><TR>
+<TD></TD>
+<TD></TD>
+<TD>DD</TD>
+<td>E4</td>
+<TD CLASS="highlight"></TD>
+<TD>03+</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FUCOM</TD>
+<td>STi</td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>0123</TD>
+<TD>0123</TD>
+<TD></TD>
+<TD></TD>
+<td>Unordered Compare Floating Point Values</td>
+</TR></TBODY>
+<TBODY><TR>
+<TD></TD>
+<TD></TD>
+<TD>DD</TD>
+<td>E5</td>
+<TD CLASS="highlight"></TD>
+<TD>03+</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FUCOM</TD>
+<td>STi</td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>0123</TD>
+<TD>0123</TD>
+<TD></TD>
+<TD></TD>
+<td>Unordered Compare Floating Point Values</td>
+</TR></TBODY>
+<TBODY><TR>
+<TD></TD>
+<TD></TD>
+<TD>DD</TD>
+<td>E6</td>
+<TD CLASS="highlight"></TD>
+<TD>03+</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FUCOM</TD>
+<td>STi</td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>0123</TD>
+<TD>0123</TD>
+<TD></TD>
+<TD></TD>
+<td>Unordered Compare Floating Point Values</td>
+</TR></TBODY>
+<TBODY><TR>
+<TD></TD>
+<TD></TD>
+<TD>DD</TD>
+<td>E7</td>
+<TD CLASS="highlight"></TD>
+<TD>03+</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FUCOM</TD>
+<td>STi</td>
+<td></td>
 <td></td>
 <td></td>
 <td rowspan="1"></td>
@@ -14839,16 +15153,185 @@
 <TD></TD>
 <TD></TD>
 <TD>DD</TD>
-<td></td>
-<TD CLASS="highlight">5</TD>
+<td>E8</td>
+<TD CLASS="highlight"></TD>
 <TD>03+</TD>
 <TD></TD>
 <TD></TD>
 <TD></TD>
 <TD>p</TD>
 <TD>FUCOMP</TD>
-<td><i>ST</i></td>
 <td>STi</td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>0123</TD>
+<TD>0123</TD>
+<TD></TD>
+<TD></TD>
+<td>Unordered Compare Floating Point Values and Pop</td>
+</TR></TBODY>
+
+<TBODY><TR id="xDD_5">
+<TD></TD>
+<TD></TD>
+<TD>DD</TD>
+<td>E9</td>
+<TD CLASS="highlight"></TD>
+<TD>03+</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>p</TD>
+<TD>FUCOMP</TD>
+<td>STi</td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>0123</TD>
+<TD>0123</TD>
+<TD></TD>
+<TD></TD>
+<td>Unordered Compare Floating Point Values and Pop</td>
+</TR></TBODY>
+<TBODY><TR id="xDD_5">
+<TD></TD>
+<TD></TD>
+<TD>DD</TD>
+<td>EA</td>
+<TD CLASS="highlight"></TD>
+<TD>03+</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>p</TD>
+<TD>FUCOMP</TD>
+<td>STi</td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>0123</TD>
+<TD>0123</TD>
+<TD></TD>
+<TD></TD>
+<td>Unordered Compare Floating Point Values and Pop</td>
+</TR></TBODY>
+<TBODY><TR id="xDD_5">
+<TD></TD>
+<TD></TD>
+<TD>DD</TD>
+<td>EB</td>
+<TD CLASS="highlight"></TD>
+<TD>03+</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>p</TD>
+<TD>FUCOMP</TD>
+<td>STi</td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>0123</TD>
+<TD>0123</TD>
+<TD></TD>
+<TD></TD>
+<td>Unordered Compare Floating Point Values and Pop</td>
+</TR></TBODY>
+<TBODY><TR id="xDD_5">
+<TD></TD>
+<TD></TD>
+<TD>DD</TD>
+<td>EC</td>
+<TD CLASS="highlight"></TD>
+<TD>03+</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>p</TD>
+<TD>FUCOMP</TD>
+<td>STi</td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>0123</TD>
+<TD>0123</TD>
+<TD></TD>
+<TD></TD>
+<td>Unordered Compare Floating Point Values and Pop</td>
+</TR></TBODY>
+<TBODY><TR id="xDD_5">
+<TD></TD>
+<TD></TD>
+<TD>DD</TD>
+<td>ED</td>
+<TD CLASS="highlight"></TD>
+<TD>03+</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>p</TD>
+<TD>FUCOMP</TD>
+<td>STi</td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>0123</TD>
+<TD>0123</TD>
+<TD></TD>
+<TD></TD>
+<td>Unordered Compare Floating Point Values and Pop</td>
+</TR></TBODY>
+<TBODY><TR id="xDD_5">
+<TD></TD>
+<TD></TD>
+<TD>DD</TD>
+<td>EE</td>
+<TD CLASS="highlight"></TD>
+<TD>03+</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>p</TD>
+<TD>FUCOMP</TD>
+<td>STi</td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>0123</TD>
+<TD>0123</TD>
+<TD></TD>
+<TD></TD>
+<td>Unordered Compare Floating Point Values and Pop</td>
+</TR></TBODY>
+<TBODY><TR id="xDD_5">
+<TD></TD>
+<TD></TD>
+<TD>DD</TD>
+<td>EF</td>
+<TD CLASS="highlight"></TD>
+<TD>03+</TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>p</TD>
+<TD>FUCOMP</TD>
+<td>STi</td>
+<td></td>
 <td></td>
 <td></td>
 <td rowspan="1"></td>
