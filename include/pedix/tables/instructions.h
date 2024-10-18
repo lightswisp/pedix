@@ -1,5 +1,5 @@
 /* (instructions.h) auto generated using gen.rb 
- * time: 2024-10-18 00:26:51 -0400
+ * time: 2024-10-18 01:01:09 -0400
  */
 
 #pragma once
@@ -5221,7 +5221,7 @@ instruction_t REGULAR_FILD_219[59] = {
   },
 };
 
-instruction_t REGULAR_FADD_220[49] = {
+instruction_t REGULAR_FADD_220[56] = {
   {
    .extended_opcode = false,
    .mnemonic = "fadd",
@@ -5657,11 +5657,74 @@ instruction_t REGULAR_FADD_220[49] = {
   {
    .extended_opcode = false,
    .mnemonic = "fdiv",
-   .opcode_field = {.type = 2, .value = 7 },
+   .opcode_field = {.type = 0, .value = 0 },
    .operands = {.size = 2, .operand = {85,84,0,0}},
    .prefix = 0,
    .primary_opcode = 220,
-   .secondary_opcode = -1,
+   .secondary_opcode = 248,
+  },
+  {
+   .extended_opcode = false,
+   .mnemonic = "fdiv",
+   .opcode_field = {.type = 0, .value = 0 },
+   .operands = {.size = 2, .operand = {85,84,0,0}},
+   .prefix = 0,
+   .primary_opcode = 220,
+   .secondary_opcode = 249,
+  },
+  {
+   .extended_opcode = false,
+   .mnemonic = "fdiv",
+   .opcode_field = {.type = 0, .value = 0 },
+   .operands = {.size = 2, .operand = {85,84,0,0}},
+   .prefix = 0,
+   .primary_opcode = 220,
+   .secondary_opcode = 250,
+  },
+  {
+   .extended_opcode = false,
+   .mnemonic = "fdiv",
+   .opcode_field = {.type = 0, .value = 0 },
+   .operands = {.size = 2, .operand = {85,84,0,0}},
+   .prefix = 0,
+   .primary_opcode = 220,
+   .secondary_opcode = 251,
+  },
+  {
+   .extended_opcode = false,
+   .mnemonic = "fdiv",
+   .opcode_field = {.type = 0, .value = 0 },
+   .operands = {.size = 2, .operand = {85,84,0,0}},
+   .prefix = 0,
+   .primary_opcode = 220,
+   .secondary_opcode = 252,
+  },
+  {
+   .extended_opcode = false,
+   .mnemonic = "fdiv",
+   .opcode_field = {.type = 0, .value = 0 },
+   .operands = {.size = 2, .operand = {85,84,0,0}},
+   .prefix = 0,
+   .primary_opcode = 220,
+   .secondary_opcode = 253,
+  },
+  {
+   .extended_opcode = false,
+   .mnemonic = "fdiv",
+   .opcode_field = {.type = 0, .value = 0 },
+   .operands = {.size = 2, .operand = {85,84,0,0}},
+   .prefix = 0,
+   .primary_opcode = 220,
+   .secondary_opcode = 254,
+  },
+  {
+   .extended_opcode = false,
+   .mnemonic = "fdiv",
+   .opcode_field = {.type = 0, .value = 0 },
+   .operands = {.size = 2, .operand = {85,84,0,0}},
+   .prefix = 0,
+   .primary_opcode = 220,
+   .secondary_opcode = 255,
   },
 };
 
@@ -5670,7 +5733,7 @@ instruction_t REGULAR_FLD_221[13] = {
    .extended_opcode = false,
    .mnemonic = "fld",
    .opcode_field = {.type = 2, .value = 0 },
-   .operands = {.size = 2, .operand = {84,58,0,0}},
+   .operands = {.size = 1, .operand = {58,0,0,0}},
    .prefix = 0,
    .primary_opcode = 221,
    .secondary_opcode = -1,
