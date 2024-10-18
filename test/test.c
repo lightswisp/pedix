@@ -182,6 +182,7 @@ PREPARE_INSTRUCTION(147, "\xDC\xC0");
 PREPARE_INSTRUCTION(148, "\xDC\x08");
 PREPARE_INSTRUCTION(149, "\xDC\xC8");
 PREPARE_INSTRUCTION(150, "\xDC\x10");
+PREPARE_INSTRUCTION(151, "\xDC\x18");
 
 int main(void){
   decoded_instruction_t *decoded = pedix_init_instruction();
@@ -338,6 +339,7 @@ int main(void){
   PREPARE_TEST(148, "fmul DWORD PTR [eax]");  
   PREPARE_TEST(149, "fmul st0,st");  
   PREPARE_TEST(150, "fcom DWORD PTR [eax]");  
+  PREPARE_TEST(151, "fcomp DWORD PTR [eax]");  
 
   puts(GREEN"All tests are passed!"NC);
   return 0;

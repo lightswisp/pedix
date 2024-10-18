@@ -13389,31 +13389,6 @@
 <TD></TD>
 <td>Compare Real</td>
 </TR></TBODY>
-<TBODY><TR>
-<TD></TD>
-<TD></TD>
-<TD>DC</TD>
-<td></td>
-<TD CLASS="highlight">2</TD>
-<TD>03+</TD>
-<TD>U<A HREF="#gen_note_x87_fpu_undoc_aliases"><SUP>9</SUP></A>
-</TD>
-<TD></TD>
-<TD></TD>
-<TD></TD>
-<TD><i>FCOM2</i></TD>
-<td><i>ST</i></td>
-<td>STi</td>
-<td></td>
-<td></td>
-<td rowspan="1"></td>
-<TD></TD>
-<TD>0123</TD>
-<TD>0123</TD>
-<TD></TD>
-<TD></TD>
-<td>Compare Real</td>
-</TR></TBODY>
 <TBODY><TR id="xDC_3">
 <TD></TD>
 <TD></TD>
@@ -13426,8 +13401,8 @@
 <TD></TD>
 <TD>p</TD>
 <TD>FCOMP</TD>
-<td><i>ST</i></td>
 <td>m64real</td>
+<td></td>
 <td></td>
 <td></td>
 <td rowspan="1"></td>
