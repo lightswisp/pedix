@@ -201,6 +201,7 @@ PREPARE_INSTRUCTION(166, "\xDD\xD8");
 PREPARE_INSTRUCTION(167, "\xDD\xE0");
 PREPARE_INSTRUCTION(168, "\xDD\xE8");
 PREPARE_INSTRUCTION(169, "\xDD\x30");
+PREPARE_INSTRUCTION(170, "\xDD\x38");
 
 int main(void){
   decoded_instruction_t *decoded = pedix_init_instruction();
@@ -376,6 +377,7 @@ int main(void){
   PREPARE_TEST(167, "fucom st0");  
   PREPARE_TEST(168, "fucomp st0");  
   PREPARE_TEST(169, "fnsave DWORD PTR [eax]");  
+  PREPARE_TEST(170, "fnstsw WORD PTR [eax]");  
 
   puts(GREEN"All tests are passed!"NC);
   return 0;
