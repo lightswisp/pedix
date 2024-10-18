@@ -13859,8 +13859,8 @@
 <TD></TD>
 <TD></TD>
 <TD>FDIV</TD>
-<td><b><i>ST</i></b></td>
 <td>m64real</td>
+<td></td>
 <td></td>
 <td></td>
 <td rowspan="1"></td>
@@ -13875,15 +13875,184 @@
 <TD></TD>
 <TD></TD>
 <TD>DC</TD>
-<td></td>
-<TD CLASS="highlight">6</TD>
+<td>F0</td>
+<TD CLASS="highlight"></TD>
 <TD></TD>
 <TD></TD>
 <TD></TD>
 <TD></TD>
 <TD></TD>
 <TD>FDIVR</TD>
-<td><b>STi</b></td>
+<td>STi</td>
+<td>ST</td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>
+<TD></TD>
+<td>Reverse Divide</td>
+</TR></TBODY>
+
+<TBODY><TR>
+<TD></TD>
+<TD></TD>
+<TD>DC</TD>
+<td>F1</td>
+<TD CLASS="highlight"></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FDIVR</TD>
+<td>STi</td>
+<td>ST</td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>
+<TD></TD>
+<td>Reverse Divide</td>
+</TR></TBODY>
+<TBODY><TR>
+<TD></TD>
+<TD></TD>
+<TD>DC</TD>
+<td>F2</td>
+<TD CLASS="highlight"></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FDIVR</TD>
+<td>STi</td>
+<td>ST</td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>
+<TD></TD>
+<td>Reverse Divide</td>
+</TR></TBODY>
+<TBODY><TR>
+<TD></TD>
+<TD></TD>
+<TD>DC</TD>
+<td>F3</td>
+<TD CLASS="highlight"></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FDIVR</TD>
+<td>STi</td>
+<td>ST</td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>
+<TD></TD>
+<td>Reverse Divide</td>
+</TR></TBODY>
+<TBODY><TR>
+<TD></TD>
+<TD></TD>
+<TD>DC</TD>
+<td>F4</td>
+<TD CLASS="highlight"></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FDIVR</TD>
+<td>STi</td>
+<td>ST</td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>
+<TD></TD>
+<td>Reverse Divide</td>
+</TR></TBODY>
+<TBODY><TR>
+<TD></TD>
+<TD></TD>
+<TD>DC</TD>
+<td>F5</td>
+<TD CLASS="highlight"></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FDIVR</TD>
+<td>STi</td>
+<td>ST</td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>
+<TD></TD>
+<td>Reverse Divide</td>
+</TR></TBODY>
+<TBODY><TR>
+<TD></TD>
+<TD></TD>
+<TD>DC</TD>
+<td>F6</td>
+<TD CLASS="highlight"></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FDIVR</TD>
+<td>STi</td>
+<td>ST</td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>
+<TD></TD>
+<td>Reverse Divide</td>
+</TR></TBODY>
+<TBODY><TR>
+<TD></TD>
+<TD></TD>
+<TD>DC</TD>
+<td>F7</td>
+<TD CLASS="highlight"></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FDIVR</TD>
+<td>STi</td>
 <td>ST</td>
 <td></td>
 <td></td>
@@ -13907,8 +14076,8 @@
 <TD></TD>
 <TD></TD>
 <TD>FDIVR</TD>
-<td><b><i>ST</i></b></td>
 <td>m64real</td>
+<td></td>
 <td></td>
 <td></td>
 <td rowspan="1"></td>

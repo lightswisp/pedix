@@ -187,6 +187,9 @@ PREPARE_INSTRUCTION(152, "\xDC\x20");
 PREPARE_INSTRUCTION(153, "\xDC\x28");
 PREPARE_INSTRUCTION(154, "\xDC\xE1");
 PREPARE_INSTRUCTION(155, "\xDC\xEA");
+PREPARE_INSTRUCTION(156, "\xDC\x30");
+PREPARE_INSTRUCTION(157, "\xDC\xF1");
+PREPARE_INSTRUCTION(158, "\xDC\x38");
 
 int main(void){
   decoded_instruction_t *decoded = pedix_init_instruction();
@@ -338,16 +341,19 @@ int main(void){
   PREPARE_TEST(143, "fucomi st,st0");  
   PREPARE_TEST(144, "fcomi st,st0");  
   PREPARE_TEST(145, "fstp DWORD PTR [eax]");  
-  PREPARE_TEST(146, "fadd DWORD PTR [eax]");  
+  PREPARE_TEST(146, "fadd QWORD PTR [eax]");  
   PREPARE_TEST(147, "fadd st0,st");  
-  PREPARE_TEST(148, "fmul DWORD PTR [eax]");  
+  PREPARE_TEST(148, "fmul QWORD PTR [eax]");  
   PREPARE_TEST(149, "fmul st0,st");  
-  PREPARE_TEST(150, "fcom DWORD PTR [eax]");  
-  PREPARE_TEST(151, "fcomp DWORD PTR [eax]");  
-  PREPARE_TEST(152, "fsub DWORD PTR [eax]");  
-  PREPARE_TEST(153, "fsubr DWORD PTR [eax]");  
+  PREPARE_TEST(150, "fcom QWORD PTR [eax]");  
+  PREPARE_TEST(151, "fcomp QWORD PTR [eax]");  
+  PREPARE_TEST(152, "fsub QWORD PTR [eax]");  
+  PREPARE_TEST(153, "fsubr QWORD PTR [eax]");  
   PREPARE_TEST(154, "fsubr st1,st");  
   PREPARE_TEST(155, "fsub st2,st");  
+  PREPARE_TEST(156, "fdiv QWORD PTR [eax]");  
+  PREPARE_TEST(157, "fdivr st1,st");  
+  PREPARE_TEST(158, "fdivr QWORD PTR [eax]");  
 
   puts(GREEN"All tests are passed!"NC);
   return 0;
