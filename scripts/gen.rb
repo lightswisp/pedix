@@ -175,7 +175,7 @@ IMMEDIATES_MAP = {
 
 FPU_MAP = {
   "m80dec" => Operands::M_32,
-  "m16int" => Operands::M_32,
+  "m16int" => Operands::M_16,
   "m94/108" => Operands::M_32,
   "m64int" => Operands::M_64,
   "m64real" => Operands::M_64,
