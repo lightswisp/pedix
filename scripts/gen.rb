@@ -63,57 +63,58 @@ module Operands
   M_16              = 56;
   M_32              = 57;
   M_64              = 58;
-  M_128             = 59;
-  M_512             = 60;
-  M_16_32           = 61;
+  M_80              = 59;
+  M_128             = 60;
+  M_512             = 61;
+  M_16_32           = 62;
 
-  M_16_AMP_32       = 62;
-  M_16_AMP_16       = 63;
-  M_32_AMP_32       = 64;
-  M_16_AMP_64       = 65;
-  M_16_32_AMP_16_32 = 66;
+  M_16_AMP_32       = 63;
+  M_16_AMP_16       = 64;
+  M_32_AMP_32       = 65;
+  M_16_AMP_64       = 66;
+  M_16_32_AMP_16_32 = 67;
 
-  MOFFS_8           = 67;
-  MOFFS_16          = 68;
-  MOFFS_32          = 69;
-  MOFFS_64          = 70;
-  MOFFS_16_32       = 71;
+  MOFFS_8           = 68;
+  MOFFS_16          = 69;
+  MOFFS_32          = 70;
+  MOFFS_64          = 71;
+  MOFFS_16_32       = 72;
 
-  REL_8             = 72;
-  REL_16            = 73;
-  REL_32            = 74;
-  REL_16_32         = 75;
+  REL_8             = 73;
+  REL_16            = 74;
+  REL_32            = 75;
+  REL_16_32         = 76;
 
-  PTR_16            = 76;
-  PTR_32            = 77;
-  PTR_16_32         = 78;
+  PTR_16            = 77;
+  PTR_32            = 78;
+  PTR_16_32         = 79;
 
-  M_PTR_16          = 79;
-  M_PTR_32          = 80;
-  M_PTR_64          = 81;
-  M_PTR_16_32       = 82;
+  M_PTR_16          = 80;
+  M_PTR_32          = 81;
+  M_PTR_64          = 82;
+  M_PTR_16_32       = 83;
 
-  ONE               = 83; # literally "1"
-  REG_ST            = 84; # literally "st" string (top element of fpu register stack)
-  REG_STI           = 85; # the i's from the top of the fpu register stack
-  REG_ST1           = 86; # st(1)
-  REG_ST2           = 87;
-  REG_STI_M32       = 88;
+  ONE               = 84; # literally "1"
+  REG_ST            = 85; # literally "st" string (top element of fpu register stack)
+  REG_STI           = 86; # the i's from the top of the fpu register stack
+  REG_ST1           = 87; # st(1)
+  REG_ST2           = 88;
+  REG_STI_M32       = 89;
 
-  XMM               = 89;
-  XMM_0             = 90;
-  XMM_M_32          = 91;
-  XMM_M_64          = 92;
-  XMM_M_128         = 93;
+  XMM               = 90;
+  XMM_0             = 91;
+  XMM_M_32          = 92;
+  XMM_M_64          = 93;
+  XMM_M_128         = 94;
 
-  REG_CRN           = 94; # Control registers
-  REG_DRN           = 95; # Debug registers
+  REG_CRN           = 95; # Control registers
+  REG_DRN           = 96; # Debug registers
 
-  MM                = 96;
-  MM_M_64           = 97;
+  MM                = 97;
+  MM_M_64           = 98;
 
-  R_PLUS_16_32      = 98;
-  R_PLUS_8          = 99;
+  R_PLUS_16_32      = 99;
+  R_PLUS_8          = 100;
 end
 
 SEGMENTS_MAP = {
@@ -174,7 +175,7 @@ IMMEDIATES_MAP = {
 }
 
 FPU_MAP = {
-  "m80dec" => Operands::M_32,
+  "m80dec" => Operands::M_80,
   "m16int" => Operands::M_16,
   "m94/108" => Operands::M_32,
   "m64int" => Operands::M_64,

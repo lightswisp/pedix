@@ -427,6 +427,9 @@ static void pedix_set_operand_by_id32(decoded_instruction_t *decoded, __operand_
     else 
       strcpy(dst, "eax");
     break;
+  case OPERAND_REG_AX: 
+    strcpy(dst, "ax");
+    break;
   case OPERAND_REG_AL: 
     strcpy(dst, "al");
     break;
@@ -500,6 +503,10 @@ static void pedix_set_operand_by_id32(decoded_instruction_t *decoded, __operand_
     break;
   case OPERAND_M_64: 
     strcpy(decoded->ptr_text, "QWORD PTR");
+    pedix_set_operand_m(decoded, dst);
+    break;
+  case OPERAND_M_80: 
+    strcpy(decoded->ptr_text, "TBYTE PTR");
     pedix_set_operand_m(decoded, dst);
     break;
   case OPERAND_REG_ST: 

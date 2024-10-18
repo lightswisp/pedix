@@ -1,5 +1,5 @@
 /* (tables.h) auto generated using gen.rb 
- * time: 2024-10-18 05:40:26 -0400
+ * time: 2024-10-18 06:41:35 -0400
  */
 
 #pragma once
@@ -215,8 +215,8 @@ instruction_container_t regular_table_32[0x100] = {
   [0xdb] = { .size = 59, .instructions = (instruction_t*)&REGULAR_FILD_219 },
   [0xdc] = { .size = 56, .instructions = (instruction_t*)&REGULAR_FADD_220 },
   [0xdd] = { .size = 46, .instructions = (instruction_t*)&REGULAR_FLD_221 },
-  [0xde] = { .size = 16, .instructions = (instruction_t*)&REGULAR_FIADD_222 },
-  [0xdf] = { .size = 15, .instructions = (instruction_t*)&REGULAR_FILD_223 },
+  [0xde] = { .size = 57, .instructions = (instruction_t*)&REGULAR_FIADD_222 },
+  [0xdf] = { .size = 33, .instructions = (instruction_t*)&REGULAR_FILD_223 },
   [0xe0] = { .size = 1, .instructions = (instruction_t*)&REGULAR_LOOPNZ_224 },
   [0xe1] = { .size = 1, .instructions = (instruction_t*)&REGULAR_LOOPZ_225 },
   [0xe2] = { .size = 1, .instructions = (instruction_t*)&REGULAR_LOOP_226 },
