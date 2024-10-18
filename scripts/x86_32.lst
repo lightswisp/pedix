@@ -13441,7 +13441,7 @@
 <TD></TD>
 <TD></TD>
 <TD>DC</TD>
-<td>E8</td>
+<td>E0</td>
 <TD CLASS="highlight"></TD>
 <TD></TD>
 <TD></TD>
@@ -13466,7 +13466,7 @@
 <TD></TD>
 <TD></TD>
 <TD>DC</TD>
-<td>E9</td>
+<td>E1</td>
 <TD CLASS="highlight"></TD>
 <TD></TD>
 <TD></TD>
@@ -13490,7 +13490,7 @@
 <TD></TD>
 <TD></TD>
 <TD>DC</TD>
-<td>EA</td>
+<td>E2</td>
 <TD CLASS="highlight"></TD>
 <TD></TD>
 <TD></TD>
@@ -13514,7 +13514,7 @@
 <TD></TD>
 <TD></TD>
 <TD>DC</TD>
-<td>EB</td>
+<td>E3</td>
 <TD CLASS="highlight"></TD>
 <TD></TD>
 <TD></TD>
@@ -13538,7 +13538,7 @@
 <TD></TD>
 <TD></TD>
 <TD>DC</TD>
-<td>EC</td>
+<td>E4</td>
 <TD CLASS="highlight"></TD>
 <TD></TD>
 <TD></TD>
@@ -13562,7 +13562,7 @@
 <TD></TD>
 <TD></TD>
 <TD>DC</TD>
-<td>ED</td>
+<td>E5</td>
 <TD CLASS="highlight"></TD>
 <TD></TD>
 <TD></TD>
@@ -13586,7 +13586,7 @@
 <TD></TD>
 <TD></TD>
 <TD>DC</TD>
-<td>EE</td>
+<td>E6</td>
 <TD CLASS="highlight"></TD>
 <TD></TD>
 <TD></TD>
@@ -13610,7 +13610,7 @@
 <TD></TD>
 <TD></TD>
 <TD>DC</TD>
-<td>EF</td>
+<td>E7</td>
 <TD CLASS="highlight"></TD>
 <TD></TD>
 <TD></TD>
@@ -13658,15 +13658,184 @@
 <TD></TD>
 <TD></TD>
 <TD>DC</TD>
-<td></td>
-<TD CLASS="highlight">5</TD>
+<td>E8</td>
+<TD CLASS="highlight"></TD>
 <TD></TD>
 <TD></TD>
 <TD></TD>
 <TD></TD>
 <TD></TD>
 <TD>FSUB</TD>
-<td><b>STi</b></td>
+<td>STi</td>
+<td>ST</td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>
+<TD></TD>
+<td>Subtract</td>
+</TR></TBODY>
+
+<TBODY><TR>
+<TD></TD>
+<TD></TD>
+<TD>DC</TD>
+<td>E9</td>
+<TD CLASS="highlight"></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FSUB</TD>
+<td>STi</td>
+<td>ST</td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>
+<TD></TD>
+<td>Subtract</td>
+</TR></TBODY>
+<TBODY><TR>
+<TD></TD>
+<TD></TD>
+<TD>DC</TD>
+<td>EA</td>
+<TD CLASS="highlight"></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FSUB</TD>
+<td>STi</td>
+<td>ST</td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>
+<TD></TD>
+<td>Subtract</td>
+</TR></TBODY>
+<TBODY><TR>
+<TD></TD>
+<TD></TD>
+<TD>DC</TD>
+<td>EB</td>
+<TD CLASS="highlight"></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FSUB</TD>
+<td>STi</td>
+<td>ST</td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>
+<TD></TD>
+<td>Subtract</td>
+</TR></TBODY>
+<TBODY><TR>
+<TD></TD>
+<TD></TD>
+<TD>DC</TD>
+<td>EC</td>
+<TD CLASS="highlight"></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FSUB</TD>
+<td>STi</td>
+<td>ST</td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>
+<TD></TD>
+<td>Subtract</td>
+</TR></TBODY>
+<TBODY><TR>
+<TD></TD>
+<TD></TD>
+<TD>DC</TD>
+<td>ED</td>
+<TD CLASS="highlight"></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FSUB</TD>
+<td>STi</td>
+<td>ST</td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>
+<TD></TD>
+<td>Subtract</td>
+</TR></TBODY>
+<TBODY><TR>
+<TD></TD>
+<TD></TD>
+<TD>DC</TD>
+<td>EE</td>
+<TD CLASS="highlight"></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FSUB</TD>
+<td>STi</td>
+<td>ST</td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>
+<TD></TD>
+<td>Subtract</td>
+</TR></TBODY>
+<TBODY><TR>
+<TD></TD>
+<TD></TD>
+<TD>DC</TD>
+<td>EF</td>
+<TD CLASS="highlight"></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FSUB</TD>
+<td>STi</td>
 <td>ST</td>
 <td></td>
 <td></td>
