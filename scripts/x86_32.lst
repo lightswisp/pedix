@@ -14510,8 +14510,8 @@
 <TD></TD>
 <TD>p</TD>
 <TD>FISTTP</TD>
-<td><b>m64int</b></td>
-<td><i>ST</i></td>
+<td>m64int</td>
+<td></td>
 <td></td>
 <td></td>
 <td rowspan="1">sse3</td>
