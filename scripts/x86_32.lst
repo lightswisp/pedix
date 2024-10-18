@@ -14522,31 +14522,6 @@
 <TD>.0..</TD>
 <td>Store Integer with Truncation and Pop</td>
 </TR></TBODY>
-<TBODY><TR>
-<TD></TD>
-<TD></TD>
-<TD>DD</TD>
-<td></td>
-<TD CLASS="highlight">1</TD>
-<TD>03+</TD>
-<TD>U<A HREF="#gen_note_x87_fpu_undoc_aliases"><SUP>9</SUP></A>
-</TD>
-<TD></TD>
-<TD></TD>
-<TD></TD>
-<TD><i>FXCH4</i></TD>
-<td><b><i>ST</i></b></td>
-<td><b>STi</b></td>
-<td></td>
-<td></td>
-<td rowspan="1"></td>
-<TD></TD>
-<TD>0123</TD>
-<TD>.1..</TD>
-<TD>0.23</TD>
-<TD></TD>
-<td>Exchange Register Contents</td>
-</TR></TBODY>
 <TBODY><TR id="xDD_2">
 <TD></TD>
 <TD></TD>
@@ -14559,8 +14534,8 @@
 <TD></TD>
 <TD></TD>
 <TD>FST</TD>
-<td><b>m64real</b></td>
-<td><i>ST</i></td>
+<td>m64real</td>
+<td></td>
 <td></td>
 <td></td>
 <td rowspan="1"></td>

@@ -194,6 +194,7 @@ PREPARE_INSTRUCTION(159, "\xDC\xF8");
 PREPARE_INSTRUCTION(160, "\xDD\x00");
 PREPARE_INSTRUCTION(161, "\xDD\xC5");
 PREPARE_INSTRUCTION(162, "\xDD\x08");
+PREPARE_INSTRUCTION(163, "\xDD\x10");
 
 int main(void){
   decoded_instruction_t *decoded = pedix_init_instruction();
@@ -362,6 +363,7 @@ int main(void){
   PREPARE_TEST(160, "fld QWORD PTR [eax]");  
   PREPARE_TEST(161, "ffree st5");  
   PREPARE_TEST(162, "fisttp QWORD PTR [eax]");  
+  PREPARE_TEST(163, "fst QWORD PTR [eax]");  
 
   puts(GREEN"All tests are passed!"NC);
   return 0;
