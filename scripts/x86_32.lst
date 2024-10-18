@@ -14550,16 +14550,185 @@
 <TD></TD>
 <TD></TD>
 <TD>DD</TD>
-<td></td>
-<TD CLASS="highlight">2</TD>
+<td>D0</td>
+<TD CLASS="highlight"></TD>
 <TD></TD>
 <TD></TD>
 <TD></TD>
 <TD></TD>
 <TD></TD>
 <TD>FST</TD>
-<td><b><i>ST</i></b></td>
 <td>STi</td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>
+<TD></TD>
+<td>Store Floating Point Value</td>
+</TR></TBODY>
+
+<TBODY><TR>
+<TD></TD>
+<TD></TD>
+<TD>DD</TD>
+<td>D1</td>
+<TD CLASS="highlight"></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FST</TD>
+<td>STi</td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>
+<TD></TD>
+<td>Store Floating Point Value</td>
+</TR></TBODY>
+<TBODY><TR>
+<TD></TD>
+<TD></TD>
+<TD>DD</TD>
+<td>D2</td>
+<TD CLASS="highlight"></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FST</TD>
+<td>STi</td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>
+<TD></TD>
+<td>Store Floating Point Value</td>
+</TR></TBODY>
+<TBODY><TR>
+<TD></TD>
+<TD></TD>
+<TD>DD</TD>
+<td>D3</td>
+<TD CLASS="highlight"></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FST</TD>
+<td>STi</td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>
+<TD></TD>
+<td>Store Floating Point Value</td>
+</TR></TBODY>
+<TBODY><TR>
+<TD></TD>
+<TD></TD>
+<TD>DD</TD>
+<td>D4</td>
+<TD CLASS="highlight"></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FST</TD>
+<td>STi</td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>
+<TD></TD>
+<td>Store Floating Point Value</td>
+</TR></TBODY>
+<TBODY><TR>
+<TD></TD>
+<TD></TD>
+<TD>DD</TD>
+<td>D5</td>
+<TD CLASS="highlight"></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FST</TD>
+<td>STi</td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>
+<TD></TD>
+<td>Store Floating Point Value</td>
+</TR></TBODY>
+<TBODY><TR>
+<TD></TD>
+<TD></TD>
+<TD>DD</TD>
+<td>D6</td>
+<TD CLASS="highlight"></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FST</TD>
+<td>STi</td>
+<td></td>
+<td></td>
+<td></td>
+<td rowspan="1"></td>
+<TD></TD>
+<TD>0123</TD>
+<TD>.1..</TD>
+<TD>0.23</TD>
+<TD></TD>
+<td>Store Floating Point Value</td>
+</TR></TBODY>
+<TBODY><TR>
+<TD></TD>
+<TD></TD>
+<TD>DD</TD>
+<td>D7</td>
+<TD CLASS="highlight"></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD>FST</TD>
+<td>STi</td>
+<td></td>
 <td></td>
 <td></td>
 <td rowspan="1"></td>
@@ -14582,8 +14751,8 @@
 <TD></TD>
 <TD>p</TD>
 <TD>FSTP</TD>
-<td><b>m64real</b></td>
-<td><i>ST</i></td>
+<td>m64real</td>
+<td></td>
 <td></td>
 <td></td>
 <td rowspan="1"></td>
