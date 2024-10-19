@@ -308,10 +308,8 @@ instruction_t *pedix_find_best_match(instruction_container_t container, decoded_
           offset++;
           temp_score++;
         }
-        else{ 
-          printf("%s--\n", container.instructions[i].mnemonic);
+        else 
           temp_score--;
-        }
       }
 
 /*#ifdef DEBUG

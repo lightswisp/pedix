@@ -229,6 +229,11 @@ PREPARE_INSTRUCTION(194, "\xDF\xE8");
 PREPARE_INSTRUCTION(195, "\xDF\x30");
 PREPARE_INSTRUCTION(196, "\xDF\xF0");
 PREPARE_INSTRUCTION(197, "\xDF\x38");
+PREPARE_INSTRUCTION(198, "\xE0\xFF");
+PREPARE_INSTRUCTION(199, "\xE1\xFF");
+PREPARE_INSTRUCTION(200, "\xE2\xFF");
+PREPARE_INSTRUCTION(201, "\xE3\x10");
+PREPARE_INSTRUCTION(202, "\xE4\x10");
 
 int main(void){
   decoded_instruction_t *decoded = pedix_init_instruction();
@@ -432,6 +437,11 @@ int main(void){
   PREPARE_TEST(195, "fbstp TBYTE PTR [eax]");  
   PREPARE_TEST(196, "fcomip st,st0");  
   PREPARE_TEST(197, "fistp QWORD PTR [eax]");  
+  PREPARE_TEST(198, "loopnz 0x01");  
+  PREPARE_TEST(199, "loopz 0x01");  
+  PREPARE_TEST(200, "loop 0x01");  
+  PREPARE_TEST(201, "jecxz 0x12");  
+  PREPARE_TEST(202, "in al,0x10");  
 
   puts(GREEN"All tests are passed!"NC);
   return 0;

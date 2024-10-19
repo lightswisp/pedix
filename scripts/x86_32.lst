@@ -17580,8 +17580,8 @@
 <TD ROWSPAN="2"></TD>
 <TD ROWSPAN="2"></TD>
 <TD>LOOPNZ</TD>
-<td><b><i>eCX</i></b></td>
 <td>rel8</td>
+<td></td>
 <td></td>
 <td></td>
 <td rowspan="2"></td>
@@ -17594,8 +17594,8 @@
 </TR>
 <tr class="nbb">
 <TD>LOOPNE</TD>
-<td><b><i>eCX</i></b></td>
 <td>rel8</td>
+<td></td>
 <td></td>
 <td></td>
 </tr>
@@ -17613,8 +17613,8 @@
 <TD ROWSPAN="2"></TD>
 <TD ROWSPAN="2"></TD>
 <TD>LOOPZ</TD>
-<td><b><i>eCX</i></b></td>
 <td>rel8</td>
+<td></td>
 <td></td>
 <td></td>
 <td rowspan="2"></td>
@@ -17645,8 +17645,8 @@
 <TD></TD>
 <TD></TD>
 <TD>LOOP</TD>
-<td><b><i>eCX</i></b></td>
 <td>rel8</td>
+<td></td>
 <td></td>
 <td></td>
 <td rowspan="1"></td>
@@ -17669,9 +17669,9 @@
 <TD ROWSPAN="2"></TD>
 <TD ROWSPAN="2"></TD>
 <TD ROWSPAN="2"></TD>
-<TD>JCXZ</TD>
+<TD>JECXZ</TD>
 <td>rel8</td>
-<td><i>CX</i></td>
+<td></td>
 <td></td>
 <td></td>
 <td rowspan="2"></td>
@@ -17685,7 +17685,7 @@
 <tr class="nbb">
 <TD>JECXZ</TD>
 <td>rel8</td>
-<td><i>ECX</i></td>
+<td></td>
 <td></td>
 <td></td>
 </tr>

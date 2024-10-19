@@ -1,5 +1,5 @@
 /* (instructions.h) auto generated using gen.rb 
- * time: 2024-10-18 06:41:35 -0400
+ * time: 2024-10-19 00:56:42 -0400
  */
 
 #pragma once
@@ -6966,7 +6966,7 @@ instruction_t REGULAR_LOOPNZ_224[1] = {
    .extended_opcode = false,
    .mnemonic = "loopnz",
    .opcode_field = {.type = 0, .value = 0 },
-   .operands = {.size = 2, .operand = {32,73,0,0}},
+   .operands = {.size = 1, .operand = {73,0,0,0}},
    .prefix = 0,
    .primary_opcode = 224,
    .secondary_opcode = -1,
@@ -6978,7 +6978,7 @@ instruction_t REGULAR_LOOPZ_225[1] = {
    .extended_opcode = false,
    .mnemonic = "loopz",
    .opcode_field = {.type = 0, .value = 0 },
-   .operands = {.size = 2, .operand = {32,73,0,0}},
+   .operands = {.size = 1, .operand = {73,0,0,0}},
    .prefix = 0,
    .primary_opcode = 225,
    .secondary_opcode = -1,
@@ -6990,19 +6990,19 @@ instruction_t REGULAR_LOOP_226[1] = {
    .extended_opcode = false,
    .mnemonic = "loop",
    .opcode_field = {.type = 0, .value = 0 },
-   .operands = {.size = 2, .operand = {32,73,0,0}},
+   .operands = {.size = 1, .operand = {73,0,0,0}},
    .prefix = 0,
    .primary_opcode = 226,
    .secondary_opcode = -1,
   },
 };
 
-instruction_t REGULAR_JCXZ_227[1] = {
+instruction_t REGULAR_JECXZ_227[1] = {
   {
    .extended_opcode = false,
-   .mnemonic = "jcxz",
+   .mnemonic = "jecxz",
    .opcode_field = {.type = 0, .value = 0 },
-   .operands = {.size = 2, .operand = {73,24,0,0}},
+   .operands = {.size = 1, .operand = {73,0,0,0}},
    .prefix = 0,
    .primary_opcode = 227,
    .secondary_opcode = -1,
