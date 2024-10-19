@@ -234,6 +234,9 @@ PREPARE_INSTRUCTION(199, "\xE1\xFF");
 PREPARE_INSTRUCTION(200, "\xE2\xFF");
 PREPARE_INSTRUCTION(201, "\xE3\x10");
 PREPARE_INSTRUCTION(202, "\xE4\x10");
+PREPARE_INSTRUCTION(203, "\xE5\x10");
+PREPARE_INSTRUCTION(204, "\xE6\x10");
+PREPARE_INSTRUCTION(205, "\xE7\x10");
 
 int main(void){
   decoded_instruction_t *decoded = pedix_init_instruction();
@@ -442,6 +445,9 @@ int main(void){
   PREPARE_TEST(200, "loop 0x01");  
   PREPARE_TEST(201, "jecxz 0x12");  
   PREPARE_TEST(202, "in al,0x10");  
+  PREPARE_TEST(203, "in eax,0x10");  
+  PREPARE_TEST(204, "out 0x10,al");  
+  PREPARE_TEST(205, "out 0x10,eax");  
 
   puts(GREEN"All tests are passed!"NC);
   return 0;
