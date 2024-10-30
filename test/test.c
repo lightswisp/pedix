@@ -238,6 +238,8 @@ PREPARE_INSTRUCTION(203, "\xE5\x10");
 PREPARE_INSTRUCTION(204, "\xE6\x10");
 PREPARE_INSTRUCTION(205, "\xE7\x10");
 PREPARE_INSTRUCTION(206, "\xE8\x10\x20\x30\x40");
+PREPARE_INSTRUCTION(207, "\xE9\x10\x20\x30\x40");
+PREPARE_INSTRUCTION(208, "\xEA\x10\x20\x30\x40\x50\x60");
 
 int main(void){
   decoded_instruction_t *decoded = pedix_init_instruction();
@@ -450,6 +452,8 @@ int main(void){
   PREPARE_TEST(204, "out 0x10,al");  
   PREPARE_TEST(205, "out 0x10,eax");  
   PREPARE_TEST(206, "call 0x40302015");  
+  PREPARE_TEST(207, "jmp 0x40302015");  
+  PREPARE_TEST(208, "jmpf 0x40302015");  
 
   puts(GREEN"All tests are passed!"NC);
   return 0;

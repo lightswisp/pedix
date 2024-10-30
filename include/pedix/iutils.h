@@ -26,10 +26,5 @@ void pedix_set_relative_address(decoded_instruction_t *decoded, uint8_t* instruc
 void pedix_set_sib(decoded_instruction_t *decoded, uint8_t *i_ptr);
 void pedix_set_modrm(decoded_instruction_t *decoded, uint8_t *i_ptr); 
 void pedix_set_displacement(decoded_instruction_t *decoded);
-uint32_t pedix_set_immediate_operand_if_present(decoded_instruction_t *decoded, uint8_t* instruction);
-uint32_t pedix_set_relative_offset_operand_if_present(decoded_instruction_t *decoded, uint8_t* instruction);
-uint32_t pedix_set_direct_address_operand_if_present(decoded_instruction_t *decoded, uint8_t* instruction);
-uint32_t pedix_set_moffs_operand_if_present(decoded_instruction_t *decoded, uint8_t* instruction);
-
 size_t pedix_get_vex_size(uint8_t vex_byte);
 instruction_t *pedix_find_best_match(instruction_container_t container, decoded_instruction_t *decoded, uint8_t *i_ptr);

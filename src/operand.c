@@ -404,22 +404,32 @@ static void pedix_set_operand_rm(decoded_instruction_t *decoded, char* dst){
   }
 }
 
-static void pedix_set_operand_by_id32(decoded_instruction_t *decoded, __operand_t id, char* dst){
+static void pedix_set_operand_by_id32(decoded_instruction_t *decoded, __operand_t id, uint8_t *instruction, char* dst){
+  uint8_t imm8;
+  uint16_t imm16;
+  uint32_t imm32, moffs, rel;
+
   switch (id) {
   case OPERAND_IMM_8: 
-    sprintf(dst, OPERAND_BYTE, (uint8_t)decoded->imm);
+    memcpy(&imm8, instruction, BYTE_LEN);
+    sprintf(dst, OPERAND_BYTE, imm8);
     break;
   case OPERAND_IMM_16: 
-    sprintf(dst, OPERAND_WORD, (uint16_t)decoded->imm);
+    memcpy(&imm16, instruction, WORD_LEN);
+    sprintf(dst, OPERAND_WORD, imm16);
     break;
   case OPERAND_IMM_32: 
-    sprintf(dst, OPERAND_DWORD, (uint32_t)decoded->imm);
+    memcpy(&imm32, instruction, DOUBLEWORD_LEN);
+    sprintf(dst, OPERAND_DWORD, imm32);
     break;
   case OPERAND_IMM_16_32:
-    if (decoded->operand_size == WORD_LEN)
-      sprintf(dst, OPERAND_WORD, (uint16_t)decoded->imm);
-    else 
-      sprintf(dst, OPERAND_DWORD, (uint32_t)decoded->imm);
+    if (decoded->operand_size == WORD_LEN) {
+      memcpy(&imm16, instruction, WORD_LEN);
+      sprintf(dst, OPERAND_WORD, imm16);
+    } else {
+      memcpy(&imm32, instruction, DOUBLEWORD_LEN);
+      sprintf(dst, OPERAND_DWORD, imm32);
+    }
     break;
   case OPERAND_REG_EAX: 
     if (decoded->operand_size == WORD_LEN)
@@ -477,13 +487,20 @@ static void pedix_set_operand_by_id32(decoded_instruction_t *decoded, __operand_
     pedix_set_operand_m(decoded, dst);
     break;
   case OPERAND_REL_8:
-    sprintf(dst, OPERAND_BYTE, (uint8_t)decoded->rel);
+    memcpy(&rel, instruction, BYTE_LEN);
+    rel += decoded->buffer.size + BYTE_LEN;
+    sprintf(dst, OPERAND_BYTE, (uint8_t)rel);
     break;
   case OPERAND_REL_16_32:
-    if (decoded->operand_size == WORD_LEN)
-      sprintf(dst, OPERAND_WORD, (uint16_t)decoded->rel);
-    else
-      sprintf(dst, OPERAND_DWORD, (uint32_t)decoded->rel);
+    if (decoded->operand_size == WORD_LEN) {
+      memcpy(&rel, instruction, WORD_LEN);
+      rel += decoded->buffer.size + WORD_LEN;
+      sprintf(dst, OPERAND_WORD, (uint16_t)rel);
+    } else {
+      memcpy(&rel, instruction, DOUBLEWORD_LEN);
+      rel += decoded->buffer.size + DOUBLEWORD_LEN;
+      sprintf(dst, OPERAND_DWORD, (uint32_t)rel);
+    }
     break;
   case R_PLUS_8:
     strcpy(dst, modrm_reg8[decoded->instruction->primary_opcode & 0x07]);
@@ -495,7 +512,12 @@ static void pedix_set_operand_by_id32(decoded_instruction_t *decoded, __operand_
       strcpy(dst, modrm_reg32[decoded->instruction->primary_opcode & 0x07]);
     break;
   case OPERAND_MOFFS_32:
-    sprintf(dst, FMT_MOFFS, decoded->segment_text, decoded->moffs);
+    if (decoded->address_size == WORD_LEN) 
+      memcpy(&moffs, instruction, WORD_LEN);
+    else 
+      memcpy(&moffs, instruction, DOUBLEWORD_LEN); 
+    
+    sprintf(dst, FMT_MOFFS, decoded->segment_text, moffs);
     break;
   case OPERAND_M_32: 
     strcpy(decoded->ptr_text, "DWORD PTR");
@@ -515,6 +537,8 @@ static void pedix_set_operand_by_id32(decoded_instruction_t *decoded, __operand_
   case OPERAND_REG_STI: 
     strcpy(dst, st_reg[decoded->instruction->secondary_opcode & 0x07]);
     break;
+  case OPERAND_PTR_16_32:
+    break;
 
   default:
     printf("id not implemented: %d\n", id);
@@ -522,13 +546,13 @@ static void pedix_set_operand_by_id32(decoded_instruction_t *decoded, __operand_
   }
 }
 
-static void pedix_set_operands32(decoded_instruction_t *decoded) {
+static void pedix_set_operands32(decoded_instruction_t *decoded, uint8_t *instruction) {
   // operand1 is assumed to be present
   for(size_t i = 0; i < decoded->instruction->operands.size; i++){
     if(decoded->instruction->operands.operand[i] == OPERAND_VOID)
       break;
 
-    pedix_set_operand_by_id32(decoded, decoded->instruction->operands.operand[i], decoded->operands[i]);
+    pedix_set_operand_by_id32(decoded, decoded->instruction->operands.operand[i], instruction, decoded->operands[i]);
   }
 }
 
@@ -553,10 +577,10 @@ void pedix_merge_operands(decoded_instruction_t *decoded) {
 /*
  * general-purpose function that cares only about bit depth
  */
-void pedix_set_operands(decoded_instruction_t *decoded) {
+void pedix_set_operands(decoded_instruction_t *decoded, uint8_t *instruction) {
   switch (decoded->mode) {
   case MODE_32:
-      pedix_set_operands32(decoded);
+      pedix_set_operands32(decoded, instruction);
       break;
   case MODE_64:
       pedix_set_operands64(decoded);
