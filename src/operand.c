@@ -406,8 +406,8 @@ static void pedix_set_operand_rm(decoded_instruction_t *decoded, char* dst){
 
 static void pedix_set_operand_by_id32(decoded_instruction_t *decoded, __operand_t id, uint8_t *instruction, char* dst){
   uint8_t imm8;
-  uint16_t imm16;
-  uint32_t imm32, moffs, rel;
+  uint16_t imm16, ptr16;
+  uint32_t imm32, moffs, rel, ptr32;
 
   switch (id) {
   case OPERAND_IMM_8: 
@@ -538,6 +538,15 @@ static void pedix_set_operand_by_id32(decoded_instruction_t *decoded, __operand_
     strcpy(dst, st_reg[decoded->instruction->secondary_opcode & 0x07]);
     break;
   case OPERAND_PTR_16_32:
+    if (decoded->operand_size == WORD_LEN) {
+      memcpy(&ptr16, instruction, WORD_LEN);
+      ptr16 += decoded->buffer.size + WORD_LEN;
+      sprintf(dst, OPERAND_WORD, ptr16);
+    } else {
+      memcpy(&ptr32, instruction, DOUBLEWORD_LEN);
+      ptr32 += decoded->buffer.size + DOUBLEWORD_LEN;
+      sprintf(dst, OPERAND_DWORD, ptr32);
+    }
     break;
 
   default:
