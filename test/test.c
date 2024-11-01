@@ -240,6 +240,17 @@ PREPARE_INSTRUCTION(205, "\xE7\x10");
 PREPARE_INSTRUCTION(206, "\xE8\x10\x20\x30\x40");
 PREPARE_INSTRUCTION(207, "\xE9\x10\x20\x30\x40");
 PREPARE_INSTRUCTION(208, "\xEA\x10\x20\x30\x40\x50\x60");
+PREPARE_INSTRUCTION(209, "\xEB\xFE");
+PREPARE_INSTRUCTION(210, "\xEC");
+PREPARE_INSTRUCTION(211, "\xED");
+PREPARE_INSTRUCTION(212, "\xEE");
+PREPARE_INSTRUCTION(213, "\xEF");
+PREPARE_INSTRUCTION(214, "\xF1");
+PREPARE_INSTRUCTION(215, "\xF4");
+PREPARE_INSTRUCTION(216, "\xF5");
+PREPARE_INSTRUCTION(217, "\xF6\x00\x00");
+PREPARE_INSTRUCTION(218, "\xF6\x08\x00");
+PREPARE_INSTRUCTION(219, "\xF6\x10");
 
 int main(void){
   decoded_instruction_t *decoded = pedix_init_instruction();
@@ -454,6 +465,17 @@ int main(void){
   PREPARE_TEST(206, "call 0x40302015");  
   PREPARE_TEST(207, "jmp 0x40302015");  
   PREPARE_TEST(208, "jmpf 0x40302015");  
+  PREPARE_TEST(209, "jmp 0x00");  
+  PREPARE_TEST(210, "in al,dx");  
+  PREPARE_TEST(211, "in eax,dx");  
+  PREPARE_TEST(212, "out dx,al");  
+  PREPARE_TEST(213, "out dx,eax");  
+  PREPARE_TEST(214, "int1");  
+  PREPARE_TEST(215, "hlt");  
+  PREPARE_TEST(216, "cmc");  
+  PREPARE_TEST(217, "test BYTE PTR [eax],0x00");  
+  PREPARE_TEST(218, "test BYTE PTR [eax],0x00");  
+  PREPARE_TEST(219, "not BYTE PTR [eax]");  
 
   puts(GREEN"All tests are passed!"NC);
   return 0;

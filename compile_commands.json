@@ -1,0 +1,110 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Iinclude",
+      "-ggdb",
+      "-DDEBUG",
+      "-Wall",
+      "-Werror",
+      "-pedantic",
+      "-c",
+      "-o",
+      "build/main.o",
+      "src/main.c"
+    ],
+    "directory": "/home/lightswisp/Documents/clang/x86_decoder",
+    "file": "/home/lightswisp/Documents/clang/x86_decoder/src/main.c",
+    "output": "/home/lightswisp/Documents/clang/x86_decoder/build/main.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Iinclude",
+      "-ggdb",
+      "-DDEBUG",
+      "-Wall",
+      "-Werror",
+      "-pedantic",
+      "-c",
+      "-o",
+      "build/iutils.o",
+      "src/iutils.c"
+    ],
+    "directory": "/home/lightswisp/Documents/clang/x86_decoder",
+    "file": "/home/lightswisp/Documents/clang/x86_decoder/src/iutils.c",
+    "output": "/home/lightswisp/Documents/clang/x86_decoder/build/iutils.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Iinclude",
+      "-ggdb",
+      "-DDEBUG",
+      "-Wall",
+      "-Werror",
+      "-pedantic",
+      "-c",
+      "-o",
+      "build/operand.o",
+      "src/operand.c"
+    ],
+    "directory": "/home/lightswisp/Documents/clang/x86_decoder",
+    "file": "/home/lightswisp/Documents/clang/x86_decoder/src/operand.c",
+    "output": "/home/lightswisp/Documents/clang/x86_decoder/build/operand.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Iinclude",
+      "-ggdb",
+      "-DDEBUG",
+      "-Wall",
+      "-Werror",
+      "-pedantic",
+      "-c",
+      "-o",
+      "build/dump.o",
+      "src/dump.c"
+    ],
+    "directory": "/home/lightswisp/Documents/clang/x86_decoder",
+    "file": "/home/lightswisp/Documents/clang/x86_decoder/src/dump.c",
+    "output": "/home/lightswisp/Documents/clang/x86_decoder/build/dump.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Iinclude",
+      "-ggdb",
+      "-DDEBUG",
+      "-Wall",
+      "-Werror",
+      "-pedantic",
+      "-c",
+      "-o",
+      "build/mnemonic.o",
+      "src/mnemonic.c"
+    ],
+    "directory": "/home/lightswisp/Documents/clang/x86_decoder",
+    "file": "/home/lightswisp/Documents/clang/x86_decoder/src/mnemonic.c",
+    "output": "/home/lightswisp/Documents/clang/x86_decoder/build/mnemonic.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Iinclude",
+      "-ggdb",
+      "-DDEBUG",
+      "-Wall",
+      "-Werror",
+      "-pedantic",
+      "-c",
+      "-o",
+      "build/decoder.o",
+      "src/decoder.c"
+    ],
+    "directory": "/home/lightswisp/Documents/clang/x86_decoder",
+    "file": "/home/lightswisp/Documents/clang/x86_decoder/src/decoder.c",
+    "output": "/home/lightswisp/Documents/clang/x86_decoder/build/decoder.o"
+  }
+]

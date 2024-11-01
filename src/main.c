@@ -1,3 +1,4 @@
+#include <cinttypes>
 #include <pedix/decoder.h>
 #include <pedix/dump.h>
 #include <stdio.h>
@@ -21,7 +22,6 @@ int main(void) {
 
   while (instructions < INSTRUCTION_LIMIT) {
    pedix_decode(decoded, instruction + offset);
-
 #ifdef DEBUG
     pedix_dump_instruction(decoded->instruction);
 #endif
@@ -34,7 +34,6 @@ int main(void) {
     /* zero the struct */
     pedix_zero_instruction(decoded);
   }
-
   pedix_free_instrucion(decoded);
   return 0;
 }

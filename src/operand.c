@@ -440,6 +440,9 @@ static void pedix_set_operand_by_id32(decoded_instruction_t *decoded, __operand_
   case OPERAND_REG_AX: 
     strcpy(dst, "ax");
     break;
+  case OPERAND_REG_DX:
+    strcpy(dst, "dx");
+    break;
   case OPERAND_REG_AL: 
     strcpy(dst, "al");
     break;
