@@ -568,10 +568,13 @@ static void pedix_set_operands32(decoded_instruction_t *decoded, uint8_t *instru
   }
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wunused-parameter"
 static void pedix_set_operands64(decoded_instruction_t *decoded) {
   // todo
   assert(!"pedix_set_operands64 is not implemented yet!");
 }
+#pragma GCC diagnostic pop
 
 void pedix_merge_operands(decoded_instruction_t *decoded) {
   if (decoded->instruction->operands.operand[0] != OPERAND_VOID){

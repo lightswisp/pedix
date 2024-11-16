@@ -282,14 +282,14 @@ void pedix_set_displacement(decoded_instruction_t *decoded){
     case 0:
       if (decoded->modrm.rm == 4) {
         uint8_t base = decoded->sib.base & 0x07;
-        if (base == 5) {
+        if (base == 5) 
           size = DOUBLEWORD_LEN; 
-          break;
-        }
+        break;
       } else if (decoded->modrm.rm == 5) {
         size = DOUBLEWORD_LEN; 
         break;
       }
+      break;
     case 1:
       size = BYTE_LEN;
       break;

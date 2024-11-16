@@ -251,6 +251,13 @@ PREPARE_INSTRUCTION(216, "\xF5");
 PREPARE_INSTRUCTION(217, "\xF6\x00\x00");
 PREPARE_INSTRUCTION(218, "\xF6\x08\x00");
 PREPARE_INSTRUCTION(219, "\xF6\x10");
+PREPARE_INSTRUCTION(220, "\xF6\x18");
+PREPARE_INSTRUCTION(221, "\xF6\x20");
+PREPARE_INSTRUCTION(222, "\xF6\x28");
+PREPARE_INSTRUCTION(223, "\xF6\x30");
+PREPARE_INSTRUCTION(224, "\xF6\x38");
+PREPARE_INSTRUCTION(225, "\xF7\x00\x11\x22\x33\x44");
+PREPARE_INSTRUCTION(226, "\xF8\x00\x11\x22\x33\x44");
 
 int main(void){
   decoded_instruction_t *decoded = pedix_init_instruction();
@@ -476,6 +483,13 @@ int main(void){
   PREPARE_TEST(217, "test BYTE PTR [eax],0x00");  
   PREPARE_TEST(218, "test BYTE PTR [eax],0x00");  
   PREPARE_TEST(219, "not BYTE PTR [eax]");  
+  PREPARE_TEST(220, "neg BYTE PTR [eax]");  
+  PREPARE_TEST(221, "mul BYTE PTR [eax]");  
+  PREPARE_TEST(222, "imul BYTE PTR [eax]");  
+  PREPARE_TEST(223, "div BYTE PTR [eax]");  
+  PREPARE_TEST(224, "idiv BYTE PTR [eax]");  
+  PREPARE_TEST(225, "test DWORD PTR [eax],0x44332211");  
+  PREPARE_TEST(226, "test DWORD PTR [eax],0x44332211");  
 
   puts(GREEN"All tests are passed!"NC);
   return 0;

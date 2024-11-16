@@ -18177,9 +18177,9 @@
 <TD></TD>
 <TD></TD>
 <TD>MUL</TD>
-<td><b><i>AX</i></b></td>
-<td><i>AL</i></td>
 <td>r/m8</td>
+<td></td>
+<td></td>
 <td></td>
 <td rowspan="1"></td>
 <TD></TD>
@@ -18201,9 +18201,9 @@
 <TD></TD>
 <TD></TD>
 <TD>IMUL</TD>
-<td><b><i>AX</i></b></td>
-<td><i>AL</i></td>
 <td>r/m8</td>
+<td></td>
+<td></td>
 <td></td>
 <td rowspan="1"></td>
 <TD></TD>
@@ -18225,10 +18225,10 @@
 <TD></TD>
 <TD></TD>
 <TD>DIV</TD>
-<td><b><i>AL</i></b></td>
-<td><b><i>AH</i></b></td>
-<td><i>AX</i></td>
 <td>r/m8</td>
+<td></td>
+<td></td>
+<td></td>
 <td rowspan="1"></td>
 <TD></TD>
 <TD>o..szapc</TD>
@@ -18249,10 +18249,10 @@
 <TD></TD>
 <TD></TD>
 <TD>IDIV</TD>
-<td><b><i>AL</i></b></td>
-<td><b><i>AH</i></b></td>
-<td><i>AX</i></td>
 <td>r/m8</td>
+<td></td>
+<td></td>
+<td></td>
 <td rowspan="1"></td>
 <TD></TD>
 <TD>o..szapc</TD>

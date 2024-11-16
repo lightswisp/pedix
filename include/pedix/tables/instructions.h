@@ -1,5 +1,5 @@
 /* (instructions.h) auto generated using gen.rb 
- * time: 2024-10-19 00:56:42 -0400
+ * time: 2024-11-15 18:55:25 -0500
  */
 
 #pragma once
@@ -7230,7 +7230,7 @@ instruction_t REGULAR_TEST_246[8] = {
    .extended_opcode = false,
    .mnemonic = "mul",
    .opcode_field = {.type = 2, .value = 4 },
-   .operands = {.size = 3, .operand = {23,15,11,0}},
+   .operands = {.size = 1, .operand = {11,0,0,0}},
    .prefix = 0,
    .primary_opcode = 246,
    .secondary_opcode = -1,
@@ -7239,7 +7239,7 @@ instruction_t REGULAR_TEST_246[8] = {
    .extended_opcode = false,
    .mnemonic = "imul",
    .opcode_field = {.type = 2, .value = 5 },
-   .operands = {.size = 3, .operand = {23,15,11,0}},
+   .operands = {.size = 1, .operand = {11,0,0,0}},
    .prefix = 0,
    .primary_opcode = 246,
    .secondary_opcode = -1,
@@ -7248,7 +7248,7 @@ instruction_t REGULAR_TEST_246[8] = {
    .extended_opcode = false,
    .mnemonic = "div",
    .opcode_field = {.type = 2, .value = 6 },
-   .operands = {.size = 4, .operand = {15,19,23,11}},
+   .operands = {.size = 1, .operand = {11,0,0,0}},
    .prefix = 0,
    .primary_opcode = 246,
    .secondary_opcode = -1,
@@ -7257,7 +7257,7 @@ instruction_t REGULAR_TEST_246[8] = {
    .extended_opcode = false,
    .mnemonic = "idiv",
    .opcode_field = {.type = 2, .value = 7 },
-   .operands = {.size = 4, .operand = {15,19,23,11}},
+   .operands = {.size = 1, .operand = {11,0,0,0}},
    .prefix = 0,
    .primary_opcode = 246,
    .secondary_opcode = -1,

@@ -162,6 +162,8 @@ static void pedix_decode32(decoded_instruction_t *decoded, uint8_t *instruction)
   }
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wunused-parameter"
 static void pedix_decode64(decoded_instruction_t *decoded, uint8_t *instruction) {
   assert(!"64-bit mode is not yet implemented");
   //     in 64-bit mode, instruction formats do not change. bits needed to
@@ -413,6 +415,7 @@ static void pedix_decode64(decoded_instruction_t *decoded, uint8_t *instruction)
   //
   //  return false;
 }
+#pragma GCC diagnostic pop
 
 void pedix_decode(decoded_instruction_t *decoded, uint8_t *instruction) {
   switch (decoded->mode) {
