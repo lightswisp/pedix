@@ -1,3 +1,25 @@
+/*
+ * Copyright (c) 2024 lightswisp
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+*/
+
 #include <string.h>
 #include <stdio.h>
 #include <stdint.h>
@@ -21,20 +43,23 @@
            pedix_instr_has_specific_prefix(decoded,                            \
                                            decoded->instruction->prefix));
 
-decoded_instruction_t *pedix_init_instruction(void) {
+decoded_instruction_t*
+pedix_init_instruction(void) {
   decoded_instruction_t *decoded = (decoded_instruction_t *)calloc(1, sizeof(decoded_instruction_t));
   assert("calloc failed" && decoded != NULL);
   return decoded;
 }
 
-void pedix_zero_instruction(decoded_instruction_t *decoded) {
+void 
+pedix_zero_instruction(decoded_instruction_t *decoded) {
   // save the mode in order to restore it after zeroing the struct
   uint8_t mode = decoded->mode;
   memset(decoded, 0, sizeof(decoded_instruction_t));
   pedix_set_mode(decoded, mode);
 }
 
-void pedix_set_mode(decoded_instruction_t *decoded, uint8_t mode){
+void 
+pedix_set_mode(decoded_instruction_t *decoded, uint8_t mode){
   switch(mode){
     case 32: 
       decoded->mode = mode; 
@@ -50,11 +75,13 @@ void pedix_set_mode(decoded_instruction_t *decoded, uint8_t mode){
   }
 }
 
-void pedix_free_instrucion(decoded_instruction_t *decoded) { 
+void 
+pedix_free_instrucion(decoded_instruction_t *decoded) { 
   free(decoded); 
 }
 
-static void pedix_decode32(decoded_instruction_t *decoded, uint8_t *instruction) {
+static void 
+pedix_decode32(decoded_instruction_t *decoded, uint8_t *instruction) {
   while (pedix_instr_has_prefix(*instruction)) {
     decoded->prefixes.prefix[decoded->prefixes.size] = *instruction;
     switch(*instruction){
@@ -162,9 +189,9 @@ static void pedix_decode32(decoded_instruction_t *decoded, uint8_t *instruction)
   }
 }
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wunused-parameter"
-static void pedix_decode64(decoded_instruction_t *decoded, uint8_t *instruction) {
+static void 
+pedix_decode64(__attribute__((unused)) decoded_instruction_t *decoded,
+               __attribute__((unused)) uint8_t *instruction) {
   assert(!"64-bit mode is not yet implemented");
   //     in 64-bit mode, instruction formats do not change. bits needed to
   //     define fields in the 64-bit context are provided by the
@@ -415,9 +442,9 @@ static void pedix_decode64(decoded_instruction_t *decoded, uint8_t *instruction)
   //
   //  return false;
 }
-#pragma GCC diagnostic pop
 
-void pedix_decode(decoded_instruction_t *decoded, uint8_t *instruction) {
+void 
+pedix_decode(decoded_instruction_t *decoded, uint8_t *instruction) {
   switch (decoded->mode) {
   case MODE_32:
     pedix_decode32(decoded, instruction);

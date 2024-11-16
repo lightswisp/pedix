@@ -1,3 +1,25 @@
+/*
+ * Copyright (c) 2024 lightswisp
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+*/
+
 #include <string.h>
 #include <assert.h>
 #include <pedix/iutils.h>
@@ -21,7 +43,8 @@
 /*
  * check if instruction has any prefixes
  */
-bool pedix_instr_has_prefix(uint8_t opcode) {
+bool 
+pedix_instr_has_prefix(uint8_t opcode) {
   switch (opcode) {
   case PREFIX_LOCK:
   case PREFIX_REPNE_Z:
@@ -46,13 +69,15 @@ bool pedix_instr_has_prefix(uint8_t opcode) {
  * check if instruction has extended opcode
  * if returns true, then the instruction size is at least 2 bytes long
  */
-bool pedix_instr_has_extended_opcode(uint8_t opcode) {
+bool 
+pedix_instr_has_extended_opcode(uint8_t opcode) {
   if (opcode == 0x0F)
     return true;
   return false;
 }
 
-size_t pedix_get_vex_size(uint8_t vex_byte) {
+size_t 
+pedix_get_vex_size(uint8_t vex_byte) {
   switch (vex_byte) {
   case 0xC5:
     return WORD_LEN;
@@ -64,13 +89,15 @@ size_t pedix_get_vex_size(uint8_t vex_byte) {
   return 0;
 }
 
-bool pedix_instr_has_specific_prefix(decoded_instruction_t *decoded, uint8_t prefix){
+bool 
+pedix_instr_has_specific_prefix(decoded_instruction_t *decoded, uint8_t prefix){
   for (size_t i = 0; i < decoded->prefixes.size; i++) 
     if (decoded->prefixes.prefix[i] == prefix) return true;
   return false;
 }
 
-bool pedix_instr_has_sib(decoded_instruction_t *decoded) {
+bool 
+pedix_instr_has_sib(decoded_instruction_t *decoded) {
  /* |mod|rm|  
   *  00 100 sib            mode                     
   *  01 100 sib  +  disp8  mode
@@ -87,7 +114,8 @@ bool pedix_instr_has_sib(decoded_instruction_t *decoded) {
   return false;
 }
 
-bool pedix_instr_has_displacement(decoded_instruction_t *decoded){
+bool 
+pedix_instr_has_displacement(decoded_instruction_t *decoded){
   if (decoded->address_size == WORD_LEN) {
     // 16-bit mode
     switch (decoded->modrm.mod) {
@@ -127,7 +155,11 @@ bool pedix_instr_has_displacement(decoded_instruction_t *decoded){
  * if there is a match, we increase the temp_score by one
  * if there is an exact hit, we return the instruction pointer immediately.
  */ 
-instruction_t *pedix_find_best_match(instruction_container_t container, decoded_instruction_t *decoded, uint8_t *instruction){
+instruction_t* 
+pedix_find_best_match(instruction_container_t container, 
+                      decoded_instruction_t *decoded, 
+                      uint8_t *instruction){
+
   uint8_t max_score, max_i;
 
   for (size_t i = 0; i < container.size; i++) {
@@ -245,7 +277,8 @@ instruction_t *pedix_find_best_match(instruction_container_t container, decoded_
   return &container.instructions[max_i];
 }
 
-void pedix_set_modrm(decoded_instruction_t *decoded, uint8_t *instruction) {
+void 
+pedix_set_modrm(decoded_instruction_t *decoded, uint8_t *instruction) {
   decoded->modrm.size = BYTE_LEN;
   decoded->modrm.field = *instruction;
   decoded->modrm.mod = MODRM_MOD(decoded->modrm.field); 
@@ -253,7 +286,8 @@ void pedix_set_modrm(decoded_instruction_t *decoded, uint8_t *instruction) {
   decoded->modrm.rm  = MODRM_RM(decoded->modrm.field); 
 }
 
-void pedix_set_sib(decoded_instruction_t *decoded, uint8_t *instruction){
+void 
+pedix_set_sib(decoded_instruction_t *decoded, uint8_t *instruction){
   decoded->sib.size  = BYTE_LEN;
   decoded->sib.field = *instruction;
   decoded->sib.scale = SIB_SCALE(decoded->sib.field); 
@@ -261,7 +295,8 @@ void pedix_set_sib(decoded_instruction_t *decoded, uint8_t *instruction){
   decoded->sib.base  = SIB_BASE(decoded->sib.field);; 
 }
 
-void pedix_set_displacement(decoded_instruction_t *decoded){
+void 
+pedix_set_displacement(decoded_instruction_t *decoded){
   size_t size = 0;
   if (decoded->address_size == WORD_LEN) {
     // 16-bit mode

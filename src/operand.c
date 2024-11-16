@@ -1,3 +1,25 @@
+/*
+ * Copyright (c) 2024 lightswisp
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+*/
+
 #include <pedix/operand.h>
 #include <pedix/defines.h>
 #include <pedix/iutils.h>
@@ -22,7 +44,8 @@ const char *st_reg[]               = {"st0", "st1", "st2", "st3", "st4", "st5", 
 #define MOD_NO_DISPLACEMENT_EXCEPT_110 0
 #define MOD_TWO_BYTE_DISPLACEMENT 2
 
-static void pedix_set_operand_m(decoded_instruction_t *decoded, char* dst){
+static void 
+pedix_set_operand_m(decoded_instruction_t *decoded, char* dst){
   char sign;
   uint32_t value;
   if (decoded->address_size == WORD_LEN) {
@@ -200,7 +223,8 @@ static void pedix_set_operand_m(decoded_instruction_t *decoded, char* dst){
   }
 }
 
-static void pedix_set_operand_rm(decoded_instruction_t *decoded, char* dst){
+static void 
+pedix_set_operand_rm(decoded_instruction_t *decoded, char* dst){
   char sign;
   uint32_t value;
   if (decoded->address_size == WORD_LEN) {
@@ -404,8 +428,10 @@ static void pedix_set_operand_rm(decoded_instruction_t *decoded, char* dst){
   }
 }
 
-static void pedix_set_operand_by_id32(decoded_instruction_t *decoded, __operand_t id, uint8_t *instruction, char* dst){
-  uint8_t imm8;
+static void 
+pedix_set_operand_by_id32(decoded_instruction_t *decoded, __operand_t id, 
+                          uint8_t *instruction, char* dst){
+  uint8_t  imm8;
   uint16_t imm16, ptr16;
   uint32_t imm32, moffs, rel, ptr32;
 
@@ -558,7 +584,8 @@ static void pedix_set_operand_by_id32(decoded_instruction_t *decoded, __operand_
   }
 }
 
-static void pedix_set_operands32(decoded_instruction_t *decoded, uint8_t *instruction) {
+static void 
+pedix_set_operands32(decoded_instruction_t *decoded, uint8_t *instruction) {
   // operand1 is assumed to be present
   for(size_t i = 0; i < decoded->instruction->operands.size; i++){
     if(decoded->instruction->operands.operand[i] == OPERAND_VOID)
@@ -568,15 +595,14 @@ static void pedix_set_operands32(decoded_instruction_t *decoded, uint8_t *instru
   }
 }
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wunused-parameter"
-static void pedix_set_operands64(decoded_instruction_t *decoded) {
+static void 
+pedix_set_operands64(__attribute__((unused)) decoded_instruction_t *decoded) {
   // todo
   assert(!"pedix_set_operands64 is not implemented yet!");
 }
-#pragma GCC diagnostic pop
 
-void pedix_merge_operands(decoded_instruction_t *decoded) {
+void 
+pedix_merge_operands(decoded_instruction_t *decoded) {
   if (decoded->instruction->operands.operand[0] != OPERAND_VOID){
       // add space
       decoded->text[strlen(decoded->text)] = 0x20;
@@ -592,7 +618,8 @@ void pedix_merge_operands(decoded_instruction_t *decoded) {
 /*
  * general-purpose function that cares only about bit depth
  */
-void pedix_set_operands(decoded_instruction_t *decoded, uint8_t *instruction) {
+void 
+pedix_set_operands(decoded_instruction_t *decoded, uint8_t *instruction) {
   switch (decoded->mode) {
   case MODE_32:
       pedix_set_operands32(decoded, instruction);
