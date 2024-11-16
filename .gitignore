@@ -4,5 +4,6 @@
 *.txt
 *.out
 *.o
+.cache
 test.csv
 temp.rb
