@@ -18370,9 +18370,9 @@
 <TD></TD>
 <TD></TD>
 <TD>MUL</TD>
-<td><b><i>eDX</i></b></td>
-<td><b><i>eAX</i></b></td>
 <td>r/m16/32</td>
+<td></td>
+<td></td>
 <td></td>
 <td rowspan="1"></td>
 <TD></TD>
@@ -18394,9 +18394,9 @@
 <TD></TD>
 <TD></TD>
 <TD>IMUL</TD>
-<td><b><i>eDX</i></b></td>
-<td><b><i>eAX</i></b></td>
 <td>r/m16/32</td>
+<td></td>
+<td></td>
 <td></td>
 <td rowspan="1"></td>
 <TD></TD>
@@ -18418,9 +18418,9 @@
 <TD></TD>
 <TD></TD>
 <TD>DIV</TD>
-<td><b><i>eDX</i></b></td>
-<td><b><i>eAX</i></b></td>
 <td>r/m16/32</td>
+<td></td>
+<td></td>
 <td></td>
 <td rowspan="1"></td>
 <TD></TD>
@@ -18442,9 +18442,9 @@
 <TD></TD>
 <TD></TD>
 <TD>IDIV</TD>
-<td><b><i>eDX</i></b></td>
-<td><b><i>eAX</i></b></td>
 <td>r/m16/32</td>
+<td></td>
+<td></td>
 <td></td>
 <td rowspan="1"></td>
 <TD></TD>
@@ -18731,7 +18731,7 @@
 <TD></TD>
 <TD></TD>
 <TD></TD>
-<TD>CALLF</TD>
+<TD>CALL</TD>
 <td>m16:16/32</td>
 <td></td>
 <td></td>
@@ -18779,7 +18779,7 @@
 <TD></TD>
 <TD></TD>
 <TD></TD>
-<TD>JMPF</TD>
+<TD>JMP</TD>
 <td>m16:16/32</td>
 <td></td>
 <td></td>

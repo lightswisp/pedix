@@ -489,13 +489,12 @@ pedix_set_operand_by_id32(decoded_instruction_t *decoded, __operand_t id,
     strcpy(dst, modrm_reg32[decoded->modrm.reg]);
     break;
   case OPERAND_RM_16_32:
-    if (decoded->operand_size == WORD_LEN) {
+    if (decoded->operand_size == WORD_LEN) 
       strcpy(decoded->ptr_text, "WORD PTR");
-      pedix_set_operand_rm(decoded, dst);
-    } else {
+    else 
       strcpy(decoded->ptr_text, "DWORD PTR");
-      pedix_set_operand_rm(decoded, dst);
-    }
+
+    pedix_set_operand_rm(decoded, dst);
     break;
   case OPERAND_R_16_32:
     if (decoded->operand_size == WORD_LEN)
@@ -513,6 +512,14 @@ pedix_set_operand_by_id32(decoded_instruction_t *decoded, __operand_t id,
     break;
   case OPERAND_M_ALL:
     strcpy(decoded->ptr_text, "DWORD PTR");
+    pedix_set_operand_m(decoded, dst);
+    break;
+  case OPERAND_M_PTR_16_32:
+    if (decoded->operand_size == WORD_LEN)
+      strcpy(decoded->ptr_text, "DWORD PTR");
+    else 
+      strcpy(decoded->ptr_text, "FWORD PTR");
+
     pedix_set_operand_m(decoded, dst);
     break;
   case OPERAND_REL_8:
