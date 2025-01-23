@@ -1,5 +1,5 @@
 /* (instructions.h) auto generated using gen.rb 
- * time: 2024-12-19 14:12:47 -0500
+ * time: 2025-01-23 02:14:18 -0500
  */
 
 #pragma once
@@ -7504,7 +7504,7 @@ instruction_t EXTENDED_SLDT_0[6] = {
    .extended_opcode = true,
    .mnemonic = "sldt",
    .opcode_field = {.type = 2, .value = 0 },
-   .operands = {.size = 1, .operand = {14,0,0,0}},
+   .operands = {.size = 1, .operand = {56,0,0,0}},
    .prefix = 0,
    .primary_opcode = 0,
    .secondary_opcode = -1,
@@ -7513,7 +7513,7 @@ instruction_t EXTENDED_SLDT_0[6] = {
    .extended_opcode = true,
    .mnemonic = "str",
    .opcode_field = {.type = 2, .value = 1 },
-   .operands = {.size = 1, .operand = {14,0,0,0}},
+   .operands = {.size = 1, .operand = {56,0,0,0}},
    .prefix = 0,
    .primary_opcode = 0,
    .secondary_opcode = -1,

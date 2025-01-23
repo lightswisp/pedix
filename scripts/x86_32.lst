@@ -18832,7 +18832,7 @@
 <TD ROWSPAN="2"></TD>
 <TD ROWSPAN="2"></TD>
 <TD>SLDT</TD>
-<td><b>r/m16/32</b></td>
+<td>m16</td>
 <td><i></i></td>
 <td></td>
 <td></td>
@@ -18865,7 +18865,7 @@
 <TD ROWSPAN="2"></TD>
 <TD ROWSPAN="2"></TD>
 <TD>STR</TD>
-<td><b>r/m16/32</b></td>
+<td>m16</td>
 <td><i></i></td>
 <td></td>
 <td></td>

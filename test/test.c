@@ -301,6 +301,8 @@ PREPARE_INSTRUCTION(244, "\xFF\x59\x11");
 PREPARE_INSTRUCTION(245, "\xFF\xE1");
 PREPARE_INSTRUCTION(246, "\xFF\x28");
 PREPARE_INSTRUCTION(247, "\xFF\xF2");
+PREPARE_INSTRUCTION(248, "\x0F\x00\x01");
+PREPARE_INSTRUCTION(249, "\x0F\x00\x08");
 
 int main(void){
   decoded_instruction_t *decoded = pedix_init_instruction();
@@ -554,6 +556,8 @@ int main(void){
   PREPARE_TEST(245, "jmp ecx");  
   PREPARE_TEST(246, "jmp FWORD PTR [eax]");  
   PREPARE_TEST(247, "push edx");  
+  PREPARE_TEST(248, "sldt WORD PTR [ecx]");
+  PREPARE_TEST(249, "str WORD PTR [eax]");
 
   puts(GREEN"All tests are passed!"NC);
   return 0;
