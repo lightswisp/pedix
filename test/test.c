@@ -560,6 +560,7 @@ int main(void){
   PREPARE_TEST(249, "str WORD PTR [eax]");
 
   puts(GREEN"All tests are passed!"NC);
+  pedix_free_instrucion(decoded);
   return 0;
 }
 
