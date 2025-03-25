@@ -30,8 +30,9 @@
 #include <pedix/operand.h>
 #include <pedix/tables/tables.h>
 
-#define NEXT_BYTE(i)(i++)
-#define NEXT_BYTES(i, n)(i+=n)
+#define eat_bytes(i, n) do{\
+  i += n;                  \
+}while(0)
 
 #define SET_BUFFER(decoded, i_ptr, len)                                        \
   memcpy(decoded->buffer.bytes + decoded->buffer.size, i_ptr, len);            \
@@ -98,34 +99,34 @@ pedix_decode32(decoded_instruction_t *decoded, uint8_t *instruction) {
 
     SET_BUFFER(decoded, instruction, BYTE_LEN);
     decoded->prefixes.size = decoded->buffer.size;
-    NEXT_BYTE(instruction);
+    eat_bytes(instruction, 1);
   }
 
   if (pedix_instr_has_extended_opcode(*instruction)) {
     // 0x0f (two byte opcode is gonna be decoded here)
     SET_BUFFER(decoded, instruction, WORD_LEN);
-    NEXT_BYTE(instruction);
+    eat_bytes(instruction, 1);
     
     instruction_container_t container = extended_table_32[*instruction];
     assert("non-zero instruction container" && container.size != 0);
 
     if (container.size == 1) {
-      NEXT_BYTE(instruction);
+      eat_bytes(instruction, 1);
       decoded->instruction = &container.instructions[0];
       MANDATORY_PREFIX_CHECK(decoded);
       if(decoded->instruction->secondary_opcode != NOT_FOUND){
         SET_BUFFER(decoded, instruction, BYTE_LEN); 
-        NEXT_BYTE(instruction);
+        eat_bytes(instruction, 1);
       }
     } else {
       // find the best match
       instruction_t* best_match_instruction = pedix_find_best_match(container, decoded, instruction);
       assert("can't find instruction" && best_match_instruction != NULL);
-      NEXT_BYTE(instruction);
+      eat_bytes(instruction, 1);
       decoded->instruction = best_match_instruction;
       if(decoded->instruction->secondary_opcode != NOT_FOUND){
         SET_BUFFER(decoded, instruction, BYTE_LEN); 
-        NEXT_BYTE(instruction);
+        eat_bytes(instruction, 1);
       }
     }
 
@@ -137,24 +138,24 @@ pedix_decode32(decoded_instruction_t *decoded, uint8_t *instruction) {
     assert("non-zero instruction container" && container.size != 0);
 
     if (container.size == 1) {
-      NEXT_BYTE(instruction);
+      eat_bytes(instruction, 1);
       decoded->instruction = &container.instructions[0];
       MANDATORY_PREFIX_CHECK(decoded);
       if(decoded->instruction->secondary_opcode != NOT_FOUND){
         SET_BUFFER(decoded, instruction, BYTE_LEN); 
-        NEXT_BYTE(instruction);
+        eat_bytes(instruction, 1);
       }
     } else {
       // find the best match
       instruction_t *best_match_instruction = pedix_find_best_match(container, decoded, instruction);
       assert("can't find instruction" && best_match_instruction != NULL);
 
-      NEXT_BYTE(instruction);
+      eat_bytes(instruction, 1);
 
       decoded->instruction = best_match_instruction;
       if(decoded->instruction->secondary_opcode != NOT_FOUND){
         SET_BUFFER(decoded, instruction, BYTE_LEN); 
-        NEXT_BYTE(instruction);
+        eat_bytes(instruction, 1);
       }
     }
   }
@@ -164,19 +165,19 @@ pedix_decode32(decoded_instruction_t *decoded, uint8_t *instruction) {
     // if it has modrm
     pedix_set_modrm(decoded, instruction);
     SET_BUFFER(decoded, instruction, BYTE_LEN);
-    NEXT_BYTE(instruction);
+    eat_bytes(instruction, 1);
     // it can have sib byte only and only when modrm is present
     if (pedix_instr_has_sib(decoded)) {
       pedix_set_sib(decoded, instruction);
       SET_BUFFER(decoded, instruction, decoded->sib.size);
-      NEXT_BYTES(instruction, decoded->sib.size);
+      eat_bytes(instruction, 1);
     }
     // sib byte must be parsed first, and only after that we are free to check for displacement 
     if(pedix_instr_has_displacement(decoded)){
       pedix_set_displacement(decoded);
       SET_BUFFER(decoded, instruction, decoded->displacement.size);
       memcpy(&decoded->displacement.field, instruction, decoded->displacement.size); 
-      NEXT_BYTES(instruction, decoded->displacement.size);
+      eat_bytes(instruction, decoded->displacement.size);
     }
   }
 
