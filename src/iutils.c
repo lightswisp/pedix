@@ -160,7 +160,7 @@ pedix_find_best_match(instruction_container_t container,
                       decoded_instruction_t *decoded, 
                       uint8_t *instruction){
 
-  uint8_t max_score, max_i;
+  uint8_t max_score = 0, max_i = 0;
 
   for (size_t i = 0; i < container.size; i++) {
     field_type_t type    = container.instructions[i].opcode_field.type;
