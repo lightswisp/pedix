@@ -93,8 +93,8 @@ pedix_decode32(decoded_instruction_t *decoded, uint8_t *instruction) {
       case PREFIX_ES:              strcpy(decoded->segment_text, "es:"); break;
       case PREFIX_FS:              strcpy(decoded->segment_text, "fs:"); break;
       case PREFIX_GS:              strcpy(decoded->segment_text, "gs:"); break;
-      case PREFIX_OPSIZE_OVERRIDE: decoded->operand_size = WORD_LEN;     break;
-      case PREFIX_ASZ_OVERRIDE:    decoded->address_size = WORD_LEN;     break;
+      case PREFIX_OPSIZE_OVERRIDE: decoded->operand_size = WORD_LEN;                break;
+      case PREFIX_ASZ_OVERRIDE:    decoded->address_size = WORD_LEN;                break;
     }
 
     SET_BUFFER(decoded, instruction, BYTE_LEN);

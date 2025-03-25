@@ -37,8 +37,6 @@ $(TEST_OBJ_DIR)/test.o: $(TEST_DIR)/test.c
 	@mkdir -p $(@D)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-.PHONY: run all clean test
-
 clean:
 	rm $(OBJ_DIR)/*.o
 	rmdir $(OBJ_DIR)
@@ -49,5 +47,10 @@ test: $(TEST_OBJS)
 	@rmdir $(TEST_OBJ_DIR)
 	@rm test_$(OUT)
 
+valgrind: 
+	valgrind --leak-check=yes ./$(OUT)
+
 run: 
 	./$(OUT)
+
+.PHONY: run all clean test valgrind
